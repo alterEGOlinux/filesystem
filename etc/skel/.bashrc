@@ -2,11 +2,11 @@
 ##                                                                           ##
 ## /home/{user}/.bashrc                                                      ##
 ##   created        : 2021-02-26 02:54:43 UTC                                ##
-##   updated        : 2022-02-10 21:17:47 UTC                                ##
+##   updated        : 2022-02-10 21:36:41 UTC                                ##
 ##   description    : Bash config file.                                      ##
 ## _________________________________________________________________________ ##
 
-  [ -f ${HOME}/.profile ] && . ${HOME}/.profile
+  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
 ## [ bash-completion ] ----------------------------------------------------- ##
 
