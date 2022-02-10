@@ -6,7 +6,6 @@
 ##   description    : Bash config file.                                      ##
 ## _________________________________________________________________________ ##
 
-  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
   [ -f ${HOME}/.profile ] && . ${HOME}/.profile
 
 ## [ bash-completion ] ----------------------------------------------------- ##
