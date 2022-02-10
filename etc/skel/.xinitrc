@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## /home/{user}/.xinitrc                                                     ##
 ##   created        : 2021-02-23 02:54:43 UTC                                ##
-##   updated        : 2022-02-08 11:52:46 UTC                                ##
+##   updated        : 2022-02-09 13:45:21 UTC                                ##
 ##   description    : Starts Window Manager with startx.                     ##
 ## _________________________________________________________________________ ##
 
@@ -22,7 +22,6 @@ case ${2} in
         
     *)
         exec /usr/bin/i3
-        /usr/bin/bash .autostart
         ;;
 
 esac
