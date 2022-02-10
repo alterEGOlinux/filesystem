@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
+##                                                                           ##
+## ~/.alterEGO/.egorc                                                        ##
+##   created     : 2021-03-19 09:37:19 UTC                                   ##
+##   updated     : 2022-02-10 21:54:21 UTC                                   ##
+##   description : Additional shell stuff for alterEGO Linux.                ##
+## _________________________________________________________________________ ##
+
+  [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ] && . ${HOME}/.alterEGO/egoSHlib/message.bash
+
+  message action "hello"
+
+## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
+
+  export BROWSER=firefox
+  export FZF_DEFAULT_COMMAND='rg --files --hidden '
+  export TERMINAL="xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar"
+  export VISUAL=vim
+  export EDITOR=${VISUAL}
+
+# vim: syntax=sh
+## FIN _____________________________________________________________ ¯\_(ツ)_/¯
