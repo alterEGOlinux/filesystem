@@ -9,7 +9,7 @@
 
   [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ] && . ${HOME}/.alterEGO/egoSHlib/message.bash
 
-  message action "$0"
+  message action "$BASH_SOURCE"
 
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
 
