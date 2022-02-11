@@ -9,7 +9,7 @@
 
   [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ] && . ${HOME}/.alterEGO/egoSHlib/message.bash
 
-  message action "$BASH_SOURCE"
+  message action "Sourced $(basename $BASH_SOURCE)"
 
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
 

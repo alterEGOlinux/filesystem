@@ -8,5 +8,7 @@
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
+  message action "Sourced $(basename $BASH_SOURCE)"
+
 # vim: syntax=sh
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯

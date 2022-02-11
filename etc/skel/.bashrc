@@ -8,6 +8,8 @@
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
+  message action "Sourced $(basename $BASH_SOURCE)"
+
 ## [ bash-completion ] ----------------------------------------------------- ##
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
