@@ -6,6 +6,9 @@
 ##   description    : Bash config file.                                      ##
 ## _________________________________________________________________________ ##
 
+  # If not running interactively, don't do anything
+  [[ $- != *i* ]] && return
+
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
   message action "Sourced $(basename $BASH_SOURCE)"
