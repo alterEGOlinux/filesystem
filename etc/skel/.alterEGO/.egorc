@@ -3,13 +3,27 @@
 ##                                                                           ##
 ## ~/.alterEGO/.egorc                                                        ##
 ##   created     : 2021-03-19 09:37:19 UTC                                   ##
-##   updated     : 2022-02-10 21:54:21 UTC                                   ##
-##   description : Additional shell stuff for alterEGO Linux.                ##
+##   updated     : 2022-02-11 10:42:38 UTC                                   ##
+##   description : alterEGO Linux core shell configuration.                  ##
 ## _________________________________________________________________________ ##
 
   [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ] && . ${HOME}/.alterEGO/egoSHlib/message.bash
 
   message action "Sourced $(basename $BASH_SOURCE)"
+
+## [ COLORS ] -------------------------------------------------------------- ##
+
+  export TERM="xterm-256color"
+
+  export COLOR_BLUE="\033[34m"
+  export COLOR_BOLD="\033[1m"
+  export COLOR_GREEN="\033[32m"
+  export COLOR_RED="\033[31m"
+  export COLOR_RESET="\033[0m"
+
+## [ ALIAS ] --------------------------------------------------------------- ##
+
+  alias msfconsole='msfconsole -x "db_connect ${USER}@msf"'
 
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
 
@@ -19,5 +33,58 @@
   export VISUAL=vim
   export EDITOR=${VISUAL}
 
-# vim: syntax=sh
+## [ PATH ] ---------------------------------------------------------------- ##
+
+  ## ref. https://www.linuxjournal.com/content/removing-duplicate-path-entries
+
+  PATH="${PATH}:${HOME}/scripts:${HOME}/bin"
+  PATH=$(printf '%s' "${PATH}" | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+
+  export PATH
+
+## [ VIM ] ----------------------------------------------------------------- ##
+
+  ## Enable CTRL+s in vim.
+  ## ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+  ## Requires mapping in .vimrc:
+  ## inoremap <C-s> <ESC>:write<CR>
+
+  stty -ixon
+
+## [ QT5 ] ----------------------------------------------------------------- ##
+
+  ## ref. https://wiki.manjaro.org/index.php/Set_all_Qt_app%27s_to_use_GTK%2B_font_%26_theme_settings
+  ## Set all Qt app's to use GTK+ font & theme settings
+  ## Overview
+  ## When using a Desktop Environment or Window Manager that doesn't allow for the settings of QT themes,
+  ## you can set QT to use your GTK themes instead.
+  ## Using qt5ct
+  ## note: In some Manjaro editions, this is already done for you by default
+  ## Install qt5ct using your favorite package manager or the command:
+  ## pamac install qt5ct
+  ## Set environment variables in ~/.profile by adding or updating the following lines:
+  ## export QT_QPA_PLATFORMTHEME="qt5ct"
+  ## Run the application QT5 Configuration Manager from the menu or run the command qt5ct.
+  ## Logout and login again to make the change effective
+
+  # export QT_QPA_PLATFORMTHEME="qt5ct"
+
+## [ WORDLISTS ] ----------------------------------------------------------- ##
+
+  export WORDLISTS="/usr/local/share/wordlists"
+  export WL_BEST1050="${WORDLISTS}/best1050.txt"
+  export WL_BIG="${WORDLISTS}/seclist-big.txt"
+  export WL_DIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
+  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
+  export WL_LARGEFILES="${WORDLISTS}/raft-large-files.txt"
+  export WL_XPLATFORM="${WORDLISTS}/xplatform.txt"
+
+## [ REVERSE SHELLS ] ------------------------------------------------------ ##
+
+  export REVSHELLS="/usr/local/share/reverse_shells"
+  export RS_PATT_NODEJS="${REVSHELLS}/patt_nodeJS.js"
+  export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
+  export RS_WEBSHELL="${REVSHELLS}/webshell.php"
+
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+## vim: syntax=sh
