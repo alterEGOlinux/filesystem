@@ -1,0 +1,81 @@
+#!/usr/bin/env sh
+## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
+##                                                                           ##
+## ~/.alterEGO/.containers                                                   ##
+##   created     : 2021-12-06 11:15:11 UTC                                   ##
+##   updated     : 2021-12-06 11:15:18 UTC                                   ##
+##   description : Containers functions and configuration.                   ##
+## _________________________________________________________________________ ##
+
+## [ CYBERCHEF ] ----------------------------------------------------------- ##
+
+  cyberchef() {
+    ##### Will install or run cyberchef docker.
+    if [[ "$1" == 'start' ]]; then
+      docker666 start
+      docker run -d -p 8888:8000 mpepping/cyberchef                           \
+      && $BROWSER "http://localhost:8888"
+    elif [[ "$1" == 'stop' ]]; then
+      docker stop $(docker ps | grep "mpepping/cyberchef" | cut -d ' ' -f1)
+      docker666 stop
+    else
+      cat <<EOF
+Usage: cyberchef [start|stop]
+EOF
+    fi
+  }
+## [ DAMN VULNERABLE WEBAPP (DVWA) ] --------------------------------------- ##
+
+  dvwa() {
+      ##### Will install or run the Damn Vulnerable Web App (DVWA) docker.
+      if [[ "$1" == 'start' ]]; then
+        docker666 start
+        docker run --rm -it -p 81:80 vulnerables/web-dvwa &
+        sleep 2
+        $BROWSER "http://localhost:81/login.php"
+      elif [[ "$1" == 'stop' ]]; then
+        docker stop $(docker ps | grep "vulnerables/web-dvwa" | cut -d ' ' -f1)
+        docker666 stop
+      else
+        cat <<EOF
+Usage: dvwa [start|stop]
+EOF
+      fi
+      }
+
+## [ OWASP JUICE SHOP ] ---------------------------------------------------- ##
+
+  juiceShop() {
+    ##### Will install or run the OWASP Juice Shop docker.
+    if [[ "$1" == 'start' ]]; then
+      docker666 start
+      docker run --rm -p 3000:3000 bkimminich/juice-shop &
+      sleep 2
+      $BROWSER "http://localhost:3000"
+    elif [[ "$1" == 'stop' ]]; then
+      docker stop $(docker ps | grep "bkimminich/juice-shop" | cut -d ' ' -f1)
+      docker666 stop
+    else
+      cat <<EOF
+Usage: juiceShop [start|stop]
+EOF
+    fi
+  }
+
+## [ KALI LINUX ] ---------------------------------------------------------- ##
+
+  kali() {
+    docker666 start
+    if [[ -z $(docker ps -a | awk '/kali/ { print $NF }') ]]; then
+      docker run --name kali --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash
+    else
+      if [[ -z "$(docker ps | grep kali$)" ]]; then
+        docker start -i kali
+      else
+        printf '%b\n' "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Kali is already running...${COLOR_RESET}"
+      fi
+    fi
+  }
+
+## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+## vim: syntax=sh

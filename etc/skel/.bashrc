@@ -1,8 +1,8 @@
 ## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
 ##                                                                           ##
-## /home/{user}/.bashrc                                                      ##
+## ~/.bashrc                                                                 ##
 ##   created        : 2021-02-26 02:54:43 UTC                                ##
-##   updated        : 2022-02-10 21:36:41 UTC                                ##
+##   updated        : 2022-02-15 21:36:47 UTC                                ##
 ##   description    : Bash config file.                                      ##
 ## _________________________________________________________________________ ##
 
@@ -50,6 +50,11 @@
 ## [ SOURCING ] ------------------------------------------------------------ ##
 
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+## [ LOADED ] -------------------------------------------------------------- ##
+
+  export LOADED='bashrc'
+  message action "$(basename $BASH_SOURCE)"
 
 # vim: syntax=sh
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯

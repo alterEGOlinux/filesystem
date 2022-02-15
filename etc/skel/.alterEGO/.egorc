@@ -3,11 +3,15 @@
 ##                                                                           ##
 ## ~/.alterEGO/.egorc                                                        ##
 ##   created     : 2021-03-19 09:37:19 UTC                                   ##
-##   updated     : 2022-02-11 10:42:38 UTC                                   ##
+##   updated     : 2022-02-15 21:14:08 UTC                                   ##
 ##   description : alterEGO Linux core shell configuration.                  ##
 ## _________________________________________________________________________ ##
 
-  [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ] && . ${HOME}/.alterEGO/egoSHlib/message.bash
+  [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ]                              \
+  && . ${HOME}/.alterEGO/egoSHlib/message.bash
+
+  [ -f ${HOME}/.alterEGO/.tryhackme ]                                         \
+  && . ${HOME}/.alterEGO/.tryhackme
 
   message action "Sourced $(basename $BASH_SOURCE)"
 
@@ -85,6 +89,92 @@
   export RS_PATT_NODEJS="${REVSHELLS}/patt_nodeJS.js"
   export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
   export RS_WEBSHELL="${REVSHELLS}/webshell.php"
+
+## [ IP ADDRESSES ] -------------------------------------------------------- ##
+
+  ipaddr() {
+
+    ## IP addresses will be exported when .egorc is sourced with the function
+    ## call, but can also be 'refreshed' when calling ipaddr from the terminal
+    ## (ex. after starting a VPN connection).
+
+    ## `host` is provided by the package 'bind'.
+    PUBIP="$(host myip.opendns.com resolver1.opendns.com                      \
+             | grep --color=never -oP '(?<=myip.opendns.com has address ).*$')"
+    export PUBIP
+
+    LANIP="$(ip address | grep --color=never -oP "(?<=inet ).*(?=/.*enp)")"
+    export LANIP
+
+    # printf "%s\n" "LAN IP:     ${LANIP}"
+    # printf "%s\n" "Public IP:  ${PUBIP}"
+  }
+  ipaddr
+
+## [ PROMPTS ] ------------------------------------------------------------- ##
+
+  prompt_command() {
+      history -a
+      dateNOW="$(date "+%F %H:%M:%S %Z")"
+      #### tty won't show unicode character #10095.
+      if tty | grep pts &>/dev/null; then
+
+          ## ( SIMPLE )
+          # export PS1='[\u@\h \W]\$ '
+          
+          ## ( KALI STYLE )
+          # export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\]┌────(\[${COLOR_RESET}\]\u@\h\[${COLOR_GREEN}\])-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]]\n\[${COLOR_GREEN}\]└─$ \[${COLOR_RESET}\]"
+
+          ## ( EGO )
+          export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\](\u@\h)-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]] • \[$dateNOW\]\n\[${COLOR_GREEN}\]❯ \[${COLOR_RESET}\]"
+      else
+
+          ## ( SIMPLE )
+          # export PS1='[\u@\h \W]\$ '
+          
+          ## ( KALI STYLE )
+          # export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\]┌────(\[${COLOR_RESET}\]\u@\h\[${COLOR_GREEN}\])-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]]\n\[${COLOR_GREEN}\]└─$ \[${COLOR_RESET}\]"
+
+          ## ( EGO )
+          export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\](\u@\h)-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]] • \[$dateNOW\]\n\[${COLOR_GREEN}\]> \[${COLOR_RESET}\]"
+      fi
+  }
+
+  PROMPT_COMMAND=prompt_command
+
+## [ GOTO ] ---------------------------------------------------------------- ##
+
+  ## ref. https://threkk.medium.com/how-to-use-bookmarks-in-bash-zsh-6b8074e40774
+  ## ref. https://twitter.com/mattn_jp/status/1434192554036137995
+  ## Requires `bash-completion` and sourced in .bashrc.
+  ## To add a goto link:
+  ## $ `ln -s </some/directory/path> ${HOME}/.alterEGO/.goto/@<gotolink>` in  directory.
+  ## Usage: `goto @<gotolink>`
+
+  if [ -d "${HOME}/.alterEGO/.goto/" ]; then
+    export CDPATH=".:${HOME}/.alterEGO/.goto:/"
+    alias goto="cd -P"
+    _goto() {
+      local IFS=$'\n'
+      COMPREPLY=( $(compgen -W "$(/bin/ls ~/.alterEGO/.goto)" -- ${COMP_WORDS[COMP_CWORD]}) )
+    } && complete -F _goto goto
+  fi
+
+## [ RELOAD ] -------------------------------------------------------------- ##
+
+  reload() {
+    if [ $LOADED = 'bashrc' ]; then
+      . "${HOME}/.bashrc"
+    elif [ $LOADED = 'profile' ]; then
+      . "${HOME}/.profile"
+    else
+      message warning "An error occured while reloading"
+    fi
+  }
+
+## [ LOADED ] -------------------------------------------------------------- ##
+
+  message action "$(basename $BASH_SOURCE)"
 
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 ## vim: syntax=sh
