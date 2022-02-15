@@ -75,8 +75,8 @@
   export WL_BEST1050="${WORDLISTS}/best1050.txt"
   export WL_BIG="${WORDLISTS}/seclist-big.txt"
   export WL_DIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
-  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
   export WL_LARGEFILES="${WORDLISTS}/raft-large-files.txt"
+  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
   export WL_XPLATFORM="${WORDLISTS}/xplatform.txt"
 
 ## [ REVERSE SHELLS ] ------------------------------------------------------ ##
