@@ -2,31 +2,22 @@
 ##                                                                           ##
 ## ~/.bashrc                                                                 ##
 ##   created        : 2021-02-26 02:54:43 UTC                                ##
-##   updated        : 2022-02-15 21:36:47 UTC                                ##
+##   updated        : 2022-02-18 12:27:46 UTC                                ##
 ##   description    : Bash config file.                                      ##
 ## _________________________________________________________________________ ##
 
   # If not running interactively, don't do anything
   [[ $- != *i* ]] && return
 
-  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
+## [ SOURCING ] ------------------------------------------------------------ ##
 
-  message action "Sourced $(basename $BASH_SOURCE)"
+  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
+  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## [ bash-completion ] ----------------------------------------------------- ##
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
   && . /usr/share/bash-completion/bash_completion
-
-## [ ALIASES ] ------------------------------------------------------------- ##
-
-  alias grep="grep --color=auto"
-  alias ll='ls --all --human-readable -l --color=auto'
-  alias ls='ls --all --color=auto'
-  alias open="xdg-open"
-
-  ##### Makes tmux understand the environment is important.
-  alias tmux="env TERM=screen-256color tmux -u"
 
 ## [ HISTORY ] ------------------------------------------------------------- ##
 
@@ -47,14 +38,10 @@
   export LESS_TERMCAP_ue=$(printf '\e[0m')     # leave underline mode
   export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
 
-## [ SOURCING ] ------------------------------------------------------------ ##
-
-  [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 ## [ LOADED ] -------------------------------------------------------------- ##
 
   export LOADED='bashrc'
-  message action "$(basename $BASH_SOURCE)"
+  message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
-# vim: syntax=sh
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# vim: syntax=sh

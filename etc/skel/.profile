@@ -6,14 +6,14 @@
 ##   description    : Loaded in non interactive shell.                       ##
 ## _________________________________________________________________________ ##
 
-  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
+## [ SOURCING ] ------------------------------------------------------------ ##
 
-  message action "Sourced $(basename $BASH_SOURCE)"
+  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
 ## [ LOADED ] -------------------------------------------------------------- ##
 
   export LOADED='profile'
-  message action "$(basename $BASH_SOURCE)"
+  message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 # vim: syntax=sh

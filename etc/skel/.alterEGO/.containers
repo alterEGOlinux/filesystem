@@ -7,6 +7,55 @@
 ##   description : Containers functions and configuration.                   ##
 ## _________________________________________________________________________ ##
 
+  docker666() {
+    ##### START/STOP docker service
+
+    printf "%b\n" "${COLOR_GREEN}[+]${COLOR_RESET} ${COLOR_BOLD}Runing docker666() to check docker status...${COLOR_RESET}"
+
+    case "${1}" in
+
+      start )
+        if [ $(systemctl is-active docker.service) = 'active' ]; then
+          printf "%b\n" "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Docker is already running...${COLOR_RESET}"
+        else
+          sudo systemctl start docker.service
+          printf "%b\n" "${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}Started docker.service...${COLOR_RESET}"
+        fi
+        ;;
+      stop )
+        read -r -p $'\e[34m[-]\e[0m \e[1mShould I stop docker service? [y/N]\e[0m ' response
+          if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            sudo systemctl stop docker.socket
+            sudo systemctl stop docker.service
+            read -r -p $'\e[34m[-]\e[0m \e[1mWould you like to delete docker0 network interface? [y/N]\e[0m ' response
+              if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+                sudo ip link delete docker0 
+              else
+                printf "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}OK... docker0 lives!${COLOR_RESET}\n"
+              fi
+          else
+            printf "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}OK...  docker.service still running...${COLOR_RESET}\n"
+          fi
+        ;;
+      * )
+        printf "%b\n" "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Usage: docker666 [start|stop]${COLOR_RESET}"
+
+    esac
+
+  }
+
+  dockerStats() {
+
+      printf "%b\n" "CONTAIER ID\tIP ADDR   \tNAME"
+      while read -r d; do
+        _containerID=$(awk '{ print $1 }' <<< "${d}")
+        _name=$(awk '{ print $2 }' <<< "${d}")
+        _ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${_containerID})
+        printf "%b\n" "${_containerID}\t${_ip}\t${_name}"
+      done <<< $(docker ps | tail -n+2)
+  }
+
+
 ## [ CYBERCHEF ] ----------------------------------------------------------- ##
 
   cyberchef() {

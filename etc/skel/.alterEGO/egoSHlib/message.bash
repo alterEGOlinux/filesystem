@@ -1,8 +1,9 @@
+#! /usr/bin/env bash
 ## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
 ##                                                                           ##
 ## /home/{user}/.alterEGO/egoSHlib/message.bash                              ##
 ##   created        : 2022-02-10 21:46:39 UTC                                ##
-##   updated        : 2022-02-10 21:46:48 UTC                                ##
+##   updated        : 2022-02-22 09:54:11 UTC                                ##
 ##   description    : Bash message module.                                   ##
 ## _________________________________________________________________________ ##
 
@@ -26,10 +27,18 @@ message() {
     result )
       printf '%b\n' "${_msg_blue}[-]${_msg_reset} ${_msg_bold}${_msg}${_msg_reset}"
       ;;
-    warning )
+    question )
+      ## The input will be in $_INPUT.
+      read -p $'\033[34m[?]\033[0m \033[1m'"${_msg}"$'\033[0m ' _INPUT
+      ;;
+    warning|alert )
       printf '%b\n' "${_msg_red}[!]${_msg_reset} ${_msg_bold}${_msg}${_msg_reset}"
+      ;;
+    title )
+      printf '%b\n' "${_msg_bold}${_msg}${_msg_reset}"
+      ;;
   esac
 }
 
-# vim: syntax=sh
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# vim: syntax=sh

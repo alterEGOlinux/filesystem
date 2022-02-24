@@ -3,17 +3,24 @@
 ##                                                                           ##
 ## ~/.alterEGO/.egorc                                                        ##
 ##   created     : 2021-03-19 09:37:19 UTC                                   ##
-##   updated     : 2022-02-15 21:14:08 UTC                                   ##
+##   updated     : 2022-02-18 12:28:04 UTC                                   ##
 ##   description : alterEGO Linux core shell configuration.                  ##
 ## _________________________________________________________________________ ##
 
   [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ]                              \
   && . ${HOME}/.alterEGO/egoSHlib/message.bash
 
+  [ -f ${HOME}/.alterEGO/.functions ]                                         \
+  && . ${HOME}/.alterEGO/.functions
+
+  [ -f ${HOME}/.alterEGO/.containers ]                                        \
+  && . ${HOME}/.alterEGO/.containers
+
+  [ -f ${HOME}/.alterEGO/.extrarc ]                                           \
+  && . ${HOME}/.alterEGO/.extrarc
+
   [ -f ${HOME}/.alterEGO/.tryhackme ]                                         \
   && . ${HOME}/.alterEGO/.tryhackme
-
-  message action "Sourced $(basename $BASH_SOURCE)"
 
 ## [ COLORS ] -------------------------------------------------------------- ##
 
@@ -27,7 +34,16 @@
 
 ## [ ALIAS ] --------------------------------------------------------------- ##
 
+  alias grep="grep --color=auto"
+  alias ll='ls --all --human-readable -l --color=auto'
+  alias ls='ls --all --color=auto'
+
+  ## Makes tmux understand the environment is important.
+  alias tmux="env TERM=screen-256color tmux -u"
+
   alias msfconsole='msfconsole -x "db_connect ${USER}@msf"'
+  alias open="xdg-open"
+  alias attack="source ${HOME}/.alterEGO/.tryhackme"
 
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
 
@@ -171,10 +187,6 @@
       message warning "An error occured while reloading"
     fi
   }
-
-## [ LOADED ] -------------------------------------------------------------- ##
-
-  message action "$(basename $BASH_SOURCE)"
 
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 ## vim: syntax=sh
