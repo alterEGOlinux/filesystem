@@ -42,7 +42,7 @@
   alias tmux="env TERM=screen-256color tmux -u"
 
   alias msfconsole='msfconsole -x "db_connect ${USER}@msf"'
-  alias open="xdg-open"
+  alias open="ael-open"
   alias attack="source ${HOME}/.alterEGO/.tryhackme"
 
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##

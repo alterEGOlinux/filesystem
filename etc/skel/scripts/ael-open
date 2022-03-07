@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
+##                                                                           ##
+## ~/scripts/ael-open                                                        ##
+##   created     : 2022-03-03 11:57:19 UTC                                   ##
+##   updated     : 2022-03-03 11:57:27 UTC                                   ##
+##   description : File openner.                                             ##
+## _________________________________________________________________________ ##
+
+open_file() {
+  file_type="${1}"
+  _file="${2}"
+
+  case ${file_type} in
+
+    application/pdf )
+      zathura "${_file}" &
+      ;;
+
+    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet )
+      libreoffice "${_file}" &
+      ;;
+
+    application/vnd.tcpdump.pcap )
+      wireshark "${_file}" &
+      ;;
+
+    inode/directory )
+      ranger "${_file}"
+      ;;
+
+    text/plain )
+      if [[ ${_file##*.} == 'csv' ]]; then
+        libreoffice "${_file}" &
+      else
+        vim "${_file}"
+      fi
+      ;;
+
+    * )
+      xdg-open "${_file}" &
+      ;;
+
+  esac
+}
+
+determine_file() {
+  _file="${@}"
+  if [[ -e ${@} ]]; then
+    file_type=$(file --brief --mime-type "${_file}")
+  fi
+
+  if [[ ${file_type} == "inode/symlink" ]]; then
+    _file=$(readlink "${@}")
+    file_type=$(file --brief --mime-type "${_file}")
+  fi
+
+  open_file ${file_type} "${_file}"
+}
+
+case "${@}" in
+
+  '' )
+    fzf
+    ;;
+
+  * )
+    determine_file "$@"
+    ;;
+
+esac
+
+## FIN _____________________________________________________________ ¯\_(ツ)_/¯
