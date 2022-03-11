@@ -48,7 +48,7 @@
 ## [ DEFAULT APPLICATIONS ] ------------------------------------------------ ##
 
   export BROWSER=firefox
-  export FZF_DEFAULT_COMMAND='rg --files --hidden '
+  # export FZF_DEFAULT_COMMAND='rg --files --hidden '
   export TERMINAL="xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar"
   export VISUAL=vim
   export EDITOR=${VISUAL}
