@@ -83,7 +83,7 @@ def fzf_nmapNSE():
     for row in records:
         row3 = row[3].replace('\n', 'NEWLINE')
         try:
-            opt = f'{row[1]:<60} :: {row[2]:<1000} :: {row3}\n'
+            opt = f'{row[1]:<60} :: {row[2]} :: {row3}\n'
             options.add(opt)
         except:
             pass
@@ -104,13 +104,16 @@ def fzf_nmapNSE():
                               "--reverse",
                               "--exact",
                               "--header=NMAP NSE",
+                              "--no-info",
+                              "--pointer=•",
                               "--delimiter=::",
+                              "--with-nth=1,2",
                               "--preview=echo {3} | sed 's/NEWLINE/\\n/g'",
                               "--preview-window=down:wrap"
                              ], input=data, stdout=subprocess.PIPE)
 
         selection = fzf.stdout
-        url = selection.decode('ascii').split(':: ')[1]
+        url = selection.decode('ascii').split(':: ')[1].strip()
 
         webbrowser.open_new_tab(url)
     except:
