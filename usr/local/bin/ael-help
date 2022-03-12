@@ -122,9 +122,21 @@ def fzf_nmapNSE():
     conn.close()
     os.remove(dumpfile)
 
+## [man pages] ------------------------------------------------------------- ##
+
+def get_man():
+
+    manpages = subprocess.run(['man', '-k', ''], stdout=subprocess.PIPE)
+
+    m = manpages.stdout.decode('UTF-8').split('\n')
+    print(m)
+
+## [MAIN] ------------------------------------------------------------------ ##
+
 def main():
-    check_database()
-    fzf_nmapNSE()
+    # check_database()
+    # fzf_nmapNSE()
+    get_man()
 
 if __name__ == '__main__':
     main()
