@@ -3,12 +3,15 @@
 ##                                                                           ##
 ## /usr/local/bin/ael-help                                                   ##
 ##   created     : 2022-03-09 11:39:01 UTC                                   ##
-##   updated     : 2022-03-10 09:22:36 UTC                                   ##
+##   updated     : 2022-03-14 17:26:12 UTC                                   ##
 ##   description : Help using `fzf`.                                         ##
 ## _________________________________________________________________________ ##
 
 from bs4 import BeautifulSoup
+import csv
 import os
+import pkgutil
+import re
 import requests
 import sqlite3
 import subprocess
@@ -35,26 +38,91 @@ def create_database():
     cur = conn.cursor()
 
     table_nmapNSE(conn, cur)
+
+## [CVE] ------------------------------------------------------------------- ##
+
+def get_cve():
+
+    url = "https://cve.mitre.org/data/downloads/allitems.csv"
+
+    response = requests.get(url)
+
+    rows = response.text.split('\n')
+
+    dumpfile = '/tmp/cve.dump'
+    with open(dumpfile, 'w') as out:
+        for row in response.text.split('\n'):
+            if row.startswith('CVE-') or row.startswith('"Name'):
+                out.write(row + '\n')
+
+    return dumpfile
+
+def table_cve():
+
+    conn = sqlite3.connect(db_name, uri=True)
+    cur = conn.cursor()
+
+    cur.execute(""" CREATE TABLE IF NOT EXISTS cve (
+                    id integer PRIMARY KEY,
+                    name text NOT NULL,
+                    description text NOT NULL,
+                    reference text NOT NULL );""")
+    conn.commit()
+
+    # dumpfile = get_cve()
+    dumpfile = '/tmp/cve.dump'
+
+    with open(dumpfile, 'r') as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            _name = row['Name']
+            _ref = re.sub('\s*?\|\s*?', '\n', row['References'])
+
+            print(_ref)
+
+    # nse_scripts = get_nmapNSE()
+    # for k, v in nse_scripts.items():
+        # cur.execute("""INSERT INTO nmapNSE (name, url, info, category) VALUES (?, ?, ?, ?)""", (k, v[0], v[1], v[2]))
+        # conn.commit()
+
+## [EXPLOITDB] ------------------------------------------------------------- ##
+
+def get_exploitdb():
+
+    url = 'https://www.exploit-db.com/search?cve=2017-0144'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html5lib')
+
+    print(soup)
     
-## [nmapNSE] --------------------------------------------------------------- ##
+## [NMAP NSE] -------------------------------------------------------------- ##
 
 def get_nmapNSE():
     url = 'https://nmap.org/nsedoc/scripts/'
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html5lib')
 
+
+    with open('/usr/share/nmap/scripts/script.db', 'r') as _scripts:
+        _data = _scripts.read()
+
     ## ref. https://stackoverflow.com/a/67579534/10500496
     ## Handling <dl> correctly.
+    
     nse_name = []
     for dl in soup.find_all('dl'):
-        nse_url, nse_text = [], []
+        nse_url, nse_text, nse_categories = [], [], []
         for dt in dl.find_all('dt'):
-            nse_name.append(dt.text.strip())
+            _nse_name = dt.text.strip()
+            nse_name.append(_nse_name)
             nse_url.append(dt.find('a')['href'].replace('../', 'https://nmap.org/nsedoc/'))
+            _category = re.findall(r'filename = "{}.nse.*categories = . (.*),'.format(_nse_name), _data)
+            nse_categories.append(_category[0])
         for dd in dl.find_all('dd'):
-            nse_text.append(dd.text.strip())
+            nse_text.append(dd.text.replace('\n\n', '__RETURN__').replace('\n', ' ').replace('__RETURN__', '\n\n').strip())
         
-    nse_scripts = dict(zip(nse_name, zip(nse_url, nse_text)))
+    nse_scripts = dict(zip(nse_name, zip(nse_url, nse_text, nse_categories)))
     return nse_scripts
 
 def table_nmapNSE(conn, cur):
@@ -63,12 +131,13 @@ def table_nmapNSE(conn, cur):
                     id integer PRIMARY KEY,
                     name text NOT NULL,
                     url text NOT NULL,
-                    info text NOT NULL );""")
+                    info text NOT NULL,
+                    category text NOT NULL );""")
     conn.commit()
 
     nse_scripts = get_nmapNSE()
     for k, v in nse_scripts.items():
-        cur.execute("""INSERT INTO nmapNSE (name, url, info) VALUES (?, ?, ?)""", (k, v[0], v[1]))
+        cur.execute("""INSERT INTO nmapNSE (name, url, info, category) VALUES (?, ?, ?, ?)""", (k, v[0], v[1], v[2]))
         conn.commit()
 
 def fzf_nmapNSE():
@@ -81,9 +150,9 @@ def fzf_nmapNSE():
 
     options = set()
     for row in records:
-        row3 = row[3].replace('\n', 'NEWLINE')
+        row3 = row[3].replace('\n', 'NEWLINE').replace("'", 'APOSTROPHE')
         try:
-            opt = f'{row[1]:<60} :: {row[2]} :: {row3}\n'
+            opt = f'{row[1]:<40}\t{row[2]:<80}\t{row3}\t{row[4]}\n'
             options.add(opt)
         except:
             pass
@@ -100,20 +169,21 @@ def fzf_nmapNSE():
 
     try:
         fzf = subprocess.run(["fzf", 
+                              "--prompt=Nmap NSE: ",
                               "--no-hscroll",
                               "--reverse",
+                              "-i",
                               "--exact",
-                              "--header=NMAP NSE",
+                              "--tiebreak=begin",
                               "--no-info",
                               "--pointer=•",
-                              "--delimiter=::",
-                              "--with-nth=1,2",
-                              "--preview=echo {3} | sed 's/NEWLINE/\\n/g'",
+                              "--delimiter=\t",
+                              '--preview=printf "%b%s" "\e[1m{1}\e[0m\nurl       : {2}\ncategories: {4}\n\n{3}" | sed "s/\'//g;s/NEWLINE/\\n/g;s/APOSTROPHE/\'/g"',
                               "--preview-window=down:wrap"
                              ], input=data, stdout=subprocess.PIPE)
 
         selection = fzf.stdout
-        url = selection.decode('ascii').split(':: ')[1].strip()
+        url = selection.decode('ascii').split('\t')[1].strip()
 
         webbrowser.open_new_tab(url)
     except:
@@ -122,21 +192,111 @@ def fzf_nmapNSE():
     conn.close()
     os.remove(dumpfile)
 
-## [man pages] ------------------------------------------------------------- ##
+## [MAN PAGES] ------------------------------------------------------------- ##
 
-def get_man():
+def fzf_man():
 
-    manpages = subprocess.run(['man', '-k', ''], stdout=subprocess.PIPE)
+    manpages = subprocess.Popen(['man', '-k', ''], stdout=subprocess.PIPE)
+    
+    options = set()
+    for man in manpages.stdout:
+        man = man.decode('UTF-8')
+        name = man.split('(')[0].strip()
+        section = man.split(')')[0].split('(')[1].strip()
+        description = man.split(')')[1].strip()
+        description = re.sub(r'^- ', '', description)
 
-    m = manpages.stdout.decode('UTF-8').split('\n')
-    print(m)
+        opt = f"{name:<40}\t{section}\t{description}\n"
+        options.add(opt)
+
+    options = ''.join(sorted(list(options)))
+
+    with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+        f.write(options)
+        f.seek(0)
+        dumpfile = f.name
+
+    with open(dumpfile, 'r') as f:
+        data = f.read().encode('UTF-8')
+
+    try:
+        fzf = subprocess.run(["fzf", 
+                              "--prompt=Man Pages: ",
+                              "--header=NAME                                            SECTION DESCRIPTION",
+                              "--no-hscroll",
+                              "--reverse",
+                              "-i",
+                              "--exact",
+                              "--tiebreak=begin",
+                              "--no-info",
+                              "--pointer=•",
+                              "--delimiter=\t",
+                              "--preview-window=down:wrap",
+                              '--preview=man {2} {1}',
+                             ], input=data, stdout=subprocess.PIPE)
+
+        selection = fzf.stdout.decode('UTF-8').split('\t')
+        man_name = selection[0].strip()
+        man = f'man {selection[1]} {man_name}'
+        subprocess.run(man, shell=True)
+
+    except:
+        pass
+
+## [PYTHON MODULES] -------------------------------------------------------- ##
+
+def fzf_python():
+
+    options = set()
+    for mod in pkgutil.iter_modules():
+        if mod.name != 'antigravity':
+            opt = f"{mod.name:<40}\t{mod.module_finder.path}\n"
+            options.add(opt)
+
+    options = ''.join(sorted(list(options)))
+
+    with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+        f.write(options)
+        f.seek(0)
+        dumpfile = f.name
+
+    with open(dumpfile, 'r') as f:
+        data = f.read().encode('UTF-8')
+
+    try:
+        fzf = subprocess.run(["fzf", 
+                              "--prompt=Python Modules: ",
+                              "--header=NAME                                 PATH",
+                              "--no-hscroll",
+                              "--reverse",
+                              "-i",
+                              "--exact",
+                              "--tiebreak=begin",
+                              "--no-info",
+                              "--pointer=•",
+                              "--delimiter=\t",
+                              "--preview-window=down:wrap",
+                              '--preview=python -m pydoc {1}',
+                             ], input=data, stdout=subprocess.PIPE)
+
+        selection = fzf.stdout.decode('UTF-8').split('\t')
+        module_name = selection[0].strip()
+        doc = f'python -m pydoc {module_name}'
+        subprocess.run(doc, shell=True)
+
+    except:
+        pass
 
 ## [MAIN] ------------------------------------------------------------------ ##
 
 def main():
-    # check_database()
+    check_database()
     # fzf_nmapNSE()
-    get_man()
+    # fzf_man()
+    # fzf_python()
+    # get_exploitdb()
+    # get_cve()
+    table_cve()
 
 if __name__ == '__main__':
     main()
