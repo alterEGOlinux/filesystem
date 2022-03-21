@@ -208,8 +208,7 @@
   bindsym $mod+Return exec xfce4-terminal                                     \
                               --hide-toolbar                                  \
                               --hide-menubar                                  \
-                              --hide-scrollbar                                \
-                              -e "env TERM=screen-256color tmux -u"
+                              --hide-scrollbar -e "env TERM=screen-256color tmux -u"
 
   ## ( toggle keyboard language )
   bindsym $mod+CTRL+l exec toggle_language.sh
