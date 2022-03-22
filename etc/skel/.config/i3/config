@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## ~/.config/i3/config                                                       ##
 ##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-03-22 10:57:21 UTC                                ##
+##   updated        : 2022-03-22 23:53:30 UTC                                ##
 ##   description    : i3vm configuration file.                               ##
 ##   app            : i3                                                     ##
 ## _________________________________________________________________________ ##
@@ -39,7 +39,7 @@
   exec --no-startup-id nm-applet
 
   ## ( background )
-  # exec --no-startup-id /usr/local/bin/ego-background.sh --set
+  exec --no-startup-id feh --bg-max --image-bg=black /usr/local/share/wallpapers/ael-anonymous1.png
 
   ## ( keyboard layout )
   exec_always setxkbmap -layout 'us,ca'
