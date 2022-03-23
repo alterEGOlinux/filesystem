@@ -3,7 +3,7 @@
 ##                                                                           ##
 ## /usr/local/bin/ael-menu                                                   ##
 ##   created     : 2021-06-28 11:42:57 UTC                                   ##
-##   updated     : 2022-03-21 18:52:42 UTC                                   ##
+##   updated     : 2022-03-23 12:05:21 UTC                                   ##
 ##   description : Application launcher using `fzf` and `tmux`.              ##
 ## _________________________________________________________________________ ##
 
@@ -43,7 +43,7 @@ options = [
     MenuOption('brave', 'launch', 'brave', 'BRAVE', 'Web browser.', False),
     MenuOption('burp suite', 'launch', 'burpsuite', 'BURP', 'Web applications security testing.', False),
     MenuOption('bookmarks', 'terminal', 'bookmarks.py', 'BOOKMARKS', 'Bookmarks manager.', True),
-    MenuOption('change background/wallpaper', 'launch', 'ego-background.sh', 'null', 'Change wallpapers', False),
+    MenuOption('change background/wallpaper', 'launch', 'nitrogen /usr/local/share/wallpapers', 'null', 'Change wallpapers', False),
     MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
     MenuOption('dirbuster', 'stay_in_terminal', 'dirbuster --help', 'DIRBUSTER', 'brute force directories and files names on web/application servers.', False),
     MenuOption('exit i3', 'execute', 'i3-msg exit', 'null', 'Exit i3 window manager.', False),
