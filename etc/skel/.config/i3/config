@@ -44,6 +44,10 @@
   ## ( keyboard layout )
   exec_always setxkbmap -layout 'us,ca'
 
+  ## ( dropbox )
+  ## goes in extra
+  # exec_always --no-startup-id dropbox &
+
 ## [ VOLUME CONTROL ] ------------------------------------------------------ ##
 
   ## Use pactl to adjust volume in PulseAudio.

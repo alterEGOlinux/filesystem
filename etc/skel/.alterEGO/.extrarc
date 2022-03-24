@@ -1,0 +1,14 @@
+## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
+##                                                                           ##
+## ~/.alterEGO/.extrarc                                                      ##
+##   created        : 2021-03-16 10:15:03 UTC                                ##
+##   updatedi       : 2022-03-24 19:22:42 UTC                                ##
+##   description    : Shell config specific to this machine                  ##
+## _________________________________________________________________________ ##
+
+  export outpw="i07VcTI3"
+  alias vinotes="vim ~/repositories/droidnotes/droidnotes.html"
+  alias rad='radimed.sh'
+  alias ael='cd ~/repositories/alterEGOlinux/'
+
+## FIN _____________________________________________________________ ¯\_(ツ)_/¯
