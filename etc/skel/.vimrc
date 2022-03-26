@@ -1,29 +1,32 @@
 "" { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
 ""                                                                           ##
-"" .vimrc                                                                    ##
+"" ~/.vimrc                                                                  ##
 ""   created        : 2021-02-23 02:54:43 UTC                                ##
-""   updated        : 2021-09-28 10:20:23 UTC                                ##
+""   updated        : 2022-03-25 11:30:36 UTC                                ##
 ""   description    : VIM main configuration file.                           ##
 ""   application    : vim                                                    ##
-""   target         : ${HOME}/.vimrc                                         ##
 "" _________________________________________________________________________ ##
 
 "" [ GENERAL CONFIG ] ------------------------------------------------------ ##
 
-  """"" Forces vim to act like vim, not like vi.
+  "" Forces vim to act like vim, not like vi.
   set nocompatible
-  """"" <leader>
+
+  "" <leader>
   let mapleader = '-'
-  """"" Highlights the cursor line.
+
+  "" Highlights the cursor line.
   set cursorline
+
   """"" Disable the creation of swap files.
   set noswapfile
-  """"" Used with colored column.
+
+  "" Used with colored column.
   set colorcolumn=80
 
 "" [ ARROW KEYS ] ---------------------------------------------------------- ##
 
-  """"" Disables arrow keys.
+  "" Disables arrow keys.
   " noremap <UP> <NOP>
   " noremap <RIGHT> <NOP>
   " noremap <LEFT> <NOP>
@@ -31,16 +34,17 @@
 
 "" [ BASE 64 ] ------------------------------------------------------------- ##
 
-  """" Decode inplace base64 text.
-  "... ref. https://stackoverflow.com/a/7849399/10500496
+  "" Decode inplace base64 text.
+  "" ref. https://stackoverflow.com/a/7849399/10500496
   vnoremap <leader>64 y:let @"=system('base64 --decode', @")<cr>gvP
 
 "" [ CHANGE CASES ] -------------------------------------------------------- ##
 
-  """"" Upper case.
+  "" Upper case.
   inoremap <C-u> <ESC>viwUea
   nnoremap <C-u> viwUea
-  """"" Lower case.
+
+  "" Lower case.
   inoremap <C-l> <ESC>viwu
   nnoremap <C-l> viwu
 
@@ -71,11 +75,13 @@
 
 "" [ ENCODING ] ------------------------------------------------------------ ##
 
-  """"" The encoding displayed.
+  "" The encoding displayed.
   set encoding=utf8
-  """"" The encoding written to file.
+
+  "" The encoding written to file.
   set fileencoding=utf8
-  """"" set BOM ...WARNING: doesn't work, need to set manually.
+
+  "" set BOM ...WARNING: doesn't work, need to set manually.
   " set bomb
 
 "" [ ESC ] ----------------------------------------------------------------- ##
@@ -85,9 +91,9 @@
 
 "" [ FILE EXPLORER ] ------------------------------------------------------- ##
 
-  """"" NerdTree-like
-  ""... Vim: you don't need NERDtree or (maybe) netrw
-  ""... https://shapeshed.com/vim-netrw/
+  "" NerdTree-like
+  "" Vim: you don't need NERDtree or (maybe) netrw
+  "" https://shapeshed.com/vim-netrw/
   let g:netrw_banner = 0
   let g:netrw_liststyle = 3
   let g:netrw_browse_split = 4
@@ -98,8 +104,8 @@
     " autocmd VimEnter * :Vexplore
   " augroup END
 
-  """"" Toggle netrw
-  ""... ref. https://vi.stackexchange.com/a/20832
+  "" Toggle netrw
+  "" ref. https://vi.stackexchange.com/a/20832
   function! ToggleNetrw()
           let i = bufnr("$")
           let wasOpen = 0
@@ -118,18 +124,20 @@
 
 "" [ HELP ] ---------------------------------------------------------------- ##
 
-  """"" View man pages of word under cursor.
+  "" View man pages of word under cursor.
   nmap <leader>k :silent execute '!man <cword>'<cr>:redraw!<cr>
-  """"" View Python documentation of word under cursor.
+
+  "" View Python documentation of word under cursor.
   nmap <leader>hp :silent execute '!pydoc <cword>'<cr>:redraw!<cr>
 
 "" [ HIGHLIGHT LINE ] ------------------------------------------------------ ##
 
-  """"" ref. https://vimtricks.com/p/highlight-specific-lines/
+  "" ref. https://vimtricks.com/p/highlight-specific-lines/
 
-  """"" Highlight the current line.
+  "" Highlight the current line.
   nnoremap <silent> <Leader>hl :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
-  """"" Clear all the highlighted lines.
+
+  "" Clear all the highlighted lines.
   nnoremap <silent> <Leader>hc :call clearmatches()<CR>
 
 "" [ HTML MAPPING ] -------------------------------------------------------- ##
@@ -137,7 +145,7 @@
   augroup filetype_html, filetype_htmldjango
     autocmd!
 
-    """"" Create a document.
+    "" Create a document.
     autocmd FileType html inoremap html<TAB> 
     \<!DOCTYPE html><CR>
     \<html lang="en"><CR>
@@ -153,67 +161,75 @@
     \</body><CR>
     \</html><ESC>?<title><CR>cit
 
-    """"" a + target="_blank"
+    "" a + target="_blank"
     autocmd FileType html inoremap <buffer>a<TAB> 
     \<a href="" target="_blank"></a><ESC>?=""<CR>ei
 
-    """"" blockquote
+    "" blockquote
     autocmd FileType html inoremap <buffer>bq<TAB> 
     \<blockquote></blockquote><ESC>2bli
 
-    """"" bold
+    "" bold
     autocmd FileType html inoremap b<TAB> 
     \<b></b><ESC>3hi
 
-    """"" break line
+    "" linebreak 
     autocmd FileType html inoremap br<TAB> 
     \<br<space>/><ESC>a
 
-    """"" code
+    "" code
     autocmd FileType html inoremap code<TAB> 
     \<code></code><ESC>6hi
 
-    """"" comment
+    "" comment
     autocmd FileType html inoremap cmt<TAB> 
     \<!--<space><space>--><ESC>3hi
 
-    """"" div
+    "" div
     autocmd FileType html inoremap div<TAB> 
     \<div><CR><space><space><CR></div><ESC>2k0viwyjPj0.k$a
 
-    """"" h1
+    "" h1
     autocmd FileType html inoremap h1<TAB> 
     \<h1></h1><ESC>4hi
 
-    """"" h2
+    "" h2
     autocmd FileType html inoremap h2<TAB> 
     \<h2></h2><ESC>4hi
 
-    """"" h3
+    "" h3
     autocmd FileType html inoremap h3<TAB> 
     \<h3></h3><ESC>4hi
 
-    """"" horizontal line
+    "" h4
+    autocmd FileType html inoremap h4<TAB> 
+    \<h4></h4><ESC>4hi
+
+    "" h5
+    autocmd FileType html inoremap h5<TAB> 
+    \<h5></h5><ESC>4hi
+
+    "" horizontal line
     autocmd FileType html inoremap hr<TAB> 
     \<hr><CR><ESC>a
 
-    """"" italic
+    "" italic
     autocmd FileType html inoremap em<TAB> 
     \<em></em><ESC>4hi
 
-    """"" li
+    "" li
     autocmd FileType html inoremap li<TAB> 
     \<li></li><ESC>4hi
 
-    """"" paragraph
+    "" paragraph
     autocmd FileType html inoremap p<TAB> 
     \<p></p><ESC>3hi
 
-    """"" preformated text
+    "" preformated text
     autocmd FileType html inoremap pre<TAB> 
     \<pre><ESC>Vypa/<ESC>O
 
-    """"" droidnotes new article
+    "" droidnotes new article
     autocmd FileType html inoremap dart<TAB> 
     \<CR><space><space><space><space><!-- TITLE -->
     \<CR><space><space><space><space><article id="id" class="_show">
@@ -230,8 +246,8 @@
     \<CR><space><space><space><space><space><space><div class="_tags">[null]</div>
     \<CR><space><space><space><space></article>
 
-    "" [ AUTOCOMPLETE TAGS ]
-    """"" ref. https://stackoverflow.com/a/532656
+    "" (-- AUTOCOMPLETE TAGS --)
+    "" ref. https://stackoverflow.com/a/532656
     autocmd FileType html inoremap /<TAB> 
     \</<C-x><C-o><ESC>
 
@@ -243,7 +259,8 @@
   set wrap
   " set showbreak=[......]
   set showbreak==>\ \ 
-  """"" Toggle linewrap.
+
+  "" Toggle linewrap.
   map <leader>w :setlocal wrap!<CR>
 
 "" [ LINE NUMBER ] --------------------------------------------------------- ##
@@ -251,7 +268,7 @@
   set number
   set relativenumber
 
-  """"" Toggle line numbering
+  "" Toggle line numbering
   nnoremap <leader>ln :set number! relativenumber!<CR>
 
 "" [ LOREM ] --------------------------------------------------------------- ##
@@ -280,8 +297,8 @@
 
 "" [ RUN SCRIPT ] ---------------------------------------------------------- ##
 
-  "" [ PYTHON ]
-  """"" Requires tmux, with a second pane open.
+  "" (-- PYTHON --)
+  "" Requires tmux, with a second pane open.
 
   function! RunPython()
       let pycmd = systemlist('command -v python')[0]
@@ -290,42 +307,45 @@
   endfunction
   nnoremap <leader>p :call RunPython()<CR>
 
-  """"" Kills the script.
+  "" Kills the script.
   nnoremap <leader>ss :!tmux send-keys -t 1 "C-c";<CR><C-l>
 
 "" [ SAVE FILE ] ----------------------------------------------------------- ##
 
-  """"" CTRL+s to save file
-  ""... ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
-  ""... Requires `stty -ixon` in a sourced rc file
+  "" CTRL+s to save file
+  "" ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+  "" Requires `stty -ixon` in a sourced rc file
   inoremap <C-s> <ESC>:write<CR>
 
 "" [ SCROLL OFFSET ] ------------------------------------------------------- ##
 
-  """"" When scrolling, keeps the cursor at the vertical center.
-  ""... Use so=999 for centered
-  ""... ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
+  "" When scrolling, keeps the cursor at the vertical center.
+  "" Use so=999 for centered
+  "" ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
   set scrolloff=999
 
 "" [ SEARCH ] -------------------------------------------------------------- ##
 
-  """"" Fuzzy find and wildmenu.
+  "" Fuzzy find and wildmenu.
   set path+=**
   set wildmenu
 
-  "" [ TEXT SEARCH ]
-  """"" Search ignorecase.
+  "" (-- TEXT SEARCH --)
+  "" Search ignorecase.
   set ignorecase
-  """"" Search highlight.
+
+  "" Search highlight.
   set hlsearch
-  """"" Toggle search highlighting                      
+
+  "" Toggle search highlighting                      
   nnoremap <F3> :set hlsearch!<CR> 
-  """"" Clear search highlighting
+
+  "" Clear search highlighting
   nnoremap <leader>cs :let @/ = ""<CR>
 
 "" [ SPELLCHECKER ] -------------------------------------------------------- ##
 
-  """"" Toggle spell checker.
+  "" Toggle spell checker.
   map <F5> :setlocal spell! spelllang=en_us<CR>
 
 "" [ STATUSLINE ] ---------------------------------------------------------- ##
@@ -345,9 +365,9 @@
 "" [ TAB AND INDENT ] ------------------------------------------------------ ##
 
   set tabstop=2
-  """"" shiftround : rounds indent to multiple of shiftwidth.
-  ""... Applies to < and > in normal mode. <C-t> and <C-d> in insert mode
-  ""... always round the indent.
+  "" shiftround : rounds indent to multiple of shiftwidth.
+  "" Applies to < and > in normal mode. <C-t> and <C-d> in insert mode
+  "" always round the indent.
   set shiftround
   set shiftwidth=2
   set expandtab
@@ -364,26 +384,27 @@
 
 "" [ TIMESTAMP ] ----------------------------------------------------------- ##
 
-  """"" Insert timestamp.
-  ""... ex: Fri Mar 8 13:29:52 UTC 2019  
+  "" Insert timestamp.
+  "" ex: 2022-03-25 15:49:24 UTC
   nnoremap <F12> "=system('echo -n $(date --utc "+%F %H:%M:%S %Z" )')<CR>p
-  ""[+] Insert timestamp as ID.
-  ""[-] ex: 202005151148
+
+  "" Insert timestamp as ID.
+  "" ex: 202203251549
   nnoremap <F9> "=system('echo -n $(date --utc "+%Y%m%d%H%M")')<CR>p
 
 "" [ XCLIP ] --------------------------------------------------------------- ##
 
-  """"" Enable clipboard ability with xclip.
-  ""... ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
+  "" Enable clipboard ability with xclip.
+  "" ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
   map <F7> y:call system("xclip -i -selection clipboard", getreg("\""))<cr>
   map <S-F7> :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p")")")"))
 
-"" [ PLUGINS ] ------------------------------------------------------------- ##
+"" [ PLUGINS - INSTALL ] --------------------------------------------------- ##
 
   syntax enable
   filetype plugin on
 
-  "" [ vim-plug ]
+  "" (-- vim-plug --)
 
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -393,63 +414,66 @@
 
   call plug#begin('~/.vim/plugged')
 
-  "" ( JEDI )
+  "" (-- JEDI --)
   Plug 'https://github.com/davidhalter/jedi-vim.git'
 
-  "" ( FZF )
+  "" (-- FZF --)
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
-  "" ( SYNTASTIC )
-  """"" Syntax checker.
-  ""... https://github.com/vim-syntastic/syntastic
+  "" (-- SYNTASTIC --)
+  "" Syntax checker.
+  "" https://github.com/vim-syntastic/syntastic
   Plug 'vim-syntastic/syntastic'
 
   call plug#end()
 
-  """"" Automatically install missing plugins.
-  ""... ref. https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup
+  "" Automatically install missing plugins.
+  "" ref. https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup
   autocmd VimEnter *
     \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
     \|   PlugInstall --sync | q
     \| endif
 
-  """"" Disable automatic indent on from vim-plug
+  "" Disable automatic indent on from vim-plug
   filetype indent off
 
-  "" [ PLUGIN: fzf.vim ]
+"" [ PLUGINS - STUFF ] ----------------------------------------------------- ""
 
-  """"" Buffers list.
+  "" (-- fzf.vim --)
+
+  "" Buffers list.
   nnoremap <silent> <leader>ls :Buffers<CR>
-  """"" Open files in $HOME.
+
+  "" Open files in $HOME.
   nnoremap <silent> <C-o> :Files ~<CR>
-  """"" Open files from /.
+
+  "" Open files from /.
   nnoremap <silent> <leader>os :Files /<CR>
-  """"" Find lines containing.
+
+  "" Find lines containing.
   nnoremap <silent> <C-f> :BLines<CR>
-  """"" Droidnotes TOC find.
-  nnoremap <silent> <leader>td :BLines <!-- <CR>
 
-  "" [ PLUGIN: emmet-vim ]
+  "" (-- emmet-vim --)     
 
-  """"" Enable emmet-vim tab completion 
+  "" Enable emmet-vim tab completion 
   " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-  "" [ PLUGIN: syntastic ]
+  "" (-- syntastic --)
 
   map <leader>sx :SyntasticToggleMode<CR>
 
 "" [ COLORSCHEME ] --------------------------------------------------------- ##
 
-  """"" Colors:
-  ""... 0   Black
-  ""... 10  Lime
+  "" Colors:
+  "" 0   Black
+  "" 10  Lime
 
   set t_Co=256
 
-  """"" Color schemes:
-  ""... iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
-  ""... blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+  "" Color schemes:
+  "" iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
+  "" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
 
   " colorscheme default
   colorscheme iceberg
@@ -468,8 +492,8 @@
   highlight StatusLineNC  cterm=NONE    ctermfg=0     ctermbg=238
   highlight Visual        cterm=NONE    ctermfg=16    ctermbg=11
 
-  "" [ HTML/MD ]
-  """""" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
+  "" (-- HTML/MD --)
+  "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
   highlight htmlTagName   cterm=BOLD    ctermfg=23    ctermbg=NONE
   highlight link htmlTag    htmlTagName
   highlight link htmlEndTag htmlTagName
@@ -495,12 +519,12 @@ hi MatchParen         term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
 " hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
 
-  "" [ WINDOW'S TAB ]
-  """"" Focused.
+  "" (--  window's tab --)
+  "" Focused.
   hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
-  """"" Unfocused.
+  "" Unfocused.
   hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
-  """"" Rest of the line.
+  "" Rest of the line.
   hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
 
 " hi Todo               term=NONE cterm=NONE ctermfg=251  ctermbg=66
