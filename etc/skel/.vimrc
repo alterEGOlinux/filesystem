@@ -480,8 +480,10 @@
 
   set background=dark
 
+  "" (-- general --)
   highlight ColorColumn   cterm=NONE    ctermfg=NONE  ctermbg=238
-  highlight Comment       cterm=BOLD    ctermfg=31    ctermbg=NONE
+  " highlight Comment       cterm=BOLD    ctermfg=31    ctermbg=NONE
+  highlight Comment       cterm=BOLD    ctermfg=12    ctermbg=NONE
   highlight CursorLine    cterm=NONE    ctermfg=NONE  ctermbg=238
   highlight Function      cterm=BOLD    ctermfg=150   ctermbg=NONE
   highlight LineHighlight cterm=NONE    ctermfg=0     ctermbg=10
@@ -494,7 +496,7 @@
 
   "" (-- HTML/MD --)
   "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
-  highlight htmlTagName   cterm=BOLD    ctermfg=23    ctermbg=NONE
+  highlight htmlTagName     cterm=BOLD    ctermfg=23    ctermbg=NONE
   highlight link htmlTag    htmlTagName
   highlight link htmlEndTag htmlTagName
 

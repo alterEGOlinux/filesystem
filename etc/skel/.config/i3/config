@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## ~/.config/i3/config                                                       ##
 ##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-03-22 23:53:30 UTC                                ##
+##   updated        : 2022-03-27 12:59:40 UTC                                ##
 ##   description    : i3vm configuration file.                               ##
 ##   app            : i3                                                     ##
 ## _________________________________________________________________________ ##
@@ -61,7 +61,7 @@
 
   ## ( colors )
   ##                      border     background text       indicator
-  client.focused          #1C445B    #1C445B    #f3f4f5    #00ff00
+  client.focused          #2e7096    #1C445B    #f3f4f5    #00ff00
   client.unfocused        #1C445B    #5E5E5E    #ffffff    #00ff00
   client.focused_inactive #000000    #000000    #ffffff    #00ff00
   client.urgent           #E53935    #E53935    #f3f4f5    #00ff00
