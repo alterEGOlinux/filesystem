@@ -2,7 +2,7 @@
 <!--                                                                        -->
 <!-- /usr/local/share/ael-help/keybinding.md                                -->
 <!--   created        : 2022-03-25 11:55:30 UTC                             -->
-<!--   updated        : 2022-03-25 11:55:38 UTC                             -->
+<!--   updated        : 2022-03-29 11:50:14 UTC                             -->
 <!--   description    : Key bindings for alterEGO linux.                    -->
 <!-- ______________________________________________________________________ -->
 
