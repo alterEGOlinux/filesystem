@@ -59,8 +59,8 @@
 
 ## [ BRIGHTNESS ] ---------------------------------------------------------- ##
 
-  bindsym $mod+d exec brightnessctl +10%
-  bindsym $mod+Shift+d exec brightnessctl 10%-
+  bindsym $mod+d exec brightnessctl set +10%
+  bindsym $mod+Shift+d exec brightnessctl set 10%-
 
 ## [ WINDOWS ] ------------------------------------------------------------- ##
 
