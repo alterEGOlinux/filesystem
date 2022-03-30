@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## ~/.config/i3/config                                                       ##
 ##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-03-27 12:59:40 UTC                                ##
+##   updated        : 2022-03-30 11:59:27 UTC                                ##
 ##   description    : i3vm configuration file.                               ##
 ##   app            : i3                                                     ##
 ## _________________________________________________________________________ ##
@@ -56,6 +56,11 @@
   bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
   bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
   bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+## [ BRIGHTNESS ] ---------------------------------------------------------- ##
+
+  bindsym $mod+d exec brightnessctl +10%
+  bindsym $mod+Shift+d exec brightnessctl 10%-
 
 ## [ WINDOWS ] ------------------------------------------------------------- ##
 
@@ -233,7 +238,7 @@
       resize set 900px 350px,                                                 \
       move position center
 
-  ## ( PAVUCONTROL )
+  ## (-- PAVUCONTROL --)
  
     for_window [title="Volume Control"]                                       \
         floating enable,                                                      \
