@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## ~/.config/i3/config                                                       ##
 ##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-03-30 11:59:27 UTC                                ##
+##   updated        : 2022-04-01 10:14:20 UTC                                ##
 ##   description    : i3vm configuration file.                               ##
 ##   app            : i3                                                     ##
 ## _________________________________________________________________________ ##
@@ -273,7 +273,8 @@
     id bar-3
     position top
     workspace_buttons yes
-    status_command /usr/bin/bumblebee-status -m nic memory disk cpu datetime
+    status_command /usr/bin/bumblebee-status -t greyish-powerline -m datetime nic memory disk cpu battery -p nic.states=^down
+    font pango:Source Code Pro Medium 10
   }
 
 ## [REFERENCES] ------------------------------------------------------------ ##
