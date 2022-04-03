@@ -245,18 +245,18 @@
         resize set 900px 350px,                                               \
         move position center
 
-  ##( BOOKMARKS MENU )
-  #bindsym $mod+b exec xfce4-terminal                                          \
-  #                        --hide-toolbar                                      \
-  #                        --hide-menubar                                      \
-  #                        --hide-scrollbar                                    \
-  #                        --title "BOOKMARKS"                                 \
-  #                        -e "bookmarks.py"
+  ## (-- BOOKMARKS MENU --)
+  bindsym $mod+b exec xfce4-terminal                                          \
+                          --hide-toolbar                                      \
+                          --hide-menubar                                      \
+                          --hide-scrollbar                                    \
+                          --title "AEL Bookmarks"                             \
+                          -e "bookmarks.py"
 
-  #for_window [title="BOOKMARKS"]                                              \
-  #    floating enable,                                                        \
-  #    resize set 900px 450px,                                                 \
-  #    move position center
+  for_window [title="AEL Bookmarks"]                                          \
+      floating enable,                                                        \
+      resize set 900px 450px,                                                 \
+      move position center
 
 ## [ STATUS BAR ] ---------------------------------------------------------- ##
 

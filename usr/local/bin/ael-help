@@ -3,7 +3,7 @@
 ##                                                                           ##
 ## /usr/local/bin/ael-help                                                   ##
 ##   created     : 2022-03-09 11:39:01 UTC                                   ##
-##   updated     : 2022-03-14 17:26:12 UTC                                   ##
+##   updated     : 2022-04-03 12:33:15 UTC                                   ##
 ##   description : Help using `fzf`.                                         ##
 ## _________________________________________________________________________ ##
 
@@ -169,7 +169,7 @@ def fzf_nmapNSE():
 
     try:
         fzf = subprocess.run(["fzf", 
-                              "--prompt=Nmap NSE: ",
+                              "--prompt=Nmap NSE ❯ ",
                               "--no-hscroll",
                               "--reverse",
                               "-i",
@@ -221,7 +221,7 @@ def fzf_man():
 
     try:
         fzf = subprocess.run(["fzf", 
-                              "--prompt=Man Pages: ",
+                              "--prompt=Man Pages ❯ ",
                               "--header=NAME                                            SECTION DESCRIPTION",
                               "--no-hscroll",
                               "--reverse",
@@ -265,7 +265,7 @@ def fzf_python():
 
     try:
         fzf = subprocess.run(["fzf", 
-                              "--prompt=Python Modules: ",
+                              "--prompt=Python Modules ❯ ",
                               "--header=NAME                                 PATH",
                               "--no-hscroll",
                               "--reverse",
