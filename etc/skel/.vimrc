@@ -426,6 +426,10 @@
   "" https://github.com/vim-syntastic/syntastic
   Plug 'vim-syntastic/syntastic'
 
+  "" (-- markdown-preview --)
+  "" https://github.com/iamcco/markdown-preview.vim
+  Plug 'iamcco/markdown-preview.vim'
+
   call plug#end()
 
   "" Automatically install missing plugins.
@@ -462,6 +466,10 @@
   "" (-- syntastic --)
 
   map <leader>sx :SyntasticToggleMode<CR>
+
+  "" (-- markdown-preview --)
+  nmap <silent> <leader>vm <Plug>MarkdownPreview
+  nmap <silent> <leader>sm <Plug>StopMarkdownPreview
 
 "" [ COLORSCHEME ] --------------------------------------------------------- ##
 
