@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## ~/.config/i3/config                                                       ##
 ##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-04-01 12:09:21 UTC                                ##
+##   updated        : 2022-04-07 10:40:46 UTC                                ##
 ##   description    : i3vm configuration file.                               ##
 ##   app            : i3                                                     ##
 ## _________________________________________________________________________ ##
@@ -17,34 +17,34 @@
 
 ## [ STARTUP ] ------------------------------------------------------------- ##
 
-  ## ( I3 VM )
+  ## (-- I3 VM --)
   ## Start XDG autostart .desktop files using dex. See also
   ## https://wiki.archlinux.org/index.php/XDG_Autostart
   exec --no-startup-id dex --autostart --environment i3
 
-  ## ( LOCK )
+  ## (-- LOCK --)
   # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
   # screen before suspend. Use loginctl lock-session to lock your screen.
   exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-  ## ( POLKIT AUTHENTICATION AGENT )
+  ## (-- POLKIT AUTHENTICATION AGENT --)
   exec_always /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-  ## ( TRANSPARENCY )
+  ## (-- TRANSPARENCY --)
   exec xcompmgr -c -f -n
 
-  ## ( Network Manager )
+  ## (-- Network Manager --)
   ## NetworkManager is the most popular way to manage wireless networks on Linux,
   ## and nm-applet is a desktop environment-independent system tray GUI for it.
   exec --no-startup-id nm-applet
 
-  ## ( background )
+  ## (-- background --)
   exec --no-startup-id nitrogen --restore
 
-  ## ( keyboard layout )
+  ## (-- keyboard layout --)
   exec_always setxkbmap -layout 'us,ca'
 
-  ## ( dropbox )
+  ## (-- dropbox --)
   ## goes in extra
   # exec_always --no-startup-id dropbox &
 
@@ -213,11 +213,12 @@
 
 ## [ APPLICATIONS ] -------------------------------------------------------- ##
 
-  ## ( terminal )
-  bindsym $mod+Return exec xfce4-terminal                                     \
-                              --hide-toolbar                                  \
-                              --hide-menubar                                  \
-                              --hide-scrollbar -e "env TERM=screen-256color tmux -u"
+  ## (-- terminal --)
+  bindsym $mod+Return exec alacritty -e env TERM=screen-256color tmux -u
+  # bindsym $mod+Return exec xfce4-terminal                                     \
+  #                             --hide-toolbar                                  \
+  #                             --hide-menubar                                  \
+  #                             --hide-scrollbar -e "env TERM=screen-256color tmux -u"
 
   ## ( toggle keyboard language )
   bindsym $mod+CTRL+l exec toggle_language.sh
@@ -273,7 +274,7 @@
     position top
     tray_output none
     workspace_buttons yes
-    status_command /usr/bin/bumblebee-status -t greyish-powerline -m datetime nic memory disk cpu battery -p nic.states=^down
+    status_command /usr/bin/bumblebee-status -t greyish-powerline -m datetime shortcut nic memory disk cpu battery -p shortcut.cmds='firefox;alacritty' shortcut.labels=';' nic.states=^down
     font pango:Source Code Pro Medium 10
   }
 
