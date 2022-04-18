@@ -430,6 +430,10 @@
   "" https://github.com/iamcco/markdown-preview.vim
   Plug 'iamcco/markdown-preview.vim'
 
+  "" (-- coloscheme iceberg --)
+  "" https://github.com/cocopon/iceberg.vim
+  Plug 'cocopon/iceberg.vim'
+
   call plug#end()
 
   "" Automatically install missing plugins.
