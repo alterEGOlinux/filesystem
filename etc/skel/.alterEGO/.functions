@@ -3,7 +3,7 @@
 ##                                                                           ##
 ## ~/.alterEGO/.functions                                                    ##
 ##   created        : 2021-05-25 19:40:20 UTC                                ##
-##   updated        : 2022-02-15 22:24:46 UTC                                ##
+##   updated        : 2022-05-25 10:58:08 UTC                                ##
 ##   description    : Shell functions to complement .egorc                   ##
 ## _________________________________________________________________________ ##
 
@@ -18,8 +18,9 @@
   }
 
   cheat() {
-      ## Query https://cheat.sh.
-      ## Menu with `fzf` and display with `less`.
+      #:- Query https://cheat.sh.
+      #:- Menu with `fzf` and display with `less`.
+      #:- https://github.com/chubin/cheat.sh
 
       cheat="$(curl -s cheat.sh/:list                                         \
               | fzf --layout="reverse"                                        \
@@ -92,6 +93,13 @@
       ## Repeat last cmd with sudo if forgotten.
 
       sudo $(history -p !!)
+  }
+
+
+  getmp3() {
+
+      youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
+
   }
 
   gitall() {
@@ -203,6 +211,14 @@
       sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
   }
 
+  searchcontent() {
+    #:- src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
+
+    rg --files-with-matches --no-messages "$1" \
+    | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+  }
+  alias sc="searchcontent"
+
   tagalog() {
 
       wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
@@ -249,6 +265,16 @@
 
       message action "Current IP addresses:"
       ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
+  }
+
+  whoisweb() {
+
+      ## Query the web if `whois` port 43 is blocked on your network.
+
+      curl --silent https://whoisjs.com/api/v1/${1}                           \
+      | jq ".raw"                                                             \
+      | sed "s/\\\r\\\n/\\n/g"
+
   }
 
 ## FIN _____________________________________________________________ ¯\_(ツ)_/¯

@@ -2,7 +2,7 @@
 ##                                                                           ##
 ## /home/{user}/.xinitrc                                                     ##
 ##   created        : 2021-02-23 02:54:43 UTC                                ##
-##   updated        : 2022-02-09 13:45:21 UTC                                ##
+##   updated        : 2022-05-03 11:50:29 UTC                                ##
 ##   description    : Starts Window Manager with startx.                     ##
 ## _________________________________________________________________________ ##
 
@@ -14,7 +14,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     unset f
 fi
 
-bash /home/ghost/.autostart
+# bash /home/ghost/.autostart
 
 case ${2} in
 

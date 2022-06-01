@@ -2,7 +2,7 @@
 ""                                                                           ##
 "" ~/.vimrc                                                                  ##
 ""   created        : 2021-02-23 02:54:43 UTC                                ##
-""   updated        : 2022-03-25 11:30:36 UTC                                ##
+""   updated        : 2022-06-01 09:20:33 UTC                                ##
 ""   description    : VIM main configuration file.                           ##
 ""   application    : vim                                                    ##
 "" _________________________________________________________________________ ##
@@ -477,40 +477,48 @@
 
 "" [ COLORSCHEME ] --------------------------------------------------------- ##
 
-  "" Colors:
-  "" 0   Black
-  "" 10  Lime
+"" (-- COLORS --)
+":-    0  Black
+":-   10  Lime
 
-  set t_Co=256
+set t_Co=256
 
-  "" Color schemes:
-  "" iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
-  "" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+"" (-- COLORSCHEMES --)
+":- iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
+":- blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
 
-  " colorscheme default
-  colorscheme iceberg
+" colorscheme default
+colorscheme iceberg
 
-  set background=dark
+set background=dark
 
-  "" (-- general --)
-  highlight ColorColumn   cterm=NONE    ctermfg=NONE  ctermbg=238
-  " highlight Comment       cterm=BOLD    ctermfg=31    ctermbg=NONE
-  highlight Comment       cterm=BOLD    ctermfg=12    ctermbg=NONE
-  highlight CursorLine    cterm=NONE    ctermfg=NONE  ctermbg=238
-  highlight Function      cterm=BOLD    ctermfg=150   ctermbg=NONE
-  highlight LineHighlight cterm=NONE    ctermfg=0     ctermbg=10
-  highlight LineNr        cterm=NONE    ctermfg=246   ctermbg=238
-  highlight Search        cterm=NONE    ctermfg=16    ctermbg=11
-  highlight Statement     cterm=ITALIC  ctermfg=110   ctermbg=NONE
-  highlight StatusLine    cterm=NONE    ctermfg=246   ctermbg=238
-  highlight StatusLineNC  cterm=NONE    ctermfg=0     ctermbg=238
-  highlight Visual        cterm=NONE    ctermfg=16    ctermbg=11
+"" (-- BIONIC READING --)
+":- ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
+nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
+highlight bionic          cterm=NONE    ctermfg=GREY
 
-  "" (-- HTML/MD --)
-  "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
-  highlight htmlTagName     cterm=BOLD    ctermfg=23    ctermbg=NONE
-  highlight link htmlTag    htmlTagName
-  highlight link htmlEndTag htmlTagName
+"" (-- GENERAL --)
+highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
+highlight Comment         cterm=BOLD    ctermfg=12    ctermbg=NONE
+highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
+highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
+highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
+highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
+highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
+highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
+highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
+highlight StatusLine      cterm=NONE    ctermfg=246   ctermbg=238
+highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
+highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
+
+"" (-- HTML/MD --)
+":- ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
+highlight htmlTagName     cterm=BOLD    ctermfg=23    ctermbg=NONE
+highlight link htmlTag    htmlTagName
+highlight link htmlEndTag htmlTagName
+" hi htmlBold gui=bold guifg=#af0000 ctermfg=124
+" hi htmlItalic cterm=ITALIC ctermfg=27
+" hi htmlH1    term=NONE cterm=BOLD ctermfg=15  ctermbg=NONE
 
 " hi Constant           term=NONE cterm=NONE ctermfg=125  ctermbg=NONE
 " hi Cursor             term=NONE cterm=NONE ctermfg=242  ctermbg=NONE
@@ -525,7 +533,6 @@
 " hi Folded             term=NONE cterm=NONE ctermfg=23  ctermbg=NONE
 " hi Identifier         term=NONE cterm=NONE ctermfg=101   ctermbg=NONE
 " hi IncSearch          term=NONE cterm=NONE ctermfg=247  ctermbg=247
-hi MatchParen         term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " hi NonText            term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " hi Normal             term=NONE cterm=NONE ctermfg=249  ctermbg=NONE
 " hi PreProc            term=NONE cterm=BOLD ctermfg=66   ctermbg=NONE
@@ -533,13 +540,13 @@ hi MatchParen         term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
 " hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
 
-  "" (--  window's tab --)
-  "" Focused.
-  hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
-  "" Unfocused.
-  hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
-  "" Rest of the line.
-  hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
+"" (-- WINDOW'S TAB --)
+":- Focused
+hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
+":- Unfocused
+hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
+":- Rest of the line
+hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
 
 " hi Todo               term=NONE cterm=NONE ctermfg=251  ctermbg=66
 " hi Type               term=NONE cterm=NONE ctermfg=96  ctermbg=NONE
@@ -563,11 +570,6 @@ hi MatchParen         term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
 " -- Shell variables (default in vim81/syntax/sh.vim).
 " hi shDerefVar         term=NONE      cterm=BOLD      ctermfg=cyan   ctermbg=NONE
 
-" ** html/md
-" -- ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
-" hi htmlBold gui=bold guifg=#af0000 ctermfg=124
-" hi htmlItalic cterm=ITALIC ctermfg=27
-" hi htmlH1    term=NONE cterm=BOLD ctermfg=15  ctermbg=NONE
 
 "" [ STUFF TO SORT ] ------------------------------------------------------- ##
 
