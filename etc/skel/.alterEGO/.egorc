@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.alterEGO/.egorc                                                        ##
-##   created     : 2021-03-19 09:37:19 UTC                                   ##
-##   updated     : 2022-03-21 09:05:42 UTC                                   ##
-##   description : alterEGO Linux core shell configuration.                  ##
-## _________________________________________________________________________ ##
+
+## { alterEGO Linux: "Open the vault of knowledge" } --------------------------
+##                                                                           
+## ~/.alterEGO/.egorc                                                        
+##   created     : 2021-03-19 09:37:19 UTC                                   
+##   updated     : 2022-06-30 10:22:01 UTC
+##   description : alterEGO Linux core shell configuration.                  
+## ____________________________________________________________________________
 
   [ -f ${HOME}/.alterEGO/egoSHlib/message.bash ]                              \
   && . ${HOME}/.alterEGO/egoSHlib/message.bash
@@ -64,7 +65,7 @@
 
 ## [ HISTORY ] ------------------------------------------------------------- ##
 
-  export HISTIGNORE="cd:clear:exit:history:ls"
+  export HISTIGNORE="cd:clear:delete:exit:gitall:history:ls:mv:nohup:vim"
   export HISTCONTROL=ignoreboth:erasedups
   export HISTSIZE=1000000
   export HISEFILESIZE=1000000
@@ -207,5 +208,5 @@
     fi
   }
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 ## vim: syntax=sh
+## FIN _____________________________________________________________ ¯\_(ツ)_/¯
