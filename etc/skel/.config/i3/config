@@ -1,15 +1,15 @@
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.config/i3/config                                                       ##
-##   created        : 2021-02-26 09:37:37 UTC                                ##
-##   updated        : 2022-04-12 02:28:02 UTC                                ##
-##   description    : i3vm configuration file.                               ##
-##   app            : i3                                                     ##
-## _________________________________________________________________________ ##
+## { alterEGO Linux } ---------------------------------------------------------
+##
+## ~/.config/i3/config
+##   created        : 2021-02-26 09:37:37 UTC
+##   updated        : 2022-07-24 14:07:44 UTC
+##   description    : i3vm configuration file.
+##   app            : i3
+## ____________________________________________ { Open the vault of knowledge }
 
   set $mod Mod4
 
-## [ FONTS ] --------------------------------------------------------------- ##
+## [ FONTS ] ------------------------------------------------------------------
 
   # Font for window titles. Will also be used by the bar unless a different font
   # is used in the bar {} block below.
@@ -284,8 +284,8 @@
     font pango:Source Code Pro Medium 10
   }
 
-## [REFERENCES] ------------------------------------------------------------ ##
+## [ REFERENCES ] -------------------------------------------------------------
 
   ## User manual: https://i3wm.org/docs/userguide.html
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+## { FIN } _________________________________________________________ ¯\_(ツ)_/¯
