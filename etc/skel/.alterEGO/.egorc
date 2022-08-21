@@ -23,6 +23,9 @@
   [ -f ${HOME}/.alterEGO/.tryhackme ]                                         \
   && . ${HOME}/.alterEGO/.tryhackme
 
+  [ -f ${HOME}/.alterEGO/.testrc ]                                            \
+  && . ${HOME}/.alterEGO/.testrc
+
 ## [ COLORS ] -------------------------------------------------------------- ##
 
   export TERM="xterm-256color"
