@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## /usr/local/share/reverse_shells/rev_ssh.bash                              ##
-##   created       : 2022-01-10 16:23:27 UTC                                 ##
-##   updated       : 2022-02-28 11:02:57 UTC                                 ##
-##   description   : Set up a reverse ssh connexion.                         ##
-## _________________________________________________________________________ ##
+# -----------------------------------------------------------------------------
+# { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+# /usr/local/share/reverse_shells/rev_ssh.bash
+# created       : 2022-01-10 16:23:27 UTC
+# updated       : 2022-08-23 18:27:55 UTC
+# description   : Set up a reverse ssh connexion.
+# -----------------------------------------------------------------------------
 
 message() {
 
@@ -151,6 +152,9 @@ you can access it like so:
 • Hussein Nasser - SSH Tunneling - Local & Remote Port Forwarding (by Example)
   https://www.youtube.com/watch?v=N8f5zv9UUMI
 
+• branko, "Bypassing corporate firewall with reverse ssh port forwarding", think shell
+  http://toic.org/blog/2009/reverse-ssh-port-forwarding/
+
 ## ----------- ${_blue}${_bold}{ alterEGO Linux: "Open the vault of knowledge" }${_reset} ----------- ##
 EOF
 }
@@ -179,4 +183,4 @@ case ${@} in
 
 esac
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# { FIN } __________________________________________________________ ¯\_(ツ)_/¯
