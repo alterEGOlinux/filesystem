@@ -497,22 +497,23 @@ set background=dark
 nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
 highlight bionic          cterm=NONE    ctermfg=GREY
 
-"" (-- GENERAL --)
+"" ( GENERAL )
 highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
-highlight Comment         cterm=BOLD    ctermfg=12    ctermbg=NONE
+highlight Comment         cterm=BOLD    ctermfg=white    ctermbg=NONE
 highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
 highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
 highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
 highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
 highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
+highlight Normal          cterm=NONE    ctermfg=NONE  ctermbg=NONE
 highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
 highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
 highlight StatusLine      cterm=NONE    ctermfg=246   ctermbg=238
 highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
 highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
 
-"" (-- HTML/MD --)
-":- ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
+"" ( HTML/MD )
+"" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
 highlight htmlTagName     cterm=BOLD    ctermfg=23    ctermbg=NONE
 highlight link htmlTag    htmlTagName
 highlight link htmlEndTag htmlTagName
