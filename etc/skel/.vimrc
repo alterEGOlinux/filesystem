@@ -505,6 +505,7 @@ highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
 highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
 highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
 highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
+" Sets the background to transparent with cterm(fg/bg) to NONE.
 highlight Normal          cterm=NONE    ctermfg=NONE  ctermbg=NONE
 highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
 highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
