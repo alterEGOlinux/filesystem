@@ -492,8 +492,8 @@ colorscheme iceberg
 
 set background=dark
 
-"" (-- BIONIC READING --)
-":- ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
+"" ( BIONIC READING )
+"" ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
 nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
 highlight bionic          cterm=NONE    ctermfg=GREY
 
@@ -515,7 +515,7 @@ highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
 
 "" ( HTML/MD )
 "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
-highlight htmlTagName     cterm=BOLD    ctermfg=23    ctermbg=NONE
+highlight htmlTagName     cterm=BOLD    ctermfg=WHITE ctermbg=NONE
 highlight link htmlTag    htmlTagName
 highlight link htmlEndTag htmlTagName
 " hi htmlBold gui=bold guifg=#af0000 ctermfg=124
