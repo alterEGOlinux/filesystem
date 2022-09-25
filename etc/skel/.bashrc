@@ -1,28 +1,27 @@
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.bashrc                                                                 ##
-##   created        : 2021-02-26 02:54:43 UTC                                ##
-##   updated        : 2022-03-21 09:06:22 UTC                                ##
-##   description    : Bash config file.                                      ##
-## _________________________________________________________________________ ##
+# ~/.bashrc
+#   created        : 2021-02-26 02:54:43 UTC
+#   updated        : 2022-09-25 14:01:15 UTC
+#   description    : Bash config file.
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
   # If not running interactively, don't do anything
   [[ $- != *i* ]] && return
 
-## [ SOURCING ] ------------------------------------------------------------ ##
+## [ SOURCING ]
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-## [ bash-completion ] ----------------------------------------------------- ##
+## [ bash-completion ]
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
   && . /usr/share/bash-completion/bash_completion
 
-## [ LOADED ] -------------------------------------------------------------- ##
+## [ LOADED ]
 
   export LOADED='bashrc'
+  ## Message function from bash-ael/message.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 # vim: syntax=sh
+# { FIN } __________________________________________________________ ¯\_(ツ)_/¯

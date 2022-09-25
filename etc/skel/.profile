@@ -1,19 +1,18 @@
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.profile                                                                ##
-##   created        : 2021-04-28 14:59:01 UTC                                ##
-##   updated        : 2022-02-15 21:36:28 UTC                                ##
-##   description    : Loaded in non interactive shell.                       ##
-## _________________________________________________________________________ ##
+# ~/.profile
+#   created        : 2021-04-28 14:59:01 UTC
+#   updated        : 2022-09-25 14:20:01 UTC
+#   description    : Loaded in non interactive shell.
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
-## [ SOURCING ] ------------------------------------------------------------ ##
+## [ SOURCING ]
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
 
-## [ LOADED ] -------------------------------------------------------------- ##
+## [ LOADED ]
 
   export LOADED='profile'
+  ## Message function from bash-ael/message.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 # vim: syntax=sh
+# { FIN } __________________________________________________________ ¯\_(ツ)_/¯
