@@ -1,13 +1,10 @@
-"" { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-""                                                                           ##
-"" ~/.vimrc                                                                  ##
-""   created        : 2021-02-23 02:54:43 UTC                                ##
-""   updated        : 2022-06-01 09:20:33 UTC                                ##
-""   description    : VIM main configuration file.                           ##
-""   application    : vim                                                    ##
-"" _________________________________________________________________________ ##
+" ~/.vimrc
+"   created        : 2021-02-23 02:54:43 UTC
+"   updated        : 2022-09-28 11:56:46 UTC
+"   description    : VIM main configuration file.
+" ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
-"" [ GENERAL CONFIG ] ------------------------------------------------------ ##
+"" [ GENERAL CONFIG ]
 
   "" Forces vim to act like vim, not like vi.
   set nocompatible
@@ -18,13 +15,13 @@
   "" Highlights the cursor line.
   set cursorline
 
-  """"" Disable the creation of swap files.
+  "" Disable the creation of swap files.
   set noswapfile
 
   "" Used with colored column.
   set colorcolumn=80
 
-"" [ ARROW KEYS ] ---------------------------------------------------------- ##
+"" [ ARROW KEYS ]
 
   "" Disables arrow keys.
   " noremap <UP> <NOP>
@@ -32,7 +29,7 @@
   " noremap <LEFT> <NOP>
   " noremap <DOWN> <NOP>
 
-"" [ BASE 64 ] ------------------------------------------------------------- ##
+"" [ BASE 64 ]
 
   "" Decode inplace base64 text.
   "" ref. https://stackoverflow.com/a/7849399/10500496
