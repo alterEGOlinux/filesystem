@@ -1,6 +1,6 @@
 # ~/.bashrc
 #   created        : 2021-02-26 02:54:43 UTC
-#   updated        : 2022-09-25 14:01:15 UTC
+#   updated        : 2022-10-09 13:17:35 UTC
 #   description    : Bash config file.
 # ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
@@ -12,7 +12,7 @@
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-## [ bash-completion ]
+## [ BASH-COMPLETION ]
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
   && . /usr/share/bash-completion/bash_completion
@@ -24,4 +24,4 @@
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
 # vim: syntax=sh
-# { FIN } __________________________________________________________ ¯\_(ツ)_/¯
+# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
