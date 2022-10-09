@@ -1,23 +1,23 @@
 # ~/.bashrc
 #   created        : 2021-02-26 02:54:43 UTC
-#   updated        : 2022-10-09 13:17:35 UTC
+#   updated        : 2022-10-09 17:22:24 UTC
 #   description    : Bash config file.
 # ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
   # If not running interactively, don't do anything
   [[ $- != *i* ]] && return
 
-## [ SOURCING ]
+## [-- SOURCING --]
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-## [ BASH-COMPLETION ]
+## [-- BASH-COMPLETION --]
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
   && . /usr/share/bash-completion/bash_completion
 
-## [ LOADED ]
+## [-- LOADED --]
 
   export LOADED='bashrc'
   ## Message function from bash-ael/message.bash
