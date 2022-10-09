@@ -1,10 +1,10 @@
 " ~/.vimrc
 "   created        : 2021-02-23 02:54:43 UTC
-"   updated        : 2022-09-28 11:56:46 UTC
+"   updated        : 2022-10-09 13:27:18 UTC
 "   description    : VIM main configuration file.
 " ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
-"" [ GENERAL CONFIG ]
+"" [-- GENERAL CONFIG --]
 
   "" Forces vim to act like vim, not like vi.
   set nocompatible
@@ -21,7 +21,7 @@
   "" Used with colored column.
   set colorcolumn=80
 
-"" [ ARROW KEYS ]
+"" [-- ARROW KEYS --]
 
   "" Disables arrow keys.
   " noremap <UP> <NOP>
@@ -29,13 +29,13 @@
   " noremap <LEFT> <NOP>
   " noremap <DOWN> <NOP>
 
-"" [ BASE 64 ]
+"" [-- BASE 64 --]
 
   "" Decode inplace base64 text.
   "" ref. https://stackoverflow.com/a/7849399/10500496
   vnoremap <leader>64 y:let @"=system('base64 --decode', @")<cr>gvP
 
-"" [ CHANGE CASES ] -------------------------------------------------------- ##
+"" [-- CHANGE CASES --]
 
   "" Upper case.
   inoremap <C-u> <ESC>viwUea
@@ -45,13 +45,12 @@
   inoremap <C-l> <ESC>viwu
   nnoremap <C-l> viwu
 
-"" [ COMMENTS TOGGLE ] ----------------------------------------------------- ##
+"" [-- COMMENTS TOGGLE --]
 
-  """"" Stackoverflow
-  ""... What's a quick way to comment/uncomment lines in Vim?
-  ""... https://stackoverflow.com/a/22246318
-  ""... Remapped from <F7> to <leader>c
-  ""... Mapped visual and normal mode.
+  "" Stackoverflow
+  "" What's a quick way to comment/uncomment lines in Vim?
+  "" https://stackoverflow.com/a/22246318
+
   autocmd FileType c,cpp,java,scala let b:comment_leader = '//'
   autocmd FileType sh,ruby,python   let b:comment_leader = '#'
   autocmd FileType conf,fstab       let b:comment_leader = '#'
@@ -65,12 +64,12 @@
   vnoremap <leader>c :call CommentToggle()<CR>
   nnoremap <leader>c :call CommentToggle()<CR>
 
-"" [ EDIT .vimrc ] --------------------------------------------------------- ##
+"" [-- EDIT/SOURCE .vimrc --]
 
   nnoremap <leader>ev :tabedit $MYVIMRC<CR>
   nnoremap <leader>so :source $MYVIMRC<CR>
 
-"" [ ENCODING ] ------------------------------------------------------------ ##
+"" [-- ENCODING --]
 
   "" The encoding displayed.
   set encoding=utf8
@@ -81,12 +80,12 @@
   "" set BOM ...WARNING: doesn't work, need to set manually.
   " set bomb
 
-"" [ ESC ] ----------------------------------------------------------------- ##
+"" [-- ESC --]
 
   inoremap ,, <ESC>
   vnoremap ,, <ESC>
 
-"" [ FILE EXPLORER ] ------------------------------------------------------- ##
+"" [-- FILE EXPLORER --]
 
   "" NerdTree-like
   "" Vim: you don't need NERDtree or (maybe) netrw
@@ -119,7 +118,7 @@
   endfunction
   map <F4> :call ToggleNetrw()<CR>
 
-"" [ HELP ] ---------------------------------------------------------------- ##
+"" [-- HELP --]
 
   "" View man pages of word under cursor.
   nmap <leader>k :silent execute '!man <cword>'<cr>:redraw!<cr>
@@ -127,7 +126,7 @@
   "" View Python documentation of word under cursor.
   nmap <leader>hp :silent execute '!pydoc <cword>'<cr>:redraw!<cr>
 
-"" [ HIGHLIGHT LINE ] ------------------------------------------------------ ##
+"" [-- HIGHLIGHT LINES --]
 
   "" ref. https://vimtricks.com/p/highlight-specific-lines/
 
@@ -137,7 +136,7 @@
   "" Clear all the highlighted lines.
   nnoremap <silent> <Leader>hc :call clearmatches()<CR>
 
-"" [ HTML MAPPING ] -------------------------------------------------------- ##
+"" [-- HTML MAPPING --]
 
   augroup filetype_html, filetype_htmldjango
     autocmd!
@@ -226,23 +225,6 @@
     autocmd FileType html inoremap pre<TAB> 
     \<pre><ESC>Vypa/<ESC>O
 
-    "" droidnotes new article
-    autocmd FileType html inoremap dart<TAB> 
-    \<CR><space><space><space><space><!-- TITLE -->
-    \<CR><space><space><space><space><article id="id" class="_show">
-    \<CR><space><space><space><space><space><space><div class="_head">
-    \<CR><space><space><space><space><space><space><space><space><div class="_left">
-    \<CR><space><space><space><space><space><space><space><space><space><space><h1 class="_title">title</h1>
-    \<CR><space><space><space><space><space><space><space><space></div>
-    \<CR><space><space><space><space><space><space><space><space><div class="_right">
-    \<CR><space><space><space><space><space><space><space><space><space><space><span class="_close_button">&times;</span>
-    \<CR><space><space><space><space><space><space><space><space></div>
-    \<CR><space><space><space><space><space><space></div>
-    \<CR><space><space><space><space><space><space><div class="_content">
-    \<CR><space><space><space><space><space><space></div>
-    \<CR><space><space><space><space><space><space><div class="_tags">[null]</div>
-    \<CR><space><space><space><space></article>
-
     "" (-- AUTOCOMPLETE TAGS --)
     "" ref. https://stackoverflow.com/a/532656
     autocmd FileType html inoremap /<TAB> 
@@ -250,7 +232,7 @@
 
   augroup end
 
-"" [ LINEBREAK AND WRAP ] -------------------------------------------------- ##
+"" [-- LINEBREAK AND WRAP --]
 
   set linebreak
   set wrap
@@ -260,7 +242,7 @@
   "" Toggle linewrap.
   map <leader>w :setlocal wrap!<CR>
 
-"" [ LINE NUMBER ] --------------------------------------------------------- ##
+"" [-- LINE NUMBER --]
 
   set number
   set relativenumber
@@ -268,20 +250,20 @@
   "" Toggle line numbering
   nnoremap <leader>ln :set number! relativenumber!<CR>
 
-"" [ LOREM ] --------------------------------------------------------------- ##
+"" [-- LOREM --]
 
   inoremap lorem<TAB> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sodales, dolor ut lobortis rhoncus, mauris leo condimentum metus, vel elementum arcu ipsum aliquam est. Integer a scelerisque turpis, at ultrices nisl. Nunc fermentum quam elementum, sagittis velit id, porta tellus. Nunc quis suscipit felis. Etiam et leo scelerisque, gravida elit nec, aliquet justo. Phasellus et neque vel turpis hendrerit fringilla sed in arcu. Suspendisse id enim lacinia libero auctor pellentesque. Proin sed sem non neque pellentesque vehicula. Nunc sapien justo, tincidunt vitae ultrices eu, consectetur sit amet orci.
 
-"" [ MOUSE ] --------------------------------------------------------------- ##
+"" [-- MOUSE --]
 
   " set mouse=a
 
-"" [ PREVIEW WINDOW ] ------------------------------------------------------ ##
+"" [-- PREVIEW WINDOW --]
 
-  """"" Sends preview window to the right.
-  ""... StackExchange
-  ""... A fixed position for preview windows
-  ""... https://vi.stackexchange.com/questions/12597/a-fixed-position-for-preview-windows
+  "" Sends preview window to the right.
+  "" StackExchange
+  "" A fixed position for preview windows
+  "" https://vi.stackexchange.com/questions/12597/a-fixed-position-for-preview-windows
   " augroup previewWindowPosition
     " au!
     " autocmd BufWinEnter * call PreviewWindowPosition()
@@ -292,7 +274,7 @@
     " endif
   " endfunction 
 
-"" [ RUN SCRIPT ] ---------------------------------------------------------- ##
+"" [-- RUN SCRIPT --]
 
   "" (-- PYTHON --)
   "" Requires tmux, with a second pane open.
@@ -304,24 +286,25 @@
   endfunction
   nnoremap <leader>p :call RunPython()<CR>
 
+  "" (-- KILL SCRIPT --)
   "" Kills the script.
   nnoremap <leader>ss :!tmux send-keys -t 1 "C-c";<CR><C-l>
 
-"" [ SAVE FILE ] ----------------------------------------------------------- ##
+"" [-- SAVE FILE --]
 
   "" CTRL+s to save file
   "" ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
   "" Requires `stty -ixon` in a sourced rc file
   inoremap <C-s> <ESC>:write<CR>
 
-"" [ SCROLL OFFSET ] ------------------------------------------------------- ##
+"" [-- SCROLL OFFSET --]
 
   "" When scrolling, keeps the cursor at the vertical center.
   "" Use so=999 for centered
   "" ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
   set scrolloff=999
 
-"" [ SEARCH ] -------------------------------------------------------------- ##
+"" [-- SEARCH --]
 
   "" Fuzzy find and wildmenu.
   set path+=**
@@ -337,15 +320,15 @@
   "" Toggle search highlighting                      
   nnoremap <F3> :set hlsearch!<CR> 
 
-  "" Clear search highlighting
+  "" (-- CLEAR SEARCH --)
   nnoremap <leader>cs :let @/ = ""<CR>
 
-"" [ SPELLCHECKER ] -------------------------------------------------------- ##
+"" [-- SPELLCHECKER --]
 
   "" Toggle spell checker.
   map <F5> :setlocal spell! spelllang=en_us<CR>
 
-"" [ STATUSLINE ] ---------------------------------------------------------- ##
+"" [-- STATUSLINE --]
 
   set laststatus=2
   set statusline=
@@ -359,7 +342,7 @@
   set statusline+=\ col:%03c\ "Colnr 
   set statusline+=\ %m%r%w\ %P\ \ "Modified? Readonly? Top/bot.
 
-"" [ TAB AND INDENT ] ------------------------------------------------------ ##
+"" [-- TAB AND INDENT --]
 
   set tabstop=2
   "" shiftround : rounds indent to multiple of shiftwidth.
@@ -369,7 +352,7 @@
   set shiftwidth=2
   set expandtab
 
-"" [ TAGS ] ---------------------------------------------------------------- ##
+"" [-- TAGS --]
 
   inoremap "<TAB> ""<left>
   inoremap '<TAB> ''<left>
@@ -597,4 +580,4 @@ endfunction
 
 nnoremap <leader>pv :call Python_vim()<ESC>
 
-"" FIN _____________________________________________________________ ¯\_(ツ)_/¯
+" _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
