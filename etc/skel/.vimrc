@@ -1,4 +1,4 @@
-" ~/.vimrc
+"~/.vimrc
 "   created        : 2021-02-23 02:54:43 UTC
 "   updated        : 2022-10-09 13:27:18 UTC
 "   description    : VIM main configuration file.
@@ -362,7 +362,7 @@
   inoremap {<CR> {<CR>}<ESC>O
   inoremap {;<CR> {<CR>};<ESC>O
 
-"" [ TIMESTAMP ] ----------------------------------------------------------- ##
+"" [-- TIMESTAMP --]
 
   "" Insert timestamp.
   "" ex: 2022-03-25 15:49:24 UTC
@@ -372,14 +372,14 @@
   "" ex: 202203251549
   nnoremap <F9> "=system('echo -n $(date --utc "+%Y%m%d%H%M")')<CR>p
 
-"" [ XCLIP ] --------------------------------------------------------------- ##
+"" [-- XCLIP --]
 
   "" Enable clipboard ability with xclip.
   "" ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
   map <F7> y:call system("xclip -i -selection clipboard", getreg("\""))<cr>
   map <S-F7> :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p")")")"))
 
-"" [ PLUGINS - INSTALL ] --------------------------------------------------- ##
+"" [-- PLUGINS - INSTALL --]
 
   syntax enable
   filetype plugin on
@@ -426,7 +426,7 @@
   "" Disable automatic indent on from vim-plug
   filetype indent off
 
-"" [ PLUGINS - STUFF ] ----------------------------------------------------- ""
+"" [-- PLUGINS - STUFF --]
 
   "" (-- fzf.vim --)
 
@@ -437,7 +437,7 @@
   nnoremap <silent> <C-o> :Files ~<CR>
 
   "" Open files from /.
-  nnoremap <silent> <leader>os :Files /<CR>
+  nnoremap <silent> <leader>sys :Files /<CR>
 
   "" Find lines containing.
   nnoremap <silent> <C-f> :BLines<CR>
@@ -455,24 +455,24 @@
   nmap <silent> <leader>vm <Plug>MarkdownPreview
   nmap <silent> <leader>sm <Plug>StopMarkdownPreview
 
-"" [ COLORSCHEME ] --------------------------------------------------------- ##
+"" [-- COLORSCHEME --]
 
 "" (-- COLORS --)
-":-    0  Black
-":-   10  Lime
+""    0  Black
+""   10  Lime
 
 set t_Co=256
 
 "" (-- COLORSCHEMES --)
-":- iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
-":- blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+"" iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
+"" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
 
 " colorscheme default
 colorscheme iceberg
 
 set background=dark
 
-"" ( BIONIC READING )
+"" (-- BIONIC READING --)
 "" ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
 nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
 highlight bionic          cterm=NONE    ctermfg=GREY
