@@ -1,10 +1,8 @@
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## /home/{user}/.xinitrc                                                     ##
-##   created        : 2021-02-23 02:54:43 UTC                                ##
-##   updated        : 2022-05-03 11:50:29 UTC                                ##
-##   description    : Starts Window Manager with startx.                     ##
-## _________________________________________________________________________ ##
+# ~/.xinitrc
+#   created        : 2021-02-23 02:54:43 UTC
+#   updated        : 2022-10-10 01:49:37 UTC
+#   description    : Starts Window Manager with startx.
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
 # Executed by startx (run your window manager from here)
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
@@ -13,8 +11,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
     done
     unset f
 fi
-
-# bash /home/ghost/.autostart
 
 case ${2} in
 
@@ -28,4 +24,4 @@ case ${2} in
 
 esac
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }

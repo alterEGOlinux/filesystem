@@ -457,127 +457,127 @@
 
 "" [-- COLORSCHEME --]
 
-"" (-- COLORS --)
-""    0  Black
-""   10  Lime
+  "" (-- COLORS --)
+  ""    0  Black
+  ""   10  Lime
 
-set t_Co=256
+  set t_Co=256
 
-"" (-- COLORSCHEMES --)
-"" iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
-"" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+  "" (-- COLORSCHEMES --)
+  "" iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
+  "" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
 
-" colorscheme default
-colorscheme iceberg
+  " colorscheme default
+  colorscheme iceberg
 
-set background=dark
+  set background=dark
 
-"" (-- BIONIC READING --)
-"" ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
-nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
-highlight bionic          cterm=NONE    ctermfg=GREY
+  "" (-- BIONIC READING --)
+  "" ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
+  nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
+  highlight bionic          cterm=NONE    ctermfg=GREY
 
-"" ( GENERAL )
-highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
-highlight Comment         cterm=BOLD    ctermfg=white    ctermbg=NONE
-highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
-highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
-highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
-highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
-highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
-" Sets the background to transparent with cterm(fg/bg) to NONE.
-highlight Normal          cterm=NONE    ctermfg=NONE  ctermbg=NONE
-highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
-highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
-highlight StatusLine      cterm=NONE    ctermfg=246   ctermbg=238
-highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
-highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
+  "" (-- GENERAL --)
+  highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
+  highlight Comment         cterm=BOLD    ctermfg=white    ctermbg=NONE
+  highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
+  highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
+  highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
+  highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
+  highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
+  "" Sets the background to transparent with cterm(fg/bg) to NONE.
+  highlight Normal          cterm=NONE    ctermfg=NONE  ctermbg=NONE
+  highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
+  highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
+  highlight StatusLine      cterm=NONE    ctermfg=246   ctermbg=238
+  highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
+  highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
 
-"" ( HTML/MD )
-"" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
-highlight htmlTagName     cterm=BOLD    ctermfg=WHITE ctermbg=NONE
-highlight link htmlTag    htmlTagName
-highlight link htmlEndTag htmlTagName
-" hi htmlBold gui=bold guifg=#af0000 ctermfg=124
-" hi htmlItalic cterm=ITALIC ctermfg=27
-" hi htmlH1    term=NONE cterm=BOLD ctermfg=15  ctermbg=NONE
+  "" (-- HTML/MD --)
+  "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
+  highlight htmlTagName     cterm=BOLD    ctermfg=WHITE ctermbg=NONE
+  highlight link htmlTag    htmlTagName
+  highlight link htmlEndTag htmlTagName
+  " hi htmlBold gui=bold guifg=#af0000 ctermfg=124
+  " hi htmlItalic cterm=ITALIC ctermfg=27
+  " hi htmlH1    term=NONE cterm=BOLD ctermfg=15  ctermbg=NONE
 
-" hi Constant           term=NONE cterm=NONE ctermfg=125  ctermbg=NONE
-" hi Cursor             term=NONE cterm=NONE ctermfg=242  ctermbg=NONE
-" hi DiffAdd            term=NONE cterm=NONE ctermfg=103  ctermbg=NONE
-" hi DiffChange         term=NONE cterm=NONE ctermfg=NONE ctermbg=16
-" hi DiffDelete         term=NONE cterm=NONE ctermfg=251  ctermbg=16
-" hi DiffText           term=NONE cterm=NONE ctermfg=251  ctermbg=101
-" hi Directory          term=NONE cterm=NONE ctermfg=101  ctermbg=16
-" hi Error              term=NONE cterm=NONE ctermfg=238  ctermbg=66
-" hi ErrorMsg           term=NONE cterm=NONE ctermfg=66   ctermbg=16
-" hi FoldColumn         term=NONE cterm=NONE ctermfg=238  ctermbg=NONE
-" hi Folded             term=NONE cterm=NONE ctermfg=23  ctermbg=NONE
-" hi Identifier         term=NONE cterm=NONE ctermfg=101   ctermbg=NONE
-" hi IncSearch          term=NONE cterm=NONE ctermfg=247  ctermbg=247
-" hi NonText            term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
-" hi Normal             term=NONE cterm=NONE ctermfg=249  ctermbg=NONE
-" hi PreProc            term=NONE cterm=BOLD ctermfg=66   ctermbg=NONE
-" hi Special            term=NONE cterm=NONE ctermfg=6   ctermbg=NONE
-" hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
-" hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
+  " hi Constant           term=NONE cterm=NONE ctermfg=125  ctermbg=NONE
+  " hi Cursor             term=NONE cterm=NONE ctermfg=242  ctermbg=NONE
+  " hi DiffAdd            term=NONE cterm=NONE ctermfg=103  ctermbg=NONE
+  " hi DiffChange         term=NONE cterm=NONE ctermfg=NONE ctermbg=16
+  " hi DiffDelete         term=NONE cterm=NONE ctermfg=251  ctermbg=16
+  " hi DiffText           term=NONE cterm=NONE ctermfg=251  ctermbg=101
+  " hi Directory          term=NONE cterm=NONE ctermfg=101  ctermbg=16
+  " hi Error              term=NONE cterm=NONE ctermfg=238  ctermbg=66
+  " hi ErrorMsg           term=NONE cterm=NONE ctermfg=66   ctermbg=16
+  " hi FoldColumn         term=NONE cterm=NONE ctermfg=238  ctermbg=NONE
+  " hi Folded             term=NONE cterm=NONE ctermfg=23  ctermbg=NONE
+  " hi Identifier         term=NONE cterm=NONE ctermfg=101   ctermbg=NONE
+  " hi IncSearch          term=NONE cterm=NONE ctermfg=247  ctermbg=247
+  " hi NonText            term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
+  " hi Normal             term=NONE cterm=NONE ctermfg=249  ctermbg=NONE
+  " hi PreProc            term=NONE cterm=BOLD ctermfg=66   ctermbg=NONE
+  " hi Special            term=NONE cterm=NONE ctermfg=6   ctermbg=NONE
+  " hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
+  " hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
 
-"" (-- WINDOW'S TAB --)
-":- Focused
-hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
-":- Unfocused
-hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
-":- Rest of the line
-hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
+  "" (-- WINDOW'S TAB --)
+  "" Focused
+  hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
+  ""- Unfocused
+  hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
+  "" Rest of the line
+  hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
 
-" hi Todo               term=NONE cterm=NONE ctermfg=251  ctermbg=66
-" hi Type               term=NONE cterm=NONE ctermfg=96  ctermbg=NONE
-" hi VertSplit          term=NONE cterm=NONE ctermfg=NONE  ctermbg=NONE
-" hi WarningMsg         term=NONE      cterm=NONE      ctermfg=103    ctermbg=NONE
-" hi CursorLineNr       term=NONE      cterm=NONE      ctermbg=237    ctermfg=16
-" hi Pmenu              term=NONE      cterm=NONE      ctermfg=249    ctermbg=16
-" hi PmenuSel           term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
-" hi PmenuSbar          term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
-" hi PmenuThumb         term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
-" hi Underlined         term=underline cterm=underline ctermfg=NONE   ctermbg=NONE
+  " hi Todo               term=NONE cterm=NONE ctermfg=251  ctermbg=66
+  " hi Type               term=NONE cterm=NONE ctermfg=96  ctermbg=NONE
+  " hi VertSplit          term=NONE cterm=NONE ctermfg=NONE  ctermbg=NONE
+  " hi WarningMsg         term=NONE      cterm=NONE      ctermfg=103    ctermbg=NONE
+  " hi CursorLineNr       term=NONE      cterm=NONE      ctermbg=237    ctermfg=16
+  " hi Pmenu              term=NONE      cterm=NONE      ctermfg=249    ctermbg=16
+  " hi PmenuSel           term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
+  " hi PmenuSbar          term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
+  " hi PmenuThumb         term=NONE      cterm=NONE      ctermfg=238    ctermbg=66
+  " hi Underlined         term=underline cterm=underline ctermfg=NONE   ctermbg=NONE
 
-" hi! link diffAdded       DiffAdd
-" hi! link diffRemoved     DiffDelete
-" hi! link diffChanged     DiffChange
-" hi! link MoreMsg         Normal
-" hi! link Question        DiffChange
-" hi! link VimHiGroup      VimGroup
+  " hi! link diffAdded       DiffAdd
+  " hi! link diffRemoved     DiffDelete
+  " hi! link diffChanged     DiffChange
+  " hi! link MoreMsg         Normal
+  " hi! link Question        DiffChange
+  " hi! link VimHiGroup      VimGroup
 
-" ** shell
-" -- Shell variables (default in vim81/syntax/sh.vim).
-" hi shDerefVar         term=NONE      cterm=BOLD      ctermfg=cyan   ctermbg=NONE
+  " ** shell
+  " -- Shell variables (default in vim81/syntax/sh.vim).
+  " hi shDerefVar         term=NONE      cterm=BOLD      ctermfg=cyan   ctermbg=NONE
 
 
-"" [ STUFF TO SORT ] ------------------------------------------------------- ##
+"" [-- STUFF TO SORT --]
 
-" function! HTML_tags()
-  " let min_tag = expand("<cWORD>")
-  " let text = "<" . min_tag . "></" . min_tag . ">
-  " echom matchlist(min_tag, '\(.\{-}\)\(\\.\)\?\(.*\)\?\(\#\)\?\(.*\)\?')[2]
-  " execute "normal! viWdi" . text . "\<ESC>?<\<CR>\<ESC>"
-  " execute "normal! viWdi" . text
-" endfunction
-" inoremap <F8> <ESC>:call HTML_tags()<CR>
+  " function! HTML_tags()
+    " let min_tag = expand("<cWORD>")
+    " let text = "<" . min_tag . "></" . min_tag . ">
+    " echom matchlist(min_tag, '\(.\{-}\)\(\\.\)\?\(.*\)\?\(\#\)\?\(.*\)\?')[2]
+    " execute "normal! viWdi" . text . "\<ESC>?<\<CR>\<ESC>"
+    " execute "normal! viWdi" . text
+  " endfunction
+  " inoremap <F8> <ESC>:call HTML_tags()<CR>
 
-"--{ PYTHON-VIM }
-function! Python_vim()
+  "--{ PYTHON-VIM }
+  function! Python_vim()
 python3 << EOF
 
-import vim
-# print(help(vim))
-# print(dir(vim))
+  import vim
+  # print(help(vim))
+  # print(dir(vim))
 
-x = vim.__doc__
-print(x)
+  x = vim.__doc__
+  print(x)
 
 EOF
-endfunction
+  endfunction
 
-nnoremap <leader>pv :call Python_vim()<ESC>
+  nnoremap <leader>pv :call Python_vim()<ESC>
 
 " _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
