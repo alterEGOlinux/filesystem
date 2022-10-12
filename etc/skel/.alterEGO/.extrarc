@@ -1,14 +1,18 @@
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.alterEGO/.extrarc                                                      ##
-##   created        : 2021-03-16 10:15:03 UTC                                ##
-##   updatedi       : 2022-03-24 19:22:42 UTC                                ##
-##   description    : Shell config specific to this machine                  ##
-## _________________________________________________________________________ ##
+# ~/.alterEGO/.extrarc
+#   created        : 2021-03-16 10:15:03 UTC
+#   updatedi       : 2022-10-12 18:39:57 UTC
+#   description    : Shell config specific to this machine
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
+  alias callotr="ssh -p 2222 ghost@10.0.0.170"
+  alias callhome='ssh ghost@184.163.109.159'
   export outpw="i07VcTI3"
-  alias vinotes="vim ~/repositories/droidnotes/droidnotes.html"
   alias rad='radimed.sh'
+  alias notes="cd ~/main/droidnotes/app/notes"
   alias ael='cd ~/repositories/alterEGOlinux/'
+  alias ramd='cd ~/radimed/'
+  alias scripts='cd ~/scripts/'
+  alias aelpylib='cd ~/repositories/alterEGOlinux/aelpylib/'
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# vim: syntax=sh
+# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }

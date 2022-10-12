@@ -1,76 +1,79 @@
 #! /usr/bin/env sh
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.alterEGO/.functions                                                    ##
-##   created        : 2021-05-25 19:40:20 UTC                                ##
-##   updated        : 2022-05-25 10:58:08 UTC                                ##
-##   description    : Shell functions to complement .egorc                   ##
-## _________________________________________________________________________ ##
+#
+# ~/.alterEGO/.functions
+#   created        : 2021-05-25 19:40:20 UTC
+#   updated        : 2022-10-12 18:43:54 UTC
+#   description    : Shell functions to complement .egorc
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
-  busy() {
-      ## When the boss comes around to look busy.
-      ## ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
-      ## CTRL+c to quit.
 
-      cat /dev/urandom                                                        \
-      | hexdump -C                                                            \
-      | grep --color=always 'ca fe'
-  }
+[ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                                \
+&& . ${HOME}/.alterEGO/bash-ael/message.bash
 
-  cheat() {
-      #:- Query https://cheat.sh.
-      #:- Menu with `fzf` and display with `less`.
-      #:- https://github.com/chubin/cheat.sh
+busy() {
+    ## When the boss comes around to look busy.
+    ## ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
+    ## CTRL+c to quit.
 
-      cheat="$(curl -s cheat.sh/:list                                         \
-              | fzf --layout="reverse"                                        \
-                    --prompt='::'                                             \
-                    --preview-window=up:80%                                   \
-                    --preview 'cat <(curl -s cheat.sh/{})')"
+    cat /dev/urandom                                                          \
+    | hexdump -C                                                              \
+    | grep --color=always 'ca fe'
+}
 
-      [[ -z ${cheat} ]] && exit 0
+cheat() {
+    ## Query https://cheat.sh.
+    ## Menu with `fzf` and display with `less`.
+    ## https://github.com/chubin/cheat.sh
 
-      curl -s cheat.sh/"${cheat}" | less -R
-  }
+    cheat="$(curl -s cheat.sh/:list                                           \
+            | fzf --layout="reverse"                                          \
+                  --prompt='::'                                               \
+                  --preview-window=up:80%                                     \
+                  --preview 'cat <(curl -s cheat.sh/{})')"
 
-  cleanHistory() {
-      ## Remove .bash_history entry.
-      ## Usage: `clean_history youtube-dl`
-      ## or `clean_history cd$`
+    [[ -z ${cheat} ]] && exit 0
 
-      history -a
-      cp ~/.bash_history /tmp/.clean_history
-      sed -i "/^${1}/d" /tmp/.clean_history
-      history -c                                                              \
-      && history -r /tmp/.clean_history                                       \
-      && history -w
-      rm /tmp/.clean_history
-      history
-  }
+    curl -s cheat.sh/"${cheat}" | less -R
+}
 
-  delete() {
+cleanHistory() {
+    ## Remove .bash_history entry.
+    ## Usage: `clean_history youtube-dl`
+    ## or `clean_history cd$`
 
-      if [ -d "${1}" ]; then
-        read -r -p $'\e[34m[-]\e[0m \e[1mAre you sure your want to delete this directory? [y/N]\e[0m ' response
-          if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            rm --recursive --force "${1}" 
-          else
-            message warning "OK... Abording deletion!"
-          fi
-      else
-        message warning "There is nothing to do here!"
-      fi
-  }
+    history -a
+    cp ~/.bash_history /tmp/.clean_history
+    sed -i "/^${1}/d" /tmp/.clean_history
+    history -c                                                                \
+    && history -r /tmp/.clean_history                                         \
+    && history -w
+    rm /tmp/.clean_history
+    history
+}
 
-  dirsize() {
-      ## Check size of biggest directories.
+delete() {
 
-      message action "Size of current directory, followed by biggest child directories:"
-      ## du -bh --max-depth 1 | sort -rh | head
-      du --bytes --human-readable --max-depth 1                               \
-      | sort --reverse --human-numeric-sort                                   \
-      | head
-  }
+    if [ -d "${1}" ]; then
+      message question "Are you sure your want to delete this directory? [y/N]"
+        if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+          rm --recursive --force "${1}" 
+        else
+          message warning "OK... Abording deletion!"
+        fi
+    else
+      message warning "There is nothing to do here!"
+    fi
+}
+
+dirsize() {
+    ## Check size of biggest directories.
+
+    message action "Size of current directory, followed by biggest child directories:"
+    ## du -bh --max-depth 1 | sort -rh | head
+    du --bytes --human-readable --max-depth 1                                 \
+    | sort --reverse --human-numeric-sort                                     \
+    | head
+}
 
   fixout() {
       ## Fix history and exit.
@@ -219,6 +222,12 @@
   }
   alias sc="searchcontent"
 
+shellInfo() {
+    shopt -s extdebug
+    type -a ${@}
+    declare -F ${@}
+}
+
   tagalog() {
 
       wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
@@ -277,5 +286,5 @@
 
   }
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
 # vim: syntax=sh
+# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }

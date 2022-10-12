@@ -1,130 +1,173 @@
 #!/usr/bin/env sh
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## ~/.alterEGO/.containers                                                   ##
-##   created     : 2021-12-06 11:15:11 UTC                                   ##
-##   updated     : 2021-12-06 11:15:18 UTC                                   ##
-##   description : Containers functions and configuration.                   ##
-## _________________________________________________________________________ ##
+#
+# ~/.alterEGO/.containers
+#   created     : 2021-12-06 11:15:11 UTC
+#   updated     : 2022-10-12 10:00:45 UTC
+#   description : Containers functions and configuration.
+# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
 
-  docker666() {
-    ##### START/STOP docker service
+[ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                              \
+&& . ${HOME}/.alterEGO/bash-ael/message.bash
 
-    printf "%b\n" "${COLOR_GREEN}[+]${COLOR_RESET} ${COLOR_BOLD}Runing docker666() to check docker status...${COLOR_RESET}"
+docker666() {
+  ## START/STATUS/STOP docker service
 
-    case "${1}" in
+  _status=$(systemctl is-active docker.service)
 
-      start )
-        if [ $(systemctl is-active docker.service) = 'active' ]; then
-          printf "%b\n" "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Docker is already running...${COLOR_RESET}"
-        else
-          sudo systemctl start docker.service
-          printf "%b\n" "${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}Started docker.service...${COLOR_RESET}"
-        fi
-        ;;
-      stop )
-        read -r -p $'\e[34m[-]\e[0m \e[1mShould I stop docker service? [y/N]\e[0m ' response
-          if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+  case "${1}" in
+
+    start )
+      message action "Runing docker666() to check docker status..."
+      if [ ${_status} = 'active' ]; then
+        message warning "Docker is already running... Nothing to do..."
+      else
+        sudo systemctl start docker.service
+        message result "Started docker.service..."
+      fi
+      ;;
+
+    status )
+      message action "Runing docker666() to check docker status..."
+      message result "Docker is ${_status}"
+      ;;
+
+    stop )
+      message action "Runing docker666() to check docker status..."
+      if [ ${_status} = 'inactive' ]; then
+        message warning "Docker is already stopped... Nothing to do..."
+      else
+        message question "Should I stop docker service? [y/N]"
+          if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
             sudo systemctl stop docker.socket
             sudo systemctl stop docker.service
-            read -r -p $'\e[34m[-]\e[0m \e[1mWould you like to delete docker0 network interface? [y/N]\e[0m ' response
-              if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            message question "Would you like to delete docker0 network interface? [y/N]"
+              if [[ "$_INPUT" =~ ^([yY][eE][sS]|[yY])$ ]]; then
                 sudo ip link delete docker0 
               else
-                printf "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}OK... docker0 lives!${COLOR_RESET}\n"
+                message result "OK... Docker network lives!"
               fi
           else
-            printf "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}OK...  docker.service still running...${COLOR_RESET}\n"
+            message result "OK...  docker.service still running..."
           fi
-        ;;
-      * )
-        printf "%b\n" "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Usage: docker666 [start|stop]${COLOR_RESET}"
+      fi
+      ;;
 
-    esac
+    * )
+      message warning "Usage: docker666 [start|status|stop]"
 
-  }
+  esac
 
-  dockerStats() {
+}
 
-      printf "%b\n" "CONTAIER ID\tIP ADDR   \tNAME"
-      while read -r d; do
-        _containerID=$(awk '{ print $1 }' <<< "${d}")
+dockerStats() {
+
+  if [[ "$(systemctl is-active docker.service)" == "inactive" ]]; then
+    docker666 start
+  fi
+
+  message action "Checking docker stats..."
+    while read -r d; do
+      _containerID=$(awk '{ print $1 }' <<< "${d}")
+      if [[ -z "${_containerID}" ]]; then
+        message warning "No container exists..."
+      else
+        message title "CONTAINER ID\tIP ADDR   \tNAME"
         _name=$(awk '{ print $2 }' <<< "${d}")
         _ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${_containerID})
         printf "%b\n" "${_containerID}\t${_ip}\t${_name}"
-      done <<< $(docker ps | tail -n+2)
-  }
+      fi
+    done <<< $(docker ps | tail -n+2)
+}
 
+dockerContainerCleaner() {
 
-## [ CYBERCHEF ] ----------------------------------------------------------- ##
-
-  cyberchef() {
-    ##### Will install or run cyberchef docker.
-    if [[ "$1" == 'start' ]]; then
+    if [[ "$(systemctl is-active docker.service)" == "inactive" ]]; then
       docker666 start
-      docker run -d -p 8888:8000 mpepping/cyberchef                           \
-      && $BROWSER "http://localhost:8888"
+    fi
+
+    message action "This will remove all Docker containers on this machine..."
+    message question "Proceed? [Y/n]"
+      if [[ "$_INPUT" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+        for c in $(docker container ls --all | awk 'FNR > 1 {print $1}'); do
+          docker container rm $c
+        done
+      else
+        message result "GoodBye!!!"
+      fi
+}
+
+## [-- CYBERCHEF --]
+
+cyberchef() {
+  ## Will install or run cyberchef docker.
+  if [[ "${1}" == 'start' ]]; then
+    docker666 start
+    message action "Starting/Installing CyberChef container..."
+    docker run -d -p 8888:8000 mpepping/cyberchef                             \
+    && $BROWSER "http://localhost:8888"
+  elif [[ "${1}" == 'stop' ]]; then
+    message result "Stopping Cyberchef container..."
+    docker stop $(docker ps | grep "mpepping/cyberchef" | cut -d ' ' -f1)
+    docker666 stop
+  else
+    message warning "Usage: cyberchef [start|stop]"
+  fi
+}
+
+## [-- DAMN VULNERABLE WEBAPP (DVWA) --]
+
+dvwa() {
+    ## Will install or run the Damn Vulnerable Web App (DVWA) docker.
+    if [[ "${1}" == 'start' ]]; then
+      docker666 start
+      message action "Starting/Installing Dawn Vulnerable Web App container..."
+      docker run --rm -it -p 81:80 vulnerables/web-dvwa &
+      sleep 2
+      $BROWSER "http://localhost:81/login.php"
     elif [[ "$1" == 'stop' ]]; then
-      docker stop $(docker ps | grep "mpepping/cyberchef" | cut -d ' ' -f1)
+      message result "Stopping Damn Vulnerable Web App container..."
+      docker stop $(docker ps | grep "vulnerables/web-dvwa" | cut -d ' ' -f1)
       docker666 stop
     else
-      cat <<EOF
-Usage: cyberchef [start|stop]
-EOF
+      message warning "Usage: dvwa [start|stop]"
     fi
-  }
-## [ DAMN VULNERABLE WEBAPP (DVWA) ] --------------------------------------- ##
+}
 
-  dvwa() {
-      ##### Will install or run the Damn Vulnerable Web App (DVWA) docker.
-      if [[ "$1" == 'start' ]]; then
-        docker666 start
-        docker run --rm -it -p 81:80 vulnerables/web-dvwa &
-        sleep 2
-        $BROWSER "http://localhost:81/login.php"
-      elif [[ "$1" == 'stop' ]]; then
-        docker stop $(docker ps | grep "vulnerables/web-dvwa" | cut -d ' ' -f1)
-        docker666 stop
-      else
-        cat <<EOF
-Usage: dvwa [start|stop]
-EOF
-      fi
-      }
+## [-- OWASP JUICE SHOP --]
 
-## [ OWASP JUICE SHOP ] ---------------------------------------------------- ##
-
-  juiceShop() {
-    ##### Will install or run the OWASP Juice Shop docker.
+juiceShop() {
+    ## Will install or run the OWASP Juice Shop docker.
     if [[ "$1" == 'start' ]]; then
       docker666 start
+      message action "Starting/Installing OWASP Juice Shop container..."
       docker run --rm -p 3000:3000 bkimminich/juice-shop &
       sleep 2
       $BROWSER "http://localhost:3000"
     elif [[ "$1" == 'stop' ]]; then
+      message result "Stopping OWASP Juice Shop container..."
       docker stop $(docker ps | grep "bkimminich/juice-shop" | cut -d ' ' -f1)
       docker666 stop
     else
-      cat <<EOF
-Usage: juiceShop [start|stop]
-EOF
+      message alert "Usage: juiceShop [start|stop]"
     fi
-  }
+}
 
-## [ KALI LINUX ] ---------------------------------------------------------- ##
+## [-- KALI LINUX --]
 
   kali() {
     docker666 start
     if [[ -z $(docker ps -a | awk '/kali/ { print $NF }') ]]; then
+      message action "Starting/Installing OWASP Juice Shop container..."
       docker run --name kali --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash
     else
       if [[ -z "$(docker ps | grep kali$)" ]]; then
+      message action "Using kali container..."
         docker start -i kali
       else
-        printf '%b\n' "${COLOR_RED}[!]${COLOR_RESET} ${COLOR_BOLD}Kali is already running...${COLOR_RESET}"
+        message alert "Kali is already running..."
       fi
     fi
   }
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
-## vim: syntax=sh
+# vim: syntax=sh
+# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
