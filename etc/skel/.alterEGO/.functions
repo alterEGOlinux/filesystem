@@ -1,11 +1,12 @@
 #! /usr/bin/env sh
-#
-# ~/.alterEGO/.functions
-#   created        : 2021-05-25 19:40:20 UTC
-#   updated        : 2022-10-12 18:43:54 UTC
-#   description    : Shell functions to complement .egorc
-# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
+##
+## ~/.alterEGO/.functions
+##   created        : 2021-05-25 19:40:20 UTC
+##   updated        : 2022-10-14 15:11:47 UTC
+##   description    : Shell functions to complement .egorc
+## ___________________________{ alterEGO Linux: "Open the vault of knowledge" }
 
+## [-- MODULES --]
 
 [ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                                \
 && . ${HOME}/.alterEGO/bash-ael/message.bash
@@ -36,23 +37,7 @@ cheat() {
     curl -s cheat.sh/"${cheat}" | less -R
 }
 
-cleanHistory() {
-    ## Remove .bash_history entry.
-    ## Usage: `clean_history youtube-dl`
-    ## or `clean_history cd$`
-
-    history -a
-    cp ~/.bash_history /tmp/.clean_history
-    sed -i "/^${1}/d" /tmp/.clean_history
-    history -c                                                                \
-    && history -r /tmp/.clean_history                                         \
-    && history -w
-    rm /tmp/.clean_history
-    history
-}
-
 delete() {
-
     if [ -d "${1}" ]; then
       message question "Are you sure your want to delete this directory? [y/N]"
         if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
@@ -65,7 +50,7 @@ delete() {
     fi
 }
 
-dirsize() {
+dirSize() {
     ## Check size of biggest directories.
 
     message action "Size of current directory, followed by biggest child directories:"
@@ -75,152 +60,159 @@ dirsize() {
     | head
 }
 
-  fixout() {
-      ## Fix history and exit.
-      ## Don't try to put this code in a shell script, it won't work.
-      ## `history` don't play well in scripts.
+fixout() {
+    ## Fix history and exit.
+    ## Don't try to put this code in a shell script, it won't work.
+    ## `history` don't play well in scripts.
 
-      history -n && history                                                   \
-      | sort -k2 -k1nr                                                        \
-      | uniq -f1                                                              \
-      | sort -n                                                               \
-      | cut -c8- > ~/.tmp$$                                                   \
-      && history -c                                                           \
-      && history -r ~/.tmp$$                                                  \
-      && history -w                                                           \
-      && rm ~/.tmp$$                                                          \
-      && exit
-  }
+    history -n && history                                                     \
+    | sort -k2 -k1nr                                                          \
+    | uniq -f1                                                                \
+    | sort -n                                                                 \
+    | cut -c8- > ~/.tmp$$                                                     \
+    && history -c                                                             \
+    && history -r ~/.tmp$$                                                    \
+    && history -w                                                             \
+    && rm ~/.tmp$$                                                            \
+    && exit
+}
 
-  fuck() {
-      ## Repeat last cmd with sudo if forgotten.
+fuck() {
+    ## Repeat last cmd with sudo if forgotten.
 
-      sudo $(history -p !!)
-  }
+    sudo $(history -p !!)
+}
 
+getmp3() {
+    youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
+}
 
-  getmp3() {
+gitall() {
+    git pull && git add . && git commit && git push
+}
 
-      youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
+gitStatus() {
+    ## Get status of local git repository.
+    ## ref. https://gist.github.com/giggio/1704664
 
-  }
+    dumpfile="/tmp/gitStatus.dump"
 
-  gitall() {
-      git pull && git add . && git commit && git push
-  }
+    if [ -z ${1} ]; then
+      local_git_repository=$(find ${HOME} -name ".git" -type d | grep -v /.cache/ | sed 's/.git//' | fzf)
+    else
+      local_git_repository=${1}
+    fi
+    
+    cd ${local_git_repository}
+    git fetch
+    git status > ${dumpfile}
 
-  gitstatus() {
-      ## Get status of local git repository.
-      ## ref. https://gist.github.com/giggio/1704664
+    message action "Checking local repository status for\n    ${local_git_repository}"
 
-      dumpfile="/tmp/gitstatus.dump"
+    untracked=$(grep "Untracked files" ${dumpfile});
+    unstaged=$(grep "Changes not staged for commit" ${dumpfile});
+    to_commit=$(grep "Changes to be committed" ${dumpfile});
+    is_ahead=$(grep "Your branch is ahead of" ${dumpfile});
+    is_behind=$(grep "Your branch is behind" ${dumpfile});
 
-      if [ -z ${1} ]; then
-        local_git_repository=$(find ${HOME} -name ".git" -type d | grep -v /.cache/ | sed 's/.git//' | fzf)
-      else
-        local_git_repository=${1}
-      fi
-      
-      cd ${local_git_repository}
-      git fetch
-      git status > ${dumpfile}
-      printf "${COLOR_GREEN}[+]${COLOR_RESET} ${COLOR_BOLD}Checking local repository status for\n\t${local_git_repository}\n\n${COLOR_RESET}"
-      cat ${dumpfile}
-      untracked=$(grep "Untracked files" ${dumpfile});
-      unstaged=$(grep "Changes not staged for commit" ${dumpfile});
-      to_commit=$(grep "Changes to be committed" ${dumpfile});
-      is_ahead=$(grep "Your branch is ahead of" ${dumpfile});
-      is_behind=$(grep "Your branch is behind" ${dumpfile});
-      if [[ -n "${untracked}" ]]; then
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}ADD Files to add to repo.${COLOR_RESET}\n"
-      elif [[ -n ${unstaged} ]]; then
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}ADD Files to be staged.${COLOR_RESET}\n"
-      elif [[ -n "${to_commit}" ]]; then
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}COMMIT Files to commit.${COLOR_RESET}\n"
-      elif [[ -n "${is_ahead}" ]]; then
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}PUSH Time to push.${COLOR_RESET}\n"
-      elif [[ -n "${is_behind}" ]]; then
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}PULL Time to pull.${COLOR_RESET}\n"
-      else
-        printf "\n${COLOR_BLUE}[-]${COLOR_RESET} ${COLOR_BOLD}STAY Nothing to do.${COLOR_RESET}\n"
-      fi
-  }
+    if [[ -n "${untracked}" ]]; then
+      message result "ADD Files to add to repo."
+    elif [[ -n ${unstaged} ]]; then
+      message result "ADD Files to be staged."
+    elif [[ -n "${to_commit}" ]]; then
+      message result "COMMIT Files to commit."
+    elif [[ -n "${is_ahead}" ]]; then
+      message result "PUSH Time to push."
+    elif [[ -n "${is_behind}" ]]; then
+      message result "PULL Time to pull."
+    else
+      message result "STAY Nothing to do."
+    fi
+}
 
-  heraser() {
-      ## Uses `fzf` to sort through the bash history and let you delete an 
-      ## entry.
+historyCleaner() {
+    if [[ ${@} != '' ]]; then
+      ## Remove .bash_history entry.
+      ## Usage: `historyCleaner youtube-dl`
+      ## or `historyCleaner cd$`
 
-      choices=$( history | grep --color=none "${@}" | fzf )
+      dumpfile="/tmp/historyCleaner.dump"
+
+      history -a
+      cp ~/.bash_history ${dumpfile}
+      sed -i "/^${@}/d" ${dumpfile}
+      history -c                                                              \
+      && history -r ${dumpfile}                                               \
+      && history -w
+      rm ${dumpfile}
+      history
+    else
+      ## Uses `fzf` to sort through the bash history and let you delete an entry.
+      choices=$(history | fzf)
       [[ -z "${choices}" ]] && exit 1
 
-      confirm=$(printf "yes\ncancel" | fzf)
-      
-      if [[ ${confirm} == 'yes' ]]; then
+      message question "Are you sure your want to delete this? [y/N]"
+        if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
           to_delete=$(awk '{ print $1 }' <<< "${choices}")
           history -d ${to_delete}
-      fi
-  }
+        fi
+    fi
+}
 
-  ispeed() {
-      ## Test Internet speed.
+ispeed() {
+    ## Test Internet speed.
 
-      curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
-      | python -
-  }
+    curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
+    | python -
+}
 
-  nmapbasic() {
-      message action "Function <nmapBasic> is <sudo grc nmap -sV -O -sC --traceroute ${*}> ..."
-      sleep 2
-      sudo grc nmap -sV -O -sC --traceroute ${@}
-  }
+nmapBasic() {
+    message action "Will run function <nmapBasic>:\n    sudo grc nmap -sV -O -sC --traceroute <ip address>"
+    message alert "Scanning multiple devices or network will take forever..."
+    sleep 2
+    sudo grc nmap -sV -O -sC --traceroute ${@}
+}
 
-  nowutc() {
 
-      echo  $(date --utc "+%F %H:%M:%S %Z")
-  }
+ports() {
+    message action "Will run function <ports>:\n    sudo netstat -tulanp"
+    sudo netstat -tulanp
+}
 
-  ports() {
+psBasic() {
+    message action "Will run function <psbasic>:\n     ps aux"
+    ps aux
+}
 
-      message action "Function <ports> is <sudo netstat -tulanp> ..."
-      sudo netstat -tulanp
-  }
+psGrep() {
+    message action "Will fun function <psgrep>:\n    ps aux | grep -Ei <application name>"
+    ps aux | grep -Ei "$@"
+}
 
-  psbasic() {
+pyClean () {
+    ## ref. https://stackoverflow.com/a/41386937/10500496  
+    find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+}
 
-      message action "Function <psbasic> is <ps aux> ..."
-      ps aux
-  }
+pyServer() {
+    message action "Will run function <pyServer>:\    python -m http.server"
+    message result "Starting web server ..."
+    python -m http.server
+}
 
-  psgrep() {
-      message action "Function <psgrep> is <ps aux | grep -Ei "$@"> ..."
-      ps aux | grep -Ei "$@"
-  }
+scanNet() {
+    message action "Will run function <scanNet>:\n    sudo rustscan -a <ip address> -- -sV -O -sC --traceroute -Pn"
+    sleep 2
+    sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
+}
 
-  pyclean () {
-      ## ref. https://stackoverflow.com/a/41386937/10500496  
-      find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
-  }
+searchContent() {
+  ## src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
-  pywebserver() {
-      message action "Function <pywebserver> is <python -m http.server> ..."
-      message result "Starting web server ..."
-      python -m http.server
-  }
-
-  scannet() {
-      message action "<scanNet> will run:"
-      message result "sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn"
-      sleep 2
-      sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
-  }
-
-  searchcontent() {
-    #:- src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
-
-    rg --files-with-matches --no-messages "$1" \
-    | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-  }
-  alias sc="searchcontent"
+  rg --files-with-matches --no-messages "$1"                                  \
+  | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
+alias sc="searchcontent"
 
 shellInfo() {
     shopt -s extdebug
@@ -228,63 +220,63 @@ shellInfo() {
     declare -F ${@}
 }
 
-  tagalog() {
+showUTC() {
+    echo  $(date --utc "+%F %H:%M:%S %Z")
+}
 
-      wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
-      | awk -F '"' '{print $2}'                                               \
-      | head -n 1
-  }
+tagalog() {
 
-  translate() {
-      ## Add language abbr after string to translate.
-      ## For example, translate "Hello world" fr
+    wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
+    | awk -F '"' '{print $2}'                                                 \
+    | head -n 1
+}
 
-      wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
-      | awk -F '"' '{print $2}'                                               \
-      | head -n 1
-  }
+translate() {
+    ## Add language abbr after string to translate.
+    ## For example, translate "Hello world" fr
 
-  tunsrc() {
+    wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
+    | awk -F '"' '{print $2}'                                                 \
+    | head -n 1
+}
 
-      message action "Reading tunnels..."
-      message title "INT\tIP ADDR   \tPID\tNAME"
-      while read -r _interface; do
+tunsrc() {
+    message action "Reading tunnels..."
+    message title "INT\tIP ADDR   \tPID\tNAME"
+    while read -r _interface; do
 
-        _ip=$(grep -oP '(?<=inet )(.*)(?=/)' <<<"${_interface}")
-        _tun=$(awk '{ print $NF }' <<<"${_interface}")
-        _ps=$(sudo grep -r $_tun /proc/*/fdinfo 2>/dev/null | cut -d / -f 3)
-        _cmd="$(ps -o cmd --no-headers ${_ps})"
+      _ip=$(grep -oP '(?<=inet )(.*)(?=/)' <<<"${_interface}")
+      _tun=$(awk '{ print $NF }' <<<"${_interface}")
+      _ps=$(sudo grep -r $_tun /proc/*/fdinfo 2>/dev/null | cut -d / -f 3)
+      _cmd="$(ps -o cmd --no-headers ${_ps})"
 
-        if [[ $(awk '/openvpn/ && /server/' <<< ${_cmd}) ]]; then
-          _tunname="OpenVPNServer"
-        elif [[ $(awk '/openvpn/ && /tryhackme/' <<< "${_cmd}") ]]; then
-          _tunname="TryHackMe"
-        elif [[ $(awk '/nordvpn/' <<< "${_cmd}") ]]; then
-          _tunname="NordVPN"
-        else
-          _tunname="UNDEFINED"
-        fi
+      if [[ $(awk '/openvpn/ && /server/' <<< ${_cmd}) ]]; then
+        _tunname="OpenVPNServer"
+      elif [[ $(awk '/openvpn/ && /tryhackme/' <<< "${_cmd}") ]]; then
+        _tunname="TryHackMe"
+      elif [[ $(awk '/nordvpn/' <<< "${_cmd}") ]]; then
+        _tunname="NordVPN"
+      else
+        _tunname="UNDEFINED"
+      fi
 
-        printf "%b\n" "${_tun}\t${_ip}\t${_ps}\t${_tunname}"
+      printf "%b\n" "${_tun}\t${_ip}\t${_ps}\t${_tunname}"
 
-      done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
-  }
+    done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
+}
 
-  viewips() {
+viewips() {
+    message action "Current IP addresses:"
+    ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
+}
 
-      message action "Current IP addresses:"
-      ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
-  }
+whoisWeb() {
+    ## Query the web if `whois` port 43 is blocked on your network.
 
-  whoisweb() {
-
-      ## Query the web if `whois` port 43 is blocked on your network.
-
-      curl --silent https://whoisjs.com/api/v1/${1}                           \
-      | jq ".raw"                                                             \
-      | sed "s/\\\r\\\n/\\n/g"
-
-  }
+    curl --silent https://whoisjs.com/api/v1/${1}                             \
+    | jq ".raw"                                                               \
+    | sed "s/\\\r\\\n/\\n/g"
+}
 
 # vim: syntax=sh
-# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
+## _________________________________________________________{ FIN: ¯\_(ツ)_/¯ }
