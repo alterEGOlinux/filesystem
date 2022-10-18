@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
-#                                                                           
-# ~/.alterEGO/.egorc                                                        
-#   created     : 2021-03-19 09:37:19 UTC                                   
-#   updated     : 2022-10-12 11:52:04 UTC
-#   description : alterEGO Linux core shell configuration.                  
-# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
+##                                                                           
+## ~/.alterEGO/.egorc                                                        
+##   created     : 2021-03-19 09:37:19 UTC                                   
+##   updated     : 2022-10-18 22:23:23 UTC
+##   description : alterEGO Linux core shell configuration.                  
+## ___________________________{ alterEGO Linux: "Open the vault of knowledge" }
 
-## [-- SOURCING --]
+## [-- MODULES --]
 
   [ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                              \
   && . ${HOME}/.alterEGO/bash-ael/message.bash
@@ -19,6 +19,9 @@
 
   [ -f ${HOME}/.alterEGO/.pkgmanager ]                                        \
   && . ${HOME}/.alterEGO/.pkgmanager
+
+  [ -f ${HOME}/.alterEGO/.gits ]                                              \
+  && . ${HOME}/.alterEGO/.gits
 
   [ -f ${HOME}/.alterEGO/.extrarc ]                                           \
   && . ${HOME}/.alterEGO/.extrarc
@@ -222,4 +225,4 @@
   }
 
 # vim: syntax=sh
-# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
+## _________________________________________________________{ FIN: ¯\_(ツ)_/¯ }
