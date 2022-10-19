@@ -14,19 +14,8 @@
 ## [-- lazygit --]
 
 lazygit() {
-    repositories=(
-                  "${HOME}/main/ael-filesystem"
-                  "${HOME}/main/collection"
-                  "${HOME}/main/droidnotes"
-                  "${HOME}/main/NeuronRIS"
-                  "${HOME}/main/python-ael"
-                  "${HOME}/main/ramdapp"
-                  "${HOME}/main/stuff"
-                  "${HOME}/scripts"
-                  "${HOME}/radimed"
-                 )
-
-    for repo in "${repositories[@]}"; do
+    ## The variable git_repositories is defined in /.alterego/.extrarc
+    for repo in "${git_repositories[@]}"; do
         message action "Updating $repo"
         cd "$repo"
         git pull                                                              \
