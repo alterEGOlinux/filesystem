@@ -2,7 +2,7 @@
 ##
 ## ~/.alterEGO/.gits
 ##   created        : 2022-10-18 22:14:48 UTC
-##   updated        : 2022-10-18 22:14:53 UTC
+##   updated        : 2022-10-19 12:35:04 UTC
 ##   description    : Shell stuff for git
 ## ___________________________{ alterEGO Linux: "Open the vault of knowledge" }
 
@@ -15,6 +15,7 @@
 
 lazygit() {
     ## The variable git_repositories is defined in /.alterego/.extrarc
+    cd ${HOME}
     for repo in "${git_repositories[@]}"; do
         message action "Updating $repo"
         cd "$repo"
