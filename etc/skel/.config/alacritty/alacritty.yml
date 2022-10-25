@@ -1,4 +1,12 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.config/alacritty/alacritty.yml
+##   created     : 2022-10-21 11:28:22 UTC
+##   updated     : 2022-10-21 11:28:34 UTC
+##   description : Configuration for Alacritty, the GPU enhanced terminal emulator.
+## ____________________________________________________________________________
 
 # Import additional configuration files
 #
@@ -23,6 +31,7 @@ import:
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
 
+## [-- WINDOW --]
 window:
 
   ## (-- window background --)
@@ -105,7 +114,7 @@ window:
   # Scrolling distance multiplier.
   #multiplier: 3
 
-# Font configuration
+## [-- FONTS --]
 font:
   normal:
     family: Source Code Pro
@@ -129,8 +138,8 @@ font:
     #style: Bold Italic
 
   # Point size
-  #size: 11.0
-  size: 10.0
+  size: 11.0
+  #size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -156,7 +165,7 @@ font:
 #draw_bold_text_with_bright_colors: false
 #
 
-## [ COLORS ] -------------------------------------------------------------- ##
+## [-- COLORS --]
 
 colors:
   # Default colors
@@ -373,7 +382,7 @@ colors:
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-## [ CURSOR ] -------------------------------------------------------------- ##
+## [-- CURSOR --]
 
 cursor:
   style:
@@ -853,3 +862,6 @@ cursor:
 
   # Print all received window events.
   #print_events: false
+
+## vim: foldmethod=marker
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

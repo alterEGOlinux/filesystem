@@ -1,8 +1,12 @@
-"~/.vimrc
-"   created        : 2021-02-23 02:54:43 UTC
-"   updated        : 2022-10-09 13:27:18 UTC
-"   description    : VIM main configuration file.
-" ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
+"# ----------------------------------------------------------------------------
+"#             { alterEGO Linux: "Open the vault of knowledge" }             ##
+"# ----------------------------------------------------------------------------
+"#
+"# ~/.vimrc
+"#   created        : 2021-02-23 02:54:43 UTC
+"#   updated        : 2022-10-21 12:20:52 UTC
+"#   description    : VIM main configuration file.
+"# ____________________________________________________________________________
 
 "" [-- GENERAL CONFIG --]
 
@@ -394,6 +398,10 @@
 
   call plug#begin('~/.vim/plugged')
 
+  "" (-- coloscheme iceberg --)
+  "" https://github.com/cocopon/iceberg.vim
+  Plug 'cocopon/iceberg.vim'
+
   "" (-- JEDI --)
   Plug 'https://github.com/davidhalter/jedi-vim.git'
 
@@ -401,18 +409,18 @@
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
+  "" (-- MARKDOWN-PREVIEW --)
+  "" https://github.com/iamcco/markdown-preview.vim
+  Plug 'iamcco/markdown-preview.vim'
+
   "" (-- SYNTASTIC --)
   "" Syntax checker.
   "" https://github.com/vim-syntastic/syntastic
   Plug 'vim-syntastic/syntastic'
 
-  "" (-- markdown-preview --)
-  "" https://github.com/iamcco/markdown-preview.vim
-  Plug 'iamcco/markdown-preview.vim'
-
-  "" (-- coloscheme iceberg --)
-  "" https://github.com/cocopon/iceberg.vim
-  Plug 'cocopon/iceberg.vim'
+  "" (-- ULTISNIPS --)
+  "" https://github.com/SirVer/ultisnips
+  Plug 'SirVer/ultisnips'
 
   call plug#end()
 
@@ -454,6 +462,12 @@
   "" (-- markdown-preview --)
   nmap <silent> <leader>vm <Plug>MarkdownPreview
   nmap <silent> <leader>sm <Plug>StopMarkdownPreview
+
+  "" (-- ULTISNIPS --)
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsEditSplit="vertical"
+  let g:UltiSnipsJumpForwardTrigger="<c-k>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
 "" [-- COLORSCHEME --]
 
@@ -580,4 +594,4 @@ EOF
 
   nnoremap <leader>pv :call Python_vim()<ESC>
 
-" _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
+"# ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

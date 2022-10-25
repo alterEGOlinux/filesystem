@@ -1,13 +1,17 @@
-# ~/.bashrc
-#   created        : 2021-02-26 02:54:43 UTC
-#   updated        : 2022-10-09 17:22:24 UTC
-#   description    : Bash config file.
-# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.bashrc
+##   created        : 2021-02-26 02:54:43 UTC
+##   updated        : 2022-10-24 11:23:42 UTC
+##   description    : Bash config file.
+## ____________________________________________________________________________
 
   # If not running interactively, don't do anything
   [[ $- != *i* ]] && return
 
-## [-- SOURCING --]
+## [-- MODULES --]
 
   [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -24,4 +28,5 @@
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
 # vim: syntax=sh
-# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
+# vim: foldmethod=marker
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
