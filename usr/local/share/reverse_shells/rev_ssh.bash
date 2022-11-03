@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-
-# -----------------------------------------------------------------------------
-# { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-# /usr/local/share/reverse_shells/rev_ssh.bash
-# created       : 2022-01-10 16:23:27 UTC
-# updated       : 2022-08-23 18:27:55 UTC
-# description   : Set up a reverse ssh connexion.
-# -----------------------------------------------------------------------------
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## /usr/local/share/reverse_shells/rev_ssh.bash
+##   created        : 2022-01-10 16:23:27 UTC
+##   updated        : 2022-11-03 10:56:23 UTC
+##   description    : Set up a reverse ssh connexion.
+## ____________________________________________________________________________
 
 message() {
 
@@ -48,6 +48,10 @@ usage() {
     _reset=$(printf '%b' "\033[0m")
 
     cat << EOF | less -R
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+
 ${_bold}USAGE:${_reset} rev_ssh.bash <user@home_address:port>
 
 This script creates a ssh reverse tunnel that allows you to bypass the firewall 
@@ -64,7 +68,7 @@ On the home machine:
 
   $ ssh -p <port> localhost
 
-## [ ${_blue}${_bold}How does it work: the basic${_reset} ] ----------------------------------------- ##
+## [-- ${_blue}${_bold}How does it work: the basic${_reset} --]
 
 SSH reverse tunneling uses local port forwarding on the local machine from an
 already existing ssh connection:
@@ -88,7 +92,7 @@ Usually, a ssh connection will timeout and disconnect from the server if no
 data is received from the server. In order to bypass this, ServerAliveInterval
 option sets automatic message every 60 seconds if no activity occurs.
 
-## [ ${_blue}${_bold}localhost${_reset} ] ----------------------------------------------------------- ##
+## [-- ${_blue}${_bold}localhost${_reset} --]
 
 ssh doesn't seem to require localhost to be defined to work, but it doesn't 
 hurt to set the localhost in /etc/hosts like so:
@@ -96,7 +100,7 @@ hurt to set the localhost in /etc/hosts like so:
   127.0.0.1        localhost
   ::1              localhost
 
-## [ ${_blue}${_bold}Password vs ssh-key${_reset} ] ------------------------------------------------- ##
+## [-- ${_blue}${_bold}Password vs ssh-key${_reset} --]
 
 Using this script with a password will work with limitation.
 
@@ -115,7 +119,7 @@ On the remote server:
 This will create a public and private key on the remote server, and then copy 
 the public key to home.
 
-## [ ${_blue}${_bold}In the background with tmux${_reset} ] ----------------------------------------- ##
+## [-- ${_blue}${_bold}In the background with tmux${_reset} --]
 
 Although running rev_ssh.bash by itself is nice, to enable a more permanent
 reverse connection, you can use a multiplexer like tmux to keep the process
@@ -138,7 +142,7 @@ you can access it like so:
 
   $ env TERM=screen-256color tmux -u a -t <session_name>
 
-## [ ${_blue}${_bold}Further reading${_reset} ] ----------------------------------------------------- ##
+## [-- ${_blue}${_bold}Further reading${_reset} --]
 
 • ServerFault - SSH remote port forwarding failed
   https://serverfault.com/questions/595323/ssh-remote-port-forwarding-failed/615751#615751
@@ -155,7 +159,7 @@ you can access it like so:
 • branko, "Bypassing corporate firewall with reverse ssh port forwarding", think shell
   http://toic.org/blog/2009/reverse-ssh-port-forwarding/
 
-## ----------- ${_blue}${_bold}{ alterEGO Linux: "Open the vault of knowledge" }${_reset} ----------- ##
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
 EOF
 }
 
@@ -183,4 +187,9 @@ case ${@} in
 
 esac
 
-# { FIN } __________________________________________________________ ¯\_(ツ)_/¯
+## [-- TODO --]
+
+## Include option --tmux
+
+# vim: foldmethod=marker
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
