@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933333"
+   version="1.1"
+   id="svg364"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="file_dcm.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview366"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="9.5144352"
+     inkscape:cx="42.672002"
+     inkscape:cy="28.956002"
+     inkscape:window-width="1910"
+     inkscape:window-height="1005"
+     inkscape:window-x="0"
+     inkscape:window-y="46"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3515"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs361">
+    <rect
+       x="45.774612"
+       y="173.58836"
+       width="157.97462"
+       height="60.543213"
+       id="rect3350" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1302">
+      <path
+         id="path1304"
+         style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.264583"
+         d="m -26.395805,12.493294 c 0.835381,1.935794 1.60473,3.900514 2.367298,5.865792 h 14.1991327 v -5.865792 z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath1302-6">
+      <path
+         id="path1304-7"
+         style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.264583"
+         d="m -26.395805,12.493294 c 0.835381,1.935794 1.60473,3.900514 2.367298,5.865792 h 14.1991327 v -5.865792 z" />
+    </clipPath>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g36505"
+       transform="matrix(0.28394559,0,0,0.26562695,-0.8877824,0.03364424)">
+      <rect
+         style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0.3024;stroke-opacity:1;paint-order:stroke fill markers"
+         id="rect591"
+         width="43.419956"
+         height="60.981789"
+         x="11.0864"
+         y="1.5300547"
+         ry="0.59133792"
+         rx="0.55318797"
+         inkscape:label="file" />
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0.3024;stroke-opacity:1;paint-order:stroke fill markers"
+         id="rect1986"
+         width="44.286819"
+         height="17.578838"
+         x="10.652067"
+         y="45.063797"
+         rx="0.55318797"
+         ry="0.59133792"
+         inkscape:label="rect1986" />
+      <text
+         xml:space="preserve"
+         transform="scale(0.26458333)"
+         id="text3348"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:42.6667px;line-height:1.45;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro Semi-Bold';text-align:center;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect3350);display:inline"><tspan
+           x="83.247975"
+           y="215.18792"
+           id="tspan364">DCM</tspan></text>
+      <path
+         style="fill:#000000;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+         id="path365"
+         d="m 6.0228002,16.144053 a 2.3370886,3.3122606 0 0 1 -6.298e-4,0.07689 l -2.3364588,-0.07689 z"
+         sodipodi:type="arc"
+         sodipodi:arc-type="slice"
+         sodipodi:start="0"
+         sodipodi:end="0.023215364"
+         sodipodi:ry="3.3122606"
+         sodipodi:rx="2.3370886"
+         sodipodi:cy="16.144053"
+         sodipodi:cx="3.6857116" />
+      <g
+         id="g1534"
+         style="fill:#ffffff;fill-opacity:1"
+         transform="matrix(0.85890882,-0.64790329,0.59245589,0.93929331,47.406806,-9.6510475)">
+        <g
+           id="g1311"
+           style="fill:#ffffff;fill-opacity:1">
+          <rect
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="rect423"
+             width="37.99733"
+             height="5.8658252"
+             x="-47.826714"
+             y="12.493484"
+             rx="0.53016728"
+             ry="0.51822901"
+             clip-path="url(#clipPath1302)" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path425"
+             cx="-11.148156"
+             cy="11.43657"
+             rx="4.778748"
+             ry="4.3851175" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path425-3"
+             cx="-10.996925"
+             cy="19.092276"
+             rx="4.778748"
+             ry="4.3851175" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path427"
+             cx="-13.434621"
+             cy="9.6717272"
+             rx="1.125538"
+             ry="0.018986039" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path475"
+             ry="2.6362553"
+             rx="2.5433314"
+             cy="15.808536"
+             cx="-10.399695" />
+        </g>
+        <g
+           id="g1311-5"
+           transform="rotate(180,-27.21727,15.35599)"
+           style="fill:#ffffff;fill-opacity:1">
+          <rect
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="rect423-3"
+             width="37.99733"
+             height="5.8658252"
+             x="-47.826714"
+             y="12.493484"
+             rx="0.53016728"
+             ry="0.51822901"
+             clip-path="url(#clipPath1302-6)" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path425-5"
+             cx="-11.148156"
+             cy="11.43657"
+             rx="4.778748"
+             ry="4.3851175" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path425-3-6"
+             cx="-10.996925"
+             cy="19.092276"
+             rx="4.778748"
+             ry="4.3851175" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path427-2"
+             cx="-13.434621"
+             cy="9.6717272"
+             rx="1.125538"
+             ry="0.018986039" />
+          <ellipse
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linejoin:bevel;stroke-miterlimit:7;stroke-dashoffset:0.3024"
+             id="path475-9"
+             ry="2.6362553"
+             rx="2.5433314"
+             cy="15.808536"
+             cx="-10.399695" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
