@@ -1,34 +1,38 @@
 #!/usr/bin/env bash
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## /usr/local/bin/screenshot.sh                                              ##
-##   created     : 2020-07-17 15:57:36 UTC                                   ##
-##   updated     : 2022-03-21 18:39:19 UTC                                   ##
-##   description : Screenshots application.                                  ##
-## _________________________________________________________________________ ##
 
-  directory="${HOME}/tmp/screenshots"
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## /usr/local/bin/screenshot.sh
+##   created        : 2020-07-17 15:57:36 UTC
+##   updated        : 2022-11-08 16:57:35 UTC
+##   description    : Screenshots application.
+## ____________________________________________________________________________
 
-  if [[ ! -d ${directory} ]]; then
-    mkdir -p ${directory}
-  fi
+directory="${HOME}/tmp/screenshots"
 
-  output="${directory}/screenshot-$(date --utc "+%Y%m%d%H%M%S").png"
+if [[ ! -d ${directory} ]]; then
+  mkdir -p ${directory}
+fi
 
-  case ${@} in
+output="${directory}/screenshot-$(date --utc "+%Y%m%d%H%M%S").png"
 
-    --area )
-      import -pause 1 ${output} && gimp ${output} 2> /dev/null &
-      ;;
+case ${@} in
 
-    --screen )
-      import -screen ${output} && gimp ${output} 2> /dev/null &
-      ;;
+  --area )
+    import -pause 1 ${output} && gimp ${output} 2> /dev/null &
+    ;;
 
-    --window )
-      import -window root ${output} && gimp ${output} 2>/dev/null & 
-      ;;
+  --screen )
+    import -screen ${output} && gimp ${output} 2> /dev/null &
+    ;;
 
-  esac
+  --window )
+    import -window root ${output} && gimp ${output} 2>/dev/null & 
+    ;;
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+esac
+
+# vim: foldmethod=marker
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
