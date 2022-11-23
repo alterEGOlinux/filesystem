@@ -11,8 +11,8 @@
 
 ## [-- MODULES --]
 
-  # [ -f ${HOME}/.ael/bash-ael/colors.bash ]                                    \
-  # && . ${HOME}/.ael/bash-ael/colors.bash
+  [ -f ${HOME}/.ael/bash-ael/colors.bash ]                                    \
+  && . ${HOME}/.ael/bash-ael/colors.bash
 
 message() {
 
@@ -44,5 +44,6 @@ message() {
   esac
 }
 
+## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
 ## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

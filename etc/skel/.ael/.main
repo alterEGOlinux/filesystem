@@ -15,6 +15,9 @@
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
+  [ -f ${HOME}/.ael/bash-ael/colors.bash ]                                  \
+  && . ${HOME}/.ael/bash-ael/colors.bash
+
   [ -f ${HOME}/.ael/.functions ]                                              \
   && . ${HOME}/.ael/.functions
 
@@ -157,20 +160,20 @@
           # export PS1='[\u@\h \W]\$ '
           
           ## (-- KALI STYLE --)
-          # export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\]┌────(\[${COLOR_RESET}\]\u@\h\[${COLOR_GREEN}\])-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]]\n\[${COLOR_GREEN}\]└─$ \[${COLOR_RESET}\]"
+          # export PS1="\[${RESET}\]\[${GREEN}\]┌────(\[${RESET}\]\u@\h\[${GREEN}\])-[\[${RESET}\]\w\[${GREEN}\]]\n\[${GREEN}\]└─$ \[${RESET}\]"
 
           ## (-- EGO --)
-          export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\](\u@\h)-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]] • \[$dateNOW\]\n\[${COLOR_GREEN}\]❯ \[${COLOR_RESET}\]"
+          export PS1="\[${RESET}\]\[${GREEN}\](\u@\h)-[\[${RESET}\]\w\[${GREEN}\]] • \[$dateNOW\]\n\[${GREEN}\]❯ \[${RESET}\]"
 
       else
           ## (-- SIMPLE --)
           # export PS1='[\u@\h \W]\$ '
           
           ## (-- KALI STYLE --)
-          # export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\]┌────(\[${COLOR_RESET}\]\u@\h\[${COLOR_GREEN}\])-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]]\n\[${COLOR_GREEN}\]└─$ \[${COLOR_RESET}\]"
+          # export PS1="\[${RESET}\]\[${GREEN}\]┌────(\[${RESET}\]\u@\h\[${GREEN}\])-[\[${RESET}\]\w\[${GREEN}\]]\n\[${GREEN}\]└─$ \[${RESET}\]"
 
           ## (-- EGO --)
-          export PS1="\[${COLOR_RESET}\]\[${COLOR_GREEN}\](\u@\h)-[\[${COLOR_RESET}\]\w\[${COLOR_GREEN}\]] • \[$dateNOW\]\n\[${COLOR_GREEN}\]> \[${COLOR_RESET}\]"
+          export PS1="\[${RESET}\]\[${GREEN}\](\u@\h)-[\[${RESET}\]\w\[${GREEN}\]] • \[$dateNOW\]\n\[${GREEN}\]> \[${RESET}\]"
       fi
   }
 
