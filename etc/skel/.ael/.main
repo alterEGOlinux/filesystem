@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.main
 ##   created        : 2021-03-19 09:37:19 UTC
-##   updated        : 2022-11-22 22:47:48 UTC
+##   updated        : 2022-11-22 22:38:09 UTC
 ##   description    : alterEGO Linux core shell configuration.
 ## ____________________________________________________________________________
 
@@ -15,23 +15,26 @@
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-  [ -f ${HOME}/.alterEGO/.functions ]                                         \
-  && . ${HOME}/.alterEGO/.functions
+  [ -f ${HOME}/.ael/.functions ]                                              \
+  && . ${HOME}/.ael/.functions
 
-  [ -f ${HOME}/.alterEGO/.containers ]                                        \
-  && . ${HOME}/.alterEGO/.containers
+  [ -f ${HOME}/.ael/.containers ]                                             \
+  && . ${HOME}/.ael/.containers
 
-  [ -f ${HOME}/.alterEGO/.pkgmanager ]                                        \
-  && . ${HOME}/.alterEGO/.pkgmanager
+  [ -f ${HOME}/.ael/.pkgmanager ]                                             \
+  && . ${HOME}/.ael/.pkgmanager
 
-  [ -f ${HOME}/.alterEGO/.gits ]                                              \
-  && . ${HOME}/.alterEGO/.gits
+  [ -f ${HOME}/.ael/.gits ]                                                   \
+  && . ${HOME}/.ael/.gits
 
-  [ -f ${HOME}/.alterEGO/.extra ]                                             \
-  && . ${HOME}/.alterEGO/.extra
+  [ -f ${HOME}/.ael/.hacker ]                                                 \
+  && . ${HOME}/.ael/.hacker
 
-  [ -f ${HOME}/.alterEGO/.test ]                                              \
-  && . ${HOME}/.alterEGO/.test
+  [ -f ${HOME}/.ael/.extra ]                                                  \
+  && . ${HOME}/.ael/.extra
+
+  [ -f ${HOME}/.ael/.test ]                                                   \
+  && . ${HOME}/.ael/.test
 
 ## [-- COLORS --]
 
@@ -118,23 +121,6 @@
   ## Logout and login again to make the change effective
 
   # export QT_QPA_PLATFORMTHEME="qt5ct"
-
-## [-- WORDLISTS --]
-
-  export WORDLISTS="/usr/local/share/wordlists"
-  export WL_BEST1050="${WORDLISTS}/best1050.txt"
-  export WL_BIG="${WORDLISTS}/seclist-big.txt"
-  export WL_DIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
-  export WL_LARGEFILES="${WORDLISTS}/raft-large-files.txt"
-  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
-  export WL_XPLATFORM="${WORDLISTS}/xplatform.txt"
-
-## [-- REVERSE SHELLS --]
-
-  export REVSHELLS="/usr/local/share/reverse_shells"
-  export RS_PATT_NODEJS="${REVSHELLS}/patt_nodeJS.js"
-  export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
-  export RS_WEBSHELL="${REVSHELLS}/webshell.php"
 
 ## [-- IP ADDRESSES --]
 

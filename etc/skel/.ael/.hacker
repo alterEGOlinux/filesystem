@@ -1,0 +1,30 @@
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.ael/.hacker
+##   created        : 2022-11-22 22:25:39 UTC
+##   updated        : 2022-11-22 22:25:39 UTC
+##   description    : Hacker shell stuff.
+## ____________________________________________________________________________
+
+## [-- WORDLISTS --]
+
+  export WORDLISTS="/usr/local/share/wordlists"
+  export WL_BEST1050="${WORDLISTS}/best1050.txt"
+  export WL_BIG="${WORDLISTS}/seclist-big.txt"
+  export WL_DIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
+  export WL_LARGEFILES="${WORDLISTS}/raft-large-files.txt"
+  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
+  export WL_XPLATFORM="${WORDLISTS}/xplatform.txt"
+
+## [-- REVERSE SHELLS --]
+
+  export REVSHELLS="/usr/local/share/reverse_shells"
+  export RS_PATT_NODEJS="${REVSHELLS}/patt_nodeJS.js"
+  export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
+  export RS_WEBSHELL="${REVSHELLS}/webshell.php"
+
+# vim: foldmethod=marker
+# vim: syntax=sh
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
