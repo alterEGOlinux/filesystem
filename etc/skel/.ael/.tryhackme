@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
+
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
 ##
-## ~/.alterEGO/.tryhackme
-##   created     : 2021-03-07 15:10:11 UTC
-##   updated     : 2022-10-14 15:09:14 UTC
-##   description : TryHackMe stuff
-## ___________________________{ alterEGO Linux: "Open the vault of knowledge" }
+## ~/.ael/.tryhackme
+##   created        : 2021-03-07 15:10:11 UTC
+##   updated        : 2022-11-23 11:50:13 UTC
+##   description    : TryHackMe stuff.
+## ____________________________________________________________________________
 
 ## [-- MODULES --]
 
-[ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                                \
-&& . ${HOME}/.alterEGO/bash-ael/message.bash
+  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
+  && . ${HOME}/.ael/bash-ael/messages.bash
 
   ## ( PREPARATION )
 
@@ -204,5 +208,7 @@ EOF
 
   esac
 
-## vim: syntax=sh
-## _________________________________________________________{ FIN: ¯\_(ツ)_/¯ }
+## ----------------------------------------------------------------------------
+# vim: foldmethod=marker
+# vim: syntax=sh
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

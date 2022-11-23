@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.main
 ##   created        : 2021-03-19 09:37:19 UTC
-##   updated        : 2022-11-22 22:38:09 UTC
+##   updated        : 2022-11-23 10:58:43 UTC
 ##   description    : alterEGO Linux core shell configuration.
 ## ____________________________________________________________________________
 
@@ -53,7 +53,7 @@
   alias open="ael-open"
 
   ## TODO: Should we still source automatically. See above.
-  alias attack="source ${HOME}/.alterEGO/.tryhackme"
+  alias attack="source ${HOME}/.ael/.tryhackme"
 
 ## [-- DEFAULT APPLICATIONS --]
 
@@ -182,15 +182,15 @@
   ## ref. https://twitter.com/mattn_jp/status/1434192554036137995
   ## Requires `bash-completion` and sourced in .bashrc.
   ## To add a goto link:
-  ## $ `ln -s </some/directory/path> ${HOME}/.alterEGO/.goto/@<gotolink>` in  directory.
+  ## $ `ln -s </some/directory/path> ${HOME}/.ael/.goto/@<gotolink>` in  directory.
   ## Usage: `goto @<gotolink>`
 
-  if [ -d "${HOME}/.alterEGO/.goto/" ]; then
-    export CDPATH=".:${HOME}/.alterEGO/.goto:/"
+  if [ -d "${HOME}/.ael/.goto/" ]; then
+    export CDPATH=".:${HOME}/.ael/.goto:/"
     alias goto="cd -P"
     _goto() {
       local IFS=$'\n'
-      COMPREPLY=( $(compgen -W "$(/bin/ls ~/.alterEGO/.goto)" -- ${COMP_WORDS[COMP_CWORD]}) )
+      COMPREPLY=( $(compgen -W "$(/bin/ls ~/.ael/.goto)" -- ${COMP_WORDS[COMP_CWORD]}) )
     } && complete -F _goto goto
   fi
 
@@ -202,7 +202,7 @@
     elif [ $LOADED = 'profile' ]; then
       . "${HOME}/.profile"
     else
-      message warning "An error occured while reloading"
+      message error "An error occured while reloading"
     fi
   }
 

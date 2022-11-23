@@ -1,18 +1,25 @@
-# ~/.profile
-#   created        : 2021-04-28 14:59:01 UTC
-#   updated        : 2022-10-09 17:25:03 UTC
-#   description    : Loaded in non interactive shell.
-# ___________________________ { alterEGO Linux: "Open the vault of knowledge" }
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.profile
+##   created        : 2021-04-28 14:59:01 UTC
+##   updated        : 2022-11-23 12:53:45 UTC
+##   description    : Loaded in non interactive shell.
+## ____________________________________________________________________________
 
-## [-- SOURCING --]
+## [-- MODULES --]
 
-  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
+  [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
 
 ## [-- LOADED --]
 
   export LOADED='profile'
-  ## Message function from bash-ael/message.bash
+  ## Message function from bash-ael/messages.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
+
+## ----------------------------------------------------------------------------
+# vim: foldmethod=marker
 # vim: syntax=sh
-# _________________________________________________________ { FIN: ¯\_(ツ)_/¯ }
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

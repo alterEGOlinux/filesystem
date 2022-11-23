@@ -1,22 +1,79 @@
 #! /usr/bin/env sh
+
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
 ##
-## ~/.alterEGO/.gits
+## ~/.ael/.gits
 ##   created        : 2022-10-18 22:14:48 UTC
-##   updated        : 2022-10-19 12:35:04 UTC
-##   description    : Shell stuff for git
-## ___________________________{ alterEGO Linux: "Open the vault of knowledge" }
+##   updated        : 2022-11-23 11:17:18 UTC
+##   description    : Shell stuff for git.
+## ____________________________________________________________________________
 
 ## [-- MODULES --]
 
-[ -f ${HOME}/.alterEGO/bash-ael/message.bash ]                                \
-&& . ${HOME}/.alterEGO/bash-ael/message.bash
+  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
+  && . ${HOME}/.ael/bash-ael/messages.bash
+
+gitall() {
+
+    ## Fast update of git repo.
+
+    git pull && git add . && git commit && git push
+}
+
+git-status() {
+
+    ## Get status of local git repository.
+    ## ref. https://gist.github.com/giggio/1704664
+
+    dumpfile="/tmp/git-status.dump"
+
+    if [ -z ${1} ]; then
+      local_git_repository=$(find ${HOME} -name ".git" -type d | grep -v /.cache/ | sed 's/.git//' | fzf)
+    else
+      local_git_repository=${1}
+    fi
+    
+    cd ${local_git_repository}
+    git fetch
+    git status > ${dumpfile}
+
+    message action "Checking local repository status for\n    ${local_git_repository}"
+
+    untracked=$(grep "Untracked files" ${dumpfile});
+    unstaged=$(grep "Changes not staged for commit" ${dumpfile});
+    to_commit=$(grep "Changes to be committed" ${dumpfile});
+    is_ahead=$(grep "Your branch is ahead of" ${dumpfile});
+    is_behind=$(grep "Your branch is behind" ${dumpfile});
+
+    if [[ -n "${untracked}" ]]; then
+      message result "ADD Files to add to repo."
+    elif [[ -n ${unstaged} ]]; then
+      message result "ADD Files to be staged."
+    elif [[ -n "${to_commit}" ]]; then
+      message result "COMMIT Files to commit."
+    elif [[ -n "${is_ahead}" ]]; then
+      message result "PUSH Time to push."
+    elif [[ -n "${is_behind}" ]]; then
+      message result "PULL Time to pull."
+    else
+      message result "STAY Nothing to do."
+    fi
+}
 
 ## [-- lazygit --]
 
 lazygit() {
-    ## The variable git_repositories is defined in /.alterego/.extrarc
+
+    ## The variable lazygit_repositories is defined in ~/.ael/.extra
+
+    if [[ ! -e "${lazygit_repositories}" ]]; then
+        message warning "Please define `lazygit_repositories` in `~/.ael/.extra`."
+    fi
+
     cd ${HOME}
-    for repo in "${git_repositories[@]}"; do
+    for repo in "${lazygit_repositories[@]}"; do
         message action "Updating $repo"
         cd "$repo"
         git pull                                                              \
@@ -27,5 +84,6 @@ lazygit() {
     done
 }
 
+# vim: foldmethod=marker
 # vim: syntax=sh
-## _________________________________________________________{ FIN: ¯\_(ツ)_/¯ }
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

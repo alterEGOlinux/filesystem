@@ -4,7 +4,7 @@
 ##
 ## ~/.bashrc
 ##   created        : 2021-02-26 02:54:43 UTC
-##   updated        : 2022-10-24 11:23:42 UTC
+##   updated        : 2022-11-23 12:29:01 UTC
 ##   description    : Bash config file.
 ## ____________________________________________________________________________
 
@@ -13,7 +13,7 @@
 
 ## [-- MODULES --]
 
-  [ -f ${HOME}/.alterEGO/.egorc ] && . ${HOME}/.alterEGO/.egorc
+  [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## [-- BASH-COMPLETION --]
@@ -24,9 +24,10 @@
 ## [-- LOADED --]
 
   export LOADED='bashrc'
-  ## Message function from bash-ael/message.bash
+  ## Message function from bash-ael/messages.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
-# vim: syntax=sh
+## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
+# vim: syntax=sh
 ## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
