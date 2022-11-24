@@ -30,6 +30,9 @@
   [ -f ${HOME}/.ael/.gits ]                                                   \
   && . ${HOME}/.ael/.gits
 
+  [ -f ${HOME}/.ael/.network ]                                                \
+  && . ${HOME}/.ael/.network
+
   [ -f ${HOME}/.ael/.hacker ]                                                 \
   && . ${HOME}/.ael/.hacker
 
