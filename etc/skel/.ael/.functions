@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.functions
 ##   created        : 2021-05-25 19:40:20 UTC
-##   updated        : 2022-11-23 11:28:47 UTC
+##   updated        : 2022-11-24 01:43:20 UTC
 ##   description    : Shell functions collection.
 ## ____________________________________________________________________________
 
@@ -183,13 +183,6 @@ pyServer() {
     python -m http.server
 }
 
-scanNet() {
-
-    message action "Will run function <scanNet>:\n    sudo rustscan -a <ip address> -- -sV -O -sC --traceroute -Pn"
-    sleep 2
-    sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
-}
-
 searchContent() {
 
   ## src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
@@ -257,7 +250,7 @@ tunsrc() {
 view-ips() {
 
     message action "Current IP addresses:"
-    ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
+    /usr/bin/ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
 }
 
 whoisWeb() {

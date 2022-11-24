@@ -1,0 +1,25 @@
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.ael/.network
+##   created        : 2022-11-24 01:37:23 UTC
+##   updated        : 2022-11-24 01:37:23 UTC
+##   description    : Network related functions
+## ____________________________________________________________________________
+
+## [-- MODULES --]
+
+  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
+  && . ${HOME}/.ael/bash-ael/messages.bash
+
+scan-net() {
+
+    message action "Will run function <scanNet>:\n    sudo rustscan -a <ip address> -- -sV -O -sC --traceroute -Pn"
+    sleep 2
+    sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
+}
+
+## ----------------------------------------------------------------------------
+# vim: foldmethod=marker
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
