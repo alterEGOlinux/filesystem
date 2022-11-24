@@ -254,7 +254,7 @@ tunsrc() {
     done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
 }
 
-viewips() {
+view-ips() {
 
     message action "Current IP addresses:"
     ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
