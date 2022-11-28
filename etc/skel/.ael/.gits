@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.gits
 ##   created        : 2022-10-18 22:14:48 UTC
-##   updated        : 2022-11-23 11:17:18 UTC
+##   updated        : 2022-11-28 11:39:29 UTC
 ##   description    : Shell stuff for git.
 ## ____________________________________________________________________________
 
@@ -22,7 +22,7 @@ gitall() {
     git pull && git add . && git commit && git push
 }
 
-git-status() {
+gitStatus() {
 
     ## Get status of local git repository.
     ## ref. https://gist.github.com/giggio/1704664
@@ -84,6 +84,7 @@ lazygit() {
     done
 }
 
+## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
 ## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

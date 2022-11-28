@@ -4,7 +4,7 @@
 ##
 ## ~/.ael/.network
 ##   created        : 2022-11-24 01:37:23 UTC
-##   updated        : 2022-11-24 01:37:23 UTC
+##   updated        : 2022-11-28 12:00:42 UTC
 ##   description    : Network related functions
 ## ____________________________________________________________________________
 
@@ -13,7 +13,7 @@
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-scan-net() {
+netScan() {
 
     message action "Will run function <scanNet>:\n    sudo rustscan -a <ip address> -- -sV -O -sC --traceroute -Pn"
     sleep 2

@@ -6,9 +6,14 @@
 ##
 ## ~/.ael/.extra
 ##   created        : 2021-03-16 10:15:03 UTC
-##   updated        : 2022-11-23 12:06:33 UTC
+##   updated        : 2022-11-28 11:47:37 UTC
 ##   description    : Shell config specific to this machine.
 ## ____________________________________________________________________________
+
+## [-- MODULES --]
+
+  [ -f ${HOME}/.ael/.test ]                                                   \
+  && . ${HOME}/.ael/.test
 
 alias callotr="ssh -p 2222 ghost@10.0.0.170"
 export outpw="i07VcTI3"

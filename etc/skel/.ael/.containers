@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.containers
 ##   created        : 2021-12-06 11:15:11 UTC
-##   updated        : 2022-11-23 11:05:04 UTC
+##   updated        : 2022-11-28 11:28:37 UTC
 ##   description    : Containers functions and configuration.
 ## ____________________________________________________________________________
 
@@ -167,21 +167,22 @@ juiceShop() {
 
 ## [-- KALI LINUX --]
 
-  kali() {
-    docker666 start
-    if [[ -z $(docker ps -a | awk '/kali/ { print $NF }') ]]; then
-      message action "Starting/Installing OWASP Juice Shop container..."
-      docker run --name kali --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash
+kali() {
+  docker666 start
+  if [[ -z $(docker ps -a | awk '/kali/ { print $NF }') ]]; then
+    message action "Starting/Installing OWASP Juice Shop container..."
+    docker run --name kali --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash
+  else
+    if [[ -z "$(docker ps | grep kali$)" ]]; then
+    message action "Using kali container..."
+      docker start -i kali
     else
-      if [[ -z "$(docker ps | grep kali$)" ]]; then
-      message action "Using kali container..."
-        docker start -i kali
-      else
-        message alert "Kali is already running..."
-      fi
+      message alert "Kali is already running..."
     fi
-  }
+  fi
+}
 
+## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
 ## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

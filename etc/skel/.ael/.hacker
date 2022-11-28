@@ -4,7 +4,7 @@
 ##
 ## ~/.ael/.hacker
 ##   created        : 2022-11-22 22:25:39 UTC
-##   updated        : 2022-11-22 22:25:39 UTC
+##   updated        : 2022-11-28 11:59:07 UTC
 ##   description    : Hacker shell stuff.
 ## ____________________________________________________________________________
 
@@ -25,6 +25,7 @@
   export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
   export RS_WEBSHELL="${REVSHELLS}/webshell.php"
 
+## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
 ## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
