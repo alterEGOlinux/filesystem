@@ -1,0 +1,39 @@
+#!/usr/bin/env sh
+
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## ~/.ael/.extra
+##   created        : 2021-03-16 10:15:03 UTC
+##   updated        : 2022-11-23 12:06:33 UTC
+##   description    : Shell config specific to this machine.
+## ____________________________________________________________________________
+
+alias callotr="ssh -p 2222 ghost@10.0.0.170"
+export outpw="i07VcTI3"
+alias notes="cd ~/main/droidnotes/app/notes"
+alias ael='cd ~/main/ael-filesystem/'
+alias ramd='cd ~/radimed/'
+alias scripts='cd ~/scripts/'
+alias pyael='cd ~/main/python-ael/'
+
+lazygit_repositories=(
+              "${HOME}/main/ael-filesystem"
+              "${HOME}/main/ael-private"
+              "${HOME}/main/collection"
+              "${HOME}/main/dev"
+              "${HOME}/main/droidnotes"
+              "${HOME}/main/NeuronRIS"
+              "${HOME}/main/python-ael"
+              "${HOME}/main/ramd-support"
+              "${HOME}/main/ramdapp"
+              "${HOME}/main/stuff"
+              "${HOME}/scripts"
+              "${HOME}/radimed"
+              )
+
+## ----------------------------------------------------------------------------
+# vim: foldmethod=marker
+# vim: syntax=sh
+## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
