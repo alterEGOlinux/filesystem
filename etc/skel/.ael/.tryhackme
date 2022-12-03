@@ -17,28 +17,57 @@
 
 ## [-- FUNCTIONS --]
 
-thm-reload() {
+reload() {
   source ${HOME}/.ael/.tryhackme
 }
 
-thm-show-config() {
+show-config() {
   message title "    VARIABLE         SET TO"
-  message result "THMDIR           ${THMDIR}"
-  message result "THMCONFIG        ${THMCONFIG}"
-  message result "THMROOMNAME      ${THMROOMNAME}"
-  message result "THMROOMPATH      ${THMROOMPATH}"
+  message result "THM_DIR          ${THM_DIR}"
+  message result "THM_CONFIG       ${THM_CONFIG}"
+  if [[ ${THM_ROOM_NAME} == "" ]];then
+      message alert "THM_ROOM_NAME    Please set room name!"
+  else
+      message result "THM_ROOM_NAME    ${THM_ROOM_NAME}"
+  fi
+  if [[ ${THM_ROOM_PATH} == ${THM_DIR}/ ]];then
+      message alert "THM_ROOM_PATH    Please set room name!"
+  else
+      message result "THM_ROOM_PATH    ${THM_ROOM_PATH}"
+  fi
+  if [[ ${THM_PLAYER} == "" ]];then
+      message alert "THM_PLAYER       Please set player name!"
+  else
+      message result "THM_PLAYER       ${THM_PLAYER}"
+  fi
+  if [[ ${THM_RHOST} == "" ]];then
+      message alert "THM_RHOST        Please set remote IP!"
+  else
+      message result "THM_RHOST        ${THM_RHOST}"
+  fi
+  if [[ ${THM_LHOST} == "" ]];then
+      message alert "THM_LHOST        Please set local IP!"
+  else
+      message result "THM_LHOST        ${THM_LHOST}"
+  fi
+  message result "THM_TOOLS        ${THM_TOOLS}"
 }
 
 ## [-- INIT --]
 
-  THMDIR="${HOME}/.ael/tryhackme"
-  if [[ ! -d ${THMDIR} ]]; then
-      mkdir ${THMDIR}
+  THM_DIR="${HOME}/.ael/tryhackme"
+  if [[ ! -d ${THM_DIR} ]]; then
+      mkdir ${THM_DIR}
   fi
 
-  THMCONFIG="${THMDIR}/.tryhackme.cfg"
-  if [[ ! -e ${THMCONFIG} ]]; then
-      cat <<EOF> ${THMCONFIG}
+  THM_TOOLS="${THM_DIR}/tools"
+  if [[ ! -d ${THM_TOOLS} ]]; then
+      mkdir ${THM_TOOLS}
+  fi
+
+  THM_CONFIG="${THM_DIR}/.tryhackme.cfg"
+  if [[ ! -e ${THM_CONFIG} ]]; then
+      cat <<EOF> ${THM_CONFIG}
 ## ----------------------------------------------------------------------------
 ##             { alterEGO Linux: "Open the vault of knowledge" }             ##
 ## ----------------------------------------------------------------------------
@@ -51,27 +80,62 @@ thm-show-config() {
 
 ## [-- MAIN DIRECTORY --]
 
-  THMDIR="${THMDIR}"
+  THM_DIR="${THM_DIR}"
 
 ## [-- CONFIG FILE --]
 
-  THMCONFIG="${THMCONFIG}"
+  THM_CONFIG="${THM_CONFIG}"
 
 ## [-- ROOM --]
 
-  THMROOMNAME=""
-  THMROOMPATH="${THMDIR}/${THMROOMNAME}"
+  THM_ROOM_NAME=""
+  THM_ROOM_PATH="${THM_DIR}/${THM_ROOM_NAME}"
+
+## [-- PLAYER --]
+
+  THM_PLAYER=""
+
+## [-- IP ADDRESSES --]
+
+  THM_RHOST=""
+  THM_LHOST=""
+
+## [-- TOOLS --]
+
+  THM_TOOLS="${THM_TOOLS}"
   
 EOF
   fi
 
-  source ${THMCONFIG}
-  export THMDIR
-  export THMCONFIG
-  export THMROOMNAME
-  export THMROOMPATH
-  thm-show-config
+  source ${THM_CONFIG}
+  export THM_DIR
+  export THM_CONFIG
+  export THM_ROOM_NAME
+  export THM_ROOM_PATH
+  export THM_PLAYER
+  export THM_RHOST
+  export THM_LHOST
+  export THM_TOOLS
+  show-config
 
+
+## [-- COMPLETION --]
+
+  for x in thm .tryhackme; do
+    options="\
+            connect
+            help
+            show-config
+            login 
+            msf
+            set-lhost
+            set-player
+            set-rhost
+            set-room
+            usage
+            webroom" 
+    complete -W "${options[@]}" $x
+  done
 
   # _CONFIGDIR="${HOME}/.alterEGO/tryhackme"
   # if [ ! -d ${_CONFIGDIR} ]; then
@@ -108,23 +172,6 @@ EOF
   # [ -f ${_CONFIG} ]                                                           \
   # && . ${_CONFIG}
 
-## [ COMPLETION ] ---------------------------------------------------------- ##
-
-  # for x in attack .tryhackme; do
-    # options="\
-            # connect
-            # help
-            # info
-            # login 
-            # msf
-            # set-lhost
-            # set-player
-            # set-rhost
-            # set-room
-            # usage
-            # webroom" 
-    # complete -W "${options[@]}" $x
-  # done
 
 ## [ FUNCTIONS ] ----------------------------------------------------------- ##
 
@@ -190,6 +237,11 @@ EOF
 ## [ OPTIONS ] ------------------------------------------------------------- ##
 
   case "${1}" in
+
+    show-config )
+      reload
+      show-config
+      ;;
 
     # connect )
       # _VPN="${_CONFIGDIR}/${THMPLAYER}.ovpn"
