@@ -17,11 +17,11 @@
 
 ## [-- FUNCTIONS --]
 
-reload() {
+thm-reload() {
   source ${HOME}/.ael/.tryhackme
 }
 
-show-config() {
+thm-show-config() {
   message title "    VARIABLE         SET TO"
   message result "THM_DIR          ${THM_DIR}"
   message result "THM_CONFIG       ${THM_CONFIG}"
@@ -53,7 +53,7 @@ show-config() {
   message result "THM_TOOLS        ${THM_TOOLS}"
 }
 
-## [-- INIT --]
+thm-check() {
 
   THM_DIR="${HOME}/.ael/tryhackme"
   if [[ ! -d ${THM_DIR} ]]; then
@@ -116,22 +116,25 @@ EOF
   export THM_RHOST
   export THM_LHOST
   export THM_TOOLS
-  show-config
 
+  message action "TRYHACKME RUNNING..."
+}
 
 ## [-- COMPLETION --]
 
   for x in thm .tryhackme; do
     options="\
+            check
             connect
             help
-            show-config
             login 
             msf
+            reload
             set-lhost
             set-player
             set-rhost
             set-room
+            show-config
             usage
             webroom" 
     complete -W "${options[@]}" $x
@@ -238,10 +241,22 @@ EOF
 
   case "${1}" in
 
+    check )
+        thm-reload
+        ;;
+
+    reload )
+        thm-reload
+        ;;
+
     show-config )
-      reload
-      show-config
-      ;;
+        thm-reload
+        thm-show-config
+        ;;
+
+    * )
+        thm-check
+        ;;
 
     # connect )
       # _VPN="${_CONFIGDIR}/${THMPLAYER}.ovpn"
