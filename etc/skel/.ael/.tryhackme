@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.tryhackme
 ##   created        : 2021-03-07 15:10:11 UTC
-##   updated        : 2022-11-23 11:50:13 UTC
+##   updated        : 2022-12-04 13:33:25 UTC
 ##   description    : TryHackMe stuff.
 ## ____________________________________________________________________________
 
@@ -17,43 +17,7 @@
 
 ## [-- FUNCTIONS --]
 
-thm-reload() {
-  source ${HOME}/.ael/.tryhackme
-}
-
-thm-show-config() {
-  message title "    VARIABLE         SET TO"
-  message result "THM_DIR          ${THM_DIR}"
-  message result "THM_CONFIG       ${THM_CONFIG}"
-  if [[ ${THM_ROOM_NAME} == "" ]];then
-      message alert "THM_ROOM_NAME    Please set room name!"
-  else
-      message result "THM_ROOM_NAME    ${THM_ROOM_NAME}"
-  fi
-  if [[ ${THM_ROOM_PATH} == ${THM_DIR}/ ]];then
-      message alert "THM_ROOM_PATH    Please set room name!"
-  else
-      message result "THM_ROOM_PATH    ${THM_ROOM_PATH}"
-  fi
-  if [[ ${THM_PLAYER} == "" ]];then
-      message alert "THM_PLAYER       Please set player name!"
-  else
-      message result "THM_PLAYER       ${THM_PLAYER}"
-  fi
-  if [[ ${THM_RHOST} == "" ]];then
-      message alert "THM_RHOST        Please set remote IP!"
-  else
-      message result "THM_RHOST        ${THM_RHOST}"
-  fi
-  if [[ ${THM_LHOST} == "" ]];then
-      message alert "THM_LHOST        Please set local IP!"
-  else
-      message result "THM_LHOST        ${THM_LHOST}"
-  fi
-  message result "THM_TOOLS        ${THM_TOOLS}"
-}
-
-thm-check() {
+thm-init() {
 
   THM_DIR="${HOME}/.ael/tryhackme"
   if [[ ! -d ${THM_DIR} ]]; then
@@ -107,6 +71,18 @@ thm-check() {
 EOF
   fi
 
+    thm-reload-config
+
+}
+
+thm-reload-all() {
+
+    source ${HOME}/.ael/.tryhackme
+
+}
+
+thm-reload-config() {
+
   source ${THM_CONFIG}
   export THM_DIR
   export THM_CONFIG
@@ -117,24 +93,69 @@ EOF
   export THM_LHOST
   export THM_TOOLS
 
-  message action "TRYHACKME RUNNING..."
+  thm-show-config
+
+  message action "TRYHACKME CONFIG READY..."
+
 }
+
+thm-show-config() {
+
+    message title "    VARIABLE         SET TO"
+    message result "THM_DIR          ${THM_DIR}"
+    message result "THM_CONFIG       ${THM_CONFIG}"
+    if [[ ${THM_ROOM_NAME} == "" ]];then
+        message alert "THM_ROOM_NAME    Please set room name!"
+    else
+        message result "THM_ROOM_NAME    ${THM_ROOM_NAME}"
+    fi
+    if [[ ${THM_ROOM_PATH} == ${THM_DIR}/ ]];then
+        message alert "THM_ROOM_PATH    Please set room name!"
+    else
+        message result "THM_ROOM_PATH    ${THM_ROOM_PATH}"
+    fi
+    if [[ ${THM_PLAYER} == "" ]];then
+        message alert "THM_PLAYER       Please set player name!"
+    else
+        message result "THM_PLAYER       ${THM_PLAYER}"
+    fi
+    if [[ ${THM_RHOST} == "" ]];then
+        message alert "THM_RHOST        Please set remote IP!"
+    else
+        message result "THM_RHOST        ${THM_RHOST}"
+    fi
+    if [[ ${THM_LHOST} == "" ]];then
+        message alert "THM_LHOST        Please set local IP!"
+    else
+        message result "THM_LHOST        ${THM_LHOST}"
+    fi
+    message result "THM_TOOLS        ${THM_TOOLS}"
+
+}
+
+thm-login() {
+
+      $BROWSER "https://www.tryhackme.com/login"
+
+}
+
 
 ## [-- COMPLETION --]
 
   for x in thm .tryhackme; do
     options="\
-            check
-            connect
-            help
+            init
             login 
+            reload-all
+            reload-config
+            show-config
+            help
             msf
-            reload
             set-lhost
+            connect
             set-player
             set-rhost
             set-room
-            show-config
             usage
             webroom" 
     complete -W "${options[@]}" $x
@@ -241,22 +262,26 @@ EOF
 
   case "${1}" in
 
-    check )
-        thm-reload
-        ;;
+      login )
+          thm-login
+          ;;
 
-    reload )
-        thm-reload
-        ;;
+      reload-all )
+          thm-reload-all
+          ;;
 
-    show-config )
-        thm-reload
-        thm-show-config
-        ;;
+      reload-config )
+          thm-reload-config
+          ;;
 
-    * )
-        thm-check
-        ;;
+      show-config )
+          thm-reload-config
+          thm-show-config
+          ;;
+
+      init|* )
+          thm-init
+          ;;
 
     # connect )
       # _VPN="${_CONFIGDIR}/${THMPLAYER}.ovpn"
@@ -269,9 +294,6 @@ EOF
         # $BROWSER "https://tryhackme.com/vpn/get-config"
         # cd ${THMPATH}
       # fi
-      # ;;
-    # login )
-      # $BROWSER "https://www.tryhackme.com/login"
       # ;;
     # webroom )
       # $BROWSER "https://www.tryhackme.com/room/${THMROOM}"
@@ -317,9 +339,6 @@ EOF
         # message warning "Nope"
         # usage
       # fi
-      # ;;
-    # info )
-      # env | grep --color=never THM
       # ;;
     # msf )
       # set_msf
