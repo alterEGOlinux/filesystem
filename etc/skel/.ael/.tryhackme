@@ -6,18 +6,18 @@
 ##
 ## ~/.ael/.tryhackme
 ##   created        : 2021-03-07 15:10:11 UTC
-##   updated        : 2022-12-05 02:56:12 UTC
+##   updated        : 2022-12-05 19:51:06 UTC
 ##   description    : TryHackMe stuff.
 ## ____________________________________________________________________________
 
-## [-- MODULES --]
+## [ MODULES ]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-## [-- FUNCTIONS --]
+## [ FUNCTIONS ]
 
-## thm-connect                                                             {{{1
+## ( thm-connect )                                                         {{{1
 thm-connect() {
 
       THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
@@ -35,7 +35,7 @@ thm-connect() {
 }
 ## FIN: thm-connect 1}}}
 
-## thm-init                                                                {{{1
+## ( thm-init )                                                            {{{1
 thm-init() {
 
   THM_DIR="${HOME}/.ael/tryhackme"
@@ -95,14 +95,14 @@ EOF
 }
 ## FIN: thm-init 1}}}
 
-## thm-login                                                               {{{1
+## ( thm-login )                                                           {{{1
 thm-login() {
 
       $BROWSER "https://www.tryhackme.com/login"
 }
 ## FIN: thm-login 1}}}
 
-## thm-reload-all                                                          {{{1
+## ( thm-reload-all )                                                      {{{1
 thm-reload-all() {
 
     source ${HOME}/.ael/.tryhackme
@@ -110,7 +110,7 @@ thm-reload-all() {
 }
 ## FIN: thm-reload-all 1}}}
 
-## thm-reload-config                                                       {{{1
+## ( thm-reload-config )                                                   {{{1
 thm-reload-config() {
 
   source ${THM_CONFIG}
@@ -126,29 +126,90 @@ thm-reload-config() {
   thm-show-config
 
   message action "TRYHACKME CONFIG READY..."
-
 }
 ## FIN: thm-reload-config 1}}}
 
-## thm-set-player                                                          {{{1
+## ( thm-set-lhost )                                                       {{{1
+thm-set-lhost() {
+
+    if [[ ${#} == 1 ]]; then
+        _lhost=${1}
+        sed -i -e "s/\(THM_LHOST=\).*/\1'${_lhost}'/g" "${THM_CONFIG}"
+    else
+        message error "You must provide a local IP address!"
+    fi
+    thm-reload-config
+}
+## FIN: thm-set-lhost 1}}}
+
+## ( thm-set-msf )                                                         {{{1
+thm-set-msf() {
+
+    ## ( METASPLOIT )
+    ## Create msfconsole resource file.
+    ## This can be loaded using:
+    ## msf -r ~/.msf4/<resourcefile.rc>
+    ## Or sourced directly in msf using:
+    ## `resource thm.rc`
+
+    if [[ ! -d "${HOME}/.msf4" ]]; then
+        mkdir ${HOME}/.msf4
+    fi
+
+    cat << EOF > ~/.msf4/thm.rc
+load alias
+alias set-lhost "set LHOST ${THM_LHOST}"
+alias set-rhost "set RHOSTS ${THM_RHOST}"
+EOF
+
+    message result "Use \`resource thm.rc\` in msfconsole."
+}
+## FIN: thm-set-msf 1}}}
+
+## ( thm-set-player )                                                      {{{1
 thm-set-player() {
 
     if [[ ${#} == 1 ]]; then
         _player=${1}
-        echo ${_player}
         sed -i -e "s/\(THM_PLAYER=\).*/\1'${_player}'/g" "${THM_CONFIG}"
     else
         message error "You must provide a player's name!"
     fi
-        # export THMPLAYER="${1}"
-      # else
-        # message warning "Nope"
-        # usage
-      # fi
+    thm-reload-config
 }
 ## FIN: thm-set-player 1}}}
 
-## thm-show-config                                                         {{{1
+## ( thm-set-rhost )                                                       {{{1
+thm-set-rhost() {
+
+    if [[ ${#} == 1 ]]; then
+        _rhost=${1}
+        sed -i -e "s/\(THM_RHOST=\).*/\1'${_rhost}'/g" "${THM_CONFIG}"
+    else
+        message error "You must provide a remote IP address!"
+    fi
+    thm-reload-config
+}
+## FIN: thm-set-rhost 1}}}
+
+## ( thm-set-room )                                                        {{{1
+thm-set-room() {
+
+    if [[ ${#} == 1 ]]; then
+        _room=${1}
+        sed -i -e "s/\(THM_ROOM_NAME=\).*/\1'${_room}'/g" "${THM_CONFIG}"
+        sed -i -e "s:\(THM_ROOM_PATH=\).*:\1'${THM_DIR}/${_room}':g" "${THM_CONFIG}"
+        if [[ ! -d "${THM_DIR}/${_room}" ]]; then
+            mkdir "${THM_DIR}/${_room}"
+        fi
+    else
+        message error "You must provide a room's name!"
+    fi
+    thm-reload-config
+}
+## FIN: thm-set-room 1}}}
+
+## ( thm-show-config )                                                     {{{1
 thm-show-config() {
 
     message title "    VARIABLE         SET TO"
@@ -183,89 +244,77 @@ thm-show-config() {
 }
 ## FIN: thm-show-config 1}}}
 
-## [-- COMPLETION --]
+## ( thm-webroom )                                                         {{{1
+thm-webroom() {
+
+    $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
+}
+## FIN: thm-webroom 1}}}
+
+## ( thm-help )                                                            {{{1
+thm-help() {
+
+    message action "tryhackme help"
+
+    cat <<EOF
+Usage:
+    thm [options]
+
+Options:
+    connect
+    init
+    login 
+    msf
+    reload-all
+    reload-config
+    set-lhost
+    set-player
+    set-room
+    set-rhost
+    show-config
+    webroom
+    help
+    usage 
+
+Functions:
+  thm-connect
+  thm-init
+  thm-login
+  thm-reload-all
+  thm-reload=config
+  thm-set-lhost
+  thm-set-msf
+  thm-set-player
+  thm-set-rhost
+  thm-set-room
+  thm-show-config
+  thm-webroom
+EOF
+}
+## FIN: thm-help 1}}}
+
+## [ COMPLETION ]
 
   for x in thm .tryhackme; do
     options="\
             connect
             init
             login 
+            msf
             reload-all
             reload-config
-            set-player
-            show-config
-            help
-            msf
             set-lhost
-            set-rhost
+            set-player
             set-room
-            usage
-            webroom" 
+            set-rhost
+            show-config
+            webroom
+            help
+            usage" 
     complete -W "${options[@]}" $x
   done
 
-## [ FUNCTIONS ] ----------------------------------------------------------- ##
-
-  # set_path() {
-    # THMPATH="${_MAINDIR}/${THMROOM}"
-
-    # if [ ! -d ${THMPATH} ]; then
-      # mkdir ${THMPATH}
-    # fi
-
-    # export THMPATH
-  # }
-
-  # set_msf() {
-
-    # ( METASPLOIT )
-    # Create msfconsole resource file.
-    # This can be loaded using:
-    # msf -r ~/.msf4/<resourcefile.rc>
-    # Or sourced directly in msf using:
-    # `resource thm.rc`
-
-    # if [ ! -d "${HOME}/.msf4" ]; then
-      # mkdir ${HOME}/.msf4
-    # fi
-
-    # cat << EOF > ~/.msf4/thm.rc
-# load alias
-# alias setlhost "set LHOST ${THMLHOST}"
-# alias setrhost "set RHOSTS ${THMRHOST}"
-# EOF
-  # }
-
-## [ VARIABLES ] ----------------------------------------------------------- ##
-
-  # export THMPLAYER
-  # export THMROOM
-  # export THMRHOST
-  # export THMLHOST
-  # set_path
-
-## [ USAGE ] --------------------------------------------------------------- ##
-
-  # usage() {
-    # cat <<EOF
-# Usage: attack [option]
-
-# Options:
-  # connect
-  # login
-  # webroom
-  # set-player
-  # set-room
-  # set-lhost
-  # set-rhost
-  # info
-  # msf
-  # help/usage
-
-# EOF
-  # }
-
-## [ OPTIONS ] ------------------------------------------------------------- ##
+## [ OPTIONS ]
 
   case "${1}" in
 
@@ -277,12 +326,28 @@ thm-show-config() {
           thm-login
           ;;
 
+      msf )
+        message action "Starting msfconsole..."
+        thm-set-msf
+        msfconsole -x "db_connect ${USER}@msf" -r ~/.msf4/thm.rc
+        ;;
+
       reload-all )
           thm-reload-all
           ;;
 
       reload-config )
           thm-reload-config
+          ;;
+
+      set-lhost )
+          if [[ ${#} == 2 ]]; then
+              shift
+              _lhost=${1}
+              thm-set-lhost ${_lhost}
+          else
+              message error "You must provide a local IP address!"
+          fi
           ;;
 
       set-player )
@@ -293,60 +358,43 @@ thm-show-config() {
           else
               message error "You must provide a player's name!"
           fi
-          thm-reload-config
+          ;;
+
+      set-rhost )
+          if [[ ${#} == 2 ]]; then
+              shift
+              _rhost=${1}
+              thm-set-rhost ${_rhost}
+          else
+              message error "You must provide a remote IP address!"
+          fi
+          ;;
+
+      set-room )
+          if [[ ${#} == 2 ]]; then
+              shift
+              _room=${1}
+              thm-set-room ${_room}
+          else
+              message error "You must provide a room's name!"
+          fi
           ;;
 
       show-config )
-          thm-reload-config
           thm-show-config
+          ;;
+
+      webroom )
+          thm-webroom
+          ;;
+
+      help|usage )
+          thm-help
           ;;
 
       init|* )
           thm-init
           ;;
-
-    # webroom )
-      # $BROWSER "https://www.tryhackme.com/room/${THMROOM}"
-      # ;;
-    # set-room )
-      # if [[ ${#} == 2 ]]; then
-        # shift
-        # sed -i -e "s/\(THMROOM=\).*/\1'${1}'/g" "${_CONFIG}"
-        # export THMROOM="${1}"
-        # set_path
-        # cd "${THMPATH}"
-      # else
-        # message warning "Nope"
-        # usage
-      # fi
-      # ;;
-    # set-lhost )
-      # if [[ ${#} == 2 ]]; then
-        # shift
-        # sed -i -e "s/\(THMLHOST=\).*/\1'${1}'/g" "${_CONFIG}"
-        # export THMRHOST="${1}"
-      # else
-        # message warning "Nope"
-        # usage
-      # fi
-      # ;;
-    # set-rhost )
-      # if [[ ${#} == 2 ]]; then
-        # shift
-        # sed -i -e "s/\(THMLHOST=\).*/\1'${1}'/g" "${_CONFIG}"
-        # export THMRHOST="${1}"
-      # else
-        # message warning "Nope"
-        # usage
-      # fi
-      # ;;
-    # msf )
-      # set_msf
-      # msfconsole -x "db_connect ${USER}@msf" -r ~/.msf4/thm.rc
-      # ;;
-    # help|usage )
-      # usage
-      # ;;
 
   esac
 
