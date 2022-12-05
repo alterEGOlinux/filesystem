@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.tryhackme
 ##   created        : 2021-03-07 15:10:11 UTC
-##   updated        : 2022-12-04 13:33:25 UTC
+##   updated        : 2022-12-05 02:56:12 UTC
 ##   description    : TryHackMe stuff.
 ## ____________________________________________________________________________
 
@@ -17,6 +17,25 @@
 
 ## [-- FUNCTIONS --]
 
+## thm-connect                                                             {{{1
+thm-connect() {
+
+      THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
+      if [[ -f ${THM_VPN} ]]; then
+          sudo openvpn ${THM_VPN} &
+          cd ${THM_ROOM_PATH}
+          sleep 2
+          $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
+      else
+        # $BROWSER "https://tryhackme.com/vpn/get-config"
+        $BROWSER "https://tryhackme.com/access"
+        cd ${THM_ROOM_PATH}
+      fi
+
+}
+## FIN: thm-connect 1}}}
+
+## thm-init                                                                {{{1
 thm-init() {
 
   THM_DIR="${HOME}/.ael/tryhackme"
@@ -74,13 +93,24 @@ EOF
     thm-reload-config
 
 }
+## FIN: thm-init 1}}}
 
+## thm-login                                                               {{{1
+thm-login() {
+
+      $BROWSER "https://www.tryhackme.com/login"
+}
+## FIN: thm-login 1}}}
+
+## thm-reload-all                                                          {{{1
 thm-reload-all() {
 
     source ${HOME}/.ael/.tryhackme
 
 }
+## FIN: thm-reload-all 1}}}
 
+## thm-reload-config                                                       {{{1
 thm-reload-config() {
 
   source ${THM_CONFIG}
@@ -98,7 +128,27 @@ thm-reload-config() {
   message action "TRYHACKME CONFIG READY..."
 
 }
+## FIN: thm-reload-config 1}}}
 
+## thm-set-player                                                          {{{1
+thm-set-player() {
+
+    if [[ ${#} == 1 ]]; then
+        _player=${1}
+        echo ${_player}
+        sed -i -e "s/\(THM_PLAYER=\).*/\1'${_player}'/g" "${THM_CONFIG}"
+    else
+        message error "You must provide a player's name!"
+    fi
+        # export THMPLAYER="${1}"
+      # else
+        # message warning "Nope"
+        # usage
+      # fi
+}
+## FIN: thm-set-player 1}}}
+
+## thm-show-config                                                         {{{1
 thm-show-config() {
 
     message title "    VARIABLE         SET TO"
@@ -130,72 +180,29 @@ thm-show-config() {
         message result "THM_LHOST        ${THM_LHOST}"
     fi
     message result "THM_TOOLS        ${THM_TOOLS}"
-
 }
-
-thm-login() {
-
-      $BROWSER "https://www.tryhackme.com/login"
-
-}
-
+## FIN: thm-show-config 1}}}
 
 ## [-- COMPLETION --]
 
   for x in thm .tryhackme; do
     options="\
+            connect
             init
             login 
             reload-all
             reload-config
+            set-player
             show-config
             help
             msf
             set-lhost
-            connect
-            set-player
             set-rhost
             set-room
             usage
             webroom" 
     complete -W "${options[@]}" $x
   done
-
-  # _CONFIGDIR="${HOME}/.alterEGO/tryhackme"
-  # if [ ! -d ${_CONFIGDIR} ]; then
-    # mkdir ${_CONFIGDIR}
-  # fi
-
-  # _MAINDIR="${HOME}/.tryhackme"
-  # if [ ! -d ${_MAINDIR} ]; then
-    # mkdir ${_MAINDIR}
-  # fi
-
-  # _CONFIG="${_CONFIGDIR}/.tryhackme.cfg"
-  # if [ ! -e ${_CONFIG} ]; then
-    # message question "Player name?"
-    # _THMPLAYER="${_INPUT}"
-
-    # message question "Room name?"
-    # _THMROOM="${_INPUT}"
-
-    # message question "Remote host IP?"
-    # _THMRHOST="${_INPUT}"
-
-    # message question "Local host IP?"
-    # _THMLHOST="${_INPUT}"
-
-    # cat <<EOF> ${_CONFIG}
-# THMPLAYER="${_THMPLAYER}"
-# THMROOM="${_THMROOM}"
-# THMRHOST="${_THMRHOST}"
-# THMLHOST="${_THMLHOST}"
-# EOF
-  # fi
-
-  # [ -f ${_CONFIG} ]                                                           \
-  # && . ${_CONFIG}
-
 
 ## [ FUNCTIONS ] ----------------------------------------------------------- ##
 
@@ -262,6 +269,10 @@ thm-login() {
 
   case "${1}" in
 
+      connect )
+          thm-connect
+          ;;
+
       login )
           thm-login
           ;;
@@ -274,6 +285,17 @@ thm-login() {
           thm-reload-config
           ;;
 
+      set-player )
+          if [[ ${#} == 2 ]]; then
+              shift
+              _player=${1}
+              thm-set-player ${_player}
+          else
+              message error "You must provide a player's name!"
+          fi
+          thm-reload-config
+          ;;
+
       show-config )
           thm-reload-config
           thm-show-config
@@ -283,30 +305,8 @@ thm-login() {
           thm-init
           ;;
 
-    # connect )
-      # _VPN="${_CONFIGDIR}/${THMPLAYER}.ovpn"
-      # if [[ -f ${_VPN} ]]; then
-        # sudo openvpn ${_VPN} &
-        # cd ${THMPATH}
-        # sleep 2
-        # $BROWSER "https://www.tryhackme.com/room/${THMROOM}"
-      # else
-        # $BROWSER "https://tryhackme.com/vpn/get-config"
-        # cd ${THMPATH}
-      # fi
-      # ;;
     # webroom )
       # $BROWSER "https://www.tryhackme.com/room/${THMROOM}"
-      # ;;
-    # set-player )
-      # if [[ ${#} == 2 ]]; then
-        # shift
-        # sed -i -e "s/\(THMPLAYER=\).*/\1'${1}'/g" "${_CONFIG}"
-        # export THMPLAYER="${1}"
-      # else
-        # message warning "Nope"
-        # usage
-      # fi
       # ;;
     # set-room )
       # if [[ ${#} == 2 ]]; then
