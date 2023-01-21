@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.containers
 ##   created        : 2021-12-06 11:15:11 UTC
-##   updated        : 2023-01-21 03:32:04 UTC
+##   updated        : 2023-01-21 14:33:15 UTC
 ##   description    : Containers functions and configuration.
 ## ____________________________________________________________________________
 
@@ -86,8 +86,10 @@ dockerStats() {
         _ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${_containerID})
         printf "%b\n" "${_containerID}\t${_ip}\t${_name}"
       fi
-    done <<< $(docker ps | tail -n+2)
+    done <<< $(docker ps -a | tail -n+2)
 }
+
+  alias docker-stats="dockerStats"
 
 ## [-- DOCKER CLEANER --]
 
@@ -107,6 +109,8 @@ dockerContainerCleaner() {
         message result "GoodBye!!!"
     fi
 }
+
+  alias docker-container-cleaner="dockerContainerCleaner"
 
 ## [-- CYBERCHEF --]
 
