@@ -4,7 +4,7 @@
 ##
 ## ~/.profile
 ##   created        : 2021-04-28 14:59:01 UTC
-##   updated        : 2022-11-23 12:53:45 UTC
+##   updated        : 2023-01-21 03:00:53 UTC
 ##   description    : Loaded in non interactive shell.
 ## ____________________________________________________________________________
 
@@ -17,7 +17,6 @@
   export LOADED='profile'
   ## Message function from bash-ael/messages.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
-
 
 ## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
