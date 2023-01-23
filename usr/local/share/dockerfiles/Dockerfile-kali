@@ -1,0 +1,33 @@
+## ----------------------------------------------------------------------------
+##             { alterEGO Linux: "Open the vault of knowledge" }             ##
+## ----------------------------------------------------------------------------
+##
+## /usr/local/share/dockerfiles/Dockerfile-kali
+##   created        : 2023-01-22 16:58:01 UTC
+##   updated        : 2023-01-23 03:40:51 UTC
+##   description    : Kali Linux Docker image on AEL.
+## ____________________________________________________________________________
+
+FROM kalilinux/kali-rolling:latest
+
+## Install kali packages
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y install kali-linux-default kali-desktop-xfce xserver-xephyr
+RUN apt-get clean
+
+##  
+ENV USER root
+ENV DISPLAY ${DISPLAY:-:0.0}
+WORKDIR /root
+
+## Fixing startx
+RUN echo "function startx() {" >> /root/.bashrc
+RUN echo "    Xephyr -br -ac -noreset -screen 1280x720 :1 &" >> /root/.bashrc
+RUN echo "    DISPLAY=:1 startxfce4" >> /root/.bashrc
+RUN echo "    kill $(pgrep Xephyr)" >> /root/.bashrc
+RUN echo "}" >> /root/.bashrc
+
+## [-- ENTRYPOINT --]
+ENTRYPOINT ["/bin/bash"]

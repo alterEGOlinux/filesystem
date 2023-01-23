@@ -6,7 +6,7 @@
 ##
 ## ~/.ael/.containers
 ##   created        : 2021-12-06 11:15:11 UTC
-##   updated        : 2023-01-22 04:49:18 UTC
+##   updated        : 2023-01-23 04:44:07 UTC
 ##   description    : Containers functions and configuration.
 ## ____________________________________________________________________________
 
@@ -25,26 +25,26 @@ docker666() {
   case "${1}" in
 
     start )
-      message action "Runing docker666() to check docker status..."
+      ## Checking if docker.service is running
       if [ ${_status} = 'active' ]; then
-        message alert "Docker is already running... Nothing to do..."
+        message alert "Docker.service is active"
       else
         sudo systemctl start docker.service
-        message result "Started docker.service..."
+        message result "Starting docker.service..."
       fi
       ;;
 
     status )
-      message action "Runing docker666() to check docker status..."
-      message result "Docker is ${_status}"
+      message action "Checking docker.service status:"
+      message result "Docker.service is ${_status}"
       ;;
 
     stop )
-      message action "Runing docker666() to check docker status..."
+      ## Checking docker.servie status
       if [ ${_status} = 'inactive' ]; then
-        message alert "Docker is already stopped... Nothing to do..."
+        message alert "Docker.service is already stopped."
       else
-        message question "Should I stop docker service? [y/N]"
+        message question "Should I stop docker.service? [y/N]"
           if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
             sudo systemctl stop docker.socket
             sudo systemctl stop docker.service
@@ -52,10 +52,12 @@ docker666() {
               if [[ "$_INPUT" =~ ^([yY][eE][sS]|[yY])$ ]]; then
                 sudo ip link delete docker0 
               else
-                message result "OK... Docker network lives!"
+                message result "Leaving network interface intact."
+                message result "Moving on..."
               fi
           else
-            message result "OK...  docker.service still running..."
+            message result "Leaving docker.service running..."
+            message result "Moving on..."
           fi
       fi
       ;;
@@ -115,59 +117,79 @@ dockerContainerCleaner() {
 ## [-- CYBERCHEF --]
 
 cyberchef() {
-  ## Will install or run cyberchef docker.
 
-  if [[ "${1}" == 'start' ]]; then
     docker666 start
-    message action "Starting/Installing CyberChef container..."
-    docker run -d -p 8888:8000 mpepping/cyberchef                             \
+
+    message action "Starting Damn Vulnerable Webapp container on AEL..."
+    docker run --rm -d -p 8888:8000 mpepping/cyberchef                             \
     && $BROWSER "http://localhost:8888"
-  elif [[ "${1}" == 'stop' ]]; then
-    message result "Stopping Cyberchef container..."
-    docker stop $(docker ps | grep "mpepping/cyberchef" | cut -d ' ' -f1)
-    docker666 stop
-  else
-    message warning "Usage: cyberchef [start|stop]"
-  fi
+
+  # if [[ "${1}" == 'start' ]]; then
+    # docker666 start
+    # message action "Starting/Installing CyberChef container..."
+    # docker run -d -p 8888:8000 mpepping/cyberchef                             \
+    # && $BROWSER "http://localhost:8888"
+  # elif [[ "${1}" == 'stop' ]]; then
+    # message result "Stopping Cyberchef container..."
+    # docker stop $(docker ps | grep "mpepping/cyberchef" | cut -d ' ' -f1)
+    # docker666 stop
+  # else
+    # message warning "Usage: cyberchef [start|stop]"
+  # fi
 }
 
 ## [-- DAMN VULNERABLE WEBAPP (DVWA) --]
 
 dvwa() {
-  ## Will install or run the Damn Vulnerable Web App (DVWA) docker.
 
-  if [[ "${1}" == 'start' ]]; then
     docker666 start
-    message action "Starting/Installing Dawn Vulnerable Web App container..."
-    docker run --rm -it -p 81:80 vulnerables/web-dvwa &
-    sleep 2
-    $BROWSER "http://localhost:81/login.php"
-  elif [[ "$1" == 'stop' ]]; then
-    message result "Stopping Damn Vulnerable Web App container..."
-    docker stop $(docker ps | grep "vulnerables/web-dvwa" | cut -d ' ' -f1)
-    docker666 stop
-  else
-    message warning "Usage: dvwa [start|stop]"
-  fi
+
+    if [[ "${1}" == 'stop' ]]; then
+        docker stop $(docker ps | grep DVWA | cut -d ' ' -f1)
+        docker666 stop
+    else
+        message action "Starting Damn Vulnerable Webapp container on AEL..."
+        ## If container doesn't exist, create one
+        if [[ -z $(docker ps -a | awk '/DVWA/ { print $NF }') ]]; then
+            docker run --name DVWA -it -p 81:80 vulnerables/web-dvwa &
+            sleep 10
+            $BROWSER "http://localhost:81/login.php"
+        else
+            if [[ -z "$(docker ps | grep DVWA)" ]]; then
+                docker start DVWA
+                $BROWSER "http://localhost:81/login.php"
+            else
+                $BROWSER "http://localhost:81/login.php"
+            fi
+        fi
+    fi
 }
 
 ## [-- OWASP JUICE SHOP --]
 
 juiceShop() {
-  ## Will install or run the OWASP Juice Shop docker.
-  if [[ "$1" == 'start' ]]; then
+
     docker666 start
-    message action "Starting/Installing OWASP Juice Shop container..."
-    docker run --rm -p 3000:3000 bkimminich/juice-shop &
-    sleep 2
-    $BROWSER "http://localhost:3000"
-  elif [[ "$1" == 'stop' ]]; then
-    message result "Stopping OWASP Juice Shop container..."
-    docker stop $(docker ps | grep "bkimminich/juice-shop" | cut -d ' ' -f1)
-    docker666 stop
-  else
-    message alert "Usage: juiceShop [start|stop]"
-  fi
+
+    if [[ "${1}" == 'stop' ]]; then
+        docker stop $(docker ps | grep juice_shop | cut -d ' ' -f1)
+        docker666 stop
+    else
+        message action "Starting OWASP Juice Shop container on AEL..."
+        ## If container doesn't exist, create one
+        if [[ -z $(docker ps -a | awk '/juice_shop/ { print $NF }') ]]; then
+            docker run --name juice_shop -p 3000:3000 bkimminich/juice-shop &
+            sleep 10
+            $BROWSER "http://localhost:3000"
+        else
+            if [[ -z "$(docker ps | grep juice_shop)" ]]; then
+                docker start juice_shop
+                $BROWSER "http://localhost:3000"
+            else
+                $BROWSER "http://localhost:3000"
+            fi
+        fi
+    fi
 }
 
 ## [-- KALI LINUX --]
@@ -175,17 +197,26 @@ juiceShop() {
 kali() {
 
     docker666 start
+    xhost +
+
+    message action "Starting Kali Linux container on AEL..."
+
+    ## TODO: If image doesn't exist, create from /usr/local/share/dockerfiles/Dockerfile-kali
+    ## docker build -f /usr/local/share/dockerfiles/Dockerfile-kali --tag kali_on_ael .
+
+    ## If container doesn't exist, create one
     if [[ -z $(docker ps -a | awk '/kali_on_ael/ { print $NF }') ]]; then
-        message action "Starting/Installing Kali Linux container..."
-        docker run --name kali_on_ael --net="host" --privileged -e DISPLAY=$DISPLAY -it -v /tmp/.X11-unix:/tmp/.X11-unix kalilinux/kali-rolling /bin/bash
+        docker run --name kali_on_ael --net="host" --privileged -it -v /tmp/.X11-unix:/tmp/.X11-unix kali_on_ael
     else
         if [[ -z "$(docker ps | grep kali_on_ael)" ]]; then
-            message action "Using kali_on_ael container..."
             docker start -i kali_on_ael
         else
             message alert "Kali_on_ael is already running..."
         fi
     fi
+
+    xhost -
+    docker666 stop
 }
 
 ## ----------------------------------------------------------------------------
