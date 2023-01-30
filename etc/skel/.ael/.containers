@@ -124,9 +124,13 @@ cyberchef() {
         docker stop $(docker ps | grep "mpepping/cyberchef"  | cut -d ' ' -f1)
         docker666 stop
     else
-        message action "Starting Cyberchef container on AEL..."
-        docker run --rm -d -p 8888:8000 mpepping/cyberchef                    \
-        && $BROWSER "http://localhost:8888"
+        if docker ps --all | grep -q "mpepping/cyberchef"; then
+            $BROWSER "http://localhost:8888"
+        else
+            message action "Starting Cyberchef container on AEL..."
+            docker run --rm -d -p 8888:8000 mpepping/cyberchef                    \
+            && $BROWSER "http://localhost:8888"
+        fi
     fi
 }
 
