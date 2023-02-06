@@ -6,7 +6,7 @@
 ##
 ## /usr/local/bin/ael-menu
 ##   created        : 2021-06-28 11:42:57 UTC
-##   updated        : 2022-11-28 12:37:43 UTC
+##   updated        : 2023-02-05 03:50:05 UTC
 ##   description    : Application launcher using `fzf` and `tmux`.
 ## ____________________________________________________________________________
 
@@ -83,6 +83,7 @@ options = [
     MenuOption('vbox', 'stay_in_terminal', r"""vboxmanage list vms | awk -F '\"' '{ print \$2 }' | fzf | sed 's/\ /\\\ /g' | xargs vboxmanage startvm && exit""", 'VBOX', 'Select a virtual machine.', True),
     MenuOption('view history', 'stay_in_terminal', r"""cat ${HOME}/.bash_history | fzf""", 'HISTORY', 'View latest bash history.', True),
     MenuOption('virtualbox', 'launch', 'virtualbox', 'VBOX', 'Open-source virtualization tool.', False),
+    MenuOption('VLC', 'launch', 'vlc', 'VLC', 'VLC media player.', False),
     MenuOption('volume', 'launch', 'pavucontrol', 'VOLUME', 'Volume control.', False),
     MenuOption('wireshark', 'launch', 'sudo wireshark', 'WIRESHARK', 'Network traffic analyser.', False),
     ]
