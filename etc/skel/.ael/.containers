@@ -1,31 +1,30 @@
 #!/usr/bin/env sh
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.containers
+#   created        : 2021-12-06 11:15:11 UTC
+#   updated        : 2023-03-02 12:44:53 UTC
+#   description    : Containers functions and configuration.
+# _____________________________________________________________________________
 
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.containers
-##   created        : 2021-12-06 11:15:11 UTC
-##   updated        : 2023-01-24 01:52:34 UTC
-##   description    : Containers functions and configuration.
-## ____________________________________________________________________________
-
-## [-- MODULES --]
+# [ modules ]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-## [-- DOCKER SERVICES --]
+# [ docker services ]
 
 docker666() {
-  ## START/STATUS/STOP docker service
+  #... START/STATUS/STOP docker service
 
   _status=$(systemctl is-active docker.service)
 
   case "${1}" in
 
     start )
-      ## Checking if docker.service is running
+      #... Checking if docker.service is running
       if [ ${_status} = 'active' ]; then
         message alert "Docker.service is active"
       else
@@ -40,7 +39,7 @@ docker666() {
       ;;
 
     stop )
-      ## Checking docker.servie status
+      #... Checking docker.servie status
       if [ ${_status} = 'inactive' ]; then
         message alert "Docker.service is already stopped."
       else
@@ -69,9 +68,10 @@ docker666() {
 
 }
 
-## [-- DOCKER STATS --]
+# [ docker stats ]
 
-dockerStats() {
+docker_stats() {
+    #... TODO: Verify why IP addresses don't show. [2023-03-02]
 
     if [[ "$(systemctl is-active docker.service)" == "inactive" ]]; then
       docker666 start
@@ -91,11 +91,11 @@ dockerStats() {
     done <<< $(docker ps -a | tail -n+2)
 }
 
-  alias docker-stats="dockerStats"
+  alias docker-stats="docker_stats"
 
-## [-- DOCKER CLEANER --]
+# [ docker cleaner ]
 
-dockerContainerCleaner() {
+docker_container_cleaner() {
 
     if [[ "$(systemctl is-active docker.service)" == "inactive" ]]; then
         docker666 start
@@ -112,9 +112,9 @@ dockerContainerCleaner() {
     fi
 }
 
-  alias docker-container-cleaner="dockerContainerCleaner"
+  alias docker-container-cleaner="docker_container_cleaner"
 
-## [-- CYBERCHEF --]
+# [ cyberchef ]
 
 cyberchef() {
 
@@ -134,7 +134,7 @@ cyberchef() {
     fi
 }
 
-## [-- DAMN VULNERABLE WEBAPP (DVWA) --]
+# [ damn vulnerable webapp (DVWA) ]
 
 dvwa() {
 
@@ -145,7 +145,7 @@ dvwa() {
         docker666 stop
     else
         message action "Starting Damn Vulnerable Webapp container on AEL..."
-        ## If container doesn't exist, create one
+        #... If container doesn't exist, create one
         if [[ -z $(docker ps -a | awk '/DVWA/ { print $NF }') ]]; then
             docker run --name DVWA -it -p 81:80 vulnerables/web-dvwa &
             sleep 10
@@ -161,9 +161,9 @@ dvwa() {
     fi
 }
 
-## [-- OWASP JUICE SHOP --]
+# [ OWASP juice shop ]
 
-juiceShop() {
+juice_shop() {
 
     docker666 start
 
@@ -172,7 +172,7 @@ juiceShop() {
         docker666 stop
     else
         message action "Starting OWASP Juice Shop container on AEL..."
-        ## If container doesn't exist, create one
+        #... If container doesn't exist, create one
         if [[ -z $(docker ps -a | awk '/juice_shop/ { print $NF }') ]]; then
             docker run --name juice_shop -p 3000:3000 bkimminich/juice-shop &
             sleep 10
@@ -188,7 +188,9 @@ juiceShop() {
     fi
 }
 
-## [-- KALI LINUX --]
+  alias juice-shop="juice_shop"
+
+# [ kali linux ]
 
 kali() {
 
@@ -197,10 +199,10 @@ kali() {
 
     message action "Starting Kali Linux container on AEL..."
 
-    ## TODO: If image doesn't exist, create from /usr/local/share/dockerfiles/Dockerfile-kali
-    ## docker build -f /usr/local/share/dockerfiles/Dockerfile-kali --tag kali_on_ael .
+    #... TODO: If image doesn't exist, create from /usr/local/share/dockerfiles/Dockerfile-kali
+    #... docker build -f /usr/local/share/dockerfiles/Dockerfile-kali --tag kali_on_ael .
 
-    ## If container doesn't exist, create one
+    #... If container doesn't exist, create one
     if [[ -z $(docker ps -a | awk '/kali_on_ael/ { print $NF }') ]]; then
         docker run --name kali_on_ael --net="host" --privileged -it -v /tmp/.X11-unix:/tmp/.X11-unix kali_on_ael
     else
@@ -215,7 +217,7 @@ kali() {
     docker666 stop
 }
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
