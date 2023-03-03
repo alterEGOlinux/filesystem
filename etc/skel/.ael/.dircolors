@@ -1,12 +1,12 @@
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.dircolors
-##   created        : 2022-12-30 01:56:28 UTC
-##   updated        : 2023-01-24 01:56:28 UTC
-##   description    : Terminal colors
-## ____________________________________________________________________________
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.dircolors
+#   created        : 2022-12-30 01:56:28 UTC
+#   updated        : 2023-03-03 20:56:38 UTC
+#   description    : Terminal colors
+# _____________________________________________________________________________
 
 # Configuration file for dircolors, a utility to help you set the
 # LS_COLORS environment variable used by GNU ls with the --color option.
@@ -228,6 +228,6 @@ EXEC 01;32
 # Subsequent TERM or COLORTERM entries, can be used to add / override
 # config specific to those matching environment variables.
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

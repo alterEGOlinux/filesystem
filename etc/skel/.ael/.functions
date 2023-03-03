@@ -1,36 +1,37 @@
 #! /usr/bin/env sh
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.functions
+#   created        : 2021-05-25 19:40:20 UTC
+#   updated        : 2022-11-24 01:43:20 UTC
+#   description    : Shell functions collection.
+# _____________________________________________________________________________
 
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.functions
-##   created        : 2021-05-25 19:40:20 UTC
-##   updated        : 2022-11-24 01:43:20 UTC
-##   description    : Shell functions collection.
-## ____________________________________________________________________________
-
-## [-- MODULES --]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
+# [* FUNCTIONS *]
+
 busy() {
 
-    ## When the boss comes around to look busy.
-    ## ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
-    ## CTRL+c to quit.
+    #... When the boss comes around to look busy.
+    #... ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
+    #... CTRL+c to quit.
 
     cat /dev/urandom                                                          \
     | hexdump -C                                                              \
     | grep --color=always 'ca fe'
-}
+  }
 
 cheat() {
 
-    ## Query https://cheat.sh.
-    ## Menu with `fzf` and display with `less`.
-    ## https://github.com/chubin/cheat.sh
+    #... Query https://cheat.sh.
+    #... Menu with `fzf` and display with `less`.
+    #... https://github.com/chubin/cheat.sh
 
     cheat="$(curl -s cheat.sh/:list                                           \
             | fzf --layout="reverse"                                          \
@@ -41,11 +42,11 @@ cheat() {
     [[ -z ${cheat} ]] && exit 0
 
     curl -s cheat.sh/"${cheat}" | less -R
-}
+  }
 
 delete() {
 
-    ## Delete directory.
+    #... Delete directory.
 
     if [ -d "${1}" ]; then
       message question "Are you sure your want to delete this directory? [y/N]"
@@ -57,24 +58,25 @@ delete() {
     else
       message warning "There is nothing to do here!"
     fi
-}
+  }
 
-dirSize() {
+directory_size() {
 
-    ## Check size of biggest directories.
+    #... Check size of biggest directories.
 
     message action "Size of current directory, followed by biggest child directories:"
-    ## du -bh --max-depth 1 | sort -rh | head
+    #... du -bh --max-depth 1 | sort -rh | head
     du --bytes --human-readable --max-depth 1                                 \
     | sort --reverse --human-numeric-sort                                     \
     | head
-}
+  }
+  alias directory-size='directory_size'
 
 fixout() {
 
-    ## Fix history and exit.
-    ## Don't try to put this code in a shell script, it won't work.
-    ## `history` don't play well in scripts.
+    #... Fix history and exit.
+    #... Don't try to put this code in a shell script, it won't work.
+    #... `history` don't play well in scripts.
 
     history -n && history                                                     \
     | sort -k2 -k1nr                                                          \
@@ -86,29 +88,29 @@ fixout() {
     && history -w                                                             \
     && rm ~/.tmp$$                                                            \
     && exit
-}
+  }
 
 fuck() {
 
-    ## Repeat last cmd with sudo if forgotten.
+    #... Repeat last cmd with sudo if forgotten.
 
     sudo $(history -p !!)
-}
+  }
 
 getmp3() {
 
-    ## Extract audio to .mp3
+    #... Extract audio to .mp3
 
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
-}
+  }
 
-historyCleaner() {
+history_cleaner() {
 
     if [[ ${@} != '' ]]; then
 
-      ## Remove .bash_history entry.
-      ## Usage: `historyCleaner youtube-dl`
-      ## or `historyCleaner cd$`
+      #... Remove .bash_history entry.
+      #... Usage: `historyCleaner youtube-dl`
+      #... or `historyCleaner cd$`
 
       dumpfile="/tmp/historyCleaner.dump"
 
@@ -123,7 +125,7 @@ historyCleaner() {
 
     else
 
-      ## Uses `fzf` to sort through the bash history and let you delete an entry.
+      #... Uses `fzf` to sort through the bash history and let you delete an entry.
 
       choices=$(history | fzf)
       [[ -z "${choices}" ]] && exit 1
@@ -134,11 +136,12 @@ historyCleaner() {
           history -d ${to_delete}
         fi
     fi
-}
+  }
+  alias history-cleaner='history_cleaner'
 
 ispeed() {
 
-    ## Test Internet speed.
+    #... Test Internet speed.
 
     curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
     | python -
@@ -172,7 +175,7 @@ psGrep() {
 
 pyClean () {
 
-    ## ref. https://stackoverflow.com/a/41386937/10500496  
+    #... ref. https://stackoverflow.com/a/41386937/10500496  
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
 }
 
@@ -185,7 +188,7 @@ pyServer() {
 
 searchContent() {
 
-  ## src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
+  #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
   rg --files-with-matches --no-messages "$1"                                  \
   | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
@@ -213,8 +216,8 @@ tagalog() {
 
 translate() {
 
-    ## Add language abbr after string to translate.
-    ## For example, translate "Hello world" fr
+    #... Add language abbr after string to translate.
+    #... For example, translate "Hello world" fr
 
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
     | awk -F '"' '{print $2}'                                                 \
@@ -255,14 +258,14 @@ viewIPs() {
 
 whoisWeb() {
 
-    ## Query the web if `whois` port 43 is blocked on your network.
+    #... Query the web if `whois` port 43 is blocked on your network.
 
     curl --silent https://whoisjs.com/api/v1/${1}                             \
     | jq ".raw"                                                               \
     | sed "s/\\\r\\\n/\\n/g"
 }
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________

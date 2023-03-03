@@ -5,16 +5,16 @@
 #
 # ~/.ael/.containers
 #   created        : 2021-12-06 11:15:11 UTC
-#   updated        : 2023-03-02 12:44:53 UTC
+#   updated        : 2023-03-03 21:00:00 UTC
 #   description    : Containers functions and configuration.
 # _____________________________________________________________________________
 
-# [ modules ]
+# [* modules *]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-# [ docker services ]
+# [* docker services *]
 
 docker666() {
   #... START/STATUS/STOP docker service
@@ -68,7 +68,7 @@ docker666() {
 
 }
 
-# [ docker stats ]
+# [* docker stats *]
 
 docker_stats() {
     #... TODO: Verify why IP addresses don't show. [2023-03-02]
@@ -93,7 +93,7 @@ docker_stats() {
 
   alias docker-stats="docker_stats"
 
-# [ docker cleaner ]
+# [* docker cleaner *]
 
 docker_container_cleaner() {
 
@@ -114,7 +114,7 @@ docker_container_cleaner() {
 
   alias docker-container-cleaner="docker_container_cleaner"
 
-# [ cyberchef ]
+# [* cyberchef *]
 
 cyberchef() {
 
@@ -134,7 +134,7 @@ cyberchef() {
     fi
 }
 
-# [ damn vulnerable webapp (DVWA) ]
+# [* damn vulnerable webapp (DVWA) *]
 
 dvwa() {
 
@@ -161,7 +161,7 @@ dvwa() {
     fi
 }
 
-# [ OWASP juice shop ]
+# [* OWASP juice shop *]
 
 juice_shop() {
 
@@ -190,7 +190,7 @@ juice_shop() {
 
   alias juice-shop="juice_shop"
 
-# [ kali linux ]
+# [* kali linux *]
 
 kali() {
 
