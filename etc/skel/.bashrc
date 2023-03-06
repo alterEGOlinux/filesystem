@@ -4,24 +4,24 @@
 #
 # ~/.bashrc
 #   created        : 2021-02-26 02:54:43 UTC
-#   updated        : 2023-03-02 12:01:55 UTC
+#   updated        : 2023-03-05 23:10:51 UTC
 #   description    : Bash config file.
 # _____________________________________________________________________________
 
   #... If not running interactively, don't do anything
   [[ $- != *i* ]] && return
 
-# [ modules ]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
   [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# [ bash-completion ]
+# [* BASH-COMPLETION *]
 
   [ -r /usr/share/bash-completion/bash_completion ]                           \
   && . /usr/share/bash-completion/bash_completion
 
-# [ loaded ]
+# [* LOADED *]
 
   export LOADED='bashrc'
   #... Message function from bash-ael/messages.bash

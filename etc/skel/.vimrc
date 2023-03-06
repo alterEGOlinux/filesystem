@@ -8,7 +8,7 @@
 "   description    : VIM main configuration file.
 " _____________________________________________________________________________
 
-" [ general config ]
+" [* GENERAL CONFIG *]
 
   "... Forces vim to act like vim, not like vi.
   set nocompatible
@@ -25,7 +25,7 @@
   "... Used with colored column.
   set colorcolumn=80
 
-" [ arrow keys ]
+" [* ARROW KEYS *]
 
   "... Disables arrow keys.
   " noremap <UP> <NOP>
@@ -33,13 +33,13 @@
   " noremap <LEFT> <NOP>
   " noremap <DOWN> <NOP>
 
-" [ base 64 ]
+" [* BASE 64 *]
 
   "... Decode inplace base64 text.
   "... ref. https://stackoverflow.com/a/7849399/10500496
   vnoremap <leader>64 y:let @"=system('base64 --decode', @")<cr>gvP
 
-" [ change cases ]
+" [* CHANGE CASES *]
 
   "... Upper case.
   inoremap <C-u> <ESC>viwUea
@@ -49,7 +49,7 @@
   inoremap <C-l> <ESC>viwu
   nnoremap <C-l> viwu
 
-" [ comments toggle ]
+" [* COMMENTS TOGGLE *]
 
   "... Stackoverflow
   "... What's a quick way to comment/uncomment lines in Vim?
@@ -68,12 +68,12 @@
   vnoremap <leader>c :call CommentToggle()<CR>
   nnoremap <leader>c :call CommentToggle()<CR>
 
-" [ edit/source .vimrc ]
+" [* EDIT/SOURCE .vimrc *]
 
   nnoremap <leader>ev :tabedit $MYVIMRC<CR>
   nnoremap <leader>so :source $MYVIMRC<CR>
 
-" [ encoding ]
+" [* ENCODING *]
 
   "... The encoding displayed.
   set encoding=utf8
@@ -84,12 +84,12 @@
   "... set BOM ...WARNING: doesn't work, need to set manually.
   " set bomb
 
-" [ esc ]
+" [* ESC *]
 
   inoremap ,, <ESC>
   vnoremap ,, <ESC>
 
-" [ file explorer ]
+" [* FILE EXPLORER *]
 
   "... NerdTree-like
   "... Vim: you don't need NERDtree or (maybe) netrw
@@ -122,7 +122,7 @@
   endfunction
   map <F4> :call ToggleNetrw()<CR>
 
-" [ help ]
+" [* HELP *]
 
   "... View man pages of word under cursor.
   nmap <leader>k :silent execute '!man <cword>'<cr>:redraw!<cr>
@@ -130,7 +130,7 @@
   "... View Python documentation of word under cursor.
   nmap <leader>hp :silent execute '!pydoc <cword>'<cr>:redraw!<cr>
 
-" [ highlight lines ]
+" [* HIGHLIGHT LINES *]
 
   "... ref. https://vimtricks.com/p/highlight-specific-lines/
 
@@ -140,12 +140,12 @@
   "... Clear all the highlighted lines.
   nnoremap <silent> <Leader>hc :call clearmatches()<CR>
 
-" [ HTML mapping ]
+" [* HTML MAPPING *]
 
   augroup filetype_html, filetype_htmldjango
     autocmd!
 
-    " ( Create a document )
+    " (* Create a document *)
     
     autocmd FileType html inoremap html<TAB> 
     \<!DOCTYPE html><CR>
@@ -162,92 +162,92 @@
     \</body><CR>
     \</html><ESC>?<title><CR>cit
 
-    " ( a + target="_blank" )
+    " (* a + target="_blank" *)
 
     autocmd FileType html inoremap <buffer>a<TAB> 
     \<a href="" target="_blank"></a><ESC>?=""<CR>ei
 
-    " ( blockquote )
+    " (* blockquote *)
 
     autocmd FileType html inoremap <buffer>bq<TAB> 
     \<blockquote></blockquote><ESC>2bli
 
-    " ( bold )
+    " (* bold *)
 
     autocmd FileType html inoremap b<TAB> 
     \<b></b><ESC>3hi
 
-    " ( linebreak )
+    " (* linebreak *)
 
     autocmd FileType html inoremap br<TAB> 
     \<br<space>/><ESC>a
 
-    " ( code )
+    " (* code *)
 
     autocmd FileType html inoremap code<TAB> 
     \<code></code><ESC>6hi
 
-    " ( comment )
+    " (* comment *)
 
     autocmd FileType html inoremap cmt<TAB> 
     \<!--<space><space>--><ESC>3hi
 
-    " ( div )
+    " (* div *)
 
     autocmd FileType html inoremap div<TAB> 
     \<div><CR><space><space><CR></div><ESC>2k0viwyjPj0.k$a
 
-    " ( h1 )
+    " (* h1 *)
 
     autocmd FileType html inoremap h1<TAB> 
     \<h1></h1><ESC>4hi
 
-    " ( h2 )
+    " (* h2 *)
 
     autocmd FileType html inoremap h2<TAB> 
     \<h2></h2><ESC>4hi
 
-    " ( h3 )
+    " (* h3 *)
 
     autocmd FileType html inoremap h3<TAB> 
     \<h3></h3><ESC>4hi
 
-    " ( h4 )
+    " (* h4 *)
 
     autocmd FileType html inoremap h4<TAB> 
     \<h4></h4><ESC>4hi
 
-    " ( h5 )
+    " (* h5 *)
 
     autocmd FileType html inoremap h5<TAB> 
     \<h5></h5><ESC>4hi
 
-    " ( horizontal line )
+    " (* horizontal line *)
 
     autocmd FileType html inoremap hr<TAB> 
     \<hr><CR><ESC>a
 
-    " ( italic )
+    " (* italic *)
 
     autocmd FileType html inoremap em<TAB> 
     \<em></em><ESC>4hi
 
-    " ( li )
+    " (* li *)
 
     autocmd FileType html inoremap li<TAB> 
     \<li></li><ESC>4hi
 
-    " ( paragraph )
+    " (* paragraph *)
 
     autocmd FileType html inoremap p<TAB> 
     \<p></p><ESC>3hi
 
-    " ( preformated text )
+    " (* preformated text *)
 
     autocmd FileType html inoremap pre<TAB> 
     \<pre><ESC>Vypa/<ESC>O
 
-    " ( autocomplete tags )
+    " (* autocomplete tags *)
 
     "... ref. https://stackoverflow.com/a/532656
     autocmd FileType html inoremap /<TAB> 
@@ -255,7 +255,7 @@
 
   augroup end
 
-" [ linebreak and wrap ]
+" [* linebreak and wrap *]
 
   set linebreak
   set wrap
@@ -265,7 +265,7 @@
   "... Toggle linewrap.
   map <leader>w :setlocal wrap!<CR>
 
-" [ line number ]
+" [* line number *]
 
   set number
   set relativenumber
@@ -273,15 +273,15 @@
   "... Toggle line numbering
   nnoremap <leader>ln :set number! relativenumber!<CR>
 
-" [ lorem ]
+" [* lorem *]
 
   inoremap lorem<TAB> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sodales, dolor ut lobortis rhoncus, mauris leo condimentum metus, vel elementum arcu ipsum aliquam est. Integer a scelerisque turpis, at ultrices nisl. Nunc fermentum quam elementum, sagittis velit id, porta tellus. Nunc quis suscipit felis. Etiam et leo scelerisque, gravida elit nec, aliquet justo. Phasellus et neque vel turpis hendrerit fringilla sed in arcu. Suspendisse id enim lacinia libero auctor pellentesque. Proin sed sem non neque pellentesque vehicula. Nunc sapien justo, tincidunt vitae ultrices eu, consectetur sit amet orci.
 
-" [ mouse ]
+" [* mouse *]
 
   " set mouse=a
 
-" [ preview window ]
+" [* preview window *]
 
   "... Sends preview window to the right.
   "... StackExchange
@@ -297,9 +297,9 @@
     " endif
   " endfunction 
 
-" [ run script ]
+" [* run script *]
 
-  " ( python )
+  " (* python *)
   "... Requires tmux, with a second pane open.
 
   function! RunPython()
@@ -309,31 +309,31 @@
   endfunction
   nnoremap <leader>p :call RunPython()<CR>
 
-  " ( kill script )
+  " (* kill script *)
   "... Kills the script.
   nnoremap <leader>ss :!tmux send-keys -t 1 "C-c";<CR><C-l>
 
-" [ save file ]
+" [* save file *]
 
   "... CTRL+s to save file
   "... ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
   "... Requires `stty -ixon` in a sourced rc file
   inoremap <C-s> <ESC>:write<CR>
 
-" [ scroll offset ]
+" [* scroll offset *]
 
   "... When scrolling, keeps the cursor at the vertical center.
   "... Use so=999 for centered
   "... ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
   set scrolloff=999
 
-" [ search ]
+" [* search *]
 
   "... Fuzzy find and wildmenu.
   set path+=**
   set wildmenu
 
-  " ( text search )
+  " (* text search *)
   "... Search ignorecase.
   set ignorecase
 
@@ -343,15 +343,15 @@
   "... Toggle search highlighting                      
   nnoremap <F3> :set hlsearch!<CR> 
 
-  " ( clear search )
+  " (* clear search *)
   nnoremap <leader>cs :let @/ = ""<CR>
 
-" [ spellchecker ]
+" [* spellchecker *]
 
   "... Toggle spell checker.
   map <F5> :setlocal spell! spelllang=en_us<CR>
 
-" [ statusline ]
+" [* statusline *]
 
   set laststatus=2
   set statusline=
@@ -365,7 +365,7 @@
   set statusline+=\ col:%03c\ "Colnr 
   set statusline+=\ %m%r%w\ %P\ \ "Modified? Readonly? Top/bot.
 
-" [ tab and indent ]
+" [* tab and indent *]
 
   set tabstop=2
   "... shiftround : rounds indent to multiple of shiftwidth.
@@ -375,7 +375,7 @@
   set shiftwidth=2
   set expandtab
 
-" [ tags ]
+" [* tags *]
 
   inoremap "<TAB> ""<left>
   inoremap '<TAB> ''<left>
@@ -385,7 +385,7 @@
   inoremap {<CR> {<CR>}<ESC>O
   inoremap {;<CR> {<CR>};<ESC>O
 
-" [ timestamp ]
+" [* timestamp *]
 
   "... Insert timestamp.
   "... ex: 2022-03-25 15:49:24 UTC
@@ -395,19 +395,19 @@
   "... ex: 202203251549
   nnoremap <F9> "=system('echo -n $(date --utc "+%Y%m%d%H%M")')<CR>p
 
-" [ xclip ]
+" [* xclip *]
 
   "... Enable clipboard ability with xclip.
   "... ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
   map <F7> y:call system("xclip -i -selection clipboard", getreg("\""))<cr>
   map <S-F7> :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p")")")"))
 
-" [ plugins - install ]
+" [* plugins - install *]
 
   syntax enable
   filetype plugin on
 
-  " ( vim-plug )
+  " (* vim-plug *)
 
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -417,27 +417,27 @@
 
   call plug#begin('~/.vim/plugged')
 
-  " ( coloscheme iceberg )
+  " (* coloscheme iceberg *)
   "... https://github.com/cocopon/iceberg.vim
   Plug 'cocopon/iceberg.vim'
 
-  " ( jedi )
+  " (* jedi *)
   Plug 'https://github.com/davidhalter/jedi-vim.git'
 
-  " ( fzf )
+  " (* fzf *)
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
-  " ( markdown-preview )
+  " (* markdown-preview *)
   "... https://github.com/iamcco/markdown-preview.vim
   Plug 'iamcco/markdown-preview.vim'
 
-  " ( syntastic )
+  " (* syntastic *)
   "... Syntax checker.
   "... https://github.com/vim-syntastic/syntastic
   Plug 'vim-syntastic/syntastic'
 
-  " ( ultisnips )
+  " (* ultisnips *)
   "... https://github.com/SirVer/ultisnips
   Plug 'SirVer/ultisnips'
 
@@ -453,9 +453,9 @@
   "... Disable automatic indent on from vim-plug
   filetype indent off
 
-" [ plugins - configs ]
+" [* plugins - configs *]
 
-  " ( fzf.vim )
+  " (* fzf.vim *)
 
   "... Buffers list.
   nnoremap <silent> <leader>ls :Buffers<CR>
@@ -469,48 +469,48 @@
   "... Find lines containing.
   nnoremap <silent> <C-f> :BLines<CR>
 
-  " ( emmet-vim )     
+  " (* emmet-vim *)     
 
   "... Enable emmet-vim tab completion 
   " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-  " ( syntastic )
+  " (* syntastic *)
 
   map <leader>sx :SyntasticToggleMode<CR>
 
-  " ( markdown-preview )
+  " (* markdown-preview *)
   nmap <silent> <leader>vm <Plug>MarkdownPreview
   nmap <silent> <leader>sm <Plug>StopMarkdownPreview
 
-  " ( ultisnips )
+  " (* ultisnips *)
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsEditSplit="vertical"
   let g:UltiSnipsJumpForwardTrigger="<c-k>"
   let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
-" [ colorscheme ]
+" [* colorscheme *]
 
-  " ( colors )
+  " (* colors *)
   "...    0  Black
   "...   10  Lime
 
   set t_Co=256
 
-  " ( colorschemes )
+  " (* colorschemes *)
   "... iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
   "... blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
 
-  " ( colorscheme default )
+  " (* colorscheme default *)
   colorscheme iceberg
 
   set background=dark
 
-  " ( bionic reading )
+  " (* bionic reading *)
   "... ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
   nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
   highlight bionic          cterm=NONE    ctermfg=GREY
 
-  " ( general )
+  " (* general *)
   highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
   highlight Comment         cterm=BOLD    ctermfg=white    ctermbg=NONE
   highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
@@ -526,7 +526,7 @@
   highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
   highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
 
-  " ( html/md )
+  " (* html/md *)
   "... ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
   highlight htmlTagName     cterm=BOLD    ctermfg=WHITE ctermbg=NONE
   highlight link htmlTag    htmlTagName
@@ -555,7 +555,7 @@
   " hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
   " hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
 
-  " ( window's tab )
+  " (* window's tab *)
   "... Focused
   hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
   "... Unfocused
@@ -586,7 +586,7 @@
   " hi shDerefVar         term=NONE      cterm=BOLD      ctermfg=cyan   ctermbg=NONE
 
 
-" [ stuff to sort ]
+" [* stuff to sort *]
 
   " function! HTML_tags()
     " let min_tag = expand("<cWORD>")

@@ -17,7 +17,6 @@
 # [* FUNCTIONS *]
 
 busy() {
-
     #... When the boss comes around to look busy.
     #... ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
     #... CTRL+c to quit.
@@ -28,7 +27,6 @@ busy() {
   }
 
 cheat() {
-
     #... Query https://cheat.sh.
     #... Menu with `fzf` and display with `less`.
     #... https://github.com/chubin/cheat.sh
@@ -45,7 +43,6 @@ cheat() {
   }
 
 delete() {
-
     #... Delete directory.
 
     if [ -d "${1}" ]; then
@@ -61,7 +58,6 @@ delete() {
   }
 
 directory_size() {
-
     #... Check size of biggest directories.
 
     message action "Size of current directory, followed by biggest child directories:"
@@ -73,7 +69,6 @@ directory_size() {
   alias directory-size='directory_size'
 
 fixout() {
-
     #... Fix history and exit.
     #... Don't try to put this code in a shell script, it won't work.
     #... `history` don't play well in scripts.
@@ -91,14 +86,12 @@ fixout() {
   }
 
 fuck() {
-
     #... Repeat last cmd with sudo if forgotten.
 
     sudo $(history -p !!)
   }
 
 getmp3() {
-
     #... Extract audio to .mp3
 
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
@@ -140,54 +133,51 @@ history_cleaner() {
   alias history-cleaner='history_cleaner'
 
 ispeed() {
-
     #... Test Internet speed.
 
     curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
     | python -
-}
+  }
 
-nmapBasic() {
-
+nmap_basic() {
     message action "Will run function <nmapBasic>:\n    sudo grc nmap -sV -O -sC --traceroute <ip address>"
     message alert "Scanning multiple devices or network will take forever..."
     sleep 2
     sudo grc nmap -sV -O -sC --traceroute ${@}
-}
+  }
+  alias nmap-basic='nmap_basic'
 
 ports() {
-
     message action "Will run function <ports>:\n    sudo netstat -tulanp"
     sudo netstat -tulanp
-}
+  }
 
-psBasic() {
-
+ps_basic() {
     message action "Will run function <psbasic>:\n     ps aux"
     ps aux
-}
+  }
+alias ps-basic='ps_basic'
 
-psGrep() {
-
+ps_grep() {
     message action "Will fun function <psgrep>:\n    ps aux | grep -Ei <application name>"
     ps aux | grep -Ei "$@"
-}
+  }
+  alias ps-grep='ps_grep'
 
-pyClean () {
-
+py_clean () {
     #... ref. https://stackoverflow.com/a/41386937/10500496  
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
-}
+  }
+  alias py-clean='py_clean'
 
-pyServer() {
-
+py_server() {
     message action "Will run function <pyServer>:\    python -m http.server"
     message result "Starting web server ..."
     python -m http.server
-}
+  }
+  alias py-server='py_server'
 
 searchContent() {
-
   #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
   rg --files-with-matches --no-messages "$1"                                  \

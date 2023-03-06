@@ -4,15 +4,15 @@
 #
 # ~/.profile
 #   created        : 2021-04-28 14:59:01 UTC
-#   updated        : 2023-03-02 12:02:52 UTC
+#   updated        : 2023-03-05 23:12:33 UTC
 #   description    : Loaded in non interactive shell.
 # _____________________________________________________________________________
 
-# [ modules ]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
 
-# [ loaded ]
+# [* LOADED *]
 
   export LOADED='profile'
   #... Message function from bash-ael/messages.bash
