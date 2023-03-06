@@ -1,31 +1,28 @@
 #! /usr/bin/env sh
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.gits
+#   created        : 2022-10-18 22:14:48 UTC
+#   updated        : 2023-03-06 15:14:02 UTC
+#   description    : Shell stuff for git.
+# _____________________________________________________________________________
 
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.gits
-##   created        : 2022-10-18 22:14:48 UTC
-##   updated        : 2022-11-28 11:39:29 UTC
-##   description    : Shell stuff for git.
-## ____________________________________________________________________________
-
-## [-- MODULES --]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
 gitall() {
-
-    ## Fast update of git repo.
+    #... Fast update of git repo.
 
     git pull && git add . && git commit && git push
-}
+  }
 
-gitStatus() {
-
-    ## Get status of local git repository.
-    ## ref. https://gist.github.com/giggio/1704664
+git_status() {
+    #... Get status of local git repository.
+    #... ref. https://gist.github.com/giggio/1704664
 
     dumpfile="/tmp/git-status.dump"
 
@@ -60,18 +57,18 @@ gitStatus() {
     else
       message result "STAY Nothing to do."
     fi
-}
+  }
+  alias git-status='git_status'
 
-## [-- lazygit --]
-
+# [* lazygit *]
 lazygit() {
-
-    ## The variable lazygit_repositories is defined in ~/.ael/.extra
+    #... The variable lazygit_repositories is defined in ~/.ael/.extra
 
     if [[ ! -e "${lazygit_repositories}" ]]; then
         message warning "Please define `lazygit_repositories` in `~/.ael/.extra`."
     fi
 
+    _cwd="$(pwd)"
     cd ${HOME}
     for repo in "${lazygit_repositories[@]}"; do
         message action "Updating $repo"
@@ -82,9 +79,10 @@ lazygit() {
         && git push
         cd ${HOME}
     done
-}
+    cd "$_cwd"
+  }
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
