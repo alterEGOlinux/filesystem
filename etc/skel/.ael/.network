@@ -1,25 +1,29 @@
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.network
-##   created        : 2022-11-24 01:37:23 UTC
-##   updated        : 2022-11-28 12:00:42 UTC
-##   description    : Network related functions
-## ____________________________________________________________________________
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.network
+#   created        : 2022-11-24 01:37:23 UTC
+#   updated        : 2023-03-13 18:26:26 UTC
+#   description    : Network related functions
+# _____________________________________________________________________________
 
-## [-- MODULES --]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-netScan() {
+# [* FUNCITONS *]
+net_scan() {
 
-    message action "Will run function <scanNet>:\n    sudo rustscan -a <ip address> -- -sV -O -sC --traceroute -Pn"
+    message action "Function called <net_scan()>"
+    message action "Aliased to <net-scan>"
+    message action "Command: sudo rustscan -a <ip address> --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn"
     sleep 2
-    sudo rustscan -a ${1} -- -sV -O -sC --traceroute -Pn
-}
+    sudo rustscan -a ${1} --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn
+  }
+  alias net-scan="net_scan"
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
