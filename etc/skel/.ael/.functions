@@ -5,7 +5,7 @@
 #
 # ~/.ael/.functions
 #   created        : 2021-05-25 19:40:20 UTC
-#   updated        : 2022-11-24 01:43:20 UTC
+#   updated        : 2023-03-22 12:19:16 UTC
 #   description    : Shell functions collection.
 # _____________________________________________________________________________
 
@@ -132,26 +132,6 @@ history_cleaner() {
   }
   alias history-cleaner='history_cleaner'
 
-ispeed() {
-    #... Test Internet speed.
-
-    curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
-    | python -
-  }
-
-nmap_basic() {
-    message action "Will run function <nmapBasic>:\n    sudo grc nmap -sV -O -sC --traceroute <ip address>"
-    message alert "Scanning multiple devices or network will take forever..."
-    sleep 2
-    sudo grc nmap -sV -O -sC --traceroute ${@}
-  }
-  alias nmap-basic='nmap_basic'
-
-ports() {
-    message action "Will run function <ports>:\n    sudo netstat -tulanp"
-    sudo netstat -tulanp
-  }
-
 ps_basic() {
     message action "Will run function <psbasic>:\n     ps aux"
     ps aux
@@ -170,20 +150,13 @@ py_clean () {
   }
   alias py-clean='py_clean'
 
-py_server() {
-    message action "Will run function <pyServer>:\    python -m http.server"
-    message result "Starting web server ..."
-    python -m http.server
-  }
-  alias py-server='py_server'
-
-searchContent() {
+search_content() {
   #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
   rg --files-with-matches --no-messages "$1"                                  \
   | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-}
-alias sc="searchcontent"
+  }
+  alias sc="search_content"
 
 shellInfo() {
 
@@ -212,47 +185,6 @@ translate() {
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
-}
-
-tunsrc() {
-
-    message action "Reading tunnels..."
-    message title "INT\tIP ADDR   \tPID\tNAME"
-    while read -r _interface; do
-
-      _ip=$(grep -oP '(?<=inet )(.*)(?=/)' <<<"${_interface}")
-      _tun=$(awk '{ print $NF }' <<<"${_interface}")
-      _ps=$(sudo grep -r $_tun /proc/*/fdinfo 2>/dev/null | cut -d / -f 3)
-      _cmd="$(ps -o cmd --no-headers ${_ps})"
-
-      if [[ $(awk '/openvpn/ && /server/' <<< ${_cmd}) ]]; then
-        _tunname="OpenVPNServer"
-      elif [[ $(awk '/openvpn/ && /tryhackme/' <<< "${_cmd}") ]]; then
-        _tunname="TryHackMe"
-      elif [[ $(awk '/nordvpn/' <<< "${_cmd}") ]]; then
-        _tunname="NordVPN"
-      else
-        _tunname="UNDEFINED"
-      fi
-
-      printf "%b\n" "${_tun}\t${_ip}\t${_ps}\t${_tunname}"
-
-    done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
-}
-
-viewIPs() {
-
-    message action "Current IP addresses:"
-    /usr/bin/ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2 }'
-}
-
-whoisWeb() {
-
-    #... Query the web if `whois` port 43 is blocked on your network.
-
-    curl --silent https://whoisjs.com/api/v1/${1}                             \
-    | jq ".raw"                                                               \
-    | sed "s/\\\r\\\n/\\n/g"
 }
 
 # -----------------------------------------------------------------------------

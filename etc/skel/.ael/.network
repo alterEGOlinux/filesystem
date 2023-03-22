@@ -4,7 +4,7 @@
 #
 # ~/.ael/.network
 #   created        : 2022-11-24 01:37:23 UTC
-#   updated        : 2023-03-13 18:26:26 UTC
+#   updated        : 2023-03-22 12:18:46 UTC
 #   description    : Network related functions
 # _____________________________________________________________________________
 
@@ -14,15 +14,126 @@
   && . ${HOME}/.ael/bash-ael/messages.bash
 
 # [* FUNCITONS *]
+
+ispeed() {
+ 
+    message action "Function called <ispeed()> from $(basename $BASH_SOURCE)"
+    message action "Calculating your Internet connection speed"
+    echo
+
+    curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
+    | python -
+  }
+
 net_scan() {
 
-    message action "Function called <net_scan()>"
+    message action "Function called <net_scan()> from $(basename $BASH_SOURCE)"
     message action "Aliased to <net-scan>"
-    message action "Command: sudo rustscan -a <ip address> --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn"
+    message action "Command <sudo rustscan -a <ip address> --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn>"
+    echo
+
     sleep 2
     sudo rustscan -a ${1} --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn
   }
   alias net-scan="net_scan"
+
+nmap_basic() {
+
+    message action "Function called <nmap_basic()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <nmap-basic>"
+    message action "Command <sudo grc nmap -sV -O -sC --traceroute <ip address>>"
+    message alert "Scanning multiple devices or network will take forever..."
+    echo
+
+    sleep 2
+    sudo grc nmap -sV -O -sC --traceroute ${@}
+  }
+  alias nmap-basic='nmap_basic'
+
+ports() {
+
+    message action "Function called <ports()> from $(basename $BASH_SOURCE)"
+    message action "Command <sudo netstat -tulanp>"
+    message action "Showing open ports ..."
+    echo
+
+    sudo netstat -tulanp
+  }
+
+py_server() {
+
+    message action "Function called <py_server()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <py-server>"
+    message action "Command <python -m http.server>"
+    message action "Starting web server ..."
+    echo
+
+    python -m http.server
+  }
+  alias py-server='py_server'
+
+tun_info() {
+
+    message action "Function called <tun_info()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <tun-info>"
+    message action "Reading tunnels info ..."
+    echo
+    message title "INT\tIP ADDR   \tPID\tNAME"
+
+    while read -r _interface; do
+
+      _ip=$(grep -oP '(?<=inet )(.*)(?=/)' <<<"${_interface}")
+      _tun=$(awk '{ print $NF }' <<<"${_interface}")
+      _ps=$(sudo grep -r $_tun /proc/*/fdinfo 2>/dev/null | cut -d / -f 3)
+      _cmd="$(ps -o cmd --no-headers ${_ps})"
+
+      if [[ $(awk '/openvpn/ && /server/' <<< ${_cmd}) ]]; then
+        _tunname="OpenVPNServer"
+      elif [[ $(awk '/openvpn/ && /tryhackme/' <<< "${_cmd}") ]]; then
+        _tunname="TryHackMe"
+      elif [[ $(awk '/nordvpn/' <<< "${_cmd}") ]]; then
+        _tunname="NordVPN"
+      else
+        _tunname="UNDEFINED"
+      fi
+
+      printf "%b\n" "${_tun}\t${_ip}\t${_ps}\t${_tunname}"
+
+    done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
+  }
+  alias tun-info="tun_info"
+
+view_ips() {
+
+    message action "Function called <view_ips()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <view-ips>"
+    message action "Command </usr/bin/ip address | grep \"inet [1-9]\" | awk '{ print \$NF \"\\\t\" \$2}'>"
+    message action "Current IP address(es) ..."
+    echo
+
+    while read -r _interfaces; do
+        spaces=30
+        _interface=$(cut -f 1 <<<"${_interfaces}")
+        _ip=$(cut -f 2 <<<"${_interfaces}")
+        printf "%s%$((spaces - ${#_interface}))s%s\n" "$_interface" "$_ip"
+    done <<< $(/usr/bin/ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2}')
+  }
+  alias view-ips="view_ips"
+
+whois_web() {
+
+    #... Query the web if `whois` port 43 is blocked on your network.
+
+    message action "Function called <whois_web()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <whois_web>"
+    message action "Querying whois on the web for ${1} ..."
+    echo
+
+    curl --silent https://whoisjs.com/api/v1/${1}                             \
+    | jq ".raw"                                                               \
+    | sed "s/\\\r\\\n/\\n/g"
+  }
+  alias whois-web="whois_web"
 
 # -----------------------------------------------------------------------------
 # vim: foldmethod=marker
