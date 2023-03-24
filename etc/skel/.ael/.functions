@@ -5,7 +5,7 @@
 #
 # ~/.ael/.functions
 #   created        : 2021-05-25 19:40:20 UTC
-#   updated        : 2023-03-22 12:19:16 UTC
+#   updated        : 2023-03-24 13:23:44 UTC
 #   description    : Shell functions collection.
 # _____________________________________________________________________________
 
@@ -21,6 +21,9 @@ busy() {
     #... ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
     #... CTRL+c to quit.
 
+    message action "Function called <busy()> from $(basename $BASH_SOURCE)"
+    echo
+
     cat /dev/urandom                                                          \
     | hexdump -C                                                              \
     | grep --color=always 'ca fe'
@@ -30,6 +33,9 @@ cheat() {
     #... Query https://cheat.sh.
     #... Menu with `fzf` and display with `less`.
     #... https://github.com/chubin/cheat.sh
+
+    message action "Function called <cheat()> from $(basename $BASH_SOURCE)"
+    echo
 
     cheat="$(curl -s cheat.sh/:list                                           \
             | fzf --layout="reverse"                                          \
@@ -44,6 +50,9 @@ cheat() {
 
 delete() {
     #... Delete directory.
+
+    message action "Function called <delete()> from $(basename $BASH_SOURCE)"
+    echo
 
     if [ -d "${1}" ]; then
       message question "Are you sure your want to delete this directory? [y/N]"
@@ -60,7 +69,12 @@ delete() {
 directory_size() {
     #... Check size of biggest directories.
 
+    message action "Function called <directory_size()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <directory-size>"
+    message action "Command <du -bh --max-depth 1 | sort -rh | head>"
     message action "Size of current directory, followed by biggest child directories:"
+    echo
+
     #... du -bh --max-depth 1 | sort -rh | head
     du --bytes --human-readable --max-depth 1                                 \
     | sort --reverse --human-numeric-sort                                     \
@@ -72,6 +86,12 @@ fixout() {
     #... Fix history and exit.
     #... Don't try to put this code in a shell script, it won't work.
     #... `history` don't play well in scripts.
+
+    message action "Function called <fixout()> from $(basename $BASH_SOURCE)"
+    message action "Cleaning history before closing ..."
+    echo
+
+    sleep 2
 
     history -n && history                                                     \
     | sort -k2 -k1nr                                                          \
@@ -88,16 +108,31 @@ fixout() {
 fuck() {
     #... Repeat last cmd with sudo if forgotten.
 
+    message action "Function called <fuck()> from $(basename $BASH_SOUCE)"
+    message action "Command <sudo \$(history -p !!)"
+    message action "Repeating last command as sudo user ..."
+    echo
+
     sudo $(history -p !!)
   }
 
 getmp3() {
     #... Extract audio to .mp3
 
+    message action "Function called <getmp3()> from $(basename $BASH_SOUCE)"
+    message action "youtube-dl -x --audio-format mp3 --prefer-ffmpeg <url>"
+    message action "Extract audio from video to mp3 format ..."
+    echo
+
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
   }
 
 history_cleaner() {
+
+    message action "Function called <history_cleaner()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <history-cleaner>"
+    message action "Cleans .bash_history file ..."
+    echo
 
     if [[ ${@} != '' ]]; then
 
@@ -133,59 +168,116 @@ history_cleaner() {
   alias history-cleaner='history_cleaner'
 
 ps_basic() {
-    message action "Will run function <psbasic>:\n     ps aux"
+
+    message action "Function called <ps_basic()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <ps_basic>"
+    message action "Command <ps aux>"
+    message action "Showing processes ..."
+    echo
+
     ps aux
   }
-alias ps-basic='ps_basic'
+  alias ps-basic='ps_basic'
 
 ps_grep() {
-    message action "Will fun function <psgrep>:\n    ps aux | grep -Ei <application name>"
+
+    message action "Function called <ps_grep()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <ps_grep>"
+    message action "Command <ps aux | grep -Ei <application name>>"
+    message action "Showing processes for "${@}" ..."
+    echo
+
     ps aux | grep -Ei "$@"
   }
   alias ps-grep='ps_grep'
 
 py_clean () {
-    #... ref. https://stackoverflow.com/a/41386937/10500496  
+    #... ref. https://stackoverflow.com/a/41386937/10500496
+
+    message action "Function called <py_clean()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <py-clean>"
+    message action "Command <find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete>"
+    message action "Cleaning python cache in current directory ..."
+    echo
+
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   }
   alias py-clean='py_clean'
 
 search_content() {
-  #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
+    #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
-  rg --files-with-matches --no-messages "$1"                                  \
-  | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+    message action "Function called <search_content()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <sc>"
+    message action "Searching content "${1}" ..."
+    echo
+
+    rg --files-with-matches --no-messages "$1"                                \
+    | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
   }
   alias sc="search_content"
 
-shellInfo() {
+shell_info() {
+
+    #... Could build something with fzf to search and give info.
+    #... ref. https://stackoverflow.com/a/949006/10500496
+    #... You can use the bash(1) built-in compgen
+    #...     compgen -c will list all the commands you could run.
+    #...     compgen -a will list all the aliases you could run.
+    #...     compgen -b will list all the built-ins you could run.
+    #...     compgen -k will list all the keywords you could run.
+    #...     compgen -A function will list all the functions you could run.
+    #...     compgen -A function -abck will list all the above in one go.
+
+    message action "Function called <shell_info()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <shell-info>"
+    message action "Command <shopt -s extdebug; type -a <function>; declare -F <function>>"
+    message action "Shell information for "${@}" ..."
+    echo
 
     shopt -s extdebug
     type -a ${@}
     declare -F ${@}
-}
+  }
+  alias shell-info="shell_info"
 
-showUTC() {
+show_utc() {
+
+    message action "Function called <show_utc()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <show-utc>"
+    message action "Command <echo  \$(date --utc \"+%F %H:%M:%S %Z\")>"
+    message action "UTC time ..."
+    echo
 
     echo  $(date --utc "+%F %H:%M:%S %Z")
-}
+  }
+  alias show-utc="show_utc"
 
 tagalog() {
+
+    message action "Function called <tagalog()> from $(basename $BASH_SOURCE)"
+    message action "Translating "${@}" to Tagalog ..."
+    echo
 
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
-}
+  }
 
 translate() {
 
     #... Add language abbr after string to translate.
     #... For example, translate "Hello world" fr
 
+    message action "Function called <translate()> from $(basename $BASH_SOURCE)"
+    message action "Usage <translate <word(s)> <language code>>"
+    message action "Translating "${1}" to ${2} ..."
+    echo
+
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
-}
+  }
 
 # -----------------------------------------------------------------------------
 # vim: foldmethod=marker
