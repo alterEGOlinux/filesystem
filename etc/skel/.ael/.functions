@@ -5,7 +5,7 @@
 #
 # ~/.ael/.functions
 #   created        : 2021-05-25 19:40:20 UTC
-#   updated        : 2023-03-24 13:23:44 UTC
+#   updated        : 2023-03-26 13:21:19 UTC
 #   description    : Shell functions collection.
 # _____________________________________________________________________________
 
@@ -108,7 +108,7 @@ fixout() {
 fuck() {
     #... Repeat last cmd with sudo if forgotten.
 
-    message action "Function called <fuck()> from $(basename $BASH_SOUCE)"
+    message action "Function called <fuck()> from .functions"
     message action "Command <sudo \$(history -p !!)"
     message action "Repeating last command as sudo user ..."
     echo
@@ -203,6 +203,20 @@ py_clean () {
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   }
   alias py-clean='py_clean'
+
+reset_time() {
+
+    message action "Function called <reset_time()> from $(basename $BASH_SOURCE)"
+    message action "Aliased to <reset-time>"
+    message action "Resetting time ..."
+    echo
+
+    sudo timedatectl set-ntp true
+    sudo hwclock --systohc --utc
+
+    echo  $(date "+%F %H:%M:%S %Z")
+  }
+  alias reset-time="reset_time"
 
 search_content() {
     #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
