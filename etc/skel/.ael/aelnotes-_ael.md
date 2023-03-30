@@ -1,6 +1,7 @@
 <!-- /NOTEHEADER/                                                          {{{1
 
 AUTHOR = 'fantomH'
+FILENAME = 'aelnotes-_ael.md'
 CREATED = '2023-03-30 11:02:26 UTC'
 UPDATED = '2023-03-30 11:02:34 UTC'
 TAGS = ['#AEL', '#/etc/skel/.ael', '#filesystem', '#home', '#linux']
