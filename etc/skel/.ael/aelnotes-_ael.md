@@ -1,16 +1,17 @@
 <!-- /NOTEHEADER/                                                          {{{1
 
+AUTHOR = 'fantomH'
 CREATED = '2023-03-30 11:02:26 UTC'
 UPDATED = '2023-03-30 11:02:34 UTC'
 TAGS = ['#AEL', '#/etc/skel/.ael', '#filesystem', '#home', '#linux']
 
 /NOTEHEADER/ 1}}} -->
 
-# AEL Filesystem: /etc/skel/.ael
+# AEL Filesystem: `/etc/skel/.ael/`
 
 AEL directory containing AEL stuff.
 
-##### /etc/skel/.alterEGO/.containers
+##### /etc/skel/.ael/.containers
 
 Docker containers configuration, aliases and functions.
 
@@ -18,11 +19,13 @@ Docker containers configuration, aliases and functions.
 * `docker-stats`: gives statistics on running containers.
 * `docker-container-cleaner`: removes all containers.
 * `cyberchef`: start/stop CyberChef container.
-  ```
-  mpepping/cyberchef
-  description    : A simple, intuitive web app for analysing and decoding data without having to deal with complex tools or programming languages. CyberChef encourages both technical and non-technical people to explore data formats, encryption and compression.
-  main cmd       : docker run -d -p 8888:8000 mpepping/cyberchef
-  ```
+
+```
+mpepping/cyberchef
+description    : A simple, intuitive web app for analysing and decoding data without having to deal with complex tools or programming languages. CyberChef encourages both technical and non-technical people to explore data formats, encryption and compression.
+main cmd       : docker run -d -p 8888:8000 mpepping/cyberchef
+```
+
 * `dvwa`: start/stop Dawn Vulnerable Webapp container.
 * `juice-shop`: start/stop OWASP Juice Shop container.
 * `kali`: start Kali Linux container.
@@ -49,7 +52,7 @@ Different general shell functions:
 
 * `busy`: When the boss comes around.
 * `cheat`: Uses cheat.sh API and search.
-  - TODO: Standardize FZF config.
+    - TODO: Standardize FZF config.
 * `delete`: Deletes directory.
 * `directory-size`: Outputs biggest directories.
 * `fixout`: Cleans the history when exiting the shell.
