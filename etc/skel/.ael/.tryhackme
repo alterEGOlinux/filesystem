@@ -1,89 +1,86 @@
 #!/usr/bin/env bash
+# -----------------------------------------------------------------------------
+#              { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/.tryhackme
+#   created        : 2021-03-07 15:10:11 UTC
+#   updated        : 2023-03-28 10:36:40 UTC
+#   description    : TryHackMe stuff.
+# _____________________________________________________________________________
 
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/.tryhackme
-##   created        : 2021-03-07 15:10:11 UTC
-##   updated        : 2022-12-05 19:51:06 UTC
-##   description    : TryHackMe stuff.
-## ____________________________________________________________________________
-
-## [ MODULES ]
+# [* MODULES *]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
 
-## [ FUNCTIONS ]
+# [* FUNCTIONS *]
 
-## ( thm-connect )                                                         {{{1
+# (* thm-connect *)                                                        {{{1
 thm-connect() {
 
-      THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
-      if [[ -f ${THM_VPN} ]]; then
-          sudo openvpn ${THM_VPN} &
-          cd ${THM_ROOM_PATH}
-          sleep 2
-          $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
-      else
+    THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
+    if [[ -f ${THM_VPN} ]]; then
+        sudo openvpn ${THM_VPN} &
+        cd ${THM_ROOM_PATH}
+        sleep 2
+        $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
+    else
         # $BROWSER "https://tryhackme.com/vpn/get-config"
         $BROWSER "https://tryhackme.com/access"
         cd ${THM_ROOM_PATH}
-      fi
+    fi
+  }                                                     # FIN: thm-connect 1}}}
 
-}
-## FIN: thm-connect 1}}}
-
-## ( thm-init )                                                            {{{1
+# (* thm-init *)                                                           {{{1
 thm-init() {
 
-  THM_DIR="${HOME}/.ael/tryhackme"
-  if [[ ! -d ${THM_DIR} ]]; then
-      mkdir ${THM_DIR}
-  fi
+    THM_DIR="${HOME}/.ael/tryhackme"
+    if [[ ! -d ${THM_DIR} ]]; then
+        mkdir ${THM_DIR}
+    fi
+    
+    THM_TOOLS="${THM_DIR}/tools"
+    if [[ ! -d ${THM_TOOLS} ]]; then
+        mkdir ${THM_TOOLS}
+    fi
+    
+    THM_CONFIG="${THM_DIR}/.tryhackme.cfg"
+    if [[ ! -e ${THM_CONFIG} ]]; then
+        cat <<EOF> ${THM_CONFIG}
+# -----------------------------------------------------------------------------
+#               { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.ael/tryhackme/.tryhackme.cfg
+#   created        : 2022-12-02 12:13:16 UTC
+#   updated        : 2022-12-02 12:13:16 UTC
+#   description    : description
+# _____________________________________________________________________________
 
-  THM_TOOLS="${THM_DIR}/tools"
-  if [[ ! -d ${THM_TOOLS} ]]; then
-      mkdir ${THM_TOOLS}
-  fi
-
-  THM_CONFIG="${THM_DIR}/.tryhackme.cfg"
-  if [[ ! -e ${THM_CONFIG} ]]; then
-      cat <<EOF> ${THM_CONFIG}
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## ~/.ael/tryhackme/.tryhackme.cfg
-##   created        : 2022-12-02 12:13:16 UTC
-##   updated        : 2022-12-02 12:13:16 UTC
-##   description    : description
-## ____________________________________________________________________________
-
-## [-- MAIN DIRECTORY --]
+# [* MAIN DIRECTORY *]
 
   THM_DIR="${THM_DIR}"
 
-## [-- CONFIG FILE --]
+# [* CONFIG FILE *]
 
   THM_CONFIG="${THM_CONFIG}"
 
-## [-- ROOM --]
+# [* ROOM *]
 
   THM_ROOM_NAME=""
   THM_ROOM_PATH="${THM_DIR}/${THM_ROOM_NAME}"
 
-## [-- PLAYER --]
+# [* PLAYER *]
 
   THM_PLAYER=""
 
-## [-- IP ADDRESSES --]
+# [* IP ADDRESSES *]
 
   THM_RHOST=""
   THM_LHOST=""
 
-## [-- TOOLS --]
+# [* TOOLS *]
 
   THM_TOOLS="${THM_TOOLS}"
   
@@ -92,44 +89,39 @@ EOF
 
     thm-reload-config
 
-}
-## FIN: thm-init 1}}}
+  }                                                        # FIN: thm-init 1}}}
 
-## ( thm-login )                                                           {{{1
+# (* thm-login *)                                                          {{{1
 thm-login() {
 
-      $BROWSER "https://www.tryhackme.com/login"
-}
-## FIN: thm-login 1}}}
+    $BROWSER "https://www.tryhackme.com/login"
+  }                                                       # FIN: thm-login 1}}}
 
-## ( thm-reload-all )                                                      {{{1
+# (* thm-reload-all *)                                                     {{{1
 thm-reload-all() {
 
     source ${HOME}/.ael/.tryhackme
+  }                                                  # FIN: thm-reload-all 1}}}
 
-}
-## FIN: thm-reload-all 1}}}
-
-## ( thm-reload-config )                                                   {{{1
+# (* thm-reload-config *)                                                  {{{1
 thm-reload-config() {
 
-  source ${THM_CONFIG}
-  export THM_DIR
-  export THM_CONFIG
-  export THM_ROOM_NAME
-  export THM_ROOM_PATH
-  export THM_PLAYER
-  export THM_RHOST
-  export THM_LHOST
-  export THM_TOOLS
+    source ${THM_CONFIG}
+    export THM_DIR
+    export THM_CONFIG
+    export THM_ROOM_NAME
+    export THM_ROOM_PATH
+    export THM_PLAYER
+    export THM_RHOST
+    export THM_LHOST
+    export THM_TOOLS
+    
+    thm-show-config
+    
+    message action "TRYHACKME CONFIG READY..."
+  }                                               # FIN: thm-reload-config 1}}}
 
-  thm-show-config
-
-  message action "TRYHACKME CONFIG READY..."
-}
-## FIN: thm-reload-config 1}}}
-
-## ( thm-set-lhost )                                                       {{{1
+# (* thm-set-lhost *)                                                      {{{1
 thm-set-lhost() {
 
     if [[ ${#} == 1 ]]; then
@@ -139,18 +131,17 @@ thm-set-lhost() {
         message error "You must provide a local IP address!"
     fi
     thm-reload-config
-}
-## FIN: thm-set-lhost 1}}}
+  }                                                   # FIN: thm-set-lhost 1}}}
 
-## ( thm-set-msf )                                                         {{{1
+# (* thm-set-msf *)                                                        {{{1
 thm-set-msf() {
 
-    ## ( METASPLOIT )
-    ## Create msfconsole resource file.
-    ## This can be loaded using:
-    ## msf -r ~/.msf4/<resourcefile.rc>
-    ## Or sourced directly in msf using:
-    ## `resource thm.rc`
+    #... ( METASPLOIT )
+    #... Create msfconsole resource file.
+    #... This can be loaded using:
+    #... msf -r ~/.msf4/<resourcefile.rc>
+    #... Or sourced directly in msf using:
+    #... `resource thm.rc`
 
     if [[ ! -d "${HOME}/.msf4" ]]; then
         mkdir ${HOME}/.msf4
@@ -163,10 +154,9 @@ alias set-rhost "set RHOSTS ${THM_RHOST}"
 EOF
 
     message result "Use \`resource thm.rc\` in msfconsole."
-}
-## FIN: thm-set-msf 1}}}
+  }                                                     # FIN: thm-set-msf 1}}}
 
-## ( thm-set-player )                                                      {{{1
+# (* thm-set-player *)                                                     {{{1
 thm-set-player() {
 
     if [[ ${#} == 1 ]]; then
@@ -176,10 +166,9 @@ thm-set-player() {
         message error "You must provide a player's name!"
     fi
     thm-reload-config
-}
-## FIN: thm-set-player 1}}}
+  }                                                  # FIN: thm-set-player 1}}}
 
-## ( thm-set-rhost )                                                       {{{1
+# (* thm-set-rhost *)                                                      {{{1
 thm-set-rhost() {
 
     if [[ ${#} == 1 ]]; then
@@ -189,10 +178,9 @@ thm-set-rhost() {
         message error "You must provide a remote IP address!"
     fi
     thm-reload-config
-}
-## FIN: thm-set-rhost 1}}}
+  }                                                   # FIN: thm-set-rhost 1}}}
 
-## ( thm-set-room )                                                        {{{1
+# (* thm-set-room *)                                                       {{{1
 thm-set-room() {
 
     if [[ ${#} == 1 ]]; then
@@ -206,10 +194,9 @@ thm-set-room() {
         message error "You must provide a room's name!"
     fi
     thm-reload-config
-}
-## FIN: thm-set-room 1}}}
+  }                                                    # FIN: thm-set-room 1}}}
 
-## ( thm-show-config )                                                     {{{1
+# (* thm-show-config *)                                                    {{{1
 thm-show-config() {
 
     message title "    VARIABLE         SET TO"
@@ -241,17 +228,15 @@ thm-show-config() {
         message result "THM_LHOST        ${THM_LHOST}"
     fi
     message result "THM_TOOLS        ${THM_TOOLS}"
-}
-## FIN: thm-show-config 1}}}
+  }                                                 # FIN: thm-show-config 1}}}
 
-## ( thm-webroom )                                                         {{{1
+# (* thm-webroom *)                                                        {{{1
 thm-webroom() {
 
     $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
-}
-## FIN: thm-webroom 1}}}
+  }                                                     # FIN: thm-webroom 1}}}
 
-## ( thm-help )                                                            {{{1
+# (* thm-help *)                                                           {{{1
 thm-help() {
 
     message action "tryhackme help"
@@ -290,10 +275,9 @@ Functions:
   thm-show-config
   thm-webroom
 EOF
-}
-## FIN: thm-help 1}}}
+  }                                                        # FIN: thm-help 1}}}
 
-## [ COMPLETION ]
+# [* COMPLETION *]
 
   for x in thm .tryhackme; do
     options="\
@@ -314,7 +298,7 @@ EOF
     complete -W "${options[@]}" $x
   done
 
-## [ OPTIONS ]
+# [* OPTIONS *]
 
   case "${1}" in
 
@@ -398,7 +382,7 @@ EOF
 
   esac
 
-## ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
 # vim: syntax=sh
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
