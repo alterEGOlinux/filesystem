@@ -2,6 +2,7 @@
 
 AUTHOR = 'fantomH'
 FILENAME = 'aelnotes-_config.md'
+TITLE = 'AEL Filesystem: /etc/skel/.config/'
 CREATED = '2023-03-30 20:16:43 UTC'
 UPDATED = '2023-03-30 20:16:48 UTC'
 TAGS = ['#AEL', '#/etc/skel/.config', '#filesystem', '#home', '#linux']
