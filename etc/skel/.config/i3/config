@@ -1,11 +1,12 @@
-## { alterEGO Linux } ---------------------------------------------------------
-##
-## ~/.config/i3/config
-##   created        : 2021-02-26 09:37:37 UTC
-##   updated        : 2022-07-24 14:07:44 UTC
-##   description    : i3vm configuration file.
-##   app            : i3
-## ____________________________________________ { Open the vault of knowledge }
+# -----------------------------------------------------------------------------
+#               { alterEGO Linux: "Open the vault of knowledge" }
+# -----------------------------------------------------------------------------
+#
+# ~/.config/i3/config
+#   created        : 2021-02-26 09:37:37 UTC
+#   updated        : 2023-03-31 01:46:21 UTC
+#   description    : i3vm configuration file.
+# ____________________________________________________________________________
 
   set $mod Mod4
 
@@ -129,18 +130,18 @@
   #... Make floating window sticky.
   bindsym $mod+Shift+s sticky toggle
 
-## [ SCRATCHPAD ] ---------------------------------------------------------- ##
+# [* SCRATCHPAD *] ------------------------------------------------------------
 
-  ## Make the currently focused window a scratchpad.
+  #... Make the currently focused window a scratchpad.
   bindsym $mod+Shift+minus floating toggle,                                   \
     resize set 1920px 850px,                                                  \
     move position 0 21px,                                                     \
     move scratchpad
 
-  ## Show scratchpad window.
+  #... Show scratchpad window.
   bindsym $mod+minus scratchpad show
 
-## [ WORKSPACE ] ----------------------------------------------------------- ##
+# [* WORKSPACE *] -------------------------------------------------------------
 
   # Define names for default workspaces for which we configure key bindings later on.
   # We use variables to avoid repeating the names in multiple places.
@@ -179,7 +180,7 @@
   bindsym $mod+Shift+9 move container to workspace number $ws9
   bindsym $mod+Shift+0 move container to workspace number $ws10
 
-## [ RELOAD, RESTART, EXIT i3 ] -------------------------------------------- ##
+# [* RELOAD, RESTART, EXIT i3 *] ----------------------------------------------
 
   ## reload the configuration file
   bindsym $mod+Shift+c reload
@@ -188,7 +189,7 @@
   ## exit i3 (logs you out of your X session)
   bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-## [ RESIZE WINDOW ] ------------------------------------------------------- ##
+# [* RESIZE WINDOW *] ---------------------------------------------------------
 
   # resize window (you can also use the mouse for that)
   mode "resize" {
@@ -217,22 +218,22 @@
 
   bindsym $mod+r mode "resize"
 
-## [ APPLICATIONS ] -------------------------------------------------------- ##
+# [* APPLICATIONS *] ----------------------------------------------------------
 
-  ## (-- terminal --)
+  # (* terminal *)
   bindsym $mod+Return exec alacritty -e env TERM=screen-256color tmux -u
   # bindsym $mod+Return exec xfce4-terminal                                     \
   #                             --hide-toolbar                                  \
   #                             --hide-menubar                                  \
   #                             --hide-scrollbar -e "env TERM=screen-256color tmux -u"
 
-  ## ( toggle keyboard language )
+  # (* toggle keyboard language *)
   bindsym $mod+CTRL+l exec toggle_language.sh
 
-  ## ( screenshot )
+  # (* screenshot *)
   bindsym $mod+CTRL+s exec screenshot.sh --window
 
-  ## ( ael-menu )
+  # (* ael-menu *)
   bindsym $mod+m exec xfce4-terminal                                          \
                           --hide-toolbar                                      \
                           --hide-menubar                                      \
@@ -245,14 +246,14 @@
       resize set 900px 350px,                                                 \
       move position center
 
-  ## (-- PAVUCONTROL --)
+  # (* PAVUCONTROL *)
  
     for_window [title="Volume Control"]                                       \
         floating enable,                                                      \
         resize set 900px 350px,                                               \
         move position center
 
-  ## (-- BOOKMARKS MENU --)
+  # (* BOOKMARKS MENU *)
   bindsym $mod+b exec xfce4-terminal                                          \
                           --hide-toolbar                                      \
                           --hide-menubar                                      \
@@ -265,7 +266,7 @@
       resize set 900px 450px,                                                 \
       move position center
 
-## [ STATUS BAR ] ---------------------------------------------------------- ##
+# [* STATUS BAR *] ------------------------------------------------------------
 
   bar {
     id bar-1
@@ -284,8 +285,10 @@
     font pango:Source Code Pro Medium 10
   }
 
-## [ REFERENCES ] -------------------------------------------------------------
+# [* REFERENCES *] ------------------------------------------------------------
 
-  ## User manual: https://i3wm.org/docs/userguide.html
+  #... User manual: https://i3wm.org/docs/userguide.html
 
-## { FIN } _________________________________________________________ ¯\_(ツ)_/¯
+# -----------------------------------------------------------------------------
+# vim: foldmethod=marker
+# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
