@@ -441,6 +441,9 @@
   "... https://github.com/SirVer/ultisnips
   Plug 'SirVer/ultisnips'
 
+  " (* YouCompleteMe *)
+  Plug 'Valloric/YouCompleteMe'
+
   call plug#end()
 
   "... Automatically install missing plugins.
