@@ -486,7 +486,7 @@
   nmap <silent> <leader>sm <Plug>StopMarkdownPreview
 
   " (* ultisnips *)
-  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsExpandTrigger="<c-j>"
   let g:UltiSnipsEditSplit="vertical"
   let g:UltiSnipsJumpForwardTrigger="<c-k>"
   let g:UltiSnipsJumpBackwardTrigger="<c-j>"
