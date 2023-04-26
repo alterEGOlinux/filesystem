@@ -4,7 +4,7 @@
 #
 # ~/.xinitrc
 #   created        : 2021-02-23 02:54:43 UTC
-#   updated        : 2023-03-02 12:35:18 UTC
+#   updated        : 2023-04-25 17:23:54 UTC
 #   description    : Starts Window Manager with startx.
 # _____________________________________________________________________________
 
@@ -14,6 +14,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
         [ -x "$f" ] && . "$f"
     done
     unset f
+fi
+
+if [[ $(hostname) == "whatismyhostname" ]]; then
+    xrandr --output DP1 --primary --auto --output VGA1 --left-of DP1
 fi
 
 case ${2} in
