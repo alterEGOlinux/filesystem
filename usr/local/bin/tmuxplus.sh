@@ -6,13 +6,14 @@
 ##
 ## /usr/local/bin/tmuxplus.sh
 ##   created        : 2020-10-15 17:14:53 UTC
-##   updated        : 2023-01-27 03:29:11 UTC
+##   updated        : 2023-05-12 00:32:57 UTC
 ##   description    : Tmux wrapper.
 ## ____________________________________________________________________________
 
 
 tmux_attach() {
-  ## ref. https://github.com/nwallace/dotfiles/blob/master/scripts/bin/functions
+  ##: Will use fzf to list existing sessions.
+  ##: ref. https://github.com/nwallace/dotfiles/blob/master/scripts/bin/functions
 
   session="$(tmux ls -F '#{session_name}' | fzf)"
 
@@ -21,20 +22,18 @@ tmux_attach() {
     else
       exit 0
   fi
-
-}
+  }
 
 tmux_background() {
-  ## Sends commands to a detached session.
+  ##: Sends commands to a detached session.
 
   tmux new-session -d -s ${session}
   sleep 0.5
   tmux send-keys -t ${session} "${cmd}" enter
-
-}
+  }
 
 tmux_wrapper() {
-  ## Generates a random session.
+  ##: Generates a random session.
 
   session=$(echo MENU${RANDOM})
 
@@ -43,8 +42,7 @@ tmux_wrapper() {
   send-keys -t "${session}" "${cmd}" enter
   # sleep 1
   # tmux detach -s "${session}"
-
-}
+  }
 
 while [[ "${1}" != "" ]]; do
     case ${1} in
@@ -72,4 +70,4 @@ done
 
 ## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+## -------------------------- { FIN ¯\_(ツ)_/¯ } ------------------------------
