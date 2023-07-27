@@ -1,15 +1,12 @@
 #!/usr/bin/env sh
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.ael/.containers
-#   created        : 2021-12-06 11:15:11 UTC
-#   updated        : 2023-03-03 21:00:00 UTC
-#   description    : Containers functions and configuration.
-# _____________________________________________________________________________
 
-# [* modules *]
+## ----------------------------------------------------------------------- INFO
+## [~/.ael/.containers]
+## created       = 2021-12-06 11:15:11 UTC
+## updated       = 2023-07-27 12:01:18 UTC
+## description   = "Containers functions and configuration."
+
+## -------------------- [ import ]
 
   [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
   && . ${HOME}/.ael/bash-ael/messages.bash
@@ -190,19 +187,21 @@ juice_shop() {
 
   alias juice-shop="juice_shop"
 
-# [* kali linux *]
+## -------------------- [ kali linux ] {{{
 
 kali() {
+
+    ## updated = 2023-07-27 12:03:50 UTC
 
     docker666 start
     xhost +
 
     message action "Starting Kali Linux container on AEL..."
 
-    #... TODO: If image doesn't exist, create from /usr/local/share/dockerfiles/Dockerfile-kali
-    #... docker build -f /usr/local/share/dockerfiles/Dockerfile-kali --tag kali_on_ael .
+    ## TODO: If image doesn't exist, create from /usr/local/share/dockerfiles/Dockerfile-kali
+    ## docker build -f /usr/local/share/dockerfiles/Dockerfile-kali --tag kali_on_ael .
 
-    #... If container doesn't exist, create one
+    ## If container doesn't exist, create one
     if [[ -z $(docker ps -a | awk '/kali_on_ael/ { print $NF }') ]]; then
         docker run --name kali_on_ael --net="host" --privileged -it -v /tmp/.X11-unix:/tmp/.X11-unix kali_on_ael
     else
@@ -217,7 +216,8 @@ kali() {
     docker666 stop
 }
 
-# -----------------------------------------------------------------------------
+## }}}
+
 # vim: foldmethod=marker
 # vim: syntax=sh
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# -------------------------------------------------------------- FIN ¯\_(ツ)_/¯
