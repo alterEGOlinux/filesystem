@@ -1,14 +1,10 @@
-" -----------------------------------------------------------------------------
-"              { alterEGO Linux: 'Open the vault of knowledge' }             
-" -----------------------------------------------------------------------------
-"
-" ~/.vimrc
-"   created        : 2021-02-23 02:54:43 UTC
-"   updated        : 2023-03-02 11:47:25 UTC
-"   description    : VIM main configuration file.
-" _____________________________________________________________________________
+"" ----------------------------------------------------------------------- INFO
+"" [~/.vimrc]
+"" created       = 2021-02-23 02:54:43 UTC
+"" updated       = 2023-07-30 14:23:23 UTC
+"" description   = "VIM main configuration file."
 
-" [* GENERAL CONFIG *]
+"" -------------------- [ GENERAL CONFIG ]                                  {{{
 
   "... Forces vim to act like vim, not like vi.
   set nocompatible
@@ -25,35 +21,43 @@
   "... Used with colored column.
   set colorcolumn=80
 
-" [* ARROW KEYS *]
+  "" }}}
 
-  "... Disables arrow keys.
+"" -------------------- [ ARROW KEYS ]                                      {{{
+
+  "" Disables arrow keys.
   " noremap <UP> <NOP>
   " noremap <RIGHT> <NOP>
   " noremap <LEFT> <NOP>
   " noremap <DOWN> <NOP>
 
-" [* BASE 64 *]
+  "" }}}
 
-  "... Decode inplace base64 text.
-  "... ref. https://stackoverflow.com/a/7849399/10500496
+"" -------------------- [ BASE 64 ]                                         {{{
+
+  "" Decode inplace base64 text.
+  "" ref. https://stackoverflow.com/a/7849399/10500496
   vnoremap <leader>64 y:let @"=system('base64 --decode', @")<cr>gvP
 
-" [* CHANGE CASES *]
+  "" }}}
 
-  "... Upper case.
+"" -------------------- [ CHANGE CASES ]                                    {{{
+
+  "" Upper case.
   inoremap <C-u> <ESC>viwUea
   nnoremap <C-u> viwUea
 
-  "... Lower case.
+  "" Lower case.
   inoremap <C-l> <ESC>viwu
   nnoremap <C-l> viwu
 
-" [* COMMENTS TOGGLE *]
+  "" }}}
 
-  "... Stackoverflow
-  "... What's a quick way to comment/uncomment lines in Vim?
-  "... https://stackoverflow.com/a/22246318
+"" -------------------- [ COMMENTS TOGGLE ]                                 {{{
+
+  "" Stackoverflow
+  "" What's a quick way to comment/uncomment lines in Vim?
+  "" https://stackoverflow.com/a/22246318
 
   autocmd FileType c,cpp,java,scala let b:comment_leader = '//'
   autocmd FileType sh,ruby,python   let b:comment_leader = '#'
@@ -68,21 +72,27 @@
   vnoremap <leader>c :call CommentToggle()<CR>
   nnoremap <leader>c :call CommentToggle()<CR>
 
-" [* EDIT/SOURCE .vimrc *]
+  "" }}}
+
+"" -------------------- [ EDIT/SOURCE .vimrc ]                              {{{
 
   nnoremap <leader>ev :tabedit $MYVIMRC<CR>
   nnoremap <leader>so :source $MYVIMRC<CR>
 
-" [* ENCODING *]
+  "" }}}
 
-  "... The encoding displayed.
+"" -------------------- [ ENCODING ]                                        {{{
+
+  "" The encoding displayed.
   set encoding=utf8
 
-  "... The encoding written to file.
+  "" The encoding written to file.
   set fileencoding=utf8
 
-  "... set BOM ...WARNING: doesn't work, need to set manually.
+  "" set BOM ...WARNING: doesn't work, need to set manually.
   " set bomb
+
+  "" }}}
 
 " [* ESC *]
 
@@ -121,6 +131,22 @@
       endif
   endfunction
   map <F4> :call ToggleNetrw()<CR>
+
+"" -------------------- [ FOLDING ]                                         {{{
+
+  function! AELFoldText()
+      "" TODO: Add folding level
+
+      let nl = v:foldend - v:foldstart + 1
+      let linetext = substitute(getline(v:foldstart), '[^a-zA-Z0-9 ]','', 'g')
+      let linetext = substitute(linetext, '^\s*', '[ ', '')
+      let linetext = substitute(linetext, '\s*$', ' ]', '')
+      let padding = repeat(' ', 78 - strlen(linetext) - 7 - strlen(nl))
+      let txt = '[+] ' . linetext . padding. '| ' . nl . ' |'
+      return txt
+  endfunction
+  set foldtext=AELFoldText()
+  "" }}}
 
 " [* HELP *]
 
@@ -616,6 +642,5 @@ EOF
 
   nnoremap <leader>pv :call Python_vim()<ESC>
 
-" -----------------------------------------------------------------------------
 " vim: foldmethod=marker
-" ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+"" ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

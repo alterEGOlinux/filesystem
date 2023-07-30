@@ -158,7 +158,7 @@ dvwa() {
     fi
 }
 
-# [* OWASP juice shop *]
+## -------------------- [ OWASP juice shop ]                                {{{
 
 juice_shop() {
 
@@ -186,12 +186,15 @@ juice_shop() {
 }
 
   alias juice-shop="juice_shop"
+## }}}
 
-## -------------------- [ kali linux ] {{{
+## -------------------- [ kali linux ]                                      {{{
 
 kali() {
 
-    ## updated = 2023-07-27 12:03:50 UTC
+    ## updated = 2023-07-29 01:35:20 UTC
+    ## use startx to start a WM session (You will need to killall Xephyr to
+    ## completely exit. <= Need to find a solution.
 
     docker666 start
     xhost +
@@ -203,7 +206,10 @@ kali() {
 
     ## If container doesn't exist, create one
     if [[ -z $(docker ps -a | awk '/kali_on_ael/ { print $NF }') ]]; then
-        docker run --name kali_on_ael --net="host" --privileged -it -v /tmp/.X11-unix:/tmp/.X11-unix kali_on_ael
+        docker run --name kali_on_ael                                         \
+                   --net="host"                                               \
+                   --privileged -it                                           \
+                   -v /tmp/.X11-unix:/tmp/.X11-unix kali_on_ael
     else
         if [[ -z "$(docker ps | grep kali_on_ael)" ]]; then
             docker start -i kali_on_ael
