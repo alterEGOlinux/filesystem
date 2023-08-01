@@ -142,7 +142,7 @@
       "" TODO: Add folding level
 
       let nl = v:foldend - v:foldstart + 1
-      let linetext = substitute(getline(v:foldstart), '[^a-zA-Z0-9 ]','', 'g')
+      let linetext = substitute(getline(v:foldstart), '[^a-zA-Z0-9 /]','', 'g')
       let linetext = substitute(linetext, '^\s*', '[ ', '')
       let linetext = substitute(linetext, '\s*$', ' ]', '')
       let padding = repeat(' ', 78 - strlen(linetext) - 7 - strlen(nl))
@@ -592,7 +592,7 @@
 
   "" (* general *)
   highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
-  highlight Comment         cterm=BOLD    ctermfg=white ctermbg=NONE
+  highlight Comment         cterm=ITALIC  ctermfg=grey  ctermbg=NONE
   highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
   highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
   highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10

@@ -8,50 +8,65 @@
 
 ## -------------------- [ import ]
 
-  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
-  && . ${HOME}/.ael/bash-ael/messages.bash
+[ -f ${HOME}/.ael/bash-ael/messages.bash ]                                    \
+&& . ${HOME}/.ael/bash-ael/messages.bash
 
-# [* docker services *]
+## -------------------- [ DOCKER SERVICES ]                                 {{{
+## [docker666()]
+## version       = 2023-08-01 02:18:59 UTC
+## description   = "START/STATUS/STOP docker service."
 
 docker666() {
-  #... START/STATUS/STOP docker service
 
+  ## Checking the current status of docker.service
   _status=$(systemctl is-active docker.service)
 
+  ## Checking the provided argument (start, status, or stop) to determine the action
   case "${1}" in
 
+    ## Start Docker service
     start )
-      #... Checking if docker.service is running
+      ## Checking if docker.service is already running
       if [ ${_status} = 'active' ]; then
         message alert "Docker.service is active"
       else
+        ## If not running, start the Docker service
         sudo systemctl start docker.service
         message result "Starting docker.service..."
       fi
       ;;
 
+    ## Get the status of Docker service
     status )
       message action "Checking docker.service status:"
       message result "Docker.service is ${_status}"
       ;;
 
+    ## Stop Docker service
     stop )
-      #... Checking docker.servie status
+      ## Checking docker.servie status
       if [ ${_status} = 'inactive' ]; then
         message alert "Docker.service is already stopped."
       else
+        ## Confirm with the user before stopping the Docker service
         message question "Should I stop docker.service? [y/N]"
           if [[ "${_INPUT}" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+            ## Stopping Docker service and associated socket
             sudo systemctl stop docker.socket
             sudo systemctl stop docker.service
+
+            ## Ask if the user wants to delete the docker0 network interface
             message question "Would you like to delete docker0 network interface? [y/N]"
               if [[ "$_INPUT" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+                ## If confirmed, delete the docker0 network interface
                 sudo ip link delete docker0 
               else
+                ## If not confirmed, moving on
                 message result "Leaving network interface intact."
                 message result "Moving on..."
               fi
           else
+            ## If not confirmed, moving on
             message result "Leaving docker.service running..."
             message result "Moving on..."
           fi
@@ -62,13 +77,18 @@ docker666() {
       message warning "Usage: docker666 [start|status|stop]"
 
   esac
+  }
+  ## }}}
 
-}
-
-# [* docker stats *]
+## -------------------- [ DOCKER STATS ]                                    {{{
+## [docker-stats()]
+## version       = 2023-08-01 02:38:21 UTC
+## description   = "Show Docker Stats"
+## todo          = '''
+## + Verify why IP addresses don't show. [2023-03-02]
+## '''
 
 docker_stats() {
-    #... TODO: Verify why IP addresses don't show. [2023-03-02]
 
     if [[ "$(systemctl is-active docker.service)" == "inactive" ]]; then
       docker666 start
@@ -86,9 +106,10 @@ docker_stats() {
         printf "%b\n" "${_containerID}\t${_ip}\t${_name}"
       fi
     done <<< $(docker ps -a | tail -n+2)
-}
+  }
 
   alias docker-stats="docker_stats"
+  ## }}}
 
 # [* docker cleaner *]
 
@@ -220,9 +241,9 @@ kali() {
 
     xhost -
     docker666 stop
-}
+  }
 
-## }}}
+  ## }}}
 
 # vim: foldmethod=marker
 # vim: syntax=sh
