@@ -54,17 +54,30 @@ snippet head-ramd "alterEGO file header" b
 
 endsnippet
 
-snippet foot "file footer" b
 
-## ----------------------------------------------------------------------------
-# vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+snippet info# "# info header" b
+## ----------------------------------------------------------------------- INFO
+## [`!p snip.rv = snip.fn`]
+## author        = "${2:fantomH}"
+## created       = `date --utc "+%F %H:%M:%S %Z"`
+## updated       = `date --utc "+%F %H:%M:%S %Z"`
+## description   = "${3:description}"
+
 endsnippet
 
-snippet foot-dn "droidnotes footer" b
+snippet foot# "# footer" b
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
+endsnippet
 
+snippet foot" "vim footer" b
+" vim: foldmethod=marker
+"" ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
+endsnippet
+
+snippet foot! "html footer" b
 <!--
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }___________________________ -->
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯ -->
 endsnippet
 

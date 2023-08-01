@@ -1,24 +1,20 @@
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.profile
-#   created        : 2021-04-28 14:59:01 UTC
-#   updated        : 2023-03-05 23:12:33 UTC
-#   description    : Loaded in non interactive shell.
-# _____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [.profile]
+## author        = "fantomH @ alterEGO Linux"
+## created       = 2021-04-28 14:59:01 UTC
+## updated       = 2023-08-01 01:28:01 UTC
+## description   = "Loaded in non interactive shell."
 
-# [* MODULES *]
+## -------------------- [ MODULES ]
 
   [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
 
-# [* LOADED *]
+## -------------------- [ LOADED ]
 
   export LOADED='profile'
-  #... Message function from bash-ael/messages.bash
+  ## Message function from bash-ael/messages.bash
   message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
-# -----------------------------------------------------------------------------
-# vim: foldmethod=marker
 # vim: syntax=sh
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

@@ -1,7 +1,7 @@
 "" ----------------------------------------------------------------------- INFO
 "" [~/.vimrc]
 "" created       = 2021-02-23 02:54:43 UTC
-"" updated       = 2023-07-30 14:23:23 UTC
+"" updated       = 2023-07-30 15:14:49 UTC
 "" description   = "VIM main configuration file."
 
 "" -------------------- [ GENERAL CONFIG ]                                  {{{
@@ -94,16 +94,18 @@
 
   "" }}}
 
-" [* ESC *]
+"" -------------------- [ ESC ]                                             {{{
 
   inoremap ,, <ESC>
   vnoremap ,, <ESC>
 
-" [* FILE EXPLORER *]
+  "" }}}
 
-  "... NerdTree-like
-  "... Vim: you don't need NERDtree or (maybe) netrw
-  "... https://shapeshed.com/vim-netrw/
+"" -------------------- [ FILE EXPLORER ]                                   {{{
+
+  "" NerdTree-like
+  "" Vim: you don't need NERDtree or (maybe) netrw
+  "" https://shapeshed.com/vim-netrw/
   let g:netrw_banner = 0
   let g:netrw_liststyle = 3
   let g:netrw_browse_split = 4
@@ -114,8 +116,8 @@
     " autocmd VimEnter * :Vexplore
   " augroup END
 
-  "... Toggle netrw
-  "... ref. https://vi.stackexchange.com/a/20832
+  "" Toggle netrw
+  "" ref. https://vi.stackexchange.com/a/20832
   function! ToggleNetrw()
           let i = bufnr("$")
           let wasOpen = 0
@@ -131,6 +133,8 @@
       endif
   endfunction
   map <F4> :call ToggleNetrw()<CR>
+
+  "" }}}
 
 "" -------------------- [ FOLDING ]                                         {{{
 
@@ -148,23 +152,27 @@
   set foldtext=AELFoldText()
   "" }}}
 
-" [* HELP *]
+"" -------------------- [ HELP ]                                            {{{
 
-  "... View man pages of word under cursor.
+  "" View man pages of word under cursor.
   nmap <leader>k :silent execute '!man <cword>'<cr>:redraw!<cr>
 
-  "... View Python documentation of word under cursor.
+  "" View Python documentation of word under cursor.
   nmap <leader>hp :silent execute '!pydoc <cword>'<cr>:redraw!<cr>
 
-" [* HIGHLIGHT LINES *]
+  "" }}}
 
-  "... ref. https://vimtricks.com/p/highlight-specific-lines/
+"" -------------------- [ HIGHLIGHT LINES ]                                 {{{
 
-  "... Highlight the current line.
+  "" ref. https://vimtricks.com/p/highlight-specific-lines/
+
+  "" Highlight the current line.
   nnoremap <silent> <Leader>hl :call matchadd('LineHighlight', '\%'.line('.').'l')<CR>
 
-  "... Clear all the highlighted lines.
+  "" Clear all the highlighted lines.
   nnoremap <silent> <Leader>hc :call clearmatches()<CR>
+
+  "" }}}
 
 " [* HTML MAPPING *]
 
@@ -281,31 +289,37 @@
 
   augroup end
 
-" [* linebreak and wrap *]
+"" -------------------- [ LINEBREAK and WRAP ]                              {{{
 
   set linebreak
   set wrap
   " set showbreak=[......]
   set showbreak==>\ \ 
 
-  "... Toggle linewrap.
+  "" Toggle linewrap.
   map <leader>w :setlocal wrap!<CR>
 
-" [* line number *]
+  "" }}}
+
+"" -------------------- [ LINE NUMBER ]                                     {{{
 
   set number
   set relativenumber
 
-  "... Toggle line numbering
+  "" Toggle line numbering
   nnoremap <leader>ln :set number! relativenumber!<CR>
+
+  "" }}}
 
 " [* lorem *]
 
   inoremap lorem<TAB> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sodales, dolor ut lobortis rhoncus, mauris leo condimentum metus, vel elementum arcu ipsum aliquam est. Integer a scelerisque turpis, at ultrices nisl. Nunc fermentum quam elementum, sagittis velit id, porta tellus. Nunc quis suscipit felis. Etiam et leo scelerisque, gravida elit nec, aliquet justo. Phasellus et neque vel turpis hendrerit fringilla sed in arcu. Suspendisse id enim lacinia libero auctor pellentesque. Proin sed sem non neque pellentesque vehicula. Nunc sapien justo, tincidunt vitae ultrices eu, consectetur sit amet orci.
 
-" [* mouse *]
+"" -------------------- [ MOUSE ]                                           {{{
 
   " set mouse=a
+
+  "" }}}
 
 " [* preview window *]
 
@@ -323,10 +337,10 @@
     " endif
   " endfunction 
 
-" [* run script *]
+"" -------------------- [ RUN SCRIPT ]                                      {{{
 
-  " (* python *)
-  "... Requires tmux, with a second pane open.
+  "" (* python *)
+  "" Requires tmux, with a second pane open.
 
   function! RunPython()
       let pycmd = systemlist('command -v python')[0]
@@ -335,49 +349,60 @@
   endfunction
   nnoremap <leader>p :call RunPython()<CR>
 
-  " (* kill script *)
-  "... Kills the script.
+  "" (* kill script *)
+  "" Kills the script.
   nnoremap <leader>ss :!tmux send-keys -t 1 "C-c";<CR><C-l>
 
-" [* save file *]
+  "" }}}
 
-  "... CTRL+s to save file
-  "... ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
-  "... Requires `stty -ixon` in a sourced rc file
+"" -------------------- [ SAVE FILE ]                                       {{{
+
+  "" CTRL+s to save file
+  "" ref. https://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+  "" Requires `stty -ixon` in a sourced rc file
   inoremap <C-s> <ESC>:write<CR>
+  nnoremap <C-s> :write<CR>
 
-" [* scroll offset *]
+  "" }}}
 
-  "... When scrolling, keeps the cursor at the vertical center.
-  "... Use so=999 for centered
-  "... ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
+"" -------------------- [ SCROLL OFFSET ]                                   {{{
+
+  "" When scrolling, keeps the cursor at the vertical center.
+  "" Use so=999 for centered
+  "" ref. http://vim.wikia.com/wiki/make_search_results_appear_in_the_middle_of_the_screen
   set scrolloff=999
 
-" [* search *]
+  "" }}}
 
-  "... Fuzzy find and wildmenu.
+"" -------------------- [ SEARCH ]                                          {{{
+
+  "" Fuzzy find and wildmenu.
   set path+=**
   set wildmenu
 
-  " (* text search *)
-  "... Search ignorecase.
+  "" (* text search *)
+  "" Search ignorecase.
   set ignorecase
 
-  "... Search highlight.
+  "" Search highlight.
   set hlsearch
 
-  "... Toggle search highlighting                      
+  "" Toggle search highlighting                      
   nnoremap <F3> :set hlsearch!<CR> 
 
-  " (* clear search *)
+  "" (* clear search *)
   nnoremap <leader>cs :let @/ = ""<CR>
 
-" [* spellchecker *]
+  "" }}}
 
-  "... Toggle spell checker.
+"" -------------------- [ SPELLCHECKER ]                                    {{{
+
+  "" Toggle spell checker.
   map <F5> :setlocal spell! spelllang=en_us<CR>
 
-" [* statusline *]
+  "" }}}
+
+"" -------------------- [ STATUSLINE ]                                      {{{
 
   set laststatus=2
   set statusline=
@@ -391,17 +416,21 @@
   set statusline+=\ col:%03c\ "Colnr 
   set statusline+=\ %m%r%w\ %P\ \ "Modified? Readonly? Top/bot.
 
-" [* tab and indent *]
+  "" }}}
+
+"" -------------------- [ TAB and INDENT ]                                  {{{
 
   set tabstop=2
-  "... shiftround : rounds indent to multiple of shiftwidth.
-  "... Applies to < and > in normal mode. <C-t> and <C-d> in insert mode
-  "... always round the indent.
+  "" shiftround : rounds indent to multiple of shiftwidth.
+  "" Applies to < and > in normal mode. <C-t> and <C-d> in insert mode
+  "" always round the indent.
   set shiftround
   set shiftwidth=2
   set expandtab
 
-" [* tags *]
+  "" }}}
+
+"" -------------------- [ TAGS ]                                            {{{
 
   inoremap "<TAB> ""<left>
   inoremap '<TAB> ''<left>
@@ -411,29 +440,35 @@
   inoremap {<CR> {<CR>}<ESC>O
   inoremap {;<CR> {<CR>};<ESC>O
 
-" [* timestamp *]
+  "" }}}
 
-  "... Insert timestamp.
-  "... ex: 2022-03-25 15:49:24 UTC
+"" -------------------- [ TIMESTAMP ]                                       {{{
+
+  "" Insert timestamp.
+  "" ex: 2022-03-25 15:49:24 UTC
   nnoremap <F12> "=system('echo -n $(date --utc "+%F %H:%M:%S %Z" )')<CR>p
 
-  "... Insert timestamp as ID.
-  "... ex: 202203251549
+  "" Insert timestamp as ID.
+  "" ex: 202203251549
   nnoremap <F9> "=system('echo -n $(date --utc "+%Y%m%d%H%M")')<CR>p
 
-" [* xclip *]
+  "" }}}
 
-  "... Enable clipboard ability with xclip.
-  "... ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
+"" -------------------- [ XCLIP ]                                           {{{
+
+  "" Enable clipboard ability with xclip.
+  "" ref. Andrew [8xx8] Kulakov 'VIM Copy/Paste' <https://coderwall.com/p/hmki3q/vim-copy-paste>
   map <F7> y:call system("xclip -i -selection clipboard", getreg("\""))<cr>
   map <S-F7> :call setreg("\"",system("xclip -o -selection clipboard"))<cr>p")")")"))
 
-" [* plugins - install *]
+  "" }}}
+
+"" -------------------- [ PLUGINS - INSTALL ]                               {{{
 
   syntax enable
   filetype plugin on
 
-  " (* vim-plug *)
+  "" (* vim-plug *)
 
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -443,111 +478,127 @@
 
   call plug#begin('~/.vim/plugged')
 
-  " (* coloscheme iceberg *)
-  "... https://github.com/cocopon/iceberg.vim
+  "" (* coloscheme iceberg *)
+  "" https://github.com/cocopon/iceberg.vim
   Plug 'cocopon/iceberg.vim'
 
-  " (* jedi *)
+  "" (* jedi *)
   Plug 'https://github.com/davidhalter/jedi-vim.git'
 
-  " (* fzf *)
+  "" (* fzf *)
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
-  " (* markdown-preview *)
-  "... https://github.com/iamcco/markdown-preview.vim
+  "" (* markdown-preview *)
+  "" https://github.com/iamcco/markdown-preview.vim
   Plug 'iamcco/markdown-preview.vim'
 
-  " (* syntastic *)
-  "... Syntax checker.
-  "... https://github.com/vim-syntastic/syntastic
-  Plug 'vim-syntastic/syntastic'
+  "" (* syntastic *)
+  "" Syntax checker.
+  "" https://github.com/vim-syntastic/syntastic
+  " Plug 'vim-syntastic/syntastic'
 
-  " (* ultisnips *)
-  "... https://github.com/SirVer/ultisnips
+  "" (* ultisnips *)
+  "" https://github.com/SirVer/ultisnips
   Plug 'SirVer/ultisnips'
 
-  " (* YouCompleteMe *)
+  "" (* YouCompleteMe *)
   Plug 'Valloric/YouCompleteMe'
 
   call plug#end()
 
-  "... Automatically install missing plugins.
-  "... ref. https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup
+  "" Automatically install missing plugins.
+  "" ref. https://github.com/junegunn/vim-plug/wiki/extra#automatically-install-missing-plugins-on-startup
   autocmd VimEnter *
     \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
     \|   PlugInstall --sync | q
     \| endif
 
-  "... Disable automatic indent on from vim-plug
+  "" Disable automatic indent on from vim-plug
   filetype indent off
 
-" [* plugins - configs *]
+  "" }}}
 
-  " (* fzf.vim *)
+"" -------------------- [ PLUGINS - CONFIGS ]                               {{{
 
-  "... Buffers list.
+  "" (* fzf.vim *)
+
+  "" Buffers list.
   nnoremap <silent> <leader>ls :Buffers<CR>
 
-  "... Open files in $HOME.
+  "" Open files in $HOME.
   nnoremap <silent> <C-o> :Files ~<CR>
 
-  "... Open files from /.
+  "" Open files from /.
   nnoremap <silent> <leader>sys :Files /<CR>
 
-  "... Find lines containing.
+  "" Find lines containing.
   nnoremap <silent> <C-f> :BLines<CR>
 
-  " (* emmet-vim *)     
+  "" (* emmet-vim *)     
 
-  "... Enable emmet-vim tab completion 
+  "" Enable emmet-vim tab completion 
   " imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-  " (* syntastic *)
+  "" (* syntastic *)
+  " map <leader>sx :SyntasticToggleMode<CR>
 
-  map <leader>sx :SyntasticToggleMode<CR>
-
-  " (* markdown-preview *)
+  "" (* markdown-preview *)
   nmap <silent> <leader>vm <Plug>MarkdownPreview
   nmap <silent> <leader>sm <Plug>StopMarkdownPreview
 
-  " (* ultisnips *)
+  "" (* ultisnips *)
+  "" Since we use YouCompleteMe, some triggers were changed.
+  "" In file types not covered by YouCompleteMe, it looks like you have to 
+  "" complete the word to select it.
   let g:UltiSnipsExpandTrigger="<c-j>"
   let g:UltiSnipsEditSplit="vertical"
   let g:UltiSnipsJumpForwardTrigger="<c-k>"
   let g:UltiSnipsJumpBackwardTrigger="<c-j>"
 
-" [* colorscheme *]
+  "" }}}
 
-  " (* colors *)
-  "...    0  Black
-  "...   10  Lime
+"" -------------------- [ COLORSCHEME ]                                     {{{
+
+  "" (* colors *)
+  ""    0  Black
+  ""   10  Lime
 
   set t_Co=256
 
-  " (* colorschemes *)
-  "... iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
-  "... blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+  "" (* colorschemes *)
 
-  " (* colorscheme default *)
+  "" arstotzka: https://github.com/daylerees/colour-schemes/blob/master/vim/colors/arstotzka.vim
+  " colorscheme arstotzka
+
+  "" base16-3024: https://github.com/RRethy/nvim-base16/blob/master/colors/base16-3024.vim
+  " colorscheme base16-3024
+
+  "" blaquemagick: https://github.com/xero/blaquemagick.vim/blob/master/colors/blaquemagick.vim
+  " colorscheme blaquemagick
+
+  " iceberg: https://github.com/cocopon/iceberg.vim/blob/master/src/iceberg.vim
   colorscheme iceberg
+
+  "" silenthill: https://github.com/evilwaveforms/silenthill.vim
+  " colorscheme silenthill
 
   set background=dark
 
-  " (* bionic reading *)
-  "... ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
+  "" (* bionic reading *)
+  "" ref. https://stackoverflow.com/questions/4167425/custom-syntax-highlighting-in-vim
   nnoremap <silent> <leader>b :syn match bionic /\w\{,3}\zs\(\W\\|\w\)\{-}\(\s\\|\n\)\ze/<CR>
   highlight bionic          cterm=NONE    ctermfg=GREY
 
-  " (* general *)
+  "" (* general *)
   highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
-  highlight Comment         cterm=BOLD    ctermfg=white    ctermbg=NONE
+  highlight Comment         cterm=BOLD    ctermfg=white ctermbg=NONE
   highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
   highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
   highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
   highlight LineNr          cterm=NONE    ctermfg=246   ctermbg=238
   highlight MatchParen      cterm=NONE    ctermfg=NONE  ctermbg=NONE
-  "... Sets the background to transparent with cterm(fg/bg) to NONE.
+  "" Sets the background to transparent with cterm(fg/bg) to NONE.
   highlight Normal          cterm=NONE    ctermfg=NONE  ctermbg=NONE
   highlight Search          cterm=NONE    ctermfg=16    ctermbg=11
   highlight Statement       cterm=ITALIC  ctermfg=110   ctermbg=NONE
@@ -555,8 +606,8 @@
   highlight StatusLineNC    cterm=NONE    ctermfg=0     ctermbg=238
   highlight Visual          cterm=NONE    ctermfg=16    ctermbg=11
 
-  " (* html/md *)
-  "... ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
+  "" (* html/md *)
+  "" ref. http://vimdoc.sourceforge.net/htmldoc/syntax.html
   highlight htmlTagName     cterm=BOLD    ctermfg=WHITE ctermbg=NONE
   highlight link htmlTag    htmlTagName
   highlight link htmlEndTag htmlTagName
@@ -584,12 +635,12 @@
   " hi SpecialKey         term=NONE cterm=NONE ctermfg=99  ctermbg=NONE
   " hi String             term=NONE cterm=NONE ctermfg=26   ctermbg=NONE
 
-  " (* window's tab *)
-  "... Focused
+  "" (* window's tab *)
+  "" Focused
   hi TabLineSel         term=BOLD cterm=BOLD ctermfg=white      ctermbg=30
-  "... Unfocused
+  "" Unfocused
   hi TabLine            term=NONE cterm=NONE ctermfg=246        ctermbg=238
-  "... Rest of the line
+  "" Rest of the line
   hi TabLineFill        term=NONE cterm=NONE ctermfg=NONE       ctermbg=238
 
   " hi Todo               term=NONE cterm=NONE ctermfg=251  ctermbg=66
@@ -610,37 +661,11 @@
   " hi! link Question        DiffChange
   " hi! link VimHiGroup      VimGroup
 
-  " ** shell
-  " -- Shell variables (default in vim81/syntax/sh.vim).
+  "" (* shell *)
+  "" Shell variables (default in vim81/syntax/sh.vim).
   " hi shDerefVar         term=NONE      cterm=BOLD      ctermfg=cyan   ctermbg=NONE
 
-
-" [* stuff to sort *]
-
-  " function! HTML_tags()
-    " let min_tag = expand("<cWORD>")
-    " let text = "<" . min_tag . "></" . min_tag . ">
-    " echom matchlist(min_tag, '\(.\{-}\)\(\\.\)\?\(.*\)\?\(\#\)\?\(.*\)\?')[2]
-    " execute "normal! viWdi" . text . "\<ESC>?<\<CR>\<ESC>"
-    " execute "normal! viWdi" . text
-  " endfunction
-  " inoremap <F8> <ESC>:call HTML_tags()<CR>
-
-  "--{ PYTHON-VIM }
-  function! Python_vim()
-python3 << EOF
-
-  import vim
-  # print(help(vim))
-  # print(dir(vim))
-
-  x = vim.__doc__
-  print(x)
-
-EOF
-  endfunction
-
-  nnoremap <leader>pv :call Python_vim()<ESC>
+  "" }}}
 
 " vim: foldmethod=marker
 "" ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
