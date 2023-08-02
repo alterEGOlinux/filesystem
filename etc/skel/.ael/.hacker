@@ -1,31 +1,31 @@
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.ael/.hacker
-#   created        : 2022-11-22 22:25:39 UTC
-#   updated        : 2023-03-26 12:40:59 UTC
-#   description    : Hacker shell stuff.
-# _____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [.ael/.hacker]
+## author        = "fantomH @alterEGO Linux"
+## created       = 2022-11-22 22:25:39 UTC
+## updated       = 2023-08-02 20:14:28 UTC
+## description   = "Hacker shell stuff."
 
-# [* WORDLISTS *]
+## -------------------- [ WORDLISTS ]                                       {{{
 
-  export WORDLISTS="/usr/local/share/wordlists"
-  export WL_BEST1050="${WORDLISTS}/best1050.txt"
-  export WL_BIG="${WORDLISTS}/seclist-big.txt"
-  export WL_DIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
-  export WL_LARGEFILES="${WORDLISTS}/raft-large-files.txt"
-  export WL_ROCKYOU="${WORDLISTS}/rockyou.txt"
-  export WL_XPLATFORM="${WORDLISTS}/xplatform.txt"
+export WORDLISTS="/usr/local/share/wordlists"
+export WLBEST1050="${WORDLISTS}/best1050.txt"
+export WLBIG="${WORDLISTS}/seclist-big.txt"
+export WLDIRMEDIUM="${WORDLISTS}/directory-list-2.3-medium.txt"
+export WLLARGEFILES="${WORDLISTS}/raft-large-files.txt"
+export WLROCKYOU="${WORDLISTS}/rockyou.txt"
+export WLXPLATFORM="${WORDLISTS}/xplatform.txt"
 
-# [* REVERSE SHELLS *]
+## }}}
 
-  export REVSHELLS="/usr/local/share/reverse_shells"
-  export RS_PATT_NODEJS="${REVSHELLS}/patt_nodeJS.js"
-  export RS_REVSHELL_PHP="${REVSHELLS}/php-reverse-shell.php"
-  export RS_WEBSHELL="${REVSHELLS}/webshell.php"
+## -------------------- [ REVERSE SHELLS ]                                  {{{
 
-# -----------------------------------------------------------------------------
-# vim: foldmethod=marker
+export REVSHELLS="/usr/local/share/reverse_shells"
+export RSNODEJS="${REVSHELLS}/patt_nodeJS.js"
+export RSPHP="${REVSHELLS}/php-reverse-shell.php"
+export RSWEB="${REVSHELLS}/webshell.php"
+
+## }}}
+
 # vim: syntax=sh
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

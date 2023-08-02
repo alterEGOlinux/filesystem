@@ -20,8 +20,7 @@
 
 busy() {
 
-    message action "Function called <busy()> from $(basename $BASH_SOURCE)"
-    echo
+    message action "< busy > from $(basename $BASH_SOURCE)"
 
     cat /dev/urandom                                                          \
     | hexdump -C                                                              \
@@ -40,8 +39,7 @@ busy() {
 
 cheat() {
 
-    message action "Function called <cheat()> from $(basename $BASH_SOURCE)"
-    echo
+    message action "< cheat > from $(basename $BASH_SOURCE)"
 
     cheat="$(curl -s cheat.sh/:list                                           \
             | fzf --layout="reverse"                                          \
@@ -62,8 +60,7 @@ cheat() {
 
 delete() {
 
-    message action "Function called <delete()> from $(basename $BASH_SOURCE)"
-    echo
+    message action "< delete > from $(basename $BASH_SOURCE)"
 
     if [ -d "${1}" ]; then
       message question "Are you sure your want to delete this directory? [y/N]"
@@ -85,11 +82,9 @@ delete() {
 
 directory_size() {
 
-    message action "Function called <directory_size()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <directory-size>"
+    message action "< directory-size > from $(basename $BASH_SOURCE)"
     message action "Command <du -bh --max-depth 1 | sort -rh | head>"
     message action "Size of current directory, followed by biggest child directories:"
-    echo
 
     ## du -bh --max-depth 1 | sort -rh | head
     du --bytes --human-readable --max-depth 1                                 \
@@ -110,9 +105,8 @@ directory_size() {
 
 fixout() {
 
-    message action "Function called <fixout()> from $(basename $BASH_SOURCE)"
+    message action "< fixout > from $(basename $BASH_SOURCE)"
     message action "Cleaning history before closing ..."
-    echo
 
     sleep 2
 
@@ -136,10 +130,9 @@ fixout() {
 
 fuck() {
 
-    message action "Function called <fuck()> from .functions"
+    message action "< fuck > from .functions"
     message action "Command <sudo \$(history -p !!)"
     message action "Repeating last command as sudo user ..."
-    echo
 
     sudo $(history -p !!)
   }
@@ -152,10 +145,9 @@ fuck() {
 
 getmp3() {
 
-    message action "Function called <getmp3()> from $(basename $BASH_SOUCE)"
+    message action "< getmp3 > from $(basename $BASH_SOUCE)"
     message action "youtube-dl -x --audio-format mp3 --prefer-ffmpeg <url>"
     message action "Extract audio from video to mp3 format ..."
-    echo
 
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
   }
@@ -171,10 +163,9 @@ getmp3() {
 
 history_cleaner() {
 
-    message action "Function called <history_cleaner()> from $(basename $BASH_SOURCE)"
+    message action "< history-cleaner > from $(basename $BASH_SOURCE)"
     message action "Aliased to <history-cleaner>"
     message action "Cleans .bash_history file ..."
-    echo
 
     if [[ ${@} != '' ]]; then
 
@@ -219,7 +210,6 @@ processes() {
 
     message action "< processes > from $(basename $BASH_SOURCE)"
     message action "Showing processes ..."
-    echo
 
     ps aux
   }
@@ -234,7 +224,6 @@ ps_grep() {
 
     message action "< ps-grep > from $(basename $BASH_SOURCE)"
     message action "Showing processes for "${@}" ..."
-    echo
 
     ps aux | grep -Ei "$@"
   }
@@ -253,7 +242,6 @@ py_clean () {
 
     message action "< py-clean > from $(basename $BASH_SOURCE)"
     message action "Cleaning python cache in current directory ..."
-    echo
 
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   }
@@ -272,7 +260,6 @@ reset_time() {
 
     message action "< reset-time > from $(basename $BASH_SOURCE)"
     message action "Resetting time ..."
-    echo
 
     sudo timedatectl set-ntp true
     sudo hwclock --systohc --utc
@@ -294,7 +281,6 @@ search_content() {
 
     message action "< search-content > from $(basename $BASH_SOURCE)"
     message action "Searching content "${1}" ..."
-    echo
 
     rg --files-with-matches --no-messages "$1"                                \
     | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
@@ -322,7 +308,6 @@ shell_info() {
 
     message action "< shell-info > from $(basename $BASH_SOURCE)"
     message action "Shell information for "${@}" ..."
-    echo
 
     shopt -s extdebug
     type -a ${@}
@@ -340,38 +325,48 @@ show_utc() {
 
     message action "< show-utc > from $(basename $BASH_SOURCE)"
     message action "UTC time ..."
-    echo
 
     echo  $(date --utc "+%F %H:%M:%S %Z")
   }
   alias show-utc="show_utc"
   ## }}}
 
+## -------------------- [ tagalog ]                                         {{{
+## [tagalog()]
+## version       = 2023-08-02 11:02:33 UTC
+## description   = "Translate to Tagalog."
+
 tagalog() {
 
-    message action "Function called <tagalog()> from $(basename $BASH_SOURCE)"
+    message action "< tagalog > from $(basename $BASH_SOURCE)"
     message action "Translating "${@}" to Tagalog ..."
-    echo
 
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=tl&dt=t&q=${@}" \
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
   }
+  ## }}}
+
+## -------------------- [ translate ]                                       {{{
+## [translate()]
+## version       = 2023-08-02 11:05:00 UTC
+## description   = "Translate."
+## notes         = '''
+## Add language abbr after string to translate.
+## For example, translate "Hello world" fr
+## '''
 
 translate() {
 
-    #... Add language abbr after string to translate.
-    #... For example, translate "Hello world" fr
-
-    message action "Function called <translate()> from $(basename $BASH_SOURCE)"
+    message action "< translate > from $(basename $BASH_SOURCE)"
     message action "Usage <translate <word(s)> <language code>>"
     message action "Translating "${1}" to ${2} ..."
-    echo
 
     wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${2}&dt=t&q=${1}" \
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
   }
+  ## }}}
 
 # vim: syntax=sh
 # vim: foldmethod=marker
