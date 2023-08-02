@@ -1,25 +1,24 @@
 #! /usr/bin/env sh
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.ael/.functions
-#   created        : 2021-05-25 19:40:20 UTC
-#   updated        : 2023-03-26 13:21:19 UTC
-#   description    : Shell functions collection.
-# _____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [.ael/.functions]
+## author        = "fantomH @alterEGO Linux"
+## created       = 2021-05-25 19:40:20 UTC
+## updated       = 2023-08-01 19:52:58 UTC
+## description   = "Shell functions collection"
 
-# [* MODULES *]
+[ -f ${HOME}/.ael/bash-ael/messages.bash ]                                    \
+&& . ${HOME}/.ael/bash-ael/messages.bash
 
-  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
-  && . ${HOME}/.ael/bash-ael/messages.bash
-
-# [* FUNCTIONS *]
+## -------------------- [ busy ]                                            {{{
+## [busy()]
+## version       = 2023-08-01 19:55:12 UTC
+## description   = "When the boss comes around to look busy."
+## notes         = '''
+## ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
+## CTRL+c to quit.
+## '''
 
 busy() {
-    #... When the boss comes around to look busy.
-    #... ref. https://www.commandlinefu.com/commands/view/6663/pretend-to-be-busy-in-office-to-enjoy-a-cup-of-coffee
-    #... CTRL+c to quit.
 
     message action "Function called <busy()> from $(basename $BASH_SOURCE)"
     echo
@@ -28,11 +27,18 @@ busy() {
     | hexdump -C                                                              \
     | grep --color=always 'ca fe'
   }
+  ## }}}
+
+## -------------------- [ cheat ]                                           {{{
+## [cheat()]
+## version       = 2023-08-01 19:57:57 UTC
+## description   = "Query https://cheat.sh."
+## notes         = '''
+## Menu with `fzf` and display with `less`.
+## https://github.com/chubin/cheat.sh
+## '''
 
 cheat() {
-    #... Query https://cheat.sh.
-    #... Menu with `fzf` and display with `less`.
-    #... https://github.com/chubin/cheat.sh
 
     message action "Function called <cheat()> from $(basename $BASH_SOURCE)"
     echo
@@ -47,9 +53,14 @@ cheat() {
 
     curl -s cheat.sh/"${cheat}" | less -R
   }
+  ## }}}
+
+## -------------------- [ delete ]                                          {{{
+## [delete()]
+## version       = 2023-08-01 19:59:45 UTC
+## description   = "Delete directory."
 
 delete() {
-    #... Delete directory.
 
     message action "Function called <delete()> from $(basename $BASH_SOURCE)"
     echo
@@ -65,9 +76,14 @@ delete() {
       message warning "There is nothing to do here!"
     fi
   }
+  ## }}}
+
+## -------------------- [ directory-size ]                                  {{{
+## [directory-size()]
+## version       = 2023-08-01 20:01:01 UTC
+## description   = "Check size of biggest directories."
 
 directory_size() {
-    #... Check size of biggest directories.
 
     message action "Function called <directory_size()> from $(basename $BASH_SOURCE)"
     message action "Aliased to <directory-size>"
@@ -75,12 +91,13 @@ directory_size() {
     message action "Size of current directory, followed by biggest child directories:"
     echo
 
-    #... du -bh --max-depth 1 | sort -rh | head
+    ## du -bh --max-depth 1 | sort -rh | head
     du --bytes --human-readable --max-depth 1                                 \
     | sort --reverse --human-numeric-sort                                     \
     | head
   }
   alias directory-size='directory_size'
+  ## }}}
 
 fixout() {
     #... Fix history and exit.

@@ -3,7 +3,7 @@
 ## ----------------------------------------------------------------------- INFO
 ## [~/.ael/.containers]
 ## created       = 2021-12-06 11:15:11 UTC
-## updated       = 2023-07-27 12:01:18 UTC
+## updated       = 2023-08-01 10:57:10 UTC
 ## description   = "Containers functions and configuration."
 
 ## -------------------- [ import ]
@@ -111,7 +111,13 @@ docker_stats() {
   alias docker-stats="docker_stats"
   ## }}}
 
-# [* docker cleaner *]
+## -------------------- [ DOCKER CLEANER ]                                  {{{
+## [docker-container-cleaner()]
+## version       = 2023-08-01 10:40:08 UTC
+## description   = "Delete all docker container"
+## todo          = '''
+## + Make it list to delete with fzf. [2023-08-01]
+## '''
 
 docker_container_cleaner() {
 
@@ -128,11 +134,15 @@ docker_container_cleaner() {
     else
         message result "GoodBye!!!"
     fi
-}
+  }
 
   alias docker-container-cleaner="docker_container_cleaner"
+  ## }}}
 
-# [* cyberchef *]
+## -------------------- [ CYBERCHEF ]                                       {{{
+## [cyberchef()]
+## version       = 2023-08-01 10:42:34 UTC
+## description   = "Cyberchef: A simple, intuitive web app for analysing and decoding data without having to deal with complex tools or programming languages. CyberChef encourages both technical and non-technical people to explore data formats, encryption and compression."
 
 cyberchef() {
 
@@ -146,13 +156,17 @@ cyberchef() {
             $BROWSER "http://localhost:8888"
         else
             message action "Starting Cyberchef container on AEL..."
-            docker run --rm -d -p 8888:8000 mpepping/cyberchef                    \
+            docker run --rm -d -p 8888:8000 mpepping/cyberchef                \
             && $BROWSER "http://localhost:8888"
         fi
     fi
-}
+  }
+  ## }}}
 
-# [* damn vulnerable webapp (DVWA) *]
+## -------------------- [ DAMN VULNERABLE WEBAPP (DVWA) ]                   {{{
+## [dvwa()]
+## version       = 2023-08-01 10:48:57 UTC
+## description   = "damn vulnerable webapp (DVWA)"
 
 dvwa() {
 
@@ -177,9 +191,13 @@ dvwa() {
             fi
         fi
     fi
-}
+  }
+  ## }}}
 
 ## -------------------- [ OWASP juice shop ]                                {{{
+## [juice-shop()]
+## version       = 2023-08-01 10:50:28 UTC
+## description   = "OWASP juice shop"
 
 juice_shop() {
 
@@ -207,15 +225,18 @@ juice_shop() {
 }
 
   alias juice-shop="juice_shop"
-## }}}
+  ## }}}
 
-## -------------------- [ kali linux ]                                      {{{
+## -------------------- [ KALI LINUX ]                                      {{{
+## [kali()]
+## version       = 2023-08-01 10:51:18 UTC
+## description   = "Run Kali Linux on AEL"
+## todo          = '''
+## + Use startx to start a WM session (You will need to killall Xephyr to
+## completely exit. <= Need to find a solution.
+## '''
 
 kali() {
-
-    ## updated = 2023-07-29 01:35:20 UTC
-    ## use startx to start a WM session (You will need to killall Xephyr to
-    ## completely exit. <= Need to find a solution.
 
     docker666 start
     xhost +
@@ -242,7 +263,6 @@ kali() {
     xhost -
     docker666 stop
   }
-
   ## }}}
 
 # vim: foldmethod=marker
