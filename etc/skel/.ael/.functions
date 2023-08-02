@@ -99,10 +99,16 @@ directory_size() {
   alias directory-size='directory_size'
   ## }}}
 
+## -------------------- [ fixout ]                                          {{{
+## [fixout()]
+## version       = 2023-08-02 00:07:03 UTC
+## description   = "Fix bash history and exit."
+## notes         = '''
+## Don't try to put this code in a shell script, it won't work.
+## `history` don't play well in scripts.
+## '''
+
 fixout() {
-    #... Fix history and exit.
-    #... Don't try to put this code in a shell script, it won't work.
-    #... `history` don't play well in scripts.
 
     message action "Function called <fixout()> from $(basename $BASH_SOURCE)"
     message action "Cleaning history before closing ..."
@@ -121,9 +127,14 @@ fixout() {
     && rm ~/.tmp$$                                                            \
     && exit
   }
+  ## }}}
+
+## -------------------- [ fuck ]                                            {{{
+## [fuck()]
+## version       = 2023-08-02 00:10:38 UTC
+## description   = "Repeats last cmd with sudo if forgotten"
 
 fuck() {
-    #... Repeat last cmd with sudo if forgotten.
 
     message action "Function called <fuck()> from .functions"
     message action "Command <sudo \$(history -p !!)"
@@ -132,9 +143,14 @@ fuck() {
 
     sudo $(history -p !!)
   }
+  ## }}}
+
+## -------------------- [ getmp3 ]                                          {{{
+## [getmp3()]
+## version       = 2023-08-02 00:36:18 UTC
+## description   = "Extract video audo to .mp3"
 
 getmp3() {
-    #... Extract audio to .mp3
 
     message action "Function called <getmp3()> from $(basename $BASH_SOUCE)"
     message action "youtube-dl -x --audio-format mp3 --prefer-ffmpeg <url>"
@@ -143,6 +159,15 @@ getmp3() {
 
     youtube-dl -x --audio-format mp3 --prefer-ffmpeg "${1}"
   }
+  ## }}}
+
+## -------------------- [ history-cleaner ]                                 {{{
+## [history-cleaner()]
+## version       = 2023-08-02 00:44:35 UTC
+## description   = "Cleans bash history"
+## todo          = '''
+## - Use only fzf and multi select [2023-08-01]
+## '''
 
 history_cleaner() {
 
@@ -153,11 +178,11 @@ history_cleaner() {
 
     if [[ ${@} != '' ]]; then
 
-      #... Remove .bash_history entry.
-      #... Usage: `historyCleaner youtube-dl`
-      #... or `historyCleaner cd$`
+      ## Remove .bash_history entry.
+      ## Usage: `history-cleaner youtube-dl`
+      ## or `history-cleaner cd$`
 
-      dumpfile="/tmp/historyCleaner.dump"
+      dumpfile="/tmp/history-cleaner.dump"
 
       history -a
       cp ~/.bash_history ${dumpfile}
@@ -170,7 +195,7 @@ history_cleaner() {
 
     else
 
-      #... Uses `fzf` to sort through the bash history and let you delete an entry.
+      ## Uses `fzf` to sort through the bash history and let you delete an entry.
 
       choices=$(history | fzf)
       [[ -z "${choices}" ]] && exit 1
@@ -183,48 +208,69 @@ history_cleaner() {
     fi
   }
   alias history-cleaner='history_cleaner'
+  ## }}}
 
-ps_basic() {
+## -------------------- [ processes ]                                       {{{
+## [processes()]
+## version       = 2023-08-02 00:51:54 UTC
+## description   = "Show processes."
 
-    message action "Function called <ps_basic()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <ps_basic>"
-    message action "Command <ps aux>"
+processes() {
+
+    message action "< processes > from $(basename $BASH_SOURCE)"
     message action "Showing processes ..."
     echo
 
     ps aux
   }
-  alias ps-basic='ps_basic'
+  ## }}}
+
+## -------------------- [ ps-grep ]                                         {{{
+## [ps-grep()]
+## version       = 2023-08-02 00:56:31 UTC
+## description   = "Show processes for a particular application."
 
 ps_grep() {
 
-    message action "Function called <ps_grep()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <ps_grep>"
-    message action "Command <ps aux | grep -Ei <application name>>"
+    message action "< ps-grep > from $(basename $BASH_SOURCE)"
     message action "Showing processes for "${@}" ..."
     echo
 
     ps aux | grep -Ei "$@"
   }
   alias ps-grep='ps_grep'
+  ## }}}
+
+## -------------------- [ py-clean ]                                        {{{
+## [py-clean()]
+## version       = 2023-08-02 00:59:00 UTC
+## description   = "Clean python cache in current directory."
+## notes         = '''
+## ref. https://stackoverflow.com/a/41386937/10500496
+## '''
 
 py_clean () {
-    #... ref. https://stackoverflow.com/a/41386937/10500496
 
-    message action "Function called <py_clean()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <py-clean>"
-    message action "Command <find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete>"
+    message action "< py-clean > from $(basename $BASH_SOURCE)"
     message action "Cleaning python cache in current directory ..."
     echo
 
     find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
   }
   alias py-clean='py_clean'
+  ## }}}
+
+## -------------------- [ reset-time ]                                      {{{
+## [reset-time()]
+## version       = 2023-08-02 01:02:11 UTC
+## description   = "Reset system time."
+## notes         = '''
+## Useful when Windows boot screw time.
+## '''
 
 reset_time() {
 
-    message action "Function called <reset_time()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <reset-time>"
+    message action "< reset-time > from $(basename $BASH_SOURCE)"
     message action "Resetting time ..."
     echo
 
@@ -234,12 +280,19 @@ reset_time() {
     echo  $(date "+%F %H:%M:%S %Z")
   }
   alias reset-time="reset_time"
+  ## }}}
+
+## -------------------- [ search-content ]                                  {{{
+## [search-content()]
+## version       = 2023-08-02 01:05:06 UTC
+## description   = "Search file content."
+## notes         = '''
+## src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
+## '''
 
 search_content() {
-    #... src. https://github.com/junegunn/fzf/wiki/Examples#searching-file-contents
 
-    message action "Function called <search_content()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <sc>"
+    message action "< search-content > from $(basename $BASH_SOURCE)"
     message action "Searching content "${1}" ..."
     echo
 
@@ -247,22 +300,27 @@ search_content() {
     | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
   }
   alias sc="search_content"
+  ## }}}
+
+## -------------------- [ shell-info ]                                      {{{
+## [shell-info()]
+## version       = 2023-08-02 01:18:13 UTC
+## description   = "Gives shell function or alias info."
+## notes         = '''
+## Could build something with fzf to search and give info.
+## ref. https://stackoverflow.com/a/949006/10500496
+## You can use the bash(1) built-in compgen
+##     compgen -c will list all the commands you could run.
+##     compgen -a will list all the aliases you could run.
+##     compgen -b will list all the built-ins you could run.
+##     compgen -k will list all the keywords you could run.
+##     compgen -A function will list all the functions you could run.
+##     compgen -A function -abck will list all the above in one go.
+## '''
 
 shell_info() {
 
-    #... Could build something with fzf to search and give info.
-    #... ref. https://stackoverflow.com/a/949006/10500496
-    #... You can use the bash(1) built-in compgen
-    #...     compgen -c will list all the commands you could run.
-    #...     compgen -a will list all the aliases you could run.
-    #...     compgen -b will list all the built-ins you could run.
-    #...     compgen -k will list all the keywords you could run.
-    #...     compgen -A function will list all the functions you could run.
-    #...     compgen -A function -abck will list all the above in one go.
-
-    message action "Function called <shell_info()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <shell-info>"
-    message action "Command <shopt -s extdebug; type -a <function>; declare -F <function>>"
+    message action "< shell-info > from $(basename $BASH_SOURCE)"
     message action "Shell information for "${@}" ..."
     echo
 
@@ -271,18 +329,23 @@ shell_info() {
     declare -F ${@}
   }
   alias shell-info="shell_info"
+  ## }}}
+
+## -------------------- [ show-utc ]                                        {{{
+## [show-utc()]
+## version       = 2023-08-02 01:36:14 UTC
+## description   = "Shows UTC time."
 
 show_utc() {
 
-    message action "Function called <show_utc()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <show-utc>"
-    message action "Command <echo  \$(date --utc \"+%F %H:%M:%S %Z\")>"
+    message action "< show-utc > from $(basename $BASH_SOURCE)"
     message action "UTC time ..."
     echo
 
     echo  $(date --utc "+%F %H:%M:%S %Z")
   }
   alias show-utc="show_utc"
+  ## }}}
 
 tagalog() {
 
@@ -310,7 +373,6 @@ translate() {
     | head -n 1
   }
 
-# -----------------------------------------------------------------------------
-# vim: foldmethod=marker
 # vim: syntax=sh
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
