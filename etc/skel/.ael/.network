@@ -1,83 +1,113 @@
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.ael/.network
-#   created        : 2022-11-24 01:37:23 UTC
-#   updated        : 2023-03-22 12:18:46 UTC
-#   description    : Network related functions
-# _____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [.ael/.network]
+## author        = "fantomH @alterEGO Linux"
+## created       = 2022-11-24 01:37:23 UTC
+## updated       = 2023-08-04 02:31:36 UTC
+## description   = "Network related functions"
 
-# [* MODULES *]
+[ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
+&& . ${HOME}/.ael/bash-ael/messages.bash
 
-  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
-  && . ${HOME}/.ael/bash-ael/messages.bash
-
-# [* FUNCITONS *]
+## -------------------- [ ispeed ]                                          {{{
+## [ispeed()]
+## version       = 2023-08-02 20:23:21 UTC
+## description   = "Internet connection speed meter"
+## packages      = ['speedtest-cli']
 
 ispeed() {
  
-    message action "Function called <ispeed()> from $(basename $BASH_SOURCE)"
-    message action "Calculating your Internet connection speed"
-    echo
+    message action "< ispeed > from $(basename $BASH_SOURCE)"
+    message action "Calculating your Internet connection speed ..."
 
-    curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
-    | python -
+    ## Method no.1
+    # curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
+    # | python - --secure
+
+    ## Method no.2
+    speedtest --secure
   }
+  ## }}}
+
+## -------------------- [ net-scan ]                                        {{{
+## [net-scan()]
+## version       = 2023-08-03 11:32:17 UTC
+## description   = "Scans IP with rustscan and nmap."
+## packages      = ['nmap', 'rustscan']
 
 net_scan() {
 
-    message action "Function called <net_scan()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <net-scan>"
-    message action "Command <sudo rustscan -a <ip address> --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn>"
-    echo
+    if [[ ${1} == "localhost" ]]; then
+        _ip="127.0.0.1"
+    else
+        _ip="${1}"
+    fi
 
-    sleep 2
-    sudo rustscan -a ${1} --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn
+    message action "< net-scan > from $(basename $BASH_SOURCE)"
+    message action "Scanning ${_ip} ..."
+
+    sudo rustscan -a ${_ip} --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn
   }
   alias net-scan="net_scan"
+  ## }}}
+
+## -------------------- [ nmap-basic ]                                      {{{
+## [nmap-basic()]
+## version       = 2023-08-04 02:06:30 UTC
+## description   = "Complete nmap scan."
+## packages      = ['grc', 'nmap']
 
 nmap_basic() {
 
-    message action "Function called <nmap_basic()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <nmap-basic>"
-    message action "Command <sudo grc nmap -sV -O -sC --traceroute <ip address>>"
+    message action "< nmap-basic > from $(basename $BASH_SOURCE)"
     message alert "Scanning multiple devices or network will take forever..."
-    echo
 
     sleep 2
     sudo grc nmap -sV -O -sC --traceroute ${@}
   }
   alias nmap-basic='nmap_basic'
+  ## }}}
+
+## -------------------- [ ports ]                                           {{{
+## [ports()]
+## version       = 2023-08-04 02:11:08 UTC
+## description   = "Display open ports."
+## packages      = ['grc', 'net-tools']
 
 ports() {
 
-    message action "Function called <ports()> from $(basename $BASH_SOURCE)"
-    message action "Command <sudo netstat -tulanp>"
+    message action "< ports > from $(basename $BASH_SOURCE)"
     message action "Showing open ports ..."
-    echo
 
-    sudo netstat -tulanp
+  sudo grc netstat -tulanp
   }
+  ## }}}
+
+## -------------------- [ py-server ]                                       {{{
+## [py-server()]
+## version       = 2023-08-04 02:14:47 UTC
+## description   = "Start a web server."
+## packages      = ['python']
 
 py_server() {
 
-    message action "Function called <py_server()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <py-server>"
-    message action "Command <python -m http.server>"
+    message action "< py-server > from $(basename $BASH_SOURCE)"
     message action "Starting web server ..."
-    echo
 
     python -m http.server
   }
   alias py-server='py_server'
+## }}}
+
+## -------------------- [ tun-info ]                                        {{{
+## [tun-info()]
+## version       = 2023-08-04 02:17:19 UTC
+## description   = "Read tunnels info."
+## packages      = ['coreutils', 'gawk', 'grep', 'procps-ng']
 
 tun_info() {
 
-    message action "Function called <tun_info()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <tun-info>"
+    message action "< tun-info > from $(basename $BASH_SOURCE)"
     message action "Reading tunnels info ..."
-    echo
     message title "INT\tIP ADDR   \tPID\tNAME"
 
     while read -r _interface; do
@@ -102,14 +132,18 @@ tun_info() {
     done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
   }
   alias tun-info="tun_info"
+  ## }}}
+
+## -------------------- [ view-ips ]                                        {{{
+## [view-ips()]
+## version       = 2023-08-04 02:23:48 UTC
+## description   = "Display IP addresses."
+## packages      = ['coreutils', 'gawk', 'grep', 'procps-ng']
 
 view_ips() {
 
-    message action "Function called <view_ips()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <view-ips>"
-    message action "Command </usr/bin/ip address | grep \"inet [1-9]\" | awk '{ print \$NF \"\\\t\" \$2}'>"
+    message action "< view_ips > from $(basename $BASH_SOURCE)"
     message action "Current IP address(es) ..."
-    echo
 
     while read -r _interfaces; do
         spaces=30
@@ -119,22 +153,25 @@ view_ips() {
     done <<< $(/usr/bin/ip address | grep "inet [1-9]" | awk '{ print $NF "\t" $2}')
   }
   alias view-ips="view_ips"
+  ## }}}
+
+## -------------------- [ whois-web ]                                       {{{
+## [whois-web()]
+## version       = 2023-08-04 02:27:25 UTC
+## description   = "Query WHOIS web if `whois` port 43 is blocked on your network."
+## packages      = ['curl', 'jq', 'sed']
 
 whois_web() {
 
-    #... Query the web if `whois` port 43 is blocked on your network.
-
-    message action "Function called <whois_web()> from $(basename $BASH_SOURCE)"
-    message action "Aliased to <whois_web>"
+  message action "< whois-web > from $(basename $BASH_SOURCE)"
     message action "Querying whois on the web for ${1} ..."
-    echo
 
     curl --silent https://whoisjs.com/api/v1/${1}                             \
     | jq ".raw"                                                               \
     | sed "s/\\\r\\\n/\\n/g"
   }
   alias whois-web="whois_web"
+  ## }}}
 
-# -----------------------------------------------------------------------------
 # vim: foldmethod=marker
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

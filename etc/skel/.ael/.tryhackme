@@ -1,36 +1,30 @@
 #!/usr/bin/env bash
-# -----------------------------------------------------------------------------
-#              { alterEGO Linux: "Open the vault of knowledge" }
-# -----------------------------------------------------------------------------
-#
-# ~/.ael/.tryhackme
-#   created        : 2021-03-07 15:10:11 UTC
-#   updated        : 2023-03-28 10:36:40 UTC
-#   description    : TryHackMe stuff.
-# _____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [.ael/.tryhackme]
+## author        = "fantomH @alterEGO Linux"
+## created       = 2021-03-07 15:10:11 UTC
+## updated       = 2023-08-04 02:58:16 UTC
+## description   = "TryHackMe stuff."
 
-# [* MODULES *]
+[ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
+&& . ${HOME}/.ael/bash-ael/messages.bash
 
-  [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
-  && . ${HOME}/.ael/bash-ael/messages.bash
-
-# [* FUNCTIONS *]
-
-# (* thm-connect *)                                                        {{{1
+## -------------------- [ thm-connect ]                                     {{{
 thm-connect() {
 
-    THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
-    if [[ -f ${THM_VPN} ]]; then
-        sudo openvpn ${THM_VPN} &
-        cd ${THM_ROOM_PATH}
-        sleep 2
-        $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
-    else
-        # $BROWSER "https://tryhackme.com/vpn/get-config"
-        $BROWSER "https://tryhackme.com/access"
-        cd ${THM_ROOM_PATH}
-    fi
-  }                                                     # FIN: thm-connect 1}}}
+  THM_VPN="${THM_DIR}/${THM_PLAYER}.ovpn"
+  if [[ -f ${THM_VPN} ]]; then
+      sudo openvpn ${THM_VPN} &
+      cd ${THM_ROOM_PATH}
+      sleep 2
+      $BROWSER "https://www.tryhackme.com/room/${THM_ROOM_NAME}"
+  else
+      # $BROWSER "https://tryhackme.com/vpn/get-config"
+      $BROWSER "https://tryhackme.com/access"
+      cd ${THM_ROOM_PATH}
+  fi
+  }
+  ## }}}
 
 # (* thm-init *)                                                           {{{1
 thm-init() {
@@ -382,7 +376,6 @@ EOF
 
   esac
 
-# -----------------------------------------------------------------------------
-# vim: foldmethod=marker
 # vim: syntax=sh
-# ____________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
