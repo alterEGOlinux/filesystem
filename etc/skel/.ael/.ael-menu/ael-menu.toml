@@ -1,0 +1,120 @@
+## ----------------------------------------------------------------------- INFO
+## [.ael/.ael-menu/ael-menu.toml]
+## author        = "fantomH @alterEGO Linux"
+## created       = 2023-08-08 14:31:56 UTC
+## updated       = 2023-08-08 14:31:56 UTC
+## description   = "ael-menu main configuration."
+
+[app.arp-scan]
+name             = "arp-scan local"
+run              = "stay_in_terminal"
+cmd              = "read -p 'Would you like to scan the local network? ' REPLY; if [[ \\$REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then sudo arp-scan --localnet; else :; fi"
+session          = "ARPSCAN"
+description      = "Mac Address scan."
+is_floating      = true
+
+[app.arp-scan2]
+name             = "arp-scan local2"
+run              = "stay_in_terminal"
+cmd              = "sudo -u ${USER} arp-scan --localnet"
+session          = "ARPSCAN"
+description      = "Mac Address scan."
+is_floating      = true
+
+[app.bleachbit]
+name             = "bleachbit"
+run              = "launch"
+cmd              = "bleachbit"
+session          = "BLEACHBIT"
+description      = "Deletes unneeded files to free disk space and maintain privacy."
+is_floating      = false
+
+[app.bleachbit_as_root]
+name             = "bleachbit as root"
+run              = "launch"
+cmd              = "sudo bleachbit"
+session          = "BLEACHBIT"
+description      = "Deletes unneeded files to free disk space and maintain privacy (as ROOT)."
+is_floating      = false
+
+[app.brave]
+name             = "brave"
+run              = "launch"
+cmd              = "brave"
+session          = "BRAVE"
+description      = "Web Browser."
+is_floating      = false
+
+[app.burpsuite]
+name             = "burp suite"
+run              = "launch"
+cmd              = "burpsuite"
+session          = "BURP"
+description      = "Web applications security testing."
+is_floating      = false
+
+#    MenuOption('bookmarks', 'terminal', 'bookmarks.py', 'BOOKMARKS', 'Bookmarks manager.', True),
+
+
+#    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
+#    MenuOption('dirbuster', 'stay_in_terminal', 'dirbuster --help', 'DIRBUSTER', 'brute force directories and files names on web/application servers.', False),
+#    MenuOption('exit i3', 'execute', 'i3-msg exit', 'null', 'Exit i3 window manager.', False),
+
+[app.firefox]
+name             = "firefox"
+run              = "launch"
+cmd              = "firefox"
+session          = "FIREFOX"
+description      = "Web browser."
+is_floating      = false
+
+[app.firefox_private]
+name             = "firefox --private"
+run              = "launch"
+cmd              = "firefox --private-window"
+session          = "SHUTTTT"
+description      = "Web browser, private session."
+is_floating      = false
+
+#    MenuOption('gimp', 'launch', 'gimp', 'GIMP', 'Drawing app.', False),
+#    MenuOption('gobuster', 'stay_in_terminal', 'gobuster --help', 'GOBUSTER', 'Directory/File, DNS and VHost busting tool written in Go.', False),
+#    MenuOption('htop', 'terminal', 'htop', 'HTOP', 'Process viewer.', True),
+#    MenuOption('inkscape', 'launch', 'inkscape', 'INKSCAPE', 'Drawing app.', False),
+#    MenuOption('john', 'stay_in_terminal', 'john --help', 'JOHN', 'John the Ripper password cracker.', False),
+#    MenuOption('libreoffice', 'launch', 'libreoffice', 'LIBREOFFICE', 'Office suite.', False),
+#    MenuOption('metasploit', 'stay_in_terminal', 'msfconsole', 'METASPLOIT', 'Penetration testing framework.', False),
+#    MenuOption('netcat', 'stay_in_terminal', 'nc --help', 'NETCAT', 'Utility for network discovery and security auditing.', False),
+#    MenuOption('nmap', 'stay_in_terminal', 'nmap --help | more', 'NMAP', 'Network exploration tool and security / port scanner.', False),
+#    MenuOption('nmap NSE', 'terminal', '/usr/local/bin/nmapNSE.sh', 'NMAPNSE', 'Nmap Scripting Engine (NSE) scripts', True),
+#    MenuOption('now UTC', 'launch', r"""echo -n $(date --utc "+%F %H:%M:%S %Z") | xclip -selection clipboard""", 'NOWUTC', 'UTC time > clipboard.', False),
+#    MenuOption('pavucontrol', 'launch', 'pavucontrol', 'PAVU', 'Volume control.', False),
+#    MenuOption('public IP', 'launch', r"""curl --silent http://ipecho.net/plain | xclip -selection clipboard""", 'PUBIP', 'Get your public IP > clipboard.', False),
+#    MenuOption('ranger', 'terminal', 'ranger', 'RANGER', 'TUI file manager.', False),
+#    MenuOption('reboot', 'execute', 'reboot', 'null', 'Restart computer.', False),
+#    MenuOption('remmina', 'launch', 'remmina', 'REMMINA', 'Remote desktop client (RDP, SSH, VNC).', False),
+#    MenuOption('scout man pages', 'terminal', 'scout_man.py', 'null', 'Search & view man pages.', False),
+#    MenuOption('scout python modules', 'terminal', 'scout_pymodules.py', 'null', 'Search & view python modules documentations.', False),
+#    MenuOption('shrug', 'launch', r"""echo -n '¯\_(ツ)_/¯' | xclip -selection clipboard""", 'null', '¯\_(ツ)_/¯ > clipboard', False),
+#    MenuOption('shutdown', 'execute', 'shutdown now', 'null', 'Shutdown your PC.', False),
+#    MenuOption('sqlitebrowser', 'launch', 'sqlitebrowser', 'SQLB', 'Sqlite GUI browser', False),
+#    MenuOption('star wars', 'stay_in_terminal', 'telnet towel.blinkenlights.nl', 'STARWARS', 'Watch ASCII StarWars.', True),
+#    MenuOption('terminal', 'launch', r"\$TERMINAL", 'TERMINAL', 'Launch a terminal.', False),
+#    MenuOption('thumbs up!', 'launch', r"""echo -n '👍' | xclip -selection clipboard""", 'THUMBSUP', '👍 > clipboard', True),
+#    MenuOption('thunar', 'launch', 'thunar', 'THUNAR', 'GUI File manager.', False),
+#    MenuOption('thunar for admin', 'launch', 'sudo thunar', 'THUNARROOT', 'GUI File manager, elevated priviledges.', False),
+#    MenuOption('tmux attach', 'terminal', 'tmuxplus.sh -a', 'ATTACH', 'List Tmux sessions and attach.', True),
+#    MenuOption('toggle connection', 'launch', 'bash /usr/local/bin/toggle_connection.sh', 'CONNECT', 'START/STOP Internet connection.', False),
+#    MenuOption('vbox', 'stay_in_terminal', r"""vboxmanage list vms | awk -F '\"' '{ print \$2 }' | fzf | sed 's/\ /\\\ /g' | xargs vboxmanage startvm && exit""", 'VBOX', 'Select a virtual machine.', True),
+#    MenuOption('view history', 'stay_in_terminal', r"""cat ${HOME}/.bash_history | fzf""", 'HISTORY', 'View latest bash history.', True),
+#    MenuOption('virtualbox', 'launch', 'virtualbox', 'VBOX', 'Open-source virtualization tool.', False),
+#    MenuOption('VLC', 'launch', 'vlc', 'VLC', 'VLC media player.', False),
+#    MenuOption('volume', 'launch', 'pavucontrol', 'VOLUME', 'Volume control.', False),
+#    MenuOption('wireshark', 'launch', 'sudo wireshark', 'WIRESHARK', 'Network traffic analyser.', False),
+
+[app.wallpaper]
+name             = "change background/wallpaper"
+run              = "launch"
+cmd              = "nitrogen /usr/local/share/wallpapers"
+session          = "null"
+description      = "Change wallpapers"
+is_floating      = false
