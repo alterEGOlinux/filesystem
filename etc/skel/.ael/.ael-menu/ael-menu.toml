@@ -6,15 +6,7 @@
 ## description   = "ael-menu main configuration."
 
 [app.arp-scan]
-name             = "arp-scan local"
-run              = "stay_in_terminal"
-cmd              = "read -p 'Would you like to scan the local network? ' REPLY; if [[ \\$REPLY =~ ^([yY][eE][sS]|[yY])$ ]]; then sudo arp-scan --localnet; else :; fi"
-session          = "ARPSCAN"
-description      = "Mac Address scan."
-is_floating      = true
-
-[app.arp-scan2]
-name             = "arp-scan local2"
+name             = "arp-scan --locanet"
 run              = "stay_in_terminal"
 cmd              = "sudo -u ${USER} arp-scan --localnet"
 session          = "ARPSCAN"
@@ -29,8 +21,8 @@ session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy."
 is_floating      = false
 
-[app.bleachbit_as_root]
-name             = "bleachbit as root"
+[app.bleachbit_root]
+name             = "bleachbit (ROOT)"
 run              = "launch"
 cmd              = "sudo bleachbit"
 session          = "BLEACHBIT"
@@ -54,11 +46,23 @@ description      = "Web applications security testing."
 is_floating      = false
 
 #    MenuOption('bookmarks', 'terminal', 'bookmarks.py', 'BOOKMARKS', 'Bookmarks manager.', True),
-
-
 #    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
-#    MenuOption('dirbuster', 'stay_in_terminal', 'dirbuster --help', 'DIRBUSTER', 'brute force directories and files names on web/application servers.', False),
-#    MenuOption('exit i3', 'execute', 'i3-msg exit', 'null', 'Exit i3 window manager.', False),
+
+[app.dirbuster]
+name             = "dirbuster"
+run              = "stay_in_terminal"
+cmd              = "dirbuster --help"
+session          = "DIRBUSTER"
+description      = "Brute force directories and files names on web/application servers."
+is_floating      = false
+
+[app.exitI3]
+name             = "exit i3"
+run              = "execute"
+cmd              = "i3-msg exit"
+session          = "null"
+description      = "Exit i3 window manager."
+is_floating      = false
 
 [app.firefox]
 name             = "firefox"
@@ -76,40 +80,247 @@ session          = "SHUTTTT"
 description      = "Web browser, private session."
 is_floating      = false
 
-#    MenuOption('gimp', 'launch', 'gimp', 'GIMP', 'Drawing app.', False),
-#    MenuOption('gobuster', 'stay_in_terminal', 'gobuster --help', 'GOBUSTER', 'Directory/File, DNS and VHost busting tool written in Go.', False),
-#    MenuOption('htop', 'terminal', 'htop', 'HTOP', 'Process viewer.', True),
-#    MenuOption('inkscape', 'launch', 'inkscape', 'INKSCAPE', 'Drawing app.', False),
-#    MenuOption('john', 'stay_in_terminal', 'john --help', 'JOHN', 'John the Ripper password cracker.', False),
-#    MenuOption('libreoffice', 'launch', 'libreoffice', 'LIBREOFFICE', 'Office suite.', False),
-#    MenuOption('metasploit', 'stay_in_terminal', 'msfconsole', 'METASPLOIT', 'Penetration testing framework.', False),
-#    MenuOption('netcat', 'stay_in_terminal', 'nc --help', 'NETCAT', 'Utility for network discovery and security auditing.', False),
-#    MenuOption('nmap', 'stay_in_terminal', 'nmap --help | more', 'NMAP', 'Network exploration tool and security / port scanner.', False),
+[app.gimp]
+name             = "gimp"
+run              = "launch"
+cmd              = "gimp"
+session          = "GIMP"
+description      = "Drawing app."
+is_floating      = false
+
+[app.gobuster]
+name             = "gobuster"
+run              = "stay_in_terminal"
+cmd              = "gobuster --help"
+session          = "GOBUSTER"
+description      = "Directory/File, DNS and VHost busting tool written in Go."
+is_floating      = false
+
+[app.htop]
+name             = "htop"
+run              = "terminal"
+cmd              = "htop"
+session          = "HTOP"
+description      = "Process viewer."
+is_floating      = true
+
+[app.inkscape]
+name             = "inkscape"
+run              = "launch"
+cmd              = "inkscape"
+session          = "INKSCAPE"
+description      = "Drawing app."
+is_floating      = false
+
+[app.john]
+name             = "john"
+run              = "stay_in_terminal"
+cmd              = "john --help"
+session          = "JOHN"
+description      = "John the Ripper password cracker."
+is_floating      = false
+
+[app.libreoffice]
+name             = "libreoffice"
+run              = "launch"
+cmd              = "libreoffice"
+session          = "LIBREOFFICE"
+description      = "Office suite."
+is_floating      = false
+
+[app.metasploit]
+name             = "metasploit"
+run              = "stay_in_terminal"
+cmd              = "msfconsole"
+session          = "METASPLOIT"
+description      = "Penetration testing framework."
+is_floating      = false
+
+[app.netcat]
+name             = "netcat"
+run              = "stay_in_terminal"
+cmd              = "nc --help"
+session          = "NETCAT"
+description      = "Utility for network discovery and security auditing."
+is_floating      = false
+
+[app.nmap]
+name             = "nmap"
+run              = "stay_in_terminal"
+cmd              = "nmap --help | more"
+session          = "NMAP"
+description      = "Network exploration tool and security / port scanner."
+is_floating      = false
+
 #    MenuOption('nmap NSE', 'terminal', '/usr/local/bin/nmapNSE.sh', 'NMAPNSE', 'Nmap Scripting Engine (NSE) scripts', True),
 #    MenuOption('now UTC', 'launch', r"""echo -n $(date --utc "+%F %H:%M:%S %Z") | xclip -selection clipboard""", 'NOWUTC', 'UTC time > clipboard.', False),
-#    MenuOption('pavucontrol', 'launch', 'pavucontrol', 'PAVU', 'Volume control.', False),
-#    MenuOption('public IP', 'launch', r"""curl --silent http://ipecho.net/plain | xclip -selection clipboard""", 'PUBIP', 'Get your public IP > clipboard.', False),
-#    MenuOption('ranger', 'terminal', 'ranger', 'RANGER', 'TUI file manager.', False),
-#    MenuOption('reboot', 'execute', 'reboot', 'null', 'Restart computer.', False),
-#    MenuOption('remmina', 'launch', 'remmina', 'REMMINA', 'Remote desktop client (RDP, SSH, VNC).', False),
+
+[app.pavucontrol]
+name             = "pavucontrol"
+run              = "launch"
+cmd              = "pavucontrol"
+session          = "PAVU"
+description      = "Volume control."
+is_floating      = false
+
+[app.publicip]
+name             = "public IP"
+run              = "launch"
+cmd              = "curl --silent http://ipecho.net/plain | xclip -selection clipboard"
+session          = "PUBIP"
+description      = "Get the public IP > clipboard."
+is_floating      = false
+
+[app.ranger]
+name             = "ranger"
+run              = "terminal"
+cmd              = "ranger"
+session          = "RANGER"
+description      = "TUI file manager."
+is_floating      = false
+
+[app.reboot]
+name             = "reboot"
+run              = "execute"
+cmd              = "reboot"
+session          = "null"
+description      = "Restart computer."
+is_floating      = false
+
+[app.remmina]
+name             = "remmina"
+run              = "launch"
+cmd              = "remmina"
+session          = "REMMINA"
+description      = "Remote desktop client (RDP, SSH, VNC)."
+is_floating      = false
+
 #    MenuOption('scout man pages', 'terminal', 'scout_man.py', 'null', 'Search & view man pages.', False),
 #    MenuOption('scout python modules', 'terminal', 'scout_pymodules.py', 'null', 'Search & view python modules documentations.', False),
-#    MenuOption('shrug', 'launch', r"""echo -n '¯\_(ツ)_/¯' | xclip -selection clipboard""", 'null', '¯\_(ツ)_/¯ > clipboard', False),
-#    MenuOption('shutdown', 'execute', 'shutdown now', 'null', 'Shutdown your PC.', False),
-#    MenuOption('sqlitebrowser', 'launch', 'sqlitebrowser', 'SQLB', 'Sqlite GUI browser', False),
-#    MenuOption('star wars', 'stay_in_terminal', 'telnet towel.blinkenlights.nl', 'STARWARS', 'Watch ASCII StarWars.', True),
-#    MenuOption('terminal', 'launch', r"\$TERMINAL", 'TERMINAL', 'Launch a terminal.', False),
-#    MenuOption('thumbs up!', 'launch', r"""echo -n '👍' | xclip -selection clipboard""", 'THUMBSUP', '👍 > clipboard', True),
-#    MenuOption('thunar', 'launch', 'thunar', 'THUNAR', 'GUI File manager.', False),
-#    MenuOption('thunar for admin', 'launch', 'sudo thunar', 'THUNARROOT', 'GUI File manager, elevated priviledges.', False),
-#    MenuOption('tmux attach', 'terminal', 'tmuxplus.sh -a', 'ATTACH', 'List Tmux sessions and attach.', True),
+
+# [app.shrug]
+## Doesn't work anymore
+# name             = "shrug"
+# run              = "launch"
+# cmd              = 'r"""echo -n "¯\_(ツ)_/¯" | xclip -selection clipboard"""'
+# session          = "null"
+# description      = "¯\_(ツ)_/¯ > clipboard."
+# is_floating      = false
+
+[app.shutdown]
+name             = "shutdown"
+run              = "execute"
+cmd              = "shutdown now"
+session          = "null"
+description      = "Shutdown your computer."
+is_floating      = false
+
+[app.solitaire]
+name             = "solitaire"
+run              = "launch"
+cmd              = "/usr/bin/qsolocards"
+session          = "SOLITAIRE"
+description      = "Solitaire cards game."
+is_floating      = false
+
+[app.sqlitebrowser]
+name             = "sqlitebrowser"
+run              = "launch"
+cmd              = "/usr/bin/sqlitebrowser"
+session          = "SQLB"
+description      = "Sqlite GUI browser."
+is_floating      = false
+
+[app.starwars]
+## Might not work anymore...
+name             = "star wars"
+run              = "stay_in_terminal"
+cmd              = "telnet towel.blinkenlights.nl"
+session          = "STARWARS"
+description      = "Watch ASCII StarWars."
+is_floating      = true
+
+[app.terminal]
+name             = "terminal"
+run              = "launch"
+cmd              = "$TERMINAL"
+session          = "TERMINAL"
+description      = "Launh a terminal."
+is_floating      = false
+
+[app.thumbsup]
+name             = "thumbs up!"
+run              = "launch"
+cmd              = "echo -n '👍' | xclip -selection clipboard"
+session          = "THUMBSUP"
+description      = "👍 > clipboard"
+is_floating      = true
+
+[app.thunar]
+name             = "thunar"
+run              = "launch"
+cmd              = "thunar"
+session          = "THUNAR"
+description      = "File manager."
+is_floating      = false
+
+[app.thunar_ROOT]
+name             = "thunar (ROOT)"
+run              = "launch"
+cmd              = "sudo thunar"
+session          = "THUNARROOT"
+description      = "File manager (ROOT)."
+is_floating      = false
+
+[app.tmux_attach]
+name             = "tmux attach"
+run              = "terminal"
+cmd              = "tmuxplus.sh -a"
+session          = "ATTACH"
+description      = "List Tmux sessions and attach."
+is_floating      = true
+
 #    MenuOption('toggle connection', 'launch', 'bash /usr/local/bin/toggle_connection.sh', 'CONNECT', 'START/STOP Internet connection.', False),
-#    MenuOption('vbox', 'stay_in_terminal', r"""vboxmanage list vms | awk -F '\"' '{ print \$2 }' | fzf | sed 's/\ /\\\ /g' | xargs vboxmanage startvm && exit""", 'VBOX', 'Select a virtual machine.', True),
-#    MenuOption('view history', 'stay_in_terminal', r"""cat ${HOME}/.bash_history | fzf""", 'HISTORY', 'View latest bash history.', True),
-#    MenuOption('virtualbox', 'launch', 'virtualbox', 'VBOX', 'Open-source virtualization tool.', False),
-#    MenuOption('VLC', 'launch', 'vlc', 'VLC', 'VLC media player.', False),
-#    MenuOption('volume', 'launch', 'pavucontrol', 'VOLUME', 'Volume control.', False),
-#    MenuOption('wireshark', 'launch', 'sudo wireshark', 'WIRESHARK', 'Network traffic analyser.', False),
+
+[app.vbox]
+name             = "vbox"
+run              = "stay_in_terminal"
+cmd              = """vboxmanage list vms | awk -F '\\\"' '{ print \\$2 }' | fzf | sed 's/\\ /\\\\ /g' | xargs vboxmanage startvm && exit"""
+session          = "VBOX"
+description      = "Select a virtual machine."
+is_floating      = true
+
+[app.view_history]
+name             = "View History"
+run              = "stay_in_terminal"
+cmd              = "cat ${HOME}/.bash_history | fzf"
+session          = "HISTORY"
+description      = "View latest bash history."
+is_floating      = true
+
+[app.virtualbox]
+name             = "Virtualbox"
+run              = "launch"
+cmd              = "virtualbox"
+session          = "VBOX"
+description      = "Open-source virtalization tool."
+is_floating      = false
+
+[app.vlc]
+name             = "VLC"
+run              = "launch"
+cmd              = "vlc"
+session          = "VLC"
+description      = "VLC media player."
+is_floating      = false
+
+[app.volume]
+name             = "Volume"
+run              = "launch"
+cmd              = "pavucontrol"
+session          = "VOLUME"
+description      = "Volume control."
+is_floating      = false
 
 [app.wallpaper]
 name             = "change background/wallpaper"
@@ -118,3 +329,30 @@ cmd              = "nitrogen /usr/local/share/wallpapers"
 session          = "null"
 description      = "Change wallpapers"
 is_floating      = false
+
+[app.wireshark_ROOT]
+name             = "wireshark (ROOT)"
+run              = "launch"
+cmd              = "sudo wireshark"
+session          = "WIRESHARK"
+description      = "Network traffic analyzer."
+is_floating      = false
+
+#MenuOption('all apps', 'launch', 'dmenu_run -nb \'#000\' -l 20 | xargs', 'ALLAPPS', 'Use dmenu_run to see all apps.', False),
+#MenuOption('dicom', 'terminal', 'bash ${HOME}/scripts/dicomTAG.sh', 'DICOM', 'Browse DICOM tags.', True),
+#MenuOption('emojis', 'stay_in_terminal', r"""bash ${HOME}/fH/scripts/emojis.sh && exit""", 'EMOJIS', 'Select emojis.', True),
+#MenuOption('pamac', 'launch', 'pamac-manager', 'PAMAC', 'Package Manager based on libalpm with AUR and Appstream support.', False),
+#MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
+#MenuOption('toggle audio', 'launch', 'bash ${HOME}/fH/scripts/toggle_audio_device.sh && exit', 'AUDIO', 'Toggle audio device.', False),
+#MenuOption('VNC viewer', 'launch', 'vncviewer', 'VNC', 'VNC Viewer (client).', False),
+
+[app.work_rdp]
+name             = "Work RDP"
+run              = "launch"
+cmd              = "remmina --connect=/home/ghost/.local/share/remmina/group_rdp_work_ws-18-02-mtl-radiologymontreal-com.remmina"
+session          = "WILLWORK"
+description      = "Connect to work. mstsc"
+is_floating      = false
+
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
