@@ -45,6 +45,7 @@ export TERM="xterm-256color"
 
 ## -------------------- [ ALIASES ]                                         {{{
 
+alias less="bat"
 alias grep="grep --color=auto"
 alias ll='ls --all --human-readable -l --color=auto'
 alias ls='ls --all --color=auto'

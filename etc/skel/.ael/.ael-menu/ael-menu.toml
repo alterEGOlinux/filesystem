@@ -13,6 +13,14 @@ session          = "ARPSCAN"
 description      = "Mac Address scan."
 is_floating      = true
 
+[app.binwalk]
+name             = "binwalk"
+run              = "stay_in_terminal"
+cmd              = "binwalk --help"
+session          = "BINWALK"
+description      = "Tool for searching a given binary image for embedded files."
+is_floating      = false
+
 [app.bleachbit]
 name             = "bleachbit"
 run              = "launch"
@@ -54,6 +62,14 @@ run              = "stay_in_terminal"
 cmd              = "dirbuster --help"
 session          = "DIRBUSTER"
 description      = "Brute force directories and files names on web/application servers."
+is_floating      = false
+
+[app.bpytop]
+name             = "bpytop"
+run              = "terminal"
+cmd              = "bpytop"
+session          = "bpytop"
+description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
 is_floating      = false
 
 [app.exitI3]

@@ -121,7 +121,7 @@ font:
    family: Source Code Pro
    style: Bold
   italic:
-    family: monospace
+    family: Monospace
     style: Italic
 
   # Bold italic font face
@@ -137,7 +137,6 @@ font:
 
   # Point size
   size: 11.0
-  #size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter

@@ -592,7 +592,7 @@
 
   "" (* general *)
   highlight ColorColumn     cterm=NONE    ctermfg=NONE  ctermbg=238
-  highlight Comment         cterm=ITALIC  ctermfg=grey  ctermbg=NONE
+  highlight Comment         cterm=NONE    ctermfg=grey  ctermbg=NONE
   highlight CursorLine      cterm=NONE    ctermfg=NONE  ctermbg=238
   highlight Function        cterm=BOLD    ctermfg=150   ctermbg=NONE
   highlight LineHighlight   cterm=NONE    ctermfg=0     ctermbg=10
