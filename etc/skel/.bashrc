@@ -22,7 +22,7 @@
 
   export LOADED='bashrc'
   ## Message function from bash-ael/messages.bash
-  message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
+  # message action "$(basename $BASH_SOURCE) @ $(date | sed 's/  / /g')."
 
 # vim: syntax=sh
 # vim: foldmethod=marker
