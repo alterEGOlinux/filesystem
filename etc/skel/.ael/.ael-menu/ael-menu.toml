@@ -120,6 +120,22 @@ session          = "GOBUSTER"
 description      = "Directory/File, DNS and VHost busting tool written in Go."
 is_floating      = false
 
+[app.gping]
+name             = "gping"
+run              = "stay_in_terminal"
+cmd              = "gping --help"
+session          = "GPING"
+description      = "Ping with graph."
+is_floating      = false
+
+[app.htmlq]
+name             = "htmlq"
+run              = "stay_in_terminal"
+cmd              = "htmlq --help"
+session          = "HTMLQ"
+description      = "Like jq, but for HTML."
+is_floating      = false
+
 [app.htop]
 name             = "htop"
 run              = "terminal"
