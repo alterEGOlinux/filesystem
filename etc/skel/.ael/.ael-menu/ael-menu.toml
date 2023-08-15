@@ -37,6 +37,14 @@ session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy (as ROOT)."
 is_floating      = false
 
+[app.bpytop]
+name             = "bpytop"
+run              = "terminal"
+cmd              = "bpytop"
+session          = "bpytop"
+description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
+is_floating      = false
+
 [app.brave]
 name             = "brave"
 run              = "launch"
@@ -64,12 +72,12 @@ session          = "DIRBUSTER"
 description      = "Brute force directories and files names on web/application servers."
 is_floating      = false
 
-[app.bpytop]
-name             = "bpytop"
-run              = "terminal"
-cmd              = "bpytop"
-session          = "bpytop"
-description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
+[app.domination]
+name             = "domination"
+run              = "launch"
+cmd              = "domination"
+session          = "DOMINATION"
+description      = "Risk game."
 is_floating      = false
 
 [app.exitI3]
