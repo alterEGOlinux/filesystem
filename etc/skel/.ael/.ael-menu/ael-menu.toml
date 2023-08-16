@@ -384,7 +384,13 @@ is_floating      = false
 #MenuOption('pamac', 'launch', 'pamac-manager', 'PAMAC', 'Package Manager based on libalpm with AUR and Appstream support.', False),
 #MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
 #MenuOption('toggle audio', 'launch', 'bash ${HOME}/fH/scripts/toggle_audio_device.sh && exit', 'AUDIO', 'Toggle audio device.', False),
-#MenuOption('VNC viewer', 'launch', 'vncviewer', 'VNC', 'VNC Viewer (client).', False),
+[app.vnc]
+name             = "VNC Viewer"
+run              = "launch"
+cmd              = "vncviewer"
+session          = "VNC"
+description      = "VNC Viewer (client)."
+is_floating      = false
 
 [app.work_rdp]
 name             = "Work RDP"
