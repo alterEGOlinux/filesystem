@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        = "fantomH @alterEGO Linux"
 ## created       = 2023-08-08 14:31:56 UTC
-## updated       = 2023-08-08 14:31:56 UTC
+## updated       = 2023-08-21 10:58:01 UTC
 ## description   = "ael-menu main configuration."
 
 [app.arp-scan]
@@ -152,6 +152,14 @@ session          = "INKSCAPE"
 description      = "Drawing app."
 is_floating      = false
 
+[app.insomnia]
+name             = "insomnia"
+run              = "launch"
+cmd              = "insomnia"
+session          = "INSOMNIA"
+description      = "API Client and Design Platform for GraphQL and REST."
+is_floating      = false
+
 [app.john]
 name             = "john"
 run              = "stay_in_terminal"
@@ -201,6 +209,14 @@ run              = "launch"
 cmd              = "pavucontrol"
 session          = "PAVU"
 description      = "Volume control."
+is_floating      = false
+
+[app.pcmanfm]
+name             = "pcmanfm"
+run              = "launch"
+cmd              = "pcmanfm"
+session          = "PCMANFM"
+description      = "File Manager."
 is_floating      = false
 
 [app.publicip]

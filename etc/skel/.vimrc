@@ -142,9 +142,14 @@
       "" TODO: Add folding level
 
       let nl = v:foldend - v:foldstart + 1
-      let linetext = substitute(getline(v:foldstart), '[^a-zA-Z0-9 /]','', 'g')
-      let linetext = substitute(linetext, '^\s*', '[ ', '')
-      let linetext = substitute(linetext, '\s*$', ' ]', '')
+      let linetext = getline(v:foldstart)
+      let linetext = substitute(linetext, '---------*', '', 'g')
+      let linetext = substitute(linetext, '^"*', '', 'g')
+      let linetext = substitute(linetext, '^#*', '', 'g')
+      let linetext = substitute(linetext, '{{{', '', 'g')
+      let linetext = substitute(linetext, '<!--', '', 'g')
+      let linetext = substitute(linetext, '-->', '', 'g')
+      let linetext = substitute(linetext, '^\s*', '', '')
       let padding = repeat(' ', 78 - strlen(linetext) - 7 - strlen(nl))
       let txt = '[+] ' . linetext . padding. '| ' . nl . ' |'
       return txt
