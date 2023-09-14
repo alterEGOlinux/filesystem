@@ -65,6 +65,24 @@ snippet info# "# info header" b
 
 endsnippet
 
+snippet dsvheader "DSV markdown header" b
+<!-- HEADER                                                                 {{{
+ID: `date "+%Y%m%d%H%M%S"`
+VERSION: `date "+%Y%m%d%H%M%S"`
+TITLE: ${1}
+AUTHOR: ${2:USER}
+PERMISSIONS: ${3:PERMISSION}
+DESCRIPTION: """
+${4:DESCRIPTION}
+"""
+TAGS: ${5}
+STATE: ${6:STATE}
+HEADER }}} -->
+
+<!-------------------- [ start_of_note ] -->
+
+endsnippet
+
 snippet foot# "# footer" b
 # vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
