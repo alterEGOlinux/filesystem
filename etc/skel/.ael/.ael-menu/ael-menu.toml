@@ -1,9 +1,9 @@
 ## ----------------------------------------------------------------------- INFO
 ## [.ael/.ael-menu/ael-menu.toml]
-## author        = "fantomH @alterEGO Linux"
-## created       = 2023-08-08 14:31:56 UTC
-## updated       = 2023-08-21 10:58:01 UTC
-## description   = "ael-menu main configuration."
+## author        : fantomH @alterEGO Linux
+## created       : 2023-08-08 14:31:56 UTC
+## updated       : 2023-10-06 15:30:23 UTC
+## description   : ael-menu main configuration.
 
 [app.arp-scan]
 name             = "arp-scan --locanet"
@@ -406,6 +406,14 @@ run              = "launch"
 cmd              = "vncviewer"
 session          = "VNC"
 description      = "VNC Viewer (client)."
+is_floating      = false
+
+[app.vscode]
+name             = "Visual Studio Code"
+run              = "launch"
+cmd              = "code"
+session          = "VSCODE"
+description      = "Microsoft code editor."
 is_floating      = false
 
 [app.work_rdp]
