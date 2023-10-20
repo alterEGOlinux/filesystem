@@ -8,111 +8,6 @@
 [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
 && . ${HOME}/.ael/bash-ael/messages.bash
 
-## -------------------- [ net-scan ]                                        {{{
-## [net-scan()]
-## version       = 2023-08-03 11:32:17 UTC
-## description   = "Scans IP with rustscan and nmap."
-## packages      = ['nmap', 'rustscan']
-
-net_scan() {
-
-    if [[ ${1} == "localhost" ]]; then
-        _ip="127.0.0.1"
-    else
-        _ip="${1}"
-    fi
-
-    message action "< net-scan > from $(basename $BASH_SOURCE)"
-    message action "Scanning ${_ip} ..."
-
-    sudo rustscan -a ${_ip} --ulimit 5000 --batch-size 2000 -- -sV -O -sC --traceroute -Pn
-  }
-  alias net-scan="net_scan"
-  ## }}}
-
-## -------------------- [ nmap-basic ]                                      {{{
-## [nmap-basic()]
-## version       = 2023-08-04 02:06:30 UTC
-## description   = "Complete nmap scan."
-## packages      = ['grc', 'nmap']
-
-nmap_basic() {
-
-    message action "< nmap-basic > from $(basename $BASH_SOURCE)"
-    message alert "Scanning multiple devices or network will take forever..."
-
-    sleep 2
-    sudo grc nmap -sV -O -sC --traceroute ${@}
-  }
-  alias nmap-basic='nmap_basic'
-  ## }}}
-
-## -------------------- [ ports ]                                           {{{
-## [ports()]
-## version       = 2023-08-04 02:11:08 UTC
-## description   = "Display open ports."
-## packages      = ['grc', 'net-tools']
-
-ports() {
-
-    message action "< ports > from $(basename $BASH_SOURCE)"
-    message action "Showing open ports ..."
-
-  sudo grc netstat -tulanp
-  }
-  ## }}}
-
-## -------------------- [ py-server ]                                       {{{
-## [py-server()]
-## version       = 2023-08-04 02:14:47 UTC
-## description   = "Start a web server."
-## packages      = ['python']
-
-py_server() {
-
-    message action "< py-server > from $(basename $BASH_SOURCE)"
-    message action "Starting web server ..."
-
-    python -m http.server
-  }
-  alias py-server='py_server'
-## }}}
-
-## -------------------- [ tun-info ]                                        {{{
-## [tun-info()]
-## version       = 2023-08-04 02:17:19 UTC
-## description   = "Read tunnels info."
-## packages      = ['coreutils', 'gawk', 'grep', 'procps-ng']
-
-tun_info() {
-
-    message action "< tun-info > from $(basename $BASH_SOURCE)"
-    message action "Reading tunnels info ..."
-    message title "INT\tIP ADDR   \tPID\tNAME"
-
-    while read -r _interface; do
-
-      _ip=$(grep -oP '(?<=inet )(.*)(?=/)' <<<"${_interface}")
-      _tun=$(awk '{ print $NF }' <<<"${_interface}")
-      _ps=$(sudo grep -r $_tun /proc/*/fdinfo 2>/dev/null | cut -d / -f 3)
-      _cmd="$(ps -o cmd --no-headers ${_ps})"
-
-      if [[ $(awk '/openvpn/ && /server/' <<< ${_cmd}) ]]; then
-        _tunname="OpenVPNServer"
-      elif [[ $(awk '/openvpn/ && /tryhackme/' <<< "${_cmd}") ]]; then
-        _tunname="TryHackMe"
-      elif [[ $(awk '/nordvpn/' <<< "${_cmd}") ]]; then
-        _tunname="NordVPN"
-      else
-        _tunname="UNDEFINED"
-      fi
-
-      printf "%b\n" "${_tun}\t${_ip}\t${_ps}\t${_tunname}"
-
-    done <<< $(ip a | grep -E 'inet [1-9].*global.*(tun)')
-  }
-  alias tun-info="tun_info"
-  ## }}}
 
 ## -------------------- [ view-ips ]                                        {{{
 ## [view-ips()]
@@ -135,22 +30,21 @@ view_ips() {
   alias view-ips="view_ips"
   ## }}}
 
-## -------------------- [ whois-web ]                                       {{{
-## [whois-web()]
-## version       = 2023-08-04 02:27:25 UTC
-## description   = "Query WHOIS web if `whois` port 43 is blocked on your network."
+## -------------------- [ whoisweb ]                                        {{{
+## [whoisweb()]
+## version       = 2023-10-20 09:45:58 UTC
+## description   = Query WHOIS web if `whois` port 43 is blocked on your network.
 ## packages      = ['curl', 'jq', 'sed']
 
-whois_web() {
+whoisweb() {
 
-  message action "< whois-web > from $(basename $BASH_SOURCE)"
+    message action "< whoisweb > from $(basename $BASH_SOURCE)"
     message action "Querying whois on the web for ${1} ..."
 
     curl --silent https://whoisjs.com/api/v1/${1}                             \
     | jq ".raw"                                                               \
     | sed "s/\\\r\\\n/\\n/g"
   }
-  alias whois-web="whois_web"
   ## }}}
 
 # vim: foldmethod=marker

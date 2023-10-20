@@ -7,7 +7,7 @@
 
 ## -------------------- [ MODULES ]
 
-  [ -f ${HOME}/.ael/.main ] && . ${HOME}/.ael/.main
+  [ -f ${HOME}/.ael/.aelcore ] && . ${HOME}/.ael/.aelcore
 
 ## -------------------- [ LOADED ]
 
