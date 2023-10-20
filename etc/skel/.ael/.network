@@ -8,26 +8,6 @@
 [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                  \
 && . ${HOME}/.ael/bash-ael/messages.bash
 
-## -------------------- [ ispeed ]                                          {{{
-## [ispeed()]
-## version       = 2023-08-02 20:23:21 UTC
-## description   = "Internet connection speed meter"
-## packages      = ['speedtest-cli']
-
-ispeed() {
- 
-    message action "< ispeed > from $(basename $BASH_SOURCE)"
-    message action "Calculating your Internet connection speed ..."
-
-    ## Method no.1
-    # curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py \
-    # | python - --secure
-
-    ## Method no.2
-    speedtest --secure
-  }
-  ## }}}
-
 ## -------------------- [ net-scan ]                                        {{{
 ## [net-scan()]
 ## version       = 2023-08-03 11:32:17 UTC
