@@ -1,24 +1,24 @@
 "" ----------------------------------------------------------------------- INFO
 "" [~/.vimrc]
-"" created       = 2021-02-23 02:54:43 UTC
-"" updated       = 2023-07-30 15:14:49 UTC
-"" description   = "VIM main configuration file."
+"" created       : 2021-02-23 02:54:43 UTC
+"" updated       : 2023-11-02 01:56:30 UTC
+"" description   : VIM main configuration file.
 
 "" -------------------- [ GENERAL CONFIG ]                                  {{{
 
-  "... Forces vim to act like vim, not like vi.
+  "" Forces vim to act like vim, not like vi.
   set nocompatible
 
-  "... <leader>
+  "" <leader>
   let mapleader = '-'
 
-  "... Highlights the cursor line.
+  "" Highlights the cursor line.
   set cursorline
 
-  "... Disable the creation of swap files.
+  "" Disable the creation of swap files.
   set noswapfile
 
-  "... Used with colored column.
+  "" Used with colored column.
   set colorcolumn=80
 
   "" }}}
@@ -144,11 +144,8 @@
       let nl = v:foldend - v:foldstart + 1
       let linetext = getline(v:foldstart)
       let linetext = substitute(linetext, '---------*', '', 'g')
-      let linetext = substitute(linetext, '^"*', '', 'g')
-      let linetext = substitute(linetext, '^#*', '', 'g')
-      let linetext = substitute(linetext, '{{{', '', 'g')
-      let linetext = substitute(linetext, '<!--', '', 'g')
-      let linetext = substitute(linetext, '-->', '', 'g')
+      let linetext = substitute(linetext, '{..\d\=', '', 'g')
+      let linetext = substitute(linetext, '##\|<!--\|-->\|""', '', 'g')
       let linetext = substitute(linetext, '^\s*', '', '')
       let padding = repeat(' ', 78 - strlen(linetext) - 7 - strlen(nl))
       let txt = '[+] ' . linetext . padding. '| ' . nl . ' |'
@@ -179,120 +176,121 @@
 
   "" }}}
 
-" [* HTML MAPPING *]
+" -------------------- [ HTML MAPPING ]                                     {{{
 
-  augroup filetype_html, filetype_htmldjango
-    autocmd!
+  " augroup filetype_html, filetype_htmldjango
+    " autocmd!
 
     " (* Create a document *)
     
-    autocmd FileType html inoremap html<TAB> 
-    \<!DOCTYPE html><CR>
-    \<html lang="en"><CR>
-    \<head><CR>
-    \<space><space><meta charset="UTF-8"><CR>
-    \<space><space><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"><CR>
-    \<space><space><meta http-equiv="X-UA-Compatible" content="ie=edge"><CR>
-    \<space><space><title></title><CR>
-    \</head><CR>
-    \<CR>
-    \<body><CR>
-    \<CR>
-    \</body><CR>
-    \</html><ESC>?<title><CR>cit
+    " autocmd FileType html inoremap html<TAB> 
+    " \<!DOCTYPE html><CR>
+    " \<html lang="en"><CR>
+    " \<head><CR>
+    " \<space><space><meta charset="UTF-8"><CR>
+    " \<space><space><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"><CR>
+    " \<space><space><meta http-equiv="X-UA-Compatible" content="ie=edge"><CR>
+    " \<space><space><title></title><CR>
+    " \</head><CR>
+    " \<CR>
+    " \<body><CR>
+    " \<CR>
+    " \</body><CR>
+    " \</html><ESC>?<title><CR>cit
 
     " (* a + target="_blank" *)
 
-    autocmd FileType html inoremap <buffer>a<TAB> 
-    \<a href="" target="_blank"></a><ESC>?=""<CR>ei
+    " autocmd FileType html inoremap <buffer>a<TAB> 
+    " \<a href="" target="_blank"></a><ESC>?=""<CR>ei
 
     " (* blockquote *)
 
-    autocmd FileType html inoremap <buffer>bq<TAB> 
-    \<blockquote></blockquote><ESC>2bli
+    " autocmd FileType html inoremap <buffer>bq<TAB> 
+    " \<blockquote></blockquote><ESC>2bli
 
     " (* bold *)
 
-    autocmd FileType html inoremap b<TAB> 
-    \<b></b><ESC>3hi
+    " autocmd FileType html inoremap b<TAB> 
+    " \<b></b><ESC>3hi
 
     " (* linebreak *)
 
-    autocmd FileType html inoremap br<TAB> 
-    \<br<space>/><ESC>a
+    " autocmd FileType html inoremap br<TAB> 
+    " \<br<space>/><ESC>a
 
     " (* code *)
 
-    autocmd FileType html inoremap code<TAB> 
-    \<code></code><ESC>6hi
+    " autocmd FileType html inoremap code<TAB> 
+    " \<code></code><ESC>6hi
 
     " (* comment *)
 
-    autocmd FileType html inoremap cmt<TAB> 
-    \<!--<space><space>--><ESC>3hi
+    " autocmd FileType html inoremap cmt<TAB> 
+    " \<!--<space><space>--><ESC>3hi
 
     " (* div *)
 
-    autocmd FileType html inoremap div<TAB> 
-    \<div><CR><space><space><CR></div><ESC>2k0viwyjPj0.k$a
+    " autocmd FileType html inoremap div<TAB> 
+    " \<div><CR><space><space><CR></div><ESC>2k0viwyjPj0.k$a
 
     " (* h1 *)
 
-    autocmd FileType html inoremap h1<TAB> 
-    \<h1></h1><ESC>4hi
+    " autocmd FileType html inoremap h1<TAB> 
+    " \<h1></h1><ESC>4hi
 
     " (* h2 *)
 
-    autocmd FileType html inoremap h2<TAB> 
-    \<h2></h2><ESC>4hi
+    " autocmd FileType html inoremap h2<TAB> 
+    " \<h2></h2><ESC>4hi
 
     " (* h3 *)
 
-    autocmd FileType html inoremap h3<TAB> 
-    \<h3></h3><ESC>4hi
+    " autocmd FileType html inoremap h3<TAB> 
+    " \<h3></h3><ESC>4hi
 
     " (* h4 *)
 
-    autocmd FileType html inoremap h4<TAB> 
-    \<h4></h4><ESC>4hi
+    " autocmd FileType html inoremap h4<TAB> 
+    " \<h4></h4><ESC>4hi
 
     " (* h5 *)
 
-    autocmd FileType html inoremap h5<TAB> 
-    \<h5></h5><ESC>4hi
+    " autocmd FileType html inoremap h5<TAB> 
+    " \<h5></h5><ESC>4hi
 
     " (* horizontal line *)
 
-    autocmd FileType html inoremap hr<TAB> 
-    \<hr><CR><ESC>a
+    " autocmd FileType html inoremap hr<TAB> 
+    " \<hr><CR><ESC>a
 
     " (* italic *)
 
-    autocmd FileType html inoremap em<TAB> 
-    \<em></em><ESC>4hi
+    " autocmd FileType html inoremap em<TAB> 
+    " \<em></em><ESC>4hi
 
     " (* li *)
 
-    autocmd FileType html inoremap li<TAB> 
-    \<li></li><ESC>4hi
+    " autocmd FileType html inoremap li<TAB> 
+    " \<li></li><ESC>4hi
 
     " (* paragraph *)
 
-    autocmd FileType html inoremap p<TAB> 
-    \<p></p><ESC>3hi
+    " autocmd FileType html inoremap p<TAB> 
+    " \<p></p><ESC>3hi
 
     " (* preformated text *)
 
-    autocmd FileType html inoremap pre<TAB> 
-    \<pre><ESC>Vypa/<ESC>O
+    " autocmd FileType html inoremap pre<TAB> 
+    " \<pre><ESC>Vypa/<ESC>O
 
     " (* autocomplete tags *)
 
     "... ref. https://stackoverflow.com/a/532656
-    autocmd FileType html inoremap /<TAB> 
-    \</<C-x><C-o><ESC>
+    " autocmd FileType html inoremap /<TAB> 
+    " \</<C-x><C-o><ESC>
 
-  augroup end
+  " augroup end
+  "" }}}
 
 "" -------------------- [ LINEBREAK and WRAP ]                              {{{
 

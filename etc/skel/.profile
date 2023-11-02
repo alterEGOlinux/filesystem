@@ -1,9 +1,9 @@
 ## ----------------------------------------------------------------------- INFO
 ## [.profile]
-## author        = "fantomH @ alterEGO Linux"
+## author        = fantomH @ alterEGO Linux
 ## created       = 2021-04-28 14:59:01 UTC
-## updated       = 2023-08-01 01:28:01 UTC
-## description   = "Loaded in non interactive shell."
+## updated       = 2023-11-02 01:34:35 UTC
+## description   = Loaded in non interactive shell.
 
 ## -------------------- [ MODULES ]
 

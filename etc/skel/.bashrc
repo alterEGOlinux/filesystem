@@ -1,9 +1,9 @@
 ## ----------------------------------------------------------------------- INFO
-## [.bashrc]
-## author        = "alterEGO Linux"
+## [~/.bashrc]
+## author        = alterEGO Linux
 ## created       = 2021-02-26 02:54:43 UTC
-## updated       = 2023-08-01 01:16:54 UTC
-## description   = "Bash config file."
+## updated       = 2023-11-02 01:21:17 UTC
+## description   = Bash config file.
 
   ##: If not running interactively, don't do anything
   [[ $- != *i* ]] && return
