@@ -1,9 +1,9 @@
 ## ----------------------------------------------------------------------- INFO
 ## [~/.config/alacritty/alacritty.yml]
-## created     = 2022-10-21 11:28:22 UTC
-## updated     = 2023-07-19 19:08:54 UTC
-## author      = "alterEGO Linux"
-## description = "Configuration for Alacritty, the GPU enhanced terminal emulator."
+## created     : 2022-10-21 11:28:22 UTC
+## updated     : 2023-07-19 19:08:54 UTC
+## author      : alterEGO Linux
+## description : Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 
 # Import additional configuration files
@@ -29,7 +29,7 @@ import:
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
 
-## ---------------------------------------- [ WINDOW ]
+## -------------------- [ WINDOW ]
 window:
 
   ## (* window background *)
@@ -112,7 +112,7 @@ window:
   # Scrolling distance multiplier.
   #multiplier: 3
 
-## ---------------------------------------- [ FONTS ]
+## -------------------- [ FONTS ]
 font:
   normal:
     family: Source Code Pro
@@ -162,7 +162,7 @@ font:
 #draw_bold_text_with_bright_colors: false
 #
 
-## ---------------------------------------- [ COLORS ]
+## -------------------- [ COLORS ]
 
 colors:
   # Default colors
@@ -379,7 +379,7 @@ colors:
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-## ---------------------------------------- [ CURSOR ]
+## -------------------- [ CURSOR ]
 
 cursor:
   style:
