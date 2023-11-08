@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-## { alterEGO Linux: "Open the vault of knowledge" } ----------------------- ##
-##                                                                           ##
-## /usr/local/bin/bookmarks.py                                               ##
-##   created        : 2021-03-21 14:39:13 UTC                                ##
-##   updated        : 2021-06-27 13:59:04 UTC                                ##
-##   description    : Bookmarks.                                             ##
-## _________________________________________________________________________ ##
+## ----------------------------------------------------------------------- INFO
+## [/usr/local/bin/bookmarks.py]
+## author        : fantomH @alterEGO Linux
+## created       : 2021-03-21 14:39:13 UTC
+## updated       : 2023-11-08 11:49:48 UTC
+## description   : Bookmarks launcher.
 
 import os
 import sqlite3 as sql
@@ -63,4 +62,5 @@ except:
 con.close()
 os.remove(dumpfile)
 
-## FIN _____________________________________________________________ ¯\_(ツ)_/¯
+# vim: foldmethod=marker
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

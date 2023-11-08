@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-10-06 15:30:23 UTC
+## updated       : 2023-11-08 11:29:28 UTC
 ## description   : ael-menu main configuration.
 
 ## -------------------- [HELP]
@@ -54,11 +54,19 @@ session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy (as ROOT)."
 is_floating      = false
 
+[app.bookmarks]
+name             = "bookmarks"
+run              = "terminal"
+cmd              = "python /usr/local/bin/bookmarks.py"
+session          = "BOOKMARKS"
+description      = "Bookmarks launcher"
+is_floating      = true
+
 [app.bpytop]
 name             = "bpytop"
 run              = "terminal"
 cmd              = "bpytop"
-session          = "bpytop"
+session          = "BPYTOP"
 description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
 is_floating      = false
 
@@ -78,7 +86,6 @@ session          = "BURP"
 description      = "Web applications security testing."
 is_floating      = false
 
-#    MenuOption('bookmarks', 'terminal', 'bookmarks.py', 'BOOKMARKS', 'Bookmarks manager.', True),
 #    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
 
 [app.dirbuster]
@@ -191,6 +198,14 @@ run              = "launch"
 cmd              = "libreoffice"
 session          = "LIBREOFFICE"
 description      = "Office suite."
+is_floating      = false
+
+[app.meld]
+name             = "meld"
+run              = "launch"
+cmd              = "meld"
+session          = "MELD"
+description      = "Visual diff and merge tool."
 is_floating      = false
 
 [app.metasploit]
@@ -395,6 +410,14 @@ session          = "VOLUME"
 description      = "Volume control."
 is_floating      = false
 
+[app.vscode]
+name             = "Visual Studio Code"
+run              = "launch"
+cmd              = "code"
+session          = "VSCODE"
+description      = "Microsoft code editor."
+is_floating      = false
+
 [app.wallpaper]
 name             = "change background/wallpaper"
 run              = "launch"
@@ -417,21 +440,6 @@ is_floating      = false
 #MenuOption('pamac', 'launch', 'pamac-manager', 'PAMAC', 'Package Manager based on libalpm with AUR and Appstream support.', False),
 #MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
 #MenuOption('toggle audio', 'launch', 'bash ${HOME}/fH/scripts/toggle_audio_device.sh && exit', 'AUDIO', 'Toggle audio device.', False),
-[app.vscode]
-name             = "Visual Studio Code"
-run              = "launch"
-cmd              = "code"
-session          = "VSCODE"
-description      = "Microsoft code editor."
-is_floating      = false
-
-#[app.work_rdp]
-#name             = "Work RDP"
-#run              = "launch"
-#cmd              = "remmina --connect=/home/ghost/.local/share/remmina/group_rdp_work_ws-18-02-mtl-radiologymontreal-com.remmina"
-#session          = "WILLWORK"
-#description      = "Connect to work. mstsc"
-#is_floating      = false
 
 # vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

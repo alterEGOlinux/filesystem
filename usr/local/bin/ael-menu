@@ -3,7 +3,7 @@
 ## [bin/ael-menu]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:40:10 UTC
-## updated       : 2023-11-08 01:55:23 UTC
+## updated       : 2023-11-08 11:57:20 UTC
 ## description   : Application launcher using `fzf` and `tmux`
 
 from collections import namedtuple
@@ -19,41 +19,6 @@ from time import sleep
 CONFIGDIR = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
 MAINCONFIG = os.path.join(CONFIGDIR, 'ael-menu.toml')
 EXTRACONFIG = os.path.join(CONFIGDIR, 'ael-menu-extra.toml')
-
-# """
-# Description of the menu options
-# name        Name or title of the application shown in the menu.
-# run         Function to run in order to launch the application.
-            # - execute
-            # - launch
-            # - stay_in_terminal
-            # - terminal
-# cmd         The command that will run "as if you would use the commandline.
-# session     Applications use `tmux` to launch, the 'session' is used to
-            # create a unique tmux session name (session+random number).
-            # This enable to launch an application multiple time and keep
-            # track in tmux.
-# description Description will show in the menu.
-# is_floating Enables floating window (in I3 windows manager only).
-# """
-
-# [-- MENU OPTIONS --]
-
-# MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'session', 'description', 'is_floating'])
-
-
-# Allows additional, per site, menu options.
-# CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
-# CONFIG_FILE = os.path.join(CONFIG_DIR, 'extra.py')
-# if os.path.exists(CONFIG_FILE):
-    # sys.path.append(CONFIG_DIR)
-
-    # import extra
-    # options = options + extra.additional_options
-
-# options = sorted(options, key=lambda o: o.name.lower())
-
-## [SELECTION & LAUNCHER]
 
 def main():
 
