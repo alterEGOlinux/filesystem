@@ -5,6 +5,23 @@
 ## updated       : 2023-10-06 15:30:23 UTC
 ## description   : ael-menu main configuration.
 
+## -------------------- [HELP]
+## name          Name or title of the application shown in the menu.
+## run           Function to run in order to launch the application.
+##               - execute
+##               - launch
+##               - stay_in_terminal
+##               - terminal
+## cmd           The command that will run "as if you would use the commandline.
+## session       Applications use `tmux` to launch, the 'session' is used to
+##               create a unique tmux session name (session+random number).
+##               This enable to launch an application multiple time and keep
+##               track in tmux.
+## description   Description will show in the menu.
+## is_floating   Enables floating window (in I3 windows manager only).
+ 
+## -------------------- [APPLICATIONS] 
+
 [app.arp-scan]
 name             = "arp-scan --locanet"
 run              = "stay_in_terminal"
@@ -400,14 +417,6 @@ is_floating      = false
 #MenuOption('pamac', 'launch', 'pamac-manager', 'PAMAC', 'Package Manager based on libalpm with AUR and Appstream support.', False),
 #MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
 #MenuOption('toggle audio', 'launch', 'bash ${HOME}/fH/scripts/toggle_audio_device.sh && exit', 'AUDIO', 'Toggle audio device.', False),
-[app.vnc]
-name             = "VNC Viewer"
-run              = "launch"
-cmd              = "vncviewer"
-session          = "VNC"
-description      = "VNC Viewer (client)."
-is_floating      = false
-
 [app.vscode]
 name             = "Visual Studio Code"
 run              = "launch"
@@ -416,13 +425,13 @@ session          = "VSCODE"
 description      = "Microsoft code editor."
 is_floating      = false
 
-[app.work_rdp]
-name             = "Work RDP"
-run              = "launch"
-cmd              = "remmina --connect=/home/ghost/.local/share/remmina/group_rdp_work_ws-18-02-mtl-radiologymontreal-com.remmina"
-session          = "WILLWORK"
-description      = "Connect to work. mstsc"
-is_floating      = false
+#[app.work_rdp]
+#name             = "Work RDP"
+#run              = "launch"
+#cmd              = "remmina --connect=/home/ghost/.local/share/remmina/group_rdp_work_ws-18-02-mtl-radiologymontreal-com.remmina"
+#session          = "WILLWORK"
+#description      = "Connect to work. mstsc"
+#is_floating      = false
 
 # vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
