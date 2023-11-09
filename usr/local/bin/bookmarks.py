@@ -42,7 +42,7 @@ with open(dumpfile, 'r') as f:
 try:
     fzf = subprocess.run(["fzf",
                           "--prompt=Bookmarks ❯ ",
-                          "--header=Title",
+                          "--header= ",
                           "--no-hscroll",
                           "--reverse",
                           "-i",

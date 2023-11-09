@@ -3157,7 +3157,15 @@ declare -A tags=(
 
 for tag in "${!tags[@]}"; do
     printf "%b" "($tag)\t${tags[$tag]}\n"
-done | fzf
+done | fzf --prompt="DICOM TAG ❯ "                                            \
+           --header=" "                                                       \
+           --no-hscroll                                                       \
+           --reverse                                                          \
+           -i                                                                 \
+           --exact                                                            \
+           --tiebreak=begin                                                   \
+           --no-info                                                          \
+           --pointer=•
 
 # vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

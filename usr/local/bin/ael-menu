@@ -45,13 +45,16 @@ def main():
     opt = ''.join([f"{o.name:<40}{o.description}\n" for o in options]).encode('UTF-8')
 
     menu = subprocess.run(['fzf', 
-                        '--reverse', 
-                        '--prompt=LAUNCH: ',
-                        '--no-info',
-                        '--no-hscroll',
-                        '--pointer=•'], 
-                        input=opt, 
-                        stdout=subprocess.PIPE)
+                           "--prompt=LAUNCH ❯ ",
+                           "--header= ",
+                           "--no-hscroll",
+                           "--reverse",
+                           "-i",
+                           "--exact",
+                           "--tiebreak=begin",
+                           "--no-info",
+                           "--pointer=•",
+                           ], input=opt, stdout=subprocess.PIPE)
 
     selection = menu.stdout.decode('UTF-8').split('  ')[0].strip()
     

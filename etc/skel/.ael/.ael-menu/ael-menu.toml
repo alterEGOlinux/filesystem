@@ -112,6 +112,14 @@ session          = "DOMINATION"
 description      = "Risk game."
 is_floating      = false
 
+[app.emojis]
+name             = "Emojis"
+run              = "terminal"
+cmd              = "bash /usr/local/bin/emojis.sh"
+session          = "EMOJIS"
+description      = "Browse emojis."
+is_floating      = true
+
 [app.exitI3]
 name             = "exit i3"
 run              = "execute"
