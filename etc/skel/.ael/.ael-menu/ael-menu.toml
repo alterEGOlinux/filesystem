@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-11-09 02:41:18 UTC
+## updated       : 2023-11-09 03:09:13 UTC
 ## description   : ael-menu main configuration.
 
 ## -------------------- [HELP]
@@ -87,6 +87,14 @@ description      = "Web applications security testing."
 is_floating      = false
 
 #    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
+
+[app.dicomTAG]
+name             = "DICOM Tags"
+run              = "terminal"
+cmd              = "bash /usr/local/bin/dicomTAG.sh"
+session          = "DICOMTAG"
+description      = "Browse DICOM tags."
+is_floating      = true
 
 [app.dirbuster]
 name             = "dirbuster"
@@ -441,7 +449,6 @@ description      = "Network traffic analyzer."
 is_floating      = false
 
 #MenuOption('all apps', 'launch', 'dmenu_run -nb \'#000\' -l 20 | xargs', 'ALLAPPS', 'Use dmenu_run to see all apps.', False),
-#MenuOption('dicom', 'terminal', 'bash ${HOME}/scripts/dicomTAG.sh', 'DICOM', 'Browse DICOM tags.', True),
 #MenuOption('emojis', 'stay_in_terminal', r"""bash ${HOME}/fH/scripts/emojis.sh && exit""", 'EMOJIS', 'Select emojis.', True),
 #MenuOption('pamac', 'launch', 'pamac-manager', 'PAMAC', 'Package Manager based on libalpm with AUR and Appstream support.', False),
 #MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
