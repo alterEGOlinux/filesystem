@@ -1,14 +1,10 @@
 #!/usr/bin/env sh
-##
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## /urs/local/bin/toggle_language.sh
-##   created     : 2019-05-19 02:36:10 UTC
-##   updated     : 2023-01-27 03:44:24 UTC
-##   description : Toggle languages using setxkbmap.
-## ____________________________________________________________________________
+## ----------------------------------------------------------------------- INFO
+## [/usr/local/bin/toggle_language.sh]
+## author        : fantomH @alterEGO Linux
+## created       : 2019-05-19 02:36:10 UTC
+## updated       : 2023-11-09 02:47:04 UTC
+## description   : Toggle languages using setxkbmap.
 
   ## Assumes `setxkbmap -layout 'us,ca'` was launched already.
   ## TODO: Would need to work on a list from the query to allow many language.
@@ -36,6 +32,5 @@
       killall notify-osd
   fi
 
-## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯

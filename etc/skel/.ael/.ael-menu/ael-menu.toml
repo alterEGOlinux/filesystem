@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-11-08 11:29:28 UTC
+## updated       : 2023-11-09 02:41:18 UTC
 ## description   : ael-menu main configuration.
 
 ## -------------------- [HELP]
@@ -368,7 +368,13 @@ session          = "ATTACH"
 description      = "List Tmux sessions and attach."
 is_floating      = true
 
-#    MenuOption('toggle connection', 'launch', 'bash /usr/local/bin/toggle_connection.sh', 'CONNECT', 'START/STOP Internet connection.', False),
+[app.toggle_connection]
+name             = "Toggle Connection"
+run              = "launch"
+cmd              = "bash /usr/local/bin/toggle_connection.sh"
+session          = "CONNECT"
+description      = "START/STOP Internet connection"
+is_floating      = false
 
 [app.vbox]
 name             = "vbox"

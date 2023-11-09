@@ -2,7 +2,7 @@
 ## [~/.config/i3/config]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2021-02-26 09:37:37 UTC
-## updated       : 2023-11-03 05:21:09 UTC
+## updated       : 20231109021300
 ## description   : i3vm configuration file.
 
 set $mod Mod4
@@ -221,10 +221,10 @@ font pango:Source Code Pro Medium 10
   bindsym $mod+Return exec alacritty -e env TERM=screen-256color tmux -u
 
   ## (* toggle keyboard language *)
-  bindsym $mod+CTRL+l exec toggle_language.sh
+  bindsym $mod+CTRL+l exec /usr/local/bin/toggle_language.sh
 
   ## (* screenshot *)
-  bindsym $mod+CTRL+s exec screenshot.sh --window
+  bindsym $mod+CTRL+s exec /usr/local/bin/screenshot.sh --window
 
   ## (* ael-menu *)
   bindsym $mod+m exec xfce4-terminal                                          \
@@ -232,7 +232,7 @@ font pango:Source Code Pro Medium 10
                           --hide-menubar                                      \
                           --hide-scrollbar                                    \
                           --title "ael-menu"                                  \
-                          -e "ael-menu"
+                          -e "/usr/local/bin/ael-menu"
 
   for_window [title="ael-menu"]                                               \
       floating enable,                                                        \
@@ -251,10 +251,10 @@ font pango:Source Code Pro Medium 10
                           --hide-toolbar                                      \
                           --hide-menubar                                      \
                           --hide-scrollbar                                    \
-                          --title "AEL Bookmarks"                             \
-                          -e "bookmarks.py"
+                          --title "Bookmarks Menu"                            \
+                          -e "/usr/local/bin/bookmarks.py"
 
-  for_window [title="AEL Bookmarks"]                                          \
+  for_window [title="Bookmarks Menu"]                                         \
       floating enable,                                                        \
       resize set 900px 450px,                                                 \
       move position center

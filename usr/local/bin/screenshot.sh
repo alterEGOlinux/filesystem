@@ -1,22 +1,18 @@
 #!/usr/bin/env bash
+## ----------------------------------------------------------------------- INFO
+## [/usr/local/bin/screenshot.sh]
+## author        : fantomH @alterEGO Linux
+## created       : 2020-07-17 15:57:36 UTC
+## updated       : 2023-11-09 02:06:06 UTC
+## description   : Screenshots application.
 
-## ----------------------------------------------------------------------------
-##             { alterEGO Linux: "Open the vault of knowledge" }             ##
-## ----------------------------------------------------------------------------
-##
-## /usr/local/bin/screenshot.sh
-##   created        : 2020-07-17 15:57:36 UTC
-##   updated        : 2023-01-27 03:17:42 UTC
-##   description    : Screenshots application.
-## ____________________________________________________________________________
+DIRECTORY="${HOME}/tmp/screenshots"
 
-directory="${HOME}/tmp/screenshots"
-
-if [[ ! -d ${directory} ]]; then
-  mkdir -p ${directory}
+if [[ ! -d ${DIRECTORY} ]]; then
+  mkdir -p ${DIRECTORY}
 fi
 
-output="${directory}/screenshot-$(date --utc "+%Y%m%d%H%M%S").png"
+output="${DIRECTORY}/screenshot-$(date --utc "+%Y%m%d%H%M%S").png"
 
 case ${@} in
 
@@ -34,6 +30,5 @@ case ${@} in
 
 esac
 
-## ----------------------------------------------------------------------------
 # vim: foldmethod=marker
-## ___________________________{ FIN ¯\_(ツ)_/¯ }_______________________________
+## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
