@@ -1,10 +1,9 @@
 #!/usr/bin/env sh
-
 ## ----------------------------------------------------------------------- INFO
 ## [~/.ael/.core]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2021-03-19 09:37:19 UTC
-## updated       : 2023-10-20 01:18:16 UTC
+## updated       : 2023-11-26 17:51:31 UTC
 ## description   : alterEGO Linux core shell configuration.
 
 [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                    \
@@ -1092,6 +1091,18 @@ tagalog() {
     | awk -F '"' '{print $2}'                                                 \
     | head -n 1
   }
+  ## }}}
+
+## -------------------- [ termbin ]                                         {{{
+## [termbin]
+## type          = 'alias'
+## version       = 2023-11-26 17:45:44 UTC
+## description   = "Netcat-based command-line pastebin."
+## notes         = '''
+## url: https://termbin.com/
+## use `echo just testing! | termbin`
+
+  alias termbin="nc termbin.com 9999"
   ## }}}
 
 ## -------------------- [ translate ]                                       {{{
