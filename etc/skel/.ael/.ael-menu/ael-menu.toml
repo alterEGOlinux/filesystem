@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-11-09 03:09:13 UTC
+## updated       : 2023-12-12 23:58:32 UTC
 ## description   : ael-menu main configuration.
 
 ## -------------------- [HELP]
@@ -21,6 +21,14 @@
 ## is_floating   Enables floating window (in I3 windows manager only).
  
 ## -------------------- [APPLICATIONS] 
+
+[app.arandr]
+name             = "arandr"
+run              = "launch"
+cmd              = "arandr"
+session          = "arandr"
+description      = "Monitor setup."
+is_floating      = false
 
 [app.arp-scan]
 name             = "arp-scan --locanet"
