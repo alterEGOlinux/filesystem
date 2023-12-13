@@ -264,6 +264,7 @@ font pango:Source Code Pro Medium 10
   bar {
     id bar-1
     position bottom
+    tray_output primary
     workspace_buttons no
     status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
     font pango:Source Code Pro Medium 10
