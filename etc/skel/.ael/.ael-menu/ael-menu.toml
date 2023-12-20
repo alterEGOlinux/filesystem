@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-12-19 08:36:30 UTC
+## updated       : 2023-12-20 20:19:13 UTC
 ## description   : ael-menu main configuration.
 
 ## -------------------- [HELP]
@@ -28,6 +28,7 @@ run              = "launch"
 cmd              = "arandr"
 session          = "arandr"
 description      = "Monitor setup."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.arp-scan]
@@ -36,6 +37,7 @@ run              = "stay_in_terminal"
 cmd              = "sudo -u ${USER} arp-scan --localnet"
 session          = "ARPSCAN"
 description      = "Mac Address scan."
+desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
 [app.binwalk]
@@ -44,6 +46,7 @@ run              = "stay_in_terminal"
 cmd              = "binwalk --help"
 session          = "BINWALK"
 description      = "Tool for searching a given binary image for embedded files."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.bleachbit]
@@ -52,6 +55,7 @@ run              = "launch"
 cmd              = "bleachbit"
 session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.bleachbit_root]
@@ -60,6 +64,7 @@ run              = "launch"
 cmd              = "sudo bleachbit"
 session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy (as ROOT)."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.bookmarks]
@@ -68,6 +73,7 @@ run              = "terminal"
 cmd              = "python /usr/local/bin/bookmarks.py"
 session          = "BOOKMARKS"
 description      = "Bookmarks launcher"
+desktop          = ["i3"]
 is_floating      = true
 
 [app.bpytop]
@@ -76,6 +82,7 @@ run              = "terminal"
 cmd              = "bpytop"
 session          = "BPYTOP"
 description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
+desktop          = ["i3"]
 is_floating      = false
 
 [app.brave]
@@ -84,6 +91,7 @@ run              = "launch"
 cmd              = "brave"
 session          = "BRAVE"
 description      = "Web Browser."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.burpsuite]
@@ -92,6 +100,7 @@ run              = "launch"
 cmd              = "burpsuite"
 session          = "BURP"
 description      = "Web applications security testing."
+desktop          = ["i3"]
 is_floating      = false
 
 #    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
@@ -102,6 +111,7 @@ run              = "terminal"
 cmd              = "bash /usr/local/bin/dicomTAG.sh"
 session          = "DICOMTAG"
 description      = "Browse DICOM tags."
+desktop          = ["i3"]
 is_floating      = true
 
 [app.dirbuster]
@@ -110,6 +120,7 @@ run              = "stay_in_terminal"
 cmd              = "dirbuster --help"
 session          = "DIRBUSTER"
 description      = "Brute force directories and files names on web/application servers."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.domination]
@@ -118,6 +129,7 @@ run              = "launch"
 cmd              = "domination"
 session          = "DOMINATION"
 description      = "Risk game."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.emojis]
@@ -126,6 +138,7 @@ run              = "terminal"
 cmd              = "bash /usr/local/bin/emojis.sh"
 session          = "EMOJIS"
 description      = "Browse emojis."
+desktop          = ["i3"]
 is_floating      = true
 
 [app.exitI3]
@@ -134,6 +147,7 @@ run              = "execute"
 cmd              = "i3-msg exit"
 session          = "null"
 description      = "Exit i3 window manager."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.firefox]
@@ -142,6 +156,7 @@ run              = "launch"
 cmd              = "firefox"
 session          = "FIREFOX"
 description      = "Web browser."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.firefox_private]
@@ -150,6 +165,7 @@ run              = "launch"
 cmd              = "firefox --private-window"
 session          = "SHUTTTT"
 description      = "Web browser, private session."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.gimp]
@@ -158,6 +174,7 @@ run              = "launch"
 cmd              = "gimp"
 session          = "GIMP"
 description      = "Drawing app."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.gobuster]
@@ -166,6 +183,7 @@ run              = "stay_in_terminal"
 cmd              = "gobuster --help"
 session          = "GOBUSTER"
 description      = "Directory/File, DNS and VHost busting tool written in Go."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.gping]
@@ -174,6 +192,7 @@ run              = "stay_in_terminal"
 cmd              = "gping --help"
 session          = "GPING"
 description      = "Ping with graph."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.htmlq]
@@ -182,6 +201,7 @@ run              = "stay_in_terminal"
 cmd              = "htmlq --help"
 session          = "HTMLQ"
 description      = "Like jq, but for HTML."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.htop]
@@ -190,6 +210,7 @@ run              = "terminal"
 cmd              = "htop"
 session          = "HTOP"
 description      = "Process viewer."
+desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
 [app.inkscape]
@@ -198,6 +219,7 @@ run              = "launch"
 cmd              = "inkscape"
 session          = "INKSCAPE"
 description      = "Drawing app."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.insomnia]
@@ -206,6 +228,7 @@ run              = "launch"
 cmd              = "insomnia"
 session          = "INSOMNIA"
 description      = "API Client and Design Platform for GraphQL and REST."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.john]
@@ -214,6 +237,7 @@ run              = "stay_in_terminal"
 cmd              = "john --help"
 session          = "JOHN"
 description      = "John the Ripper password cracker."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.libreoffice]
@@ -222,6 +246,7 @@ run              = "launch"
 cmd              = "libreoffice"
 session          = "LIBREOFFICE"
 description      = "Office suite."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.meld]
@@ -230,6 +255,7 @@ run              = "launch"
 cmd              = "meld"
 session          = "MELD"
 description      = "Visual diff and merge tool."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.metasploit]
@@ -238,6 +264,7 @@ run              = "stay_in_terminal"
 cmd              = "msfconsole"
 session          = "METASPLOIT"
 description      = "Penetration testing framework."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.monitors]
@@ -246,6 +273,7 @@ run              = "launch"
 cmd              = "nwg-displays"
 session          = "MONITORS"
 description      = "Manage monitors display with nwg-displays."
+desktop          = ["Hyprland"]
 is_floating      = false
 
 [app.netcat]
@@ -254,6 +282,7 @@ run              = "stay_in_terminal"
 cmd              = "nc --help"
 session          = "NETCAT"
 description      = "Utility for network discovery and security auditing."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.nmap]
@@ -262,6 +291,7 @@ run              = "stay_in_terminal"
 cmd              = "nmap --help | more"
 session          = "NMAP"
 description      = "Network exploration tool and security / port scanner."
+desktop          = ["i3"]
 is_floating      = false
 
 #    MenuOption('nmap NSE', 'terminal', '/usr/local/bin/nmapNSE.sh', 'NMAPNSE', 'Nmap Scripting Engine (NSE) scripts', True),
@@ -273,6 +303,7 @@ run              = "launch"
 cmd              = "pavucontrol"
 session          = "PAVU"
 description      = "Volume control."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.pcmanfm]
@@ -281,6 +312,7 @@ run              = "launch"
 cmd              = "pcmanfm"
 session          = "PCMANFM"
 description      = "File Manager."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.publicip]
@@ -289,6 +321,7 @@ run              = "launch"
 cmd              = "curl --silent http://ipecho.net/plain | xclip -selection clipboard"
 session          = "PUBIP"
 description      = "Get the public IP > clipboard."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.ranger]
@@ -297,6 +330,7 @@ run              = "terminal"
 cmd              = "ranger"
 session          = "RANGER"
 description      = "TUI file manager."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.reboot]
@@ -305,6 +339,7 @@ run              = "execute"
 cmd              = "reboot"
 session          = "null"
 description      = "Restart computer."
+desktop          = ["i3", "Hyperland"]
 is_floating      = false
 
 [app.remmina]
@@ -313,6 +348,7 @@ run              = "launch"
 cmd              = "remmina"
 session          = "REMMINA"
 description      = "Remote desktop client (RDP, SSH, VNC)."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 #    MenuOption('scout man pages', 'terminal', 'scout_man.py', 'null', 'Search & view man pages.', False),
@@ -325,6 +361,7 @@ is_floating      = false
 # cmd              = 'r"""echo -n "¯\_(ツ)_/¯" | xclip -selection clipboard"""'
 # session          = "null"
 # description      = "¯\_(ツ)_/¯ > clipboard."
+#desktop          = ["i3"]
 # is_floating      = false
 
 [app.shutdown]
@@ -333,6 +370,7 @@ run              = "execute"
 cmd              = "shutdown now"
 session          = "null"
 description      = "Shutdown your computer."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.solitaire]
@@ -341,6 +379,7 @@ run              = "launch"
 cmd              = "/usr/bin/qsolocards"
 session          = "SOLITAIRE"
 description      = "Solitaire cards game."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.sqlitebrowser]
@@ -349,6 +388,7 @@ run              = "launch"
 cmd              = "/usr/bin/sqlitebrowser"
 session          = "SQLB"
 description      = "Sqlite GUI browser."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.starwars]
@@ -358,6 +398,7 @@ run              = "stay_in_terminal"
 cmd              = "telnet towel.blinkenlights.nl"
 session          = "STARWARS"
 description      = "Watch ASCII StarWars."
+desktop          = ["i3"]
 is_floating      = true
 
 [app.terminal]
@@ -366,6 +407,7 @@ run              = "launch"
 cmd              = "$TERMINAL"
 session          = "TERMINAL"
 description      = "Launh a terminal."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.thumbsup]
@@ -374,6 +416,7 @@ run              = "launch"
 cmd              = "echo -n '👍' | xclip -selection clipboard"
 session          = "THUMBSUP"
 description      = "👍 > clipboard"
+desktop          = ["i3"]
 is_floating      = true
 
 [app.thunar]
@@ -382,6 +425,7 @@ run              = "launch"
 cmd              = "thunar"
 session          = "THUNAR"
 description      = "File manager."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.thunar_ROOT]
@@ -390,6 +434,7 @@ run              = "launch"
 cmd              = "sudo thunar"
 session          = "THUNARROOT"
 description      = "File manager (ROOT)."
+desktop          = ["i3"]
 is_floating      = false
 
 [app.tmux_attach]
@@ -398,6 +443,7 @@ run              = "terminal"
 cmd              = "tmuxplus.sh -a"
 session          = "ATTACH"
 description      = "List Tmux sessions and attach."
+desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
 [app.toggle_connection]
@@ -406,6 +452,7 @@ run              = "launch"
 cmd              = "bash /usr/local/bin/toggle_connection.sh"
 session          = "CONNECT"
 description      = "START/STOP Internet connection"
+desktop          = ["i3"]
 is_floating      = false
 
 [app.vbox]
@@ -414,6 +461,7 @@ run              = "stay_in_terminal"
 cmd              = """vboxmanage list vms | awk -F '\\\"' '{ print \\$2 }' | fzf | sed 's/\\ /\\\\ /g' | xargs vboxmanage startvm && exit"""
 session          = "VBOX"
 description      = "Select a virtual machine."
+desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
 [app.view_history]
@@ -422,6 +470,7 @@ run              = "stay_in_terminal"
 cmd              = "cat ${HOME}/.bash_history | fzf"
 session          = "HISTORY"
 description      = "View latest bash history."
+desktop          = ["i3"]
 is_floating      = true
 
 [app.virtualbox]
@@ -430,6 +479,7 @@ run              = "launch"
 cmd              = "virtualbox"
 session          = "VBOX"
 description      = "Open-source virtalization tool."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.vlc]
@@ -438,6 +488,7 @@ run              = "launch"
 cmd              = "vlc"
 session          = "VLC"
 description      = "VLC media player."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.volume]
@@ -446,6 +497,7 @@ run              = "launch"
 cmd              = "pavucontrol"
 session          = "VOLUME"
 description      = "Volume control."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.vscode]
@@ -454,6 +506,7 @@ run              = "launch"
 cmd              = "code"
 session          = "VSCODE"
 description      = "Microsoft code editor."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.wallpaper]
@@ -462,6 +515,7 @@ run              = "launch"
 cmd              = "nitrogen /usr/local/share/wallpapers"
 session          = "null"
 description      = "Change wallpapers"
+desktop          = ["i3"]
 is_floating      = false
 
 [app.wireshark_ROOT]
@@ -470,6 +524,7 @@ run              = "launch"
 cmd              = "sudo wireshark"
 session          = "WIRESHARK"
 description      = "Network traffic analyzer."
+desktop          = ["i3"]
 is_floating      = false
 
 #MenuOption('all apps', 'launch', 'dmenu_run -nb \'#000\' -l 20 | xargs', 'ALLAPPS', 'Use dmenu_run to see all apps.', False),
