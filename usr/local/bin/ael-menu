@@ -20,6 +20,8 @@ CONFIGDIR = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
 MAINCONFIG = os.path.join(CONFIGDIR, 'ael-menu.toml')
 EXTRACONFIG = os.path.join(CONFIGDIR, 'ael-menu-extra.toml')
 
+DESKTOP = os.getenv('XDG_CURRENT_DESKTOP')
+
 def main():
 
     with open(MAINCONFIG, 'rb') as _input:
@@ -42,9 +44,12 @@ def main():
     options = sorted(options, key=lambda o: o.name.lower())
 
     ## Menu options generator.
-    opt = ''.join([f"{o.name:<40}{o.description}\n" for o in options]).encode('UTF-8')
+    opt = ''.join([f"{o.name:<30}{o.description}\n" for o in options]).encode('UTF-8')
 
     menu = subprocess.run(['fzf', 
+                           "--color=gutter:-1",
+                           "--margin=4%",
+                           "--border=none",
                            "--prompt=LAUNCH ❯ ",
                            "--header= ",
                            "--no-hscroll",
@@ -65,7 +70,7 @@ def main():
     add_float = ''
     command = selection.cmd
     session = f"{selection.session}{random.randint(0, 10000)}"
-    if selection.is_floating is True:
+    if selection.is_floating is True and DESKTOP != "Hyperland":
         add_float = f'''&& sleep 0.05 && i3-msg "[id=$(xdotool getactivewindow)] floating enable, resize set 800px 500px, move position center"'''
 
     ## (* EXECUTE *)
@@ -83,11 +88,17 @@ def main():
         subprocess.run(f"tmux new-session -d -s {session}", shell=True)
         sleep(0.1)
         subprocess.run(f'''tmux send-keys -t {session} "{command}" enter''', shell=True)
-        subprocess.run(f"xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar --command=\"env TERM=screen-256color tmux -u a -t '{session}'\" {add_float}", shell=True)
+        if DESKTOP == "Hyprland":
+            subprocess.run(f"env TERM=screen-256color tmux -u a -t '{session}' {add_float}", shell=True)
+        else:
+            subprocess.run(f"xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar --command=\"env TERM=screen-256color tmux -u a -t '{session}'\" {add_float}", shell=True)
 
     ## (* TERMINAL *)
     elif selection.run == 'terminal':
-        subprocess.run(f"xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar --command=\"{command}\" {add_float}", shell=True)
+        if DESKTOP == "Hyprland":
+            subprocess.run(f"{command} {add_float}", shell=True)
+        else:
+            subprocess.run(f"xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar --command=\"{command}\" {add_float}", shell=True)
 
 if __name__ == '__main__':
     main()

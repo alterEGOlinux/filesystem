@@ -51,7 +51,8 @@ export BROWSER=firefox
 export FZF_DEFAULT_COMMAND='rg --files --hidden '
 
 ## TODO: To move from xfce4-terminal to alacritty.
-export TERMINAL="xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar"
+# export TERMINAL="xfce4-terminal --hide-scrollbar --hide-menubar --hide-toolbar"
+export TERMINAL="alacritty"
 export VISUAL=vim
 export EDITOR=${VISUAL}
 
