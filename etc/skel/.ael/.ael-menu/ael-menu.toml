@@ -339,7 +339,7 @@ run              = "execute"
 cmd              = "reboot"
 session          = "null"
 description      = "Restart computer."
-desktop          = ["i3", "Hyperland"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.remmina]
