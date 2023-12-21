@@ -3,7 +3,7 @@
 ## [/usr/local/bin/emojis.md]
 ## author        : fantomH
 ## created       : 2022-06-02 08:56:47 UTC
-## updated       : 2023-11-09 11:47:59 UTC
+## updated       : 2023-12-21 03:27:58 UTC
 ## description   : Search emojis using fzf and xclip.
 
 declare -A emojis=(
@@ -1279,7 +1279,10 @@ declare -A emojis=(
 
 for emoji in "${!emojis[@]}"; do
     printf "%b" "$emoji\t${emojis[$emoji]}\n"
-done | fzf --prompt="EMOJIS ❯ "                                               \
+done | fzf --color=gutter:-1                                                  \
+           --margin=4%                                                        \
+           --border=none                                                      \
+           --prompt="EMOJIS ❯ "                                               \
            --header=" "                                                       \
            --no-hscroll                                                       \
            --reverse                                                          \

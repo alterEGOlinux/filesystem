@@ -3,7 +3,7 @@
 ## [/usr/local/bin/dicomTAG.sh]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2021-07-14 09:38:38 UTC
-## updated       : 2023-11-09 03:03:21 UTC
+## updated       : 2023-12-21 03:19:56 UTC
 ## description   : Search DICOM tags.
 
 declare -A tags=(
@@ -3157,7 +3157,10 @@ declare -A tags=(
 
 for tag in "${!tags[@]}"; do
     printf "%b" "($tag)\t${tags[$tag]}\n"
-done | fzf --prompt="DICOM TAG ❯ "                                            \
+done | fzf --color=gutter:-1                                                  \
+           --margin=4%                                                        \
+           --border=none                                                      \
+           --prompt="DICOM TAG ❯ "                                            \
            --header=" "                                                       \
            --no-hscroll                                                       \
            --reverse                                                          \

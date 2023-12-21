@@ -12,6 +12,7 @@ import tomllib
 from pprint import pprint
 import random
 import shlex
+import shutil
 import subprocess
 import sys
 from time import sleep
@@ -22,22 +23,30 @@ EXTRACONFIG = os.path.join(CONFIGDIR, 'ael-menu-extra.toml')
 
 DESKTOP = os.getenv('XDG_CURRENT_DESKTOP')
 
+def which(exec_list: list) -> bool:
+
+    for e in exec_list:
+        if shutil.which(e) is None:
+            return False
+
+    return True
+
 def main():
 
     with open(MAINCONFIG, 'rb') as _input:
         data = tomllib.load(_input)
 
         ## Convert dict of dict to namedtuple
-        MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'session', 'description', 'desktop', 'is_floating'])
-        options = [MenuOption(**values) for values in data['app'].values() if DESKTOP in values['desktop']]
+        MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'which', 'session', 'description', 'desktop', 'is_floating'])
+        options = [MenuOption(**values) for values in data['app'].values() if DESKTOP in values['desktop'] and which(values['which'])]
 
     if os.path.exists(EXTRACONFIG):
         with open(EXTRACONFIG, 'rb') as _input:
             data = tomllib.load(_input)
 
             ## Convert dict of dict to namedtuple
-            MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'session', 'description', 'desktop', 'is_floating'])
-            extra_options = [MenuOption(**values) for values in data['app'].values() if DESKTOP in values['desktop']]
+            MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'which', 'session', 'description', 'desktop', 'is_floating'])
+            extra_options = [MenuOption(**values) for values in data['app'].values() if DESKTOP in values['desktop'] and which(values['which'])]
 
             options = options + extra_options
 

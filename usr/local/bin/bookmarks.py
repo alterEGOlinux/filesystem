@@ -3,7 +3,7 @@
 ## [/usr/local/bin/bookmarks.py]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2021-03-21 14:39:13 UTC
-## updated       : 2023-11-08 11:49:48 UTC
+## updated       : 2023-12-21 03:21:31 UTC
 ## description   : Bookmarks launcher.
 
 import os
@@ -41,15 +41,18 @@ with open(dumpfile, 'r') as f:
 
 try:
     fzf = subprocess.run(["fzf",
-                          "--prompt=Bookmarks ❯ ",
-                          "--header= ",
-                          "--no-hscroll",
-                          "--reverse",
-                          "-i",
-                          "--exact",
-                          "--tiebreak=begin",
-                          "--no-info",
-                          "--pointer=•",
+                           "--color=gutter:-1",
+                           "--margin=4%",
+                           "--border=none",
+                           "--prompt=LAUNCH ❯ ",
+                           "--header= ",
+                           "--no-hscroll",
+                           "--reverse",
+                           "-i",
+                           "--exact",
+                           "--tiebreak=begin",
+                           "--no-info",
+                           "--pointer=•",
                          ], input=data, stdout=subprocess.PIPE)
 
     selection = fzf.stdout
