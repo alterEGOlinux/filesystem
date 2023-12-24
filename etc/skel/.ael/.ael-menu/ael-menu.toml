@@ -274,39 +274,69 @@ is_floating      = true
 name             = "inkscape"
 run              = "launch"
 cmd              = "inkscape"
-which            = [""]
+which            = ["inkscape"]
 session          = "INKSCAPE"
 description      = "Drawing app."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.insomnia]
 name             = "insomnia"
 run              = "launch"
 cmd              = "insomnia"
-which            = [""]
+which            = ["insomnia"]
 session          = "INSOMNIA"
 description      = "API Client and Design Platform for GraphQL and REST."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.jdgui]
+name             = "JD GUI"
+run              = "launch"
+cmd              = "jd-gui"
+which            = ["jd-gui"]
+session          = "JDGUI"
+description      = "JAVA Decompiler."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.john]
 name             = "john"
 run              = "stay_in_terminal"
-cmd              = "john --help"
-which            = [""]
+cmd              = "john --help | more"
+which            = ["john"]
 session          = "JOHN"
 description      = "John the Ripper password cracker."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.kdenlive]
+name             = "KDEnlive"
+run              = "launch"
+cmd              = "kdenlive"
+which            = ["kdenlive"]
+session          = "KDENLIVE"
+description      = "Video editor."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.libreoffice]
 name             = "libreoffice"
 run              = "launch"
 cmd              = "libreoffice"
-which            = [""]
+which            = ["libreoffice"]
 session          = "LIBREOFFICE"
 description      = "Office suite."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.mangl]
+name             = "Mangl"
+run              = "launch"
+cmd              = "mangl"
+which            = ["mangl"]
+session          = "MANGL"
+description      = "man pages viewer."
 desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
@@ -314,60 +344,100 @@ is_floating      = false
 name             = "meld"
 run              = "launch"
 cmd              = "meld"
-which            = [""]
+which            = ["meld"]
 session          = "MELD"
 description      = "Visual diff and merge tool."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.metasploit]
 name             = "metasploit"
 run              = "stay_in_terminal"
 cmd              = "msfconsole"
-which            = [""]
+which            = ["msfconsole"]
 session          = "METASPLOIT"
 description      = "Penetration testing framework."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.monitors]
 name             = "Monitor manager"
 run              = "launch"
 cmd              = "nwg-displays"
-which            = [""]
+which            = ["nwg-displays"]
 session          = "MONITORS"
 description      = "Manage monitors display with nwg-displays."
 desktop          = ["Hyprland"]
 is_floating      = false
 
+[app.mtr]
+name             = "My tracerout"
+run              = "stay_in_terminal"
+cmd              = "mtr google.com"
+which            = ["mtr"]
+session          = "MTR"
+description      = "Show traceroute live."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
 [app.netcat]
 name             = "netcat"
 run              = "stay_in_terminal"
-cmd              = "nc --help"
-which            = [""]
+cmd              = "nc --help | more"
+which            = ["nc", "more"]
 session          = "NETCAT"
 description      = "Utility for network discovery and security auditing."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.nikto]
+name             = "nikto"
+run              = "stay_in_terminal"
+cmd              = "nikto --help | more"
+which            = ["nikto", "more"]
+session          = "NIKTO"
+description      = "Scan web server for known vulnerabilities."
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.nmap]
 name             = "nmap"
 run              = "stay_in_terminal"
 cmd              = "nmap --help | more"
-which            = [""]
+which            = ["nmap", "more"]
 session          = "NMAP"
 description      = "Network exploration tool and security / port scanner."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 #    MenuOption('nmap NSE', 'terminal', '/usr/local/bin/nmapNSE.sh', 'NMAPNSE', 'Nmap Scripting Engine (NSE) scripts', True),
 #    MenuOption('now UTC', 'launch', r"""echo -n $(date --utc "+%F %H:%M:%S %Z") | xclip -selection clipboard""", 'NOWUTC', 'UTC time > clipboard.', False),
 
+[app.nomac]
+name             = "nomacs"
+run              = "launch"
+cmd              = "nomacs"
+which            = ["nomacs"]
+session          = "NOMACS"
+description      = "Image viewer."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.obs]
+name             = "obs"
+run              = "launch"
+cmd              = "obs"
+which            = ["obs"]
+session          = "OBS"
+description      = "Video capture."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
 [app.pavucontrol]
 name             = "pavucontrol"
 run              = "launch"
 cmd              = "pavucontrol"
-which            = [""]
+which            = ["pavucontrol"]
 session          = "PAVU"
 description      = "Volume control."
 desktop          = ["i3", "Hyprland"]
@@ -377,7 +447,7 @@ is_floating      = false
 name             = "pcmanfm"
 run              = "launch"
 cmd              = "pcmanfm"
-which            = [""]
+which            = ["pcmanfm"]
 session          = "PCMANFM"
 description      = "File Manager."
 desktop          = ["i3", "Hyprland"]
@@ -387,7 +457,7 @@ is_floating      = false
 name             = "public IP"
 run              = "launch"
 cmd              = "curl --silent http://ipecho.net/plain | xclip -selection clipboard"
-which            = [""]
+which            = ["curl", "xclip"]
 session          = "PUBIP"
 description      = "Get the public IP > clipboard."
 desktop          = ["i3"]
@@ -397,7 +467,7 @@ is_floating      = false
 name             = "ranger"
 run              = "terminal"
 cmd              = "ranger"
-which            = [""]
+which            = ["ranger"]
 session          = "RANGER"
 description      = "TUI file manager."
 desktop          = ["i3", "Hyprland"]
@@ -407,7 +477,7 @@ is_floating      = false
 name             = "reboot"
 run              = "execute"
 cmd              = "reboot"
-which            = [""]
+which            = ["reboot"]
 session          = "null"
 description      = "Restart computer."
 desktop          = ["i3", "Hyprland"]
@@ -417,9 +487,19 @@ is_floating      = false
 name             = "remmina"
 run              = "launch"
 cmd              = "remmina"
-which            = [""]
+which            = ["remmina"]
 session          = "REMMINA"
 description      = "Remote desktop client (RDP, SSH, VNC)."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.rustscan]
+name             = "rustscan"
+run              = "stay_in_terminal"
+cmd              = "rustscan -h | more"
+which            = ["rustscan", "more"]
+session          = "RUSTSCAN"
+description      = "Fast Port Scanner built in Rust."
 desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
@@ -440,7 +520,7 @@ is_floating      = false
 name             = "shutdown"
 run              = "execute"
 cmd              = "shutdown now"
-which            = [""]
+which            = ["shutdown"]
 session          = "null"
 description      = "Shutdown your computer."
 desktop          = ["i3", "Hyprland"]
@@ -450,98 +530,98 @@ is_floating      = false
 name             = "solitaire"
 run              = "launch"
 cmd              = "/usr/bin/qsolocards"
-which            = [""]
+which            = ["qsolocards"]
 session          = "SOLITAIRE"
 description      = "Solitaire cards game."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.sqlitebrowser]
 name             = "sqlitebrowser"
 run              = "launch"
 cmd              = "/usr/bin/sqlitebrowser"
-which            = [""]
+which            = ["sqlitebrowser"]
 session          = "SQLB"
 description      = "Sqlite GUI browser."
 desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
-[app.starwars]
-## Might not work anymore...
-name             = "star wars"
+[app.sqlmap]
+name             = "SQLmap"
 run              = "stay_in_terminal"
-cmd              = "telnet towel.blinkenlights.nl"
-which            = [""]
-session          = "STARWARS"
-description      = "Watch ASCII StarWars."
-desktop          = ["i3"]
-is_floating      = true
+cmd              = "/usr/bin/sqlmap -h | more"
+which            = ["sqlmap"]
+session          = "SQLMAP"
+description      = "Automatic SQL injection and database takeover tool."
+desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+#[app.starwars]
+## Might not work anymore...
+#name             = "star wars"
+#run              = "stay_in_terminal"
+#cmd              = "telnet towel.blinkenlights.nl"
+#which            = ["telnet"]
+#session          = "STARWARS"
+#description      = "Watch ASCII StarWars."
+#desktop          = ["i3", "Hyprland"]
+#is_floating      = true
 
 [app.terminal]
 name             = "terminal"
 run              = "launch"
 cmd              = "$TERMINAL"
-which            = [""]
+which            = ["echo"]
 session          = "TERMINAL"
 description      = "Launh a terminal."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
-[app.thumbsup]
-name             = "thumbs up!"
-run              = "launch"
-cmd              = "echo -n '👍' | xclip -selection clipboard"
-which            = [""]
-session          = "THUMBSUP"
-description      = "👍 > clipboard"
-desktop          = ["i3"]
-is_floating      = true
+#[app.thumbsup]
+#name             = "thumbs up!"
+#run              = "launch"
+#cmd              = "echo -n '👍' | xclip -selection clipboard"
+#which            = [""]
+#session          = "THUMBSUP"
+#description      = "👍 > clipboard"
+#desktop          = ["i3"]
+#is_floating      = true
 
 [app.thunar]
-name             = "thunar"
+name             = "Thunar"
 run              = "launch"
 cmd              = "thunar"
-which            = [""]
+which            = ["thunar"]
 session          = "THUNAR"
 description      = "File manager."
-desktop          = ["i3"]
-is_floating      = false
-
-[app.thunar_ROOT]
-name             = "thunar (ROOT)"
-run              = "launch"
-cmd              = "sudo thunar"
-which            = [""]
-session          = "THUNARROOT"
-description      = "File manager (ROOT)."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.tmux_attach]
 name             = "tmux attach"
 run              = "terminal"
 cmd              = "tmuxplus.sh -a"
-which            = [""]
+which            = ["tmux"]
 session          = "ATTACH"
 description      = "List Tmux sessions and attach."
 desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
-[app.toggle_connection]
-name             = "Toggle Connection"
-run              = "launch"
-cmd              = "bash /usr/local/bin/toggle_connection.sh"
-which            = [""]
-session          = "CONNECT"
-description      = "START/STOP Internet connection"
-desktop          = ["i3"]
-is_floating      = false
+#[app.toggle_connection]
+#name             = "Toggle Connection"
+#run              = "launch"
+#cmd              = "bash /usr/local/bin/toggle_connection.sh"
+#which            = ["bash"]
+#session          = "CONNECT"
+#description      = "START/STOP Internet connection"
+#desktop          = ["i3", "Hyprland"]
+#is_floating      = false
 
 [app.vbox]
 name             = "vbox"
 run              = "stay_in_terminal"
 cmd              = """vboxmanage list vms | awk -F '\\\"' '{ print \\$2 }' | fzf | sed 's/\\ /\\\\ /g' | xargs vboxmanage startvm && exit"""
-which            = [""]
+which            = ["vboxmanage", "awk", "fzf", "sed", "xargs"]
 session          = "VBOX"
 description      = "Select a virtual machine."
 desktop          = ["i3", "Hyprland"]
@@ -551,17 +631,17 @@ is_floating      = true
 name             = "View History"
 run              = "stay_in_terminal"
 cmd              = "cat ${HOME}/.bash_history | fzf"
-which            = [""]
+which            = ["cat", "fzf"]
 session          = "HISTORY"
 description      = "View latest bash history."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = true
 
 [app.virtualbox]
 name             = "Virtualbox"
 run              = "launch"
 cmd              = "virtualbox"
-which            = [""]
+which            = ["virtualbox"]
 session          = "VBOX"
 description      = "Open-source virtalization tool."
 desktop          = ["i3", "Hyprland"]
@@ -571,7 +651,7 @@ is_floating      = false
 name             = "VLC"
 run              = "launch"
 cmd              = "vlc"
-which            = [""]
+which            = ["vlc"]
 session          = "VLC"
 description      = "VLC media player."
 desktop          = ["i3", "Hyprland"]
@@ -581,7 +661,7 @@ is_floating      = false
 name             = "Volume"
 run              = "launch"
 cmd              = "pavucontrol"
-which            = [""]
+which            = ["pavucontrol"]
 session          = "VOLUME"
 description      = "Volume control."
 desktop          = ["i3", "Hyprland"]
@@ -601,7 +681,7 @@ is_floating      = false
 name             = "change background/wallpaper"
 run              = "launch"
 cmd              = "nitrogen /usr/local/share/wallpapers"
-which            = [""]
+which            = ["nitrogen"]
 session          = "null"
 description      = "Change wallpapers"
 desktop          = ["i3"]
@@ -611,10 +691,10 @@ is_floating      = false
 name             = "wireshark (ROOT)"
 run              = "launch"
 cmd              = "sudo wireshark"
-which            = [""]
+which            = ["sudo", "wireshark"]
 session          = "WIRESHARK"
 description      = "Network traffic analyzer."
-desktop          = ["i3"]
+desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 #MenuOption('all apps', 'launch', 'dmenu_run -nb \'#000\' -l 20 | xargs', 'ALLAPPS', 'Use dmenu_run to see all apps.', False),
