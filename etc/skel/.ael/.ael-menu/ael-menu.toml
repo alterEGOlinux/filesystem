@@ -5,7 +5,7 @@
 ## updated       : 2023-12-21 02:25:34 UTC
 ## description   : ael-menu main configuration.
 
-## -------------------- [HELP]
+## ---------- ( HELP )
 ## name          Name or title of the application shown in the menu.
 ## run           Function to run in order to launch the application.
 ##               - execute
@@ -20,7 +20,7 @@
 ## description   Description will show in the menu.
 ## is_floating   Enables floating window (in I3 windows manager only).
  
-## -------------------- [APPLICATIONS] 
+## ---------- ( APPLICATIONS ) 
 
 [app.arandr]
 name             = "arandr"
@@ -328,6 +328,16 @@ which            = ["libreoffice"]
 session          = "LIBREOFFICE"
 description      = "Office suite."
 desktop          = ["i3", "Hyprland"]
+is_floating      = false
+
+[app.look]
+name             = "Change look settings"
+run              = "launch"
+cmd              = "nwg-look"
+which            = ["nwg-look"]
+session          = "LOOK"
+description      = "Change look."
+desktop          = ["Hyprland"]
 is_floating      = false
 
 [app.mangl]
@@ -687,11 +697,11 @@ description      = "Change wallpapers"
 desktop          = ["i3"]
 is_floating      = false
 
-[app.wireshark_ROOT]
-name             = "wireshark (ROOT)"
+[app.wireshark]
+name             = "wireshark"
 run              = "launch"
-cmd              = "sudo wireshark"
-which            = ["sudo", "wireshark"]
+cmd              = "wireshark"
+which            = ["wireshark"]
 session          = "WIRESHARK"
 description      = "Network traffic analyzer."
 desktop          = ["i3", "Hyprland"]
