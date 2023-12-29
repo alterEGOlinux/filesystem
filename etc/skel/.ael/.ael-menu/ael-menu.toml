@@ -281,9 +281,10 @@ desktop          = ["i3", "Hyprland"]
 is_floating      = false
 
 [app.insomnia]
+## Needs to be fixed. Not in path.
 name             = "insomnia"
 run              = "launch"
-cmd              = "insomnia"
+cmd              = "/opt/insomnia/insomnia"
 which            = ["insomnia"]
 session          = "INSOMNIA"
 description      = "API Client and Design Platform for GraphQL and REST."
