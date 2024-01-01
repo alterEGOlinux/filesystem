@@ -1,8 +1,8 @@
 ## ----------------------------------------------------------------------- INFO
 ## [~/.xinitrc]
-## author        : fantomH @ alterEGO Linux
+## author        : fantomH @alterEGO Linux
 ## created       : 2021-02-23 02:54:43 UTC
-## updated       : 2023-11-02 02:37:35 UTC
+## updated       : 2024-01-01 04:30:01 UTC
 ## description   : Starts Window Manager with startx.
 
   ## Executed by startx (run your window manager from here)
