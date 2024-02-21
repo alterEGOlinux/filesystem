@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2023-12-21 02:25:34 UTC
+## updated       : 2024-02-21 18:37:45 UTC
 ## description   : ael-menu main configuration.
 
 ## ---------- ( HELP )
@@ -18,7 +18,7 @@
 ##               This enable to launch an application multiple time and keep
 ##               track in tmux.
 ## description   Description will show in the menu.
-## is_floating   Enables floating window (in I3 windows manager only).
+## is_floating   Enables floating window (in i3wm windows manager only).
  
 ## ---------- ( APPLICATIONS ) 
 
@@ -29,7 +29,7 @@ cmd              = "arandr"
 which            = ["arandr"]
 session          = "arandr"
 description      = "Monitor setup."
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = false
 
 [app.arp-scan]
@@ -39,7 +39,7 @@ cmd              = "sudo -u ${USER} arp-scan --localnet"
 which            = ["sudo", "arp-scan"]
 session          = "ARPSCAN"
 description      = "Mac Address scan."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.binwalk]
@@ -49,7 +49,7 @@ cmd              = "binwalk --help | more"
 which            = ["binwalk", "more"]
 session          = "BINWALK"
 description      = "Tool for searching a given binary image for embedded files."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.bleachbit]
@@ -59,7 +59,7 @@ cmd              = "bleachbit"
 which            = ["bleachbit"]
 session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.bleachbit_root]
@@ -73,7 +73,7 @@ cmd              = "sudo bleachbit"
 which            = ["sudo", "bleachbit"]
 session          = "BLEACHBIT"
 description      = "Deletes unneeded files to free disk space and maintain privacy (as ROOT)."
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = false
 
 [app.bookmarks]
@@ -84,7 +84,7 @@ cmd              = "python /usr/local/bin/bookmarks.py"
 which            = ["python"]
 session          = "BOOKMARKS"
 description      = "Bookmarks launcher"
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = true
 
 [app.bpytop]
@@ -94,7 +94,7 @@ cmd              = "bpytop"
 which            = ["bpytop"]
 session          = "BPYTOP"
 description      = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes"
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.brasero]
@@ -104,7 +104,7 @@ cmd              = "brasero"
 which            = ["brasero"]
 session          = "BRASERO"
 description      = "CD/DVD burner."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 
@@ -115,7 +115,7 @@ cmd              = "brave"
 which            = ["brave"]
 session          = "BRAVE"
 description      = "Web Browser."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.burpsuite]
@@ -125,7 +125,7 @@ cmd              = "burpsuite"
 which            = ["burpsuite"]
 session          = "BURP"
 description      = "Web applications security testing."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #    MenuOption('clean bash history', 'launch', 'code ${HOME}/.bash_history', 'CODE', 'Clean .bash_history with VS code.', False),
@@ -137,7 +137,7 @@ cmd              = "man crunch | less"
 which            = ["crunch", "less"]
 session          = "CRUNCH"
 description      = "Wordlists generator."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.curlftpfs]
@@ -147,7 +147,7 @@ cmd              = "curlftpfs -h | more"
 which            = ["curlftpfs", "more"]
 session          = "CURLFTPFS"
 description      = "Mount FTP host as a local directory."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.dicomTAG]
@@ -157,7 +157,7 @@ cmd              = "bash /usr/local/bin/dicomTAG.sh"
 which            = ["bash"]
 session          = "DICOMTAG"
 description      = "Browse DICOM tags."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.dirbuster]
@@ -167,7 +167,7 @@ cmd              = "dirbuster"
 which            = ["dirbuster"]
 session          = "DIRBUSTER"
 description      = "Brute force directories and files names on web/application servers."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.domination]
@@ -177,7 +177,7 @@ cmd              = "domination"
 which            = ["domination"]
 session          = "DOMINATION"
 description      = "Risk style game."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.emojis]
@@ -187,7 +187,7 @@ cmd              = "bash /usr/local/bin/emojis.sh"
 which            = ["bash"]
 session          = "EMOJIS"
 description      = "Browse emojis."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.exitI3]
@@ -197,7 +197,7 @@ cmd              = "i3-msg exit"
 which            = ["i3-msg"]
 session          = "null"
 description      = "Exit i3 window manager."
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = false
 
 [app.firefox]
@@ -207,7 +207,7 @@ cmd              = "firefox"
 which            = ["firefox"]
 session          = "FIREFOX"
 description      = "Web browser."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.firefox_private]
@@ -217,7 +217,7 @@ cmd              = "firefox --private-window"
 which            = ["firefox"]
 session          = "SHUTTTT"
 description      = "Web browser, private session."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.gimp]
@@ -227,7 +227,7 @@ cmd              = "gimp"
 which            = ["gimp"]
 session          = "GIMP"
 description      = "Drawing app."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.gobuster]
@@ -237,7 +237,7 @@ cmd              = "gobuster --help | more"
 which            = ["gobuster", "more"]
 session          = "GOBUSTER"
 description      = "Directory/File, DNS and VHost busting tool written in Go."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.gping]
@@ -247,7 +247,7 @@ cmd              = "gping --help | more"
 which            = ["gping", "more"]
 session          = "GPING"
 description      = "Ping with graph."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.htmlq]
@@ -257,7 +257,7 @@ cmd              = "htmlq --help | more"
 which            = ["htmlq", "more"]
 session          = "HTMLQ"
 description      = "Like jq, but for HTML."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.htop]
@@ -267,7 +267,7 @@ cmd              = "htop"
 which            = ["htop"]
 session          = "HTOP"
 description      = "Process viewer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.inkscape]
@@ -277,7 +277,7 @@ cmd              = "inkscape"
 which            = ["inkscape"]
 session          = "INKSCAPE"
 description      = "Drawing app."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.insomnia]
@@ -288,7 +288,7 @@ cmd              = "/opt/insomnia/insomnia"
 which            = ["insomnia"]
 session          = "INSOMNIA"
 description      = "API Client and Design Platform for GraphQL and REST."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.jdgui]
@@ -298,7 +298,7 @@ cmd              = "jd-gui"
 which            = ["jd-gui"]
 session          = "JDGUI"
 description      = "JAVA Decompiler."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.john]
@@ -308,7 +308,7 @@ cmd              = "john --help | more"
 which            = ["john"]
 session          = "JOHN"
 description      = "John the Ripper password cracker."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.kdenlive]
@@ -318,7 +318,7 @@ cmd              = "kdenlive"
 which            = ["kdenlive"]
 session          = "KDENLIVE"
 description      = "Video editor."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.libreoffice]
@@ -328,7 +328,7 @@ cmd              = "libreoffice"
 which            = ["libreoffice"]
 session          = "LIBREOFFICE"
 description      = "Office suite."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.look]
@@ -348,7 +348,7 @@ cmd              = "mangl"
 which            = ["mangl"]
 session          = "MANGL"
 description      = "man pages viewer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.meld]
@@ -358,7 +358,7 @@ cmd              = "meld"
 which            = ["meld"]
 session          = "MELD"
 description      = "Visual diff and merge tool."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.metasploit]
@@ -368,7 +368,7 @@ cmd              = "msfconsole"
 which            = ["msfconsole"]
 session          = "METASPLOIT"
 description      = "Penetration testing framework."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.monitors]
@@ -388,7 +388,7 @@ cmd              = "mtr google.com"
 which            = ["mtr"]
 session          = "MTR"
 description      = "Show traceroute live."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.netcat]
@@ -398,7 +398,7 @@ cmd              = "nc --help | more"
 which            = ["nc", "more"]
 session          = "NETCAT"
 description      = "Utility for network discovery and security auditing."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.nikto]
@@ -408,7 +408,7 @@ cmd              = "nikto --help | more"
 which            = ["nikto", "more"]
 session          = "NIKTO"
 description      = "Scan web server for known vulnerabilities."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.nmap]
@@ -418,7 +418,7 @@ cmd              = "nmap --help | more"
 which            = ["nmap", "more"]
 session          = "NMAP"
 description      = "Network exploration tool and security / port scanner."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #    MenuOption('nmap NSE', 'terminal', '/usr/local/bin/nmapNSE.sh', 'NMAPNSE', 'Nmap Scripting Engine (NSE) scripts', True),
@@ -431,7 +431,7 @@ cmd              = "nomacs"
 which            = ["nomacs"]
 session          = "NOMACS"
 description      = "Image viewer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.obs]
@@ -441,7 +441,7 @@ cmd              = "obs"
 which            = ["obs"]
 session          = "OBS"
 description      = "Video capture."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.pavucontrol]
@@ -451,7 +451,7 @@ cmd              = "pavucontrol"
 which            = ["pavucontrol"]
 session          = "PAVU"
 description      = "Volume control."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.pcmanfm]
@@ -461,7 +461,7 @@ cmd              = "pcmanfm"
 which            = ["pcmanfm"]
 session          = "PCMANFM"
 description      = "File Manager."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.publicip]
@@ -471,7 +471,7 @@ cmd              = "curl --silent http://ipecho.net/plain | xclip -selection cli
 which            = ["curl", "xclip"]
 session          = "PUBIP"
 description      = "Get the public IP > clipboard."
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = false
 
 [app.ranger]
@@ -481,7 +481,7 @@ cmd              = "ranger"
 which            = ["ranger"]
 session          = "RANGER"
 description      = "TUI file manager."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.reboot]
@@ -491,7 +491,7 @@ cmd              = "reboot"
 which            = ["reboot"]
 session          = "null"
 description      = "Restart computer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.remmina]
@@ -501,7 +501,7 @@ cmd              = "remmina"
 which            = ["remmina"]
 session          = "REMMINA"
 description      = "Remote desktop client (RDP, SSH, VNC)."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.rustscan]
@@ -511,7 +511,7 @@ cmd              = "rustscan -h | more"
 which            = ["rustscan", "more"]
 session          = "RUSTSCAN"
 description      = "Fast Port Scanner built in Rust."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #    MenuOption('scout man pages', 'terminal', 'scout_man.py', 'null', 'Search & view man pages.', False),
@@ -524,7 +524,7 @@ is_floating      = false
 # cmd              = 'r"""echo -n "¯\_(ツ)_/¯" | xclip -selection clipboard"""'
 # session          = "null"
 # description      = "¯\_(ツ)_/¯ > clipboard."
-#desktop          = ["i3"]
+#desktop          = ["i3wm"]
 # is_floating      = false
 
 [app.shutdown]
@@ -534,7 +534,7 @@ cmd              = "shutdown now"
 which            = ["shutdown"]
 session          = "null"
 description      = "Shutdown your computer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.solitaire]
@@ -544,7 +544,7 @@ cmd              = "/usr/bin/qsolocards"
 which            = ["qsolocards"]
 session          = "SOLITAIRE"
 description      = "Solitaire cards game."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.sqlitebrowser]
@@ -554,7 +554,7 @@ cmd              = "/usr/bin/sqlitebrowser"
 which            = ["sqlitebrowser"]
 session          = "SQLB"
 description      = "Sqlite GUI browser."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.sqlmap]
@@ -564,7 +564,7 @@ cmd              = "/usr/bin/sqlmap -h | more"
 which            = ["sqlmap"]
 session          = "SQLMAP"
 description      = "Automatic SQL injection and database takeover tool."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #[app.starwars]
@@ -575,7 +575,7 @@ is_floating      = false
 #which            = ["telnet"]
 #session          = "STARWARS"
 #description      = "Watch ASCII StarWars."
-#desktop          = ["i3", "Hyprland"]
+#desktop          = ["i3wm", "Hyprland"]
 #is_floating      = true
 
 [app.terminal]
@@ -585,7 +585,7 @@ cmd              = "$TERMINAL"
 which            = ["echo"]
 session          = "TERMINAL"
 description      = "Launh a terminal."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #[app.thumbsup]
@@ -595,7 +595,7 @@ is_floating      = false
 #which            = [""]
 #session          = "THUMBSUP"
 #description      = "👍 > clipboard"
-#desktop          = ["i3"]
+#desktop          = ["i3wm"]
 #is_floating      = true
 
 [app.thunar]
@@ -605,7 +605,7 @@ cmd              = "thunar"
 which            = ["thunar"]
 session          = "THUNAR"
 description      = "File manager."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.tmux_attach]
@@ -615,7 +615,7 @@ cmd              = "tmuxplus.sh -a"
 which            = ["tmux"]
 session          = "ATTACH"
 description      = "List Tmux sessions and attach."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 #[app.toggle_connection]
@@ -625,7 +625,7 @@ is_floating      = true
 #which            = ["bash"]
 #session          = "CONNECT"
 #description      = "START/STOP Internet connection"
-#desktop          = ["i3", "Hyprland"]
+#desktop          = ["i3wm", "Hyprland"]
 #is_floating      = false
 
 [app.vbox]
@@ -635,7 +635,7 @@ cmd              = """vboxmanage list vms | awk -F '\\\"' '{ print \\$2 }' | fzf
 which            = ["vboxmanage", "awk", "fzf", "sed", "xargs"]
 session          = "VBOX"
 description      = "Select a virtual machine."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.view_history]
@@ -645,7 +645,7 @@ cmd              = "cat ${HOME}/.bash_history | fzf"
 which            = ["cat", "fzf"]
 session          = "HISTORY"
 description      = "View latest bash history."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = true
 
 [app.virtualbox]
@@ -655,7 +655,7 @@ cmd              = "virtualbox"
 which            = ["virtualbox"]
 session          = "VBOX"
 description      = "Open-source virtalization tool."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.vlc]
@@ -665,7 +665,7 @@ cmd              = "vlc"
 which            = ["vlc"]
 session          = "VLC"
 description      = "VLC media player."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.volume]
@@ -675,7 +675,7 @@ cmd              = "pavucontrol"
 which            = ["pavucontrol"]
 session          = "VOLUME"
 description      = "Volume control."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.vscode]
@@ -685,7 +685,7 @@ cmd              = "code"
 which            = ["code"]
 session          = "VSCODE"
 description      = "Microsoft code editor."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 [app.wallpaper]
@@ -695,7 +695,7 @@ cmd              = "nitrogen /usr/local/share/wallpapers"
 which            = ["nitrogen"]
 session          = "null"
 description      = "Change wallpapers"
-desktop          = ["i3"]
+desktop          = ["i3wm"]
 is_floating      = false
 
 [app.wireshark]
@@ -705,7 +705,7 @@ cmd              = "wireshark"
 which            = ["wireshark"]
 session          = "WIRESHARK"
 description      = "Network traffic analyzer."
-desktop          = ["i3", "Hyprland"]
+desktop          = ["i3wm", "Hyprland"]
 is_floating      = false
 
 #MenuOption('all apps', 'launch', 'dmenu_run -nb \'#000\' -l 20 | xargs', 'ALLAPPS', 'Use dmenu_run to see all apps.', False),
