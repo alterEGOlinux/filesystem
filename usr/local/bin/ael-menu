@@ -55,6 +55,9 @@ def main():
     ## Menu options generator.
     opt = ''.join([f"{o.name:<30}{o.description}\n" for o in options]).encode('UTF-8')
 
+    print(******DEBUG*********)
+    print(opt)
+    
     menu = subprocess.run(['fzf', 
                            "--color=gutter:-1",
                            "--margin=4%",
@@ -71,7 +74,7 @@ def main():
                            ], input=opt, stdout=subprocess.PIPE)
 
     selection = menu.stdout.decode('UTF-8').split('  ')[0].strip()
-    
+
     for o in options:
         if o.name == selection:
             selection = o
