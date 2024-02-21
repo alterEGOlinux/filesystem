@@ -21,7 +21,10 @@ CONFIGDIR = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
 MAINCONFIG = os.path.join(CONFIGDIR, 'ael-menu.toml')
 EXTRACONFIG = os.path.join(CONFIGDIR, 'ael-menu-extra.toml')
 
-DESKTOP = os.getenv('XDG_CURRENT_DESKTOP')
+if os.getenv('XDG_CURRENT_DESKTOP') == "Hyprland":
+    DESKTOP = "Hyprland"
+else:
+    DESKTOP = "i3wm"
 
 def which(exec_list: list) -> bool:
 
