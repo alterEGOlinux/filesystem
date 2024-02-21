@@ -55,7 +55,7 @@ def main():
     ## Menu options generator.
     opt = ''.join([f"{o.name:<30}{o.description}\n" for o in options]).encode('UTF-8')
 
-    print(******DEBUG*********)
+    print("******DEBUG*********")
     print(opt)
     
     menu = subprocess.run(['fzf', 
