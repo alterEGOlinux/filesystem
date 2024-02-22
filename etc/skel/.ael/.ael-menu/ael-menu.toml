@@ -2,7 +2,7 @@
 ## [.ael/.ael-menu/ael-menu.toml]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2023-08-08 14:31:56 UTC
-## updated       : 2024-02-21 18:37:45 UTC
+## updated       : 2024-02-21 21:46:21 UTC
 ## description   : ael-menu main configuration.
 
 ## ---------- ( HELP )
@@ -18,6 +18,7 @@
 ##               This enable to launch an application multiple time and keep
 ##               track in tmux.
 ## description   Description will show in the menu.
+## desktop       Hyprland or i3wm.
 ## is_floating   Enables floating window (in i3wm windows manager only).
  
 ## ---------- ( APPLICATIONS ) 
@@ -714,5 +715,4 @@ is_floating      = false
 #MenuOption('pdfman', 'stay_in_terminal', '${HOME}/fH/scripts/pdfman.sh && exit', 'PDFMAN', 'Open man in pdf.', True),
 #MenuOption('toggle audio', 'launch', 'bash ${HOME}/fH/scripts/toggle_audio_device.sh && exit', 'AUDIO', 'Toggle audio device.', False),
 
-# vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
