@@ -3,10 +3,10 @@
 ## [~/.ael/bash-ael/messages.bash]
 ## author        : fantomH @alteEGO Linux
 ## created       : 2022-02-10 21:46:39 UTC
-## updated       : 2023-11-02 10:30:43 UTC
+## updated       : 2024-02-22 11:43:37 UTC
 ## description   : Bash message module.
 
-## -------------------- [ MODULES ]
+## ---------- [ MODULES ]
 
   [ -f ${HOME}/.ael/bash-ael/colors.bash ]                                    \
   && . ${HOME}/.ael/bash-ael/colors.bash
@@ -41,5 +41,4 @@ message() {
   esac
 }
 
-# vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
