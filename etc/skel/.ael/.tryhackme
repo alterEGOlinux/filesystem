@@ -3,13 +3,13 @@
 ## [.ael/.tryhackme]
 ## author        : fantomH @alterEGO Linux
 ## created       : 2021-03-07 15:10:11 UTC
-## updated       : 2023-08-08 12:56:53 UTC
+## updated       : 2024-02-22 11:22:00 UTC
 ## description   : TryHackMe stuff.
 
 [ -f ${HOME}/.ael/bash-ael/messages.bash ]                                    \
 && . ${HOME}/.ael/bash-ael/messages.bash
 
-## -------------------- [ thm-connect ]                                     {{{
+## ---------- [ thm-connect ]
 ## [thm-connect()]
 ## version       : 2023-08-08 12:59:08 UTC
 ## description   : Connect to TryHackMe
@@ -28,9 +28,8 @@ thm-connect() {
       cd ${THMROOMPATH}
   fi
   }
-  ## }}}
 
-## -------------------- [ thm-init ]                                        {{{
+## ---------- [ thm-init ]
 ## [thm-init()]
 ## version       : 2023-08-08 13:01:16 UTC
 ## description   : ""
@@ -58,42 +57,40 @@ thm-init() {
 ## updated       : 2023-08-08 13:08:43 UTC
 ## description   : THM config.
 
-## -------------------- [ MAIN DIRECTORY ]
+## ---------- [ MAIN DIRECTORY ]
 
 THMDIR="${THMDIR}"
 
-## -------------------- [ CONFIG FILE ]
+## ---------- [ CONFIG FILE ]
 
 THMCONFIG="${THMCONFIG}"
 
-## -------------------- [ ROOM ]
+## ---------- [ ROOM ]
 
 THMROOMNAME=""
 THMROOMPATH="${THMDIR}/${THMROOMNAME}"
 
-## -------------------- [ PLAYER ]
+## ---------- [ PLAYER ]
 
 THMPLAYER=""
 
-## -------------------- [ IP ADDRESSES ]
+## ---------- [ IP ADDRESSES ]
 
 THMRHOST=""
 THMLHOST=""
 
-## -------------------- [ TOOLS ]
+## ---------- [ TOOLS ]
 
 THMTOOLS="${THMTOOLS}"
 
-# vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯  
 EOF
     fi
 
     thm-reload-config
   }
-  ## }}}
 
-## -------------------- [ thm-login ]                                       {{{
+## ---------- [ thm-login ]
 ## [thm-login()]
 ## version       : 2023-08-08 13:16:13 UTC
 ## description   : ""
@@ -102,9 +99,8 @@ thm-login() {
 
     $BROWSER "https://www.tryhackme.com/login"
   }
-  ## }}}
 
-## -------------------- [ thm-reload-all ]                                  {{{
+## ---------- [ thm-reload-all ]
 ## [thm-reload-all()]
 ## version       : 2023-08-08 13:18:02 UTC
 ## description   : ""
@@ -113,9 +109,8 @@ thm-reload-all() {
 
     source ${HOME}/.ael/.tryhackme
   }
-  ## }}}
 
-## -------------------- [ thm-reload-config ]                               {{{
+## ---------- [ thm-reload-config ]
 ## [thm-reload-config()]
 ## version       : 2023-08-08 13:21:35 UTC
 ## description   : ""
@@ -136,9 +131,8 @@ thm-reload-config() {
     
     message action "TRYHACKME CONFIG READY..."
   }
-  ## }}}
 
-## -------------------- [ thm-set-lhost ]                                   {{{
+## ---------- [ thm-set-lhost ]
 ## [thm-set-lhost()]
 ## version       : 2023-08-08 13:23:34 UTC
 ## description   : ""
@@ -153,9 +147,8 @@ thm-set-lhost() {
     fi
     thm-reload-config
   }
-  ## }}}
 
-## -------------------- [ thm-set-msf ]                                     {{{
+## ---------- [ thm-set-msf ]
 ## [thm-set-msf()]
 ## version       : 2023-08-08 13:25:24 UTC
 ## description   : ""
@@ -181,9 +174,8 @@ EOF
 
     message result "Use \`resource thm.rc\` in msfconsole."
   }
-  ## }}}
 
-## -------------------- [ thm-set-player ]                                  {{{
+## ---------- [ thm-set-player ]
 ## [thm-set-player()]
 ## version       : 2023-08-08 13:27:51 UTC
 ## description   : Set player's name.
@@ -198,9 +190,8 @@ thm-set-player() {
     fi
     thm-reload-config
   }
-  ## }}}
 
-## -------------------- [ thm-set-rhost ]                                   {{{
+## ---------- [ thm-set-rhost ]
 ## [thm-set-rhost()]
 ## version       : 2023-08-08 13:30:47 UTC
 ## description   : Set remote IP address.
@@ -215,9 +206,8 @@ thm-set-rhost() {
     fi
     thm-reload-config
   }
-  ## }}}
 
-## -------------------- [ thm-set-room ]                                    {{{
+## ---------- [ thm-set-room ]
 ## [thm-set-room()]
 ## version       : 2023-08-08 13:33:17 UTC
 ## description   : Set room's name.
@@ -236,9 +226,8 @@ thm-set-room() {
     fi
     thm-reload-config
   }
-  ## }}}
 
-## -------------------- [ thm-show-config ]                                 {{{
+## ---------- [ thm-show-config ]
 ## [thm-show-config()]
 ## version       : 2023-08-08 13:35:44 UTC
 ## description   : Show config.
@@ -275,9 +264,8 @@ thm-show-config() {
     fi
     message result "THMTOOLS        ${THMTOOLS}"
   }
-  ## }}}
 
-## -------------------- [ thm-webroom ]                                     {{{
+## ---------- [ thm-webroom ]
 ## [thm-webroom()]
 ## version       : 2023-08-08 13:35:44 UTC
 ## description   : Open room in browser.
@@ -285,9 +273,8 @@ thm-webroom() {
 
     $BROWSER "https://www.tryhackme.com/room/${THMROOMNAME}"
   }
-  ## }}}
 
-## -------------------- [ thm-help ]                                        {{{
+## ---------- [ thm-help ]
 ## [thm-help()]
 ## version       : 2023-08-08 13:35:44 UTC
 ## description   : Help dialogue.
@@ -330,9 +317,8 @@ Functions:
   thm-webroom
 EOF
   }
-  ## }}}
 
-## -------------------- [ COMPLETION ]                                      {{{
+## ---------- [ COMPLETION ]
 
 for x in thm .tryhackme; do
     options="\
@@ -353,9 +339,7 @@ for x in thm .tryhackme; do
     complete -W "${options[@]}" $x
 done
 
-## }}}
-
-## -------------------- [ OPTIONS ]                                         {{{
+## ---------- [ OPTIONS ]
 
 case "${1}" in
 
@@ -438,8 +422,5 @@ case "${1}" in
         ;;
 
 esac
-## }}}
 
-# vim: syntax=sh
-# vim: foldmethod=marker
 ## ------------------------------------------------------------- FIN ¯\_(ツ)_/¯
