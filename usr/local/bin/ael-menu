@@ -17,11 +17,6 @@ import sys
 from time import sleep
 
 
-
-configuration_directory = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
-main_configuration = os.path.join(configuration_directory, 'ael-menu.toml')
-extra_configuration = os.path.join(configuration_directory, 'ael-menu-extra.toml')
-
 if os.getenv('XDG_CURRENT_DESKTOP') == "Hyprland":
     DESKTOP = "Hyprland"
 else:
@@ -37,15 +32,19 @@ def which(exec_list: list) -> bool:
 
 def main():
 
-    with open(main_configuration, 'rb') as _input:
+    CONFIGURATION_DIRECTORY = os.path.join(os.path.expanduser('~'), '.ael', '.ael-menu')
+    MAIN_CONFIGURATION = os.path.join(CONFIGURATION_DIRECTORY, 'ael-menu.toml')
+    EXTRA_CONFIGURATION = os.path.join(CONFIGURATION_DIRECTORY, 'ael-menu-extra.toml')
+
+    with open(MAIN_CONFIGURATION, 'rb') as _input:
         data = tomllib.load(_input)
 
         ## Convert dict of dict to namedtuple
         MenuOption = namedtuple('MenuOption', ['name', 'run', 'cmd', 'which', 'session', 'description', 'desktop', 'is_floating'])
         options = [MenuOption(**values) for values in data['app'].values() if DESKTOP in values['desktop'] and which(values['which'])]
 
-    if os.path.exists(extra_configuration):
-        with open(extra_configuration, 'rb') as _input:
+    if os.path.exists(EXTRA_CONFIGURATION):
+        with open(EXTRA_CONFIGURATION, 'rb') as _input:
             data = tomllib.load(_input)
 
             ## Convert dict of dict to namedtuple
